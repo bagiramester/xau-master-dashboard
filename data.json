@@ -1,34 +1,34 @@
 {
   "meta": {
-    "last_updated": "2026-06-29 20:00 CEST",
-    "note": "Ezt a fájlt szerkeszd naponta a morning research után."
+    "last_updated": "2026-06-29 21:00 CEST",
+    "note": "Reggeli research alapján frissítve. Kulcsszintek kézzel pontosítandók chart alapján."
   },
   "header": {
     "bias_direction": "SHORT",
-    "bias_status": "SÁRGA – csak high-quality short setupok",
+    "bias_status": "SÁRGA – XAU HTF BEAR, US10Y emelkedő, FedWatch HOLD → short bias fennáll",
     "risk_mode": "YELLOW",
     "daily_pl_usd": 12.5,
     "daily_risk_usage_pct": 15
   },
   "macro": {
-    "fedwatch": "NEUTRAL",
-    "us10y": "RISING",
-    "dxy": "USD-BULL",
-    "sentiment": "MIXED",
+    "fedwatch": "HOLD 69%",
+    "us10y": "4.40% – EMELKEDŐ",
+    "dxy": "100.8 – NEUTRAL/GYENGE",
+    "sentiment": "FEAR (25/100)",
     "htf_trend": "BEAR",
     "intraday_regime": "TREND",
-    "volatility": "NORMAL"
+    "volatility": "NORMÁL"
   },
   "levels": {
-    "pdh": null,
-    "pdl": null,
+    "pdh": 4089.26,
+    "pdl": 3984.1,
     "asia_high": null,
     "asia_low": null,
-    "daily_open": null,
-    "htf_level": null
+    "daily_open": 4080.8,
+    "htf_level": 4220.0
   },
   "notrade_filters": {
-    "high_impact_macro": "ellenőrzött",
+    "high_impact_macro": "NFP közeledik – fokozott figyelem",
     "asia_session": "nem preferált",
     "spread_liquidity": "OK"
   },
@@ -47,40 +47,40 @@
   },
   "setups": [
     {
-      "label": "Setup A",
+      "label": "Setup A – Short continuation",
       "direction": "SHORT",
       "type": "Trend",
       "bias_compatible": true,
-      "entry_zone": "2380–2385",
-      "sl": 2392,
-      "tp1": 2365,
+      "entry_zone": "4080–4090",
+      "sl": 4110,
+      "tp1": 4040,
       "rr": 2.0,
       "risk_usd": 10,
       "units": 1,
       "score": 7,
       "allowed": false,
-      "note": "SÁRGA módban min 8/10 szükséges – felülvizsgálandó"
+      "note": "SÁRGA módban min 8/10 szükséges – score felülvizsgálandó"
     },
     {
-      "label": "Setup B",
-      "direction": null,
-      "type": "Range",
+      "label": "Setup B – 4000 support bounce watch",
+      "direction": "LONG",
+      "type": "Reversal",
       "bias_compatible": false,
-      "entry_zone": null,
-      "sl": null,
-      "tp1": null,
-      "rr": null,
+      "entry_zone": "3995–4005",
+      "sl": 3975,
+      "tp1": 4045,
+      "rr": 2.25,
       "risk_usd": null,
       "units": 1,
-      "score": null,
+      "score": 5,
       "allowed": false,
-      "note": "Nincs aktív setup B"
+      "note": "Bias ellenére figyelt szint – csak konfirmáció után, SÁRGA módban min 8/10"
     }
   ],
   "trade_log": [
     {
       "time": "10:15",
-      "direction": "S",
+      "direction": "SHORT",
       "rr": 2.1,
       "rule_ok": true,
       "note": ""
