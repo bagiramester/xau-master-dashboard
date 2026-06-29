@@ -19,64 +19,48 @@
       --space-2: 0.5rem;
       --space-3: 0.75rem;
       --space-4: 1rem;
-      --space-6: 1.5rem;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; display: flex; flex-direction: column;
     }
     .dashboard-root { display: flex; flex-direction: column; min-height: 100vh; }
 
     /* TOP BAR */
     .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding: var(--space-3) var(--space-4);
-      border-bottom: 1px solid var(--border);
-      background: #111;
+      border-bottom: 1px solid var(--border); background: #111;
     }
     .top-left { display: flex; flex-direction: column; gap: 0.25rem; }
     .top-left strong { font-size: 0.95rem; color: var(--accent); letter-spacing: 0.04em; }
-    .top-left span { font-size: 0.8rem; color: var(--text-muted); }
+    .top-left span { font-size: 0.78rem; color: var(--text-muted); }
     .top-center { text-align: center; }
-    .bias-label { font-size: 1.15rem; font-weight: 700; color: var(--warning); }
+    .bias-label { font-size: 1.15rem; font-weight: 700; }
     .bias-status { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
     .top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
     .risk-badge {
-      padding: 0.15rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      border: 1px solid var(--border);
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      padding: 0.15rem 0.7rem; border-radius: 999px;
+      font-size: 0.78rem; border: 1px solid var(--border);
+      font-weight: 600; letter-spacing: 0.04em;
     }
-    .risk-badge.green { border-color: var(--success); color: var(--success); }
-    .risk-badge.yellow { border-color: var(--warning); color: var(--warning); }
-    .risk-badge.red { border-color: var(--danger); color: var(--danger); }
+    .risk-badge.GREEN { border-color: var(--success); color: var(--success); }
+    .risk-badge.YELLOW { border-color: var(--warning); color: var(--warning); }
+    .risk-badge.RED { border-color: var(--danger); color: var(--danger); }
     .pl-label { font-size: 0.8rem; color: var(--text-muted); }
 
     /* MAIN GRID */
     .main-grid {
       display: grid;
       grid-template-columns: 260px minmax(0, 1fr) 320px;
-      gap: var(--space-4);
-      padding: var(--space-4);
-      flex: 1;
+      gap: var(--space-4); padding: var(--space-4); flex: 1;
     }
     .panel {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--space-3);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: var(--space-3);
+      display: flex; flex-direction: column; gap: var(--space-2);
     }
     .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
     .panel-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
@@ -87,30 +71,21 @@
     tr + tr td { border-top: 1px solid #222; }
     .divider { border: none; border-top: 1px solid var(--border); margin: var(--space-3) 0; }
     .pill {
-      padding: 0.1rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.72rem;
-      color: var(--text-muted);
+      padding: 0.1rem 0.55rem; border-radius: 999px;
+      border: 1px solid var(--border); font-size: 0.72rem; color: var(--text-muted);
     }
     .pill.gold { border-color: var(--accent); color: var(--accent); }
 
     /* CHART */
     .chart-panel { display: flex; flex-direction: column; gap: var(--space-2); }
     .tv-container {
-      flex: 1;
-      min-height: 480px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
+      flex: 1; min-height: 480px;
+      border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden;
     }
     #tv-xauusd-chart { width: 100%; height: 100%; }
     .chart-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem; color: var(--text-muted);
     }
     .chip-row { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
@@ -123,19 +98,23 @@
 
     /* SETUP CARDS */
     .setup-card {
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      padding: var(--space-2);
-      margin-bottom: 0.4rem;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      padding: var(--space-2); margin-bottom: 0.4rem;
     }
-    .setup-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; font-size: 0.8rem; }
+    .setup-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.3rem; font-size: 0.8rem;
+    }
     .setup-card-title { font-weight: 600; font-size: 0.82rem; }
     .tag { font-size: 0.68rem; padding: 0.05rem 0.45rem; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); }
-    .tag.long { border-color: var(--success); color: var(--success); }
-    .tag.short { border-color: var(--danger); color: var(--danger); }
-    .tag.neutral { border-color: var(--text-muted); color: var(--text-muted); }
+    .tag.LONG, .tag.long { border-color: var(--success); color: var(--success); }
+    .tag.SHORT, .tag.short { border-color: var(--danger); color: var(--danger); }
     .setup-card-body { font-size: 0.76rem; color: var(--text-muted); }
     .setup-card-body div { margin-bottom: 0.15rem; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
+    .score-bar-track { flex: 1; height: 5px; background: #2b2b2b; border-radius: 999px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+    .score-val { font-size: 0.75rem; color: var(--accent); font-weight: 600; min-width: 32px; text-align: right; }
 
     /* TRADE LOG */
     .trade-log-table { max-height: 160px; overflow-y: auto; }
@@ -143,102 +122,72 @@
     .rule-violation { color: var(--danger); font-size: 0.72rem; }
     .rule-notrade { color: var(--text-muted); font-size: 0.72rem; }
 
-    /* SCORE BAR */
-    .score-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
-    .score-bar-track {
-      flex: 1;
-      height: 5px;
-      background: #2b2b2b;
-      border-radius: 999px;
-      overflow: hidden;
+    /* LAST UPDATED */
+    .last-updated {
+      text-align: center; font-size: 0.7rem; color: var(--text-muted);
+      padding: 0.4rem; border-top: 1px solid var(--border);
     }
-    .score-bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
-    .score-val { font-size: 0.75rem; color: var(--accent); font-weight: 600; min-width: 28px; text-align: right; }
+    .last-updated span { color: var(--accent); }
+
+    /* LOADING / ERROR */
+    .loading-overlay {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--text-muted); z-index: 99;
+    }
   </style>
 </head>
 <body>
-<div class="dashboard-root">
+<div class="loading-overlay" id="loading">Dashboard betöltése...</div>
+
+<div class="dashboard-root" id="app" style="display:none">
 
   <!-- TOP BAR -->
   <header class="top-bar">
     <div class="top-left">
       <strong>XAU Master OS V5 – Desktop Dashboard</strong>
-      <span id="date-session">Betöltés...</span>
+      <span id="date-session"></span>
     </div>
     <div class="top-center">
-      <div class="bias-label">Bias: SHORT</div>
-      <div class="bias-status">Status: SÁRGA – csak high-quality short setupok</div>
+      <div class="bias-label" id="bias-label"></div>
+      <div class="bias-status" id="bias-status"></div>
     </div>
     <div class="top-right">
-      <div class="risk-badge yellow">Risk mód: YELLOW</div>
-      <div class="pl-label">Napi P/L: +12.5 USD &nbsp;·&nbsp; Risk usage: 15%</div>
+      <div class="risk-badge" id="risk-badge"></div>
+      <div class="pl-label" id="pl-label"></div>
     </div>
   </header>
 
   <!-- MAIN GRID -->
   <main class="main-grid">
 
-    <!-- BAL OSZLOP: Macro + Regime + Levels -->
+    <!-- BAL OSZLOP -->
     <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title">Macro Market OS</div>
-      </div>
+      <div class="panel-header"><div class="panel-title">Macro Market OS</div></div>
       <div class="panel-body">
         <table>
           <thead><tr><th>Elem</th><th>Rezsim</th></tr></thead>
-          <tbody>
-            <tr><td>FedWatch</td><td><span class="pill">NEUTRAL</span></td></tr>
-            <tr><td>US10Y</td><td><span class="pill">RISING</span></td></tr>
-            <tr><td>DXY</td><td><span class="pill">USD-BULL</span></td></tr>
-            <tr><td>Szentiment</td><td><span class="pill">MIXED</span></td></tr>
-          </tbody>
+          <tbody id="macro-table"></tbody>
         </table>
-
         <hr class="divider">
-
         <div class="panel-title" style="margin-bottom:0.4rem">XAU Market Regime</div>
-        <table>
-          <tbody>
-            <tr><td>HTF trend</td><td><span class="pill">BEAR</span></td></tr>
-            <tr><td>Intraday regime</td><td><span class="pill">TREND</span></td></tr>
-            <tr><td>Volatility</td><td><span class="pill">NORMAL</span></td></tr>
-          </tbody>
-        </table>
-
+        <table><tbody id="regime-table"></tbody></table>
         <hr class="divider">
-
         <div class="panel-title" style="margin-bottom:0.4rem">Kulcsszintek</div>
-        <table>
-          <tbody>
-            <tr><td>PDH</td><td>–</td></tr>
-            <tr><td>PDL</td><td>–</td></tr>
-            <tr><td>Asia High</td><td>–</td></tr>
-            <tr><td>Asia Low</td><td>–</td></tr>
-            <tr><td>Daily Open</td><td>–</td></tr>
-            <tr><td>HTF szint</td><td>–</td></tr>
-          </tbody>
-        </table>
-
+        <table><tbody id="levels-table"></tbody></table>
         <hr class="divider">
-
         <div class="panel-title" style="margin-bottom:0.4rem">No-trade szűrők</div>
-        <div style="font-size:0.75rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.2rem;">
-          <div>High impact makró: <span style="color:var(--warning)">ellenőrzött</span></div>
-          <div>Asia session: <span style="color:var(--text-muted)">nem preferált</span></div>
-          <div>Spread/likviditás: <span style="color:var(--success)">OK</span></div>
-        </div>
+        <div id="notrade-block" style="font-size:0.75rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.2rem;"></div>
       </div>
     </section>
 
-    <!-- KÖZÉPSŐ PANEL: TradingView chart -->
+    <!-- KÖZÉPSŐ PANEL: chart -->
     <section class="panel chart-panel">
       <div class="panel-header">
         <div class="panel-title">XAUUSD – Live Chart (OANDA:XAUUSD)</div>
         <span class="pill gold">TradingView embed</span>
       </div>
-      <div class="tv-container">
-        <div id="tv-xauusd-chart"></div>
-      </div>
+      <div class="tv-container"><div id="tv-xauusd-chart"></div></div>
       <div class="chart-footer">
         <span>Default: M15 &nbsp;·&nbsp; HTF: H4 / D1</span>
         <div class="chip-row">
@@ -249,141 +198,207 @@
       </div>
     </section>
 
-    <!-- JOBB OSZLOP: Risk + Setup + Trade Log -->
+    <!-- JOBB OSZLOP -->
     <section class="right-column">
-
-      <!-- Risk OS panel -->
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Risk OS – Napi állapot</div>
-        </div>
-        <div class="panel-body">
-          <div class="kpi-row"><span>Napi P/L</span><span class="value pos">+12.5 USD</span></div>
-          <div class="kpi-row"><span>Napi risk usage</span><span class="value">15% / 100 USD</span></div>
-          <div class="kpi-row"><span>Heti risk usage</span><span class="value">25% / 300 USD</span></div>
-          <div class="kpi-row"><span>Loss streak</span><span class="value">0</span></div>
-          <div class="kpi-row"><span>Risk mód</span><span class="value" style="color:var(--warning)">YELLOW</span></div>
-          <div class="kpi-row"><span>RPT ajánlott</span><span class="value">5–10 USD</span></div>
-          <div class="kpi-row"><span>Nyitott pozíciók</span><span class="value">0 / 3 max</span></div>
-        </div>
+        <div class="panel-header"><div class="panel-title">Risk OS – Napi állapot</div></div>
+        <div class="panel-body" id="risk-panel"></div>
       </div>
-
-      <!-- Setup Execution panel -->
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Setup Execution OS</div>
-        </div>
-        <div class="panel-body">
-
-          <div class="setup-card">
-            <div class="setup-card-header">
-              <span class="setup-card-title">Setup A – SHORT</span>
-              <span class="tag short">Trend</span>
-            </div>
-            <div class="setup-card-body">
-              <div>Bias kompatibilis: <strong style="color:var(--success)">IGEN</strong></div>
-              <div>Belépési zóna: 2380–2385</div>
-              <div>SL: 2392 &nbsp;·&nbsp; TP1: 2365 &nbsp;·&nbsp; RR: 1:2.0</div>
-              <div>Kockázat: 10 USD &nbsp;·&nbsp; Egység: 1</div>
-              <div style="margin-top:0.4rem;">Score:</div>
-              <div class="score-bar-wrap">
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div>
-                <span class="score-val">7/10</span>
-              </div>
-              <div style="margin-top:0.3rem;">Engedélyezett: <strong style="color:var(--success)">IGEN (SÁRGA &gt;=8 szükséges, jelenleg 7 – felülvizsgálandó)</strong></div>
-            </div>
-          </div>
-
-          <div class="setup-card">
-            <div class="setup-card-header">
-              <span class="setup-card-title">Setup B – (opcionális)</span>
-              <span class="tag neutral">Range</span>
-            </div>
-            <div class="setup-card-body">
-              <div>Bias kompatibilis: RÉSZBEN</div>
-              <div>Belépési zóna: –</div>
-              <div>SL / TP / RR: –</div>
-              <div style="margin-top:0.4rem;">Score:</div>
-              <div class="score-bar-wrap">
-                <div class="score-bar-track"><div class="score-bar-fill" style="width:0%"></div></div>
-                <span class="score-val">–</span>
-              </div>
-              <div style="margin-top:0.3rem;">Engedélyezett: <strong style="color:var(--danger)">NEM</strong></div>
-            </div>
-          </div>
-
-        </div>
+        <div class="panel-header"><div class="panel-title">Setup Execution OS</div></div>
+        <div class="panel-body" id="setup-panel"></div>
       </div>
-
-      <!-- Trade log mini -->
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Trade Log – napi snapshot</div>
-        </div>
+        <div class="panel-header"><div class="panel-title">Trade Log – napi snapshot</div></div>
         <div class="panel-body trade-log-table">
           <table>
-            <thead>
-              <tr><th>Idő</th><th>Ir.</th><th>RR</th><th>Rule</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>10:15</td><td>S</td><td>+2.1</td>
-                <td><span class="rule-ok">OK</span></td>
-              </tr>
-              <tr>
-                <td>12:30</td><td>–</td><td>–</td>
-                <td><span class="rule-notrade">NO-TRADE</span></td>
-              </tr>
-              <tr>
-                <td>15:00</td><td>–</td><td>–</td>
-                <td><span class="rule-notrade">NO-TRADE</span></td>
-              </tr>
-            </tbody>
+            <thead><tr><th>Idő</th><th>Ir.</th><th>RR</th><th>Rule</th></tr></thead>
+            <tbody id="tradelog-table"></tbody>
           </table>
         </div>
       </div>
-
     </section>
+
   </main>
+
+  <footer class="last-updated">
+    Adatok utolsó frissítése: <span id="last-updated-time">–</span>
+    &nbsp;·&nbsp; Az oldal automatikusan újratölti az adatokat 5 percenként.
+  </footer>
 </div>
 
-<!-- TradingView Advanced Chart embed -->
+<!-- TradingView -->
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script type="text/javascript">
-  new TradingView.widget({
-    container_id: "tv-xauusd-chart",
-    autosize: true,
-    symbol: "OANDA:XAUUSD",
-    interval: "15",
-    timezone: "Europe/Budapest",
-    theme: "dark",
-    style: "1",
-    locale: "en",
-    toolbar_bg: "#1c1b19",
-    hide_top_toolbar: false,
-    hide_legend: false,
-    allow_symbol_change: false
-  });
+<script>
+// ─── SESSION CLOCK ───────────────────────────────────────────────
+function getSession(h) {
+  if (h >= 9 && h < 12) return 'London Session (09:00–12:00)';
+  if (h >= 14 && h < 19) return 'London–NY Overlap (14:00–19:00)';
+  if (h >= 2 && h < 9)  return 'Ázsiai session (nem preferált)';
+  return 'Off-session';
+}
+function updateClock() {
+  var now  = new Date();
+  var date = now.toLocaleDateString('hu-HU');
+  var time = now.toLocaleTimeString('hu-HU', {hour:'2-digit', minute:'2-digit'});
+  document.getElementById('date-session').textContent =
+    date + ' · ' + time + ' CEST · ' + getSession(now.getHours());
+}
+updateClock();
+setInterval(updateClock, 30000);
 
-  // Dátum + session megjelenítés
-  (function() {
-    var el = document.getElementById('date-session');
-    function getSession(h) {
-      if (h >= 9 && h < 12) return 'London Session (09:00–12:00)';
-      if (h >= 14 && h < 19) return 'London–NY Overlap (14:00–19:00)';
-      if (h >= 2 && h < 9) return 'Ázsiai session (nem preferált)';
-      return 'Off-session';
-    }
-    function update() {
-      var now = new Date();
-      var date = now.toLocaleDateString('hu-HU');
-      var time = now.toLocaleTimeString('hu-HU', {hour:'2-digit', minute:'2-digit'});
-      var session = getSession(now.getHours());
-      el.textContent = date + ' · ' + time + ' CEST · ' + session;
-    }
-    update();
-    setInterval(update, 30000);
-  })();
+// ─── HELPERS ─────────────────────────────────────────────────────
+function pill(val) {
+  return '<span class="pill">' + (val || '–') + '</span>';
+}
+function tag(val) {
+  if (!val) return '<span class="tag">–</span>';
+  return '<span class="tag ' + val + '">' + val + '</span>';
+}
+function fmt(val, fallback) {
+  return (val !== null && val !== undefined) ? val : (fallback || '–');
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────
+function render(d) {
+  var h = d.header;
+  var biasColors = { SHORT: '#d9534f', LONG: '#5cb85c', NEUTRAL: '#f0ad4e' };
+  var biasEl = document.getElementById('bias-label');
+  biasEl.textContent = 'Bias: ' + h.bias_direction;
+  biasEl.style.color = biasColors[h.bias_direction] || '#f5f5f5';
+  document.getElementById('bias-status').textContent = h.bias_status;
+
+  var badge = document.getElementById('risk-badge');
+  badge.textContent = 'Risk mód: ' + h.risk_mode;
+  badge.className = 'risk-badge ' + h.risk_mode;
+
+  var pl = h.daily_pl_usd;
+  document.getElementById('pl-label').innerHTML =
+    'Napi P/L: <strong style="color:' + (pl >= 0 ? '#5cb85c' : '#d9534f') + '">' +
+    (pl >= 0 ? '+' : '') + pl.toFixed(1) + ' USD</strong>' +
+    ' &nbsp;·&nbsp; Risk usage: ' + h.daily_risk_usage_pct + '%';
+
+  // Macro table
+  var m = d.macro;
+  document.getElementById('macro-table').innerHTML = [
+    ['FedWatch', m.fedwatch],
+    ['US10Y',    m.us10y],
+    ['DXY',      m.dxy],
+    ['Szentiment', m.sentiment]
+  ].map(function(r){
+    return '<tr><td>' + r[0] + '</td><td>' + pill(r[1]) + '</td></tr>';
+  }).join('');
+
+  document.getElementById('regime-table').innerHTML = [
+    ['HTF trend',       m.htf_trend],
+    ['Intraday regime', m.intraday_regime],
+    ['Volatility',      m.volatility]
+  ].map(function(r){
+    return '<tr><td>' + r[0] + '</td><td>' + pill(r[1]) + '</td></tr>';
+  }).join('');
+
+  // Levels
+  var lv = d.levels;
+  document.getElementById('levels-table').innerHTML = [
+    ['PDH', lv.pdh], ['PDL', lv.pdl],
+    ['Asia High', lv.asia_high], ['Asia Low', lv.asia_low],
+    ['Daily Open', lv.daily_open], ['HTF szint', lv.htf_level]
+  ].map(function(r){
+    return '<tr><td>' + r[0] + '</td><td>' + fmt(r[1]) + '</td></tr>';
+  }).join('');
+
+  // No-trade filters
+  var nt = d.notrade_filters;
+  document.getElementById('notrade-block').innerHTML =
+    '<div>High impact makró: <span style="color:var(--warning)">' + nt.high_impact_macro + '</span></div>' +
+    '<div>Asia session: <span>' + nt.asia_session + '</span></div>' +
+    '<div>Spread/likviditás: <span style="color:var(--success)">' + nt.spread_liquidity + '</span></div>';
+
+  // Risk panel
+  var r = d.risk;
+  document.getElementById('risk-panel').innerHTML = [
+    ['Napi P/L', (r.daily_pl_usd >= 0 ? '+' : '') + r.daily_pl_usd.toFixed(1) + ' USD', r.daily_pl_usd >= 0 ? 'pos' : 'neg'],
+    ['Napi risk usage', r.daily_risk_usage_pct + '% / ' + r.daily_limit_usd + ' USD', ''],
+    ['Heti risk usage', r.weekly_risk_usage_pct + '% / ' + r.weekly_limit_usd + ' USD', ''],
+    ['Loss streak', r.loss_streak, ''],
+    ['Risk mód', r.risk_mode, ''],
+    ['RPT ajánlott', r.rpt_min_usd + '–' + r.rpt_max_usd + ' USD', ''],
+    ['Nyitott pozíciók', r.open_positions + ' / ' + r.max_positions + ' max', '']
+  ].map(function(row){
+    return '<div class="kpi-row"><span>' + row[0] + '</span>' +
+           '<span class="value ' + row[2] + '">' + row[1] + '</span></div>';
+  }).join('');
+
+  // Setup cards
+  document.getElementById('setup-panel').innerHTML = d.setups.map(function(s) {
+    var score = s.score !== null ? s.score : null;
+    var barPct = score !== null ? (score / 10 * 100) + '%' : '0%';
+    var scoreText = score !== null ? score + '/10' : '–';
+    var allowedColor = s.allowed ? 'var(--success)' : 'var(--danger)';
+    var allowedText = s.allowed ? 'IGEN' : 'NEM';
+    return '<div class="setup-card">' +
+      '<div class="setup-card-header">' +
+        '<span class="setup-card-title">' + s.label + (s.direction ? ' – ' + s.direction : '') + '</span>' +
+        tag(s.type) +
+      '</div>' +
+      '<div class="setup-card-body">' +
+        '<div>Bias kompatibilis: <strong style="color:' + (s.bias_compatible ? 'var(--success)' : 'var(--danger)') + '">' + (s.bias_compatible ? 'IGEN' : 'NEM') + '</strong></div>' +
+        '<div>Belépési zóna: ' + fmt(s.entry_zone) + '</div>' +
+        '<div>SL: ' + fmt(s.sl) + ' &nbsp;·&nbsp; TP1: ' + fmt(s.tp1) + ' &nbsp;·&nbsp; RR: ' + (s.rr ? '1:' + s.rr.toFixed(1) : '–') + '</div>' +
+        '<div>Kockázat: ' + fmt(s.risk_usd, '–') + ' USD &nbsp;·&nbsp; Egység: ' + s.units + '</div>' +
+        '<div>Score:<div class="score-bar-wrap"><div class="score-bar-track"><div class="score-bar-fill" style="width:' + barPct + '"></div></div><span class="score-val">' + scoreText + '</span></div></div>' +
+        '<div>Engedélyezett: <strong style="color:' + allowedColor + '">' + allowedText + '</strong>' + (s.note ? ' – <em>' + s.note + '</em>' : '') + '</div>' +
+      '</div></div>';
+  }).join('');
+
+  // Trade log
+  document.getElementById('tradelog-table').innerHTML = d.trade_log.map(function(t) {
+    var ruleHtml;
+    if (t.rule_ok === true)  ruleHtml = '<span class="rule-ok">OK</span>';
+    else if (t.rule_ok === false) ruleHtml = '<span class="rule-violation">VIOLATION</span>';
+    else ruleHtml = '<span class="rule-notrade">' + (t.note || 'NO-TRADE') + '</span>';
+    return '<tr><td>' + t.time + '</td><td>' + fmt(t.direction) + '</td>' +
+           '<td>' + (t.rr !== null && t.rr !== undefined ? (t.rr > 0 ? '+' : '') + t.rr.toFixed(1) : '–') + '</td>' +
+           '<td>' + ruleHtml + '</td></tr>';
+  }).join('');
+
+  // Last updated
+  document.getElementById('last-updated-time').textContent = d.meta.last_updated;
+
+  // Show app
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+}
+
+// ─── FETCH DATA.JSON ─────────────────────────────────────────────
+function loadData() {
+  fetch('./data.json?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(d) { render(d); })
+    .catch(function(e) {
+      document.getElementById('loading').textContent = 'Hiba az adatok betöltésekor. Frissítsd az oldalt.';
+      console.error(e);
+    });
+}
+
+loadData();
+setInterval(loadData, 5 * 60 * 1000); // 5 percenként újratölti
+
+// ─── TRADINGVIEW CHART ───────────────────────────────────────────
+new TradingView.widget({
+  container_id: 'tv-xauusd-chart',
+  autosize: true,
+  symbol: 'OANDA:XAUUSD',
+  interval: '15',
+  timezone: 'Europe/Budapest',
+  theme: 'dark',
+  style: '1',
+  locale: 'en',
+  toolbar_bg: '#1c1b19',
+  hide_top_toolbar: false,
+  hide_legend: false,
+  allow_symbol_change: false
+});
 </script>
 </body>
 </html>

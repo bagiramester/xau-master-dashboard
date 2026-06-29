@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "last_updated": "2026-06-29 20:00 CEST",
+    "note": "Ezt a fájlt szerkeszd naponta a morning research után."
+  },
+  "header": {
+    "bias_direction": "SHORT",
+    "bias_status": "SÁRGA – csak high-quality short setupok",
+    "risk_mode": "YELLOW",
+    "daily_pl_usd": 12.5,
+    "daily_risk_usage_pct": 15
+  },
+  "macro": {
+    "fedwatch": "NEUTRAL",
+    "us10y": "RISING",
+    "dxy": "USD-BULL",
+    "sentiment": "MIXED",
+    "htf_trend": "BEAR",
+    "intraday_regime": "TREND",
+    "volatility": "NORMAL"
+  },
+  "levels": {
+    "pdh": null,
+    "pdl": null,
+    "asia_high": null,
+    "asia_low": null,
+    "daily_open": null,
+    "htf_level": null
+  },
+  "notrade_filters": {
+    "high_impact_macro": "ellenőrzött",
+    "asia_session": "nem preferált",
+    "spread_liquidity": "OK"
+  },
+  "risk": {
+    "daily_pl_usd": 12.5,
+    "daily_risk_usage_pct": 15,
+    "daily_limit_usd": 100,
+    "weekly_risk_usage_pct": 25,
+    "weekly_limit_usd": 300,
+    "loss_streak": 0,
+    "risk_mode": "YELLOW",
+    "rpt_min_usd": 5,
+    "rpt_max_usd": 10,
+    "open_positions": 0,
+    "max_positions": 3
+  },
+  "setups": [
+    {
+      "label": "Setup A",
+      "direction": "SHORT",
+      "type": "Trend",
+      "bias_compatible": true,
+      "entry_zone": "2380–2385",
+      "sl": 2392,
+      "tp1": 2365,
+      "rr": 2.0,
+      "risk_usd": 10,
+      "units": 1,
+      "score": 7,
+      "allowed": false,
+      "note": "SÁRGA módban min 8/10 szükséges – felülvizsgálandó"
+    },
+    {
+      "label": "Setup B",
+      "direction": null,
+      "type": "Range",
+      "bias_compatible": false,
+      "entry_zone": null,
+      "sl": null,
+      "tp1": null,
+      "rr": null,
+      "risk_usd": null,
+      "units": 1,
+      "score": null,
+      "allowed": false,
+      "note": "Nincs aktív setup B"
+    }
+  ],
+  "trade_log": [
+    {
+      "time": "10:15",
+      "direction": "S",
+      "rr": 2.1,
+      "rule_ok": true,
+      "note": ""
+    },
+    {
+      "time": "12:30",
+      "direction": null,
+      "rr": null,
+      "rule_ok": null,
+      "note": "NO-TRADE"
+    },
+    {
+      "time": "15:00",
+      "direction": null,
+      "rr": null,
+      "rule_ok": null,
+      "note": "NO-TRADE"
+    }
+  ]
+}
