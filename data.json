@@ -1,7 +1,10 @@
 {
   "meta": {
     "last_updated": "2026-06-30 16:14 CEST",
+    "last_auto_sync": "2026-06-30 16:14 CEST",
+    "last_manual_update": "2026-06-30 13:35 CEST",
     "auto": true,
+    "date": "2026-06-30",
     "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
   "macro": {
@@ -13,18 +16,42 @@
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "updated_at": "2026-06-30 08:57 CEST"
     },
-    "us10y": "N/A",
-    "dxy": "101.34 – NEUTRAL",
-    "sentiment": "N/A",
-    "htf_trend": "RANGE",
+    "us10y": {
+      "value": "4.38%",
+      "bias": "YELLOW",
+      "source_label": "US10Y – TradingView",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "dxy": {
+      "value": "101.34 – NEUTRAL",
+      "bias": "NEUTRAL",
+      "source_label": "DXY – TradingView",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "sentiment": {
+      "value": "NEUTRAL",
+      "bias": "NEUTRAL",
+      "source_label": "Fear & Greed – CNN",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "htf_trend": {
+      "value": "RANGE",
+      "bias": "NEUTRAL",
+      "source_label": "XAUUSD H4 – manuális",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
     "intraday_regime": {
       "value": "RANGE-BEAR",
       "bias": "YELLOW",
-      "source_type": "manual",
       "source_label": "M15 – HIGH vol, napi ~2-3% mozgás",
       "updated_at": "2026-06-30 08:57 CEST"
     },
-    "volatility": "NORMÁL"
+    "volatility": {
+      "value": "NORMÁL",
+      "bias": "GREEN",
+      "source_label": "Intraday szórás – manuális",
+      "updated_at": "2026-06-30 08:57 CEST"
+    }
   },
   "levels": {
     "pdh": 4070.0,
@@ -76,16 +103,21 @@
     "max_trades_today": 1,
     "open_positions": 0,
     "open_xau_positions": 0,
-    "trade_allowed_now": true,
-    "xau_trade_allowed_now": true,
-    "trade_allowed_reason": "YELLOW mód – max 1 setup, score ≥8 szükséges. Makró ablak 14:45–16:30 CEST között tiltás."
+    "trade_allowed_now": false,
+    "xau_trade_allowed_now": false,
+    "trade_allowed_reason": "YELLOW mód + Makró ablak 14:45–16:30 CEST aktív. Trade tiltva."
   },
   "header": {
     "bias_direction": "SHORT",
-    "bias_status": "–",
-    "risk_mode": "ZÖLD",
+    "daily_status": "YELLOW",
+    "risk_mode": "YELLOW",
     "daily_pl_usd": 0,
-    "daily_risk_usage_pct": 0
+    "daily_risk_usage_pct": 0,
+    "session": "London–NY Overlap",
+    "preferred_session": "London 09:00–12:00 CEST",
+    "focus_setup": "A",
+    "macro_lock_active": true,
+    "narrative": "RANGE-BEAR nap, HIGH vol, makró ablak 14:45–16:30. London session LOCKED, Overlap részben."
   },
   "setups": {
     "A": {
@@ -93,20 +125,20 @@
       "type": "HTF sell zóna reakció",
       "bias_compatibility": "igen",
       "entry_zone": "4058–4068 (charton pontosítandó)",
-      "sl": "4070–4075 felett (charton H1 close alapján)",
+      "sl": "4070–4075 felett",
       "tp1": "3965–3970",
       "tp2": "3930",
       "rr_min": 2.0,
       "score": 7,
-      "session": "London 09:00–12:00 CEST / Overlap (nem makró ablakban)",
-      "invalidation": "H1 close 4075 felett – HTF sell zóna áttörve",
+      "session": "London 09:00–12:00 / Overlap",
+      "invalidation": "H1 close 4075 felett",
       "allowed": false,
-      "locked_reason": "Score 7 – SÁRGA napon ≥8 szükséges. Chart M15/H1 rejection megerősítés szükséges.",
+      "locked_reason": "Score 7 – SÁRGA napon ≥8 szükséges. Makró ablak aktív.",
       "confirmed": false,
       "thesis": [
         "FedWatch NEUTRAL/HIKE + US10Y 4.38% → short XAU makró háttér",
         "HTF RANGE-BEAR struktúra, sell zóna 4058–4068",
-        "Sell-zone reakció: M15 rejection megerősítéssel érvényes"
+        "M15 rejection megerősítés szükséges belépőhöz"
       ],
       "updated_at": "2026-06-30 13:35 CEST"
     },
@@ -114,14 +146,14 @@
       "direction": "SHORT",
       "type": "Intraday range breakdown",
       "bias_compatibility": "részben",
-      "entry_zone": "Range alsó zóna törésénél (charton)",
-      "sl": "Range teteje felett (charton)",
+      "entry_zone": "Range alsó zóna törésénél",
+      "sl": "Range teteje felett",
       "tp1": "3965–3970",
       "tp2": null,
       "rr_min": 2.0,
       "score": 5,
-      "session": "London / Overlap (nem makró ablakban)",
-      "invalidation": "Range visszafordul, H1 close range felett",
+      "session": "London / Overlap",
+      "invalidation": "H1 close range felett",
       "allowed": false,
       "locked_reason": "Score 5 – SÁRGA napon ≥8 szükséges. Score-limit alatt.",
       "confirmed": false,
