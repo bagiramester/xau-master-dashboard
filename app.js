@@ -188,9 +188,41 @@ function renderGuardian(data) {
   }
 }
 
-/* ─── SETUPS ─── */
+/* ─── SETUPS ───
+   Garantáltan mindig 2 setup kártya jelenik meg.
+   Ha a data.json-ban az A vagy B kulcs hiányzik / üres,
+   az app egy PLACEHOLDER fallback objektummal tölti fel a kártyát.
+   Ez biztosítja, hogy a layout soha nem törik össze.
+─── */
+
+const SETUP_FALLBACK = {
+  direction: '',
+  type: 'Nincs setup definiálva',
+  entry_zone: '–',
+  sl: '–',
+  tp1: '–',
+  tp2: null,
+  rr_min: 0,
+  score: 0,
+  allowed: false,
+  locked_reason: 'A data.json-ban nincs setup megadva erre a pozícióra.',
+  thesis: ['Töltsd ki a data.json setups.A / setups.B mezőit.'],
+  updated_at: null,
+};
 
 function renderSetups(data) {
+  const rawSetups = data.setups || {};
+
+  // Mindig pontosan 2 slot: A és B
+  const slots = ['A', 'B'];
+  slots.forEach(letter => {
+    // Ha a kulcs hiányzik vagy null, fallback-et alkalmazunk
+    if (!rawSetups[letter] || typeof rawSetups[letter] !== 'object') {
+      rawSetups[letter] = { ...SETUP_FALLBACK };
+    }
+  });
+
+  // Renderelés
   renderSetupCard('A', data);
   renderSetupCard('B', data);
 
@@ -213,7 +245,7 @@ function renderSetups(data) {
 }
 
 function renderSetupCard(letter, data) {
-  const setup   = (data.setups || {})[letter] || {};
+  const setup   = (data.setups || {})[letter] || { ...SETUP_FALLBACK };
   const h       = data.header || {};
   const r       = data.risk   || {};
   const filters = data.notrade_filters || {};
@@ -228,6 +260,8 @@ function renderSetupCard(letter, data) {
   if (rr < 2 && rr > 0)   lockReasons.push('RR < 1:2');
   if (score < requiredScore && requiredScore < 99) lockReasons.push(`Score ${score} < ${requiredScore}`);
   if (filters.macro_window_active) lockReasons.push('Makró ablak aktív');
+  // Ha fallback (type = 'Nincs setup definiálva'), mindig locked
+  if (setup.type === SETUP_FALLBACK.type) lockReasons.push('Nincs setup adat');
 
   const isAllowed = lockReasons.length === 0 && !!setup.allowed;
   const dir = (setup.direction || '').toUpperCase();
