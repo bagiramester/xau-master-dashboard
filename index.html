@@ -14,30 +14,32 @@
 <!-- TOP INFO BAR -->
 <header class="top-bar">
   <div class="top-bar__left">
-    <div class="top-bar__datetime" id="datetimeBlock">
-      <span class="top-bar__date" id="currentDate">2026. 06. 30.</span>
+    <div class="top-bar__datetime">
+      <span class="top-bar__date" id="currentDate">2026. 06. 30. - 08:13 CEST</span>
       <span class="top-bar__session" id="sessionLabel">● London Session</span>
       <span class="top-bar__refresh" id="refreshCountdown">Next scheduled refresh: 2 min</span>
     </div>
   </div>
   <div class="top-bar__center">
     <span class="top-bar__datecenter" id="dateCenterLabel">2026. 06. 30.</span>
-    <span class="top-bar__narrative" id="narrativeText">Global bias focus with direct narrative · Bias: <strong>LONG</strong> | Narratíva: FedWatch neutral, US10Y sideways, DXY bull, sentiment mixed. HTF range/expansion, intraday TREND up, NORMAL vol. Bias: <strong>LONG (SÁRGA)</strong>…</span>
+    <span class="top-bar__narrative" id="narrativeText">Global bias focus with direct narrative narrative · Bias: <strong>LONG</strong> | Narratíva: FedWatch neutral, US10Y sideways, DXY bull, sentiment mixed. HTF range/expansion, intraday TREND up, NORMAL vol. Bias: <strong>LONG (SÁRGA)</strong>…</span>
   </div>
   <div class="top-bar__right">
-    <div class="top-bar__effective">
+    <div class="top-bar__effective-block">
       <span class="top-bar__effective-label">Derived frontend Effective Mode</span>
       <div class="top-bar__traffic" id="effectiveModeDisplay">
         <span class="badge badge--green" id="emGreen">GREEN</span>
+        <span class="badge badge--slash">/</span>
         <span class="badge badge--yellow" id="emYellow">YELLOW</span>
+        <span class="badge badge--slash">/</span>
         <span class="badge badge--red" id="emRed">RED</span>
       </div>
     </div>
-    <div class="top-bar__countdown">
+    <div class="top-bar__countdown-block">
       <span class="top-bar__countdown-label">Active no-trade countdown</span>
       <span class="top-bar__countdown-value" id="noTradeCountdown">FOMC HÍR TILTÁS: <strong id="countdownMin">18 min</strong></span>
     </div>
-    <div class="top-bar__status">
+    <div class="top-bar__status-block">
       <span class="top-bar__status-label">Today Status Pill</span>
       <div class="top-bar__pills" id="todayStatusPills">
         <span class="pill pill--green" id="pillTradeOk">[ TRADE OK ]</span>
@@ -57,15 +59,13 @@
 <!-- MAIN GRID -->
 <main class="dashboard-grid">
 
-  <!-- ===== LEFT COLUMN ===== -->
+  <!-- LEFT COLUMN -->
   <div class="col col--left">
-
-    <!-- SETUP FOCUS -->
     <section class="panel panel--setup-focus">
       <h2 class="panel__title">SETUP FOCUS</h2>
       <div class="setup-focus__inner">
         <div class="setup-focus__mascot">
-          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira" width="130" height="130">
+          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira" width="100" height="100">
         </div>
         <div class="setup-focus__bubble" id="bagiruBubble">
           <strong>Bagira Virtual Assistant console bubble</strong><br>
@@ -85,23 +85,23 @@
         <div class="setup-card__body">
           <div class="setup-col">
             <div class="setup-row"><span class="setup-key">Metrics:</span></div>
-            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val" id="sA_score1">7/10</span></div>
-            <div class="setup-row"><span class="setup-key">Required:</span><span class="setup-val setup-val--warn" id="sA_req1">8/10</span></div>
-            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val" id="sA_rr1">Dynamic RR 1:2.4</span></div>
-            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock" id="sA_rrlock1">Locked by RR rule</span></div>
-            <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green" id="sA_bias1">IGEN</span></div>
-            <div class="setup-row setup-thesis"><span class="setup-key">Thesis bullet pontok:</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val">7/10</span></div>
+            <div class="setup-row"><span class="setup-key">Required:</span><span class="setup-val setup-val--warn">8/10</span></div>
+            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">Dynamic RR 1:2.4</span></div>
+            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
+            <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
+            <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
             <div class="setup-row"><span class="setup-thesis-item">🍎 M1S rejection megerősítés</span></div>
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
           </div>
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val setup-val--amber" id="sA_score2">5/10</span></div>
-            <div class="setup-row setup-row--amber"><span class="setup-warn">Amber warning for yellow mode</span></div>
-            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val" id="sA_rr2">1:2.4</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val setup-val--amber">5/10</span></div>
+            <div class="setup-row--amber"><span class="setup-warn">Amber warning for yellow mode</span></div>
+            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.4</span></div>
             <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
             <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
-            <div class="setup-row setup-thesis"><span class="setup-key">Thesis bullet pontok:</span></div>
+            <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
             <div class="setup-row"><span class="setup-thesis-item">🍎 M1S rejection megerősítés</span></div>
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
@@ -119,20 +119,20 @@
         </div>
         <div class="setup-card__body">
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score Tracker:</span><span class="setup-val" id="sB_score1">7/10</span></div>
-            <div class="setup-row setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning w/o</span></div>
-            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val" id="sB_rr1">1:2.4</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker:</span><span class="setup-val">7/10</span></div>
+            <div class="setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning w/o</span></div>
+            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.4</span></div>
             <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
             <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
-            <div class="setup-row setup-thesis"><span class="setup-key">Thesis bullet pontok:</span></div>
+            <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
             <div class="setup-row"><span class="setup-thesis-item">🍎 M1S rejection megerősítés</span></div>
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
           </div>
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val setup-val--amber" id="sB_score2">5/10</span></div>
-            <div class="setup-row setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning<br>Locked by score threshold</span></div>
-            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val" id="sB_rr2">1:2.0</span></div>
+            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val setup-val--amber">5/10</span></div>
+            <div class="setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning<br>Locked by score threshold</span></div>
+            <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.0</span></div>
             <div class="setup-row"><span class="setup-key">Thesis:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
           </div>
@@ -140,22 +140,20 @@
         <div class="setup-card__footer">Footer: Invalidation, Session Rule, Macro Lock, status, Allowed status</div>
       </div>
     </section>
-    <!-- Phase labels bottom left -->
     <div class="phase-label">Tervezési Fázis</div>
   </div>
 
-  <!-- ===== CENTER COLUMN ===== -->
+  <!-- CENTER COLUMN -->
   <div class="col col--center">
-
-    <!-- LIVE CANVAS & MACRO INTEL -->
     <section class="panel panel--live">
       <h2 class="panel__title">LIVE CANVAS &amp; MACRO INTEL</h2>
       <div class="live-context-bar" id="chartContextBar">
-        <strong>Chart Context Bar</strong> (Above): Preferred session, Active macro lock, Current setup focus
+        <strong>Chart Context Bar</strong> (Above): Preferred session, &nbsp; Active macro lock, &nbsp; Current setup focus
       </div>
-      <!-- Chart placeholder -->
       <div class="chart-area" id="chartArea">
-        <div class="chart-placeholder">[ TradingView Widget Area ]</div>
+        <div class="tradingview-widget-container" style="width:100%;height:100%;">
+          <div id="tradingview_xau" style="width:100%;height:100%;"></div>
+        </div>
       </div>
       <div class="live-session-pills">
         <span class="session-pill" id="cLondon">[ London ]</span>
@@ -163,21 +161,16 @@
         <span class="session-pill session-pill--active" id="cNoTrade">[ No-Trade Window ]</span>
       </div>
     </section>
-
-    <!-- BOTTOM CENTER: Bagira + Macro Grid -->
     <div class="center-bottom">
-      <!-- Bagira Console Grid -->
       <div class="bagira-grid-panel">
         <div class="bagira-grid-panel__title">Bagira Virtual Assistant console grid</div>
         <div class="bagira-grid-panel__img">
-          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira AI" width="120" height="120">
+          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira AI" width="90" height="90">
         </div>
         <div class="bagira-grid-panel__speech" id="bagiraGridSpeech">
           "Kockázat korlátozva. Maximum 1 trade engedélyezett mára."
         </div>
       </div>
-
-      <!-- Macro Market & Kulcsszintek -->
       <div class="macro-grid-panel">
         <div class="macro-grid-panel__title">Macro Market &amp; Kulcsszintek matrix grid</div>
         <div class="macro-heatmap" id="macroHeatmap">
@@ -188,43 +181,25 @@
           <div class="macro-cell" id="mHtfTrend2">HTF<br>trend</div>
           <div class="macro-cell" id="mIntraday">Intraday<br>regime</div>
           <div class="macro-cell" id="mVolatility">Volatility<br>Regime</div>
+          <div class="macro-cell macro-cell--empty"></div>
         </div>
         <div class="key-levels-table">
           <div class="key-levels-title"><strong>Table of Key Levels</strong></div>
-          <div class="key-level-row" id="kl1">
-            <span class="kl-label">[PDH - 2345.10 - AUTO]</span>
-            <span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span>
-            <span class="kl-derived">[DERIVED]</span>
-          </div>
-          <div class="key-level-row" id="kl2">
-            <span class="kl-label">[Asia High - Manual]</span>
-            <span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span>
-            <span class="kl-derived">[DERIVED]</span>
-          </div>
-          <div class="key-level-row" id="kl3">
-            <span class="kl-label">[PDH - 2345.10 - AUTO]</span>
-            <span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span>
-            <span class="kl-derived">[DERIVED]</span>
-          </div>
-          <div class="key-level-row" id="kl4">
-            <span class="kl-label">[Asia High - Manual]</span>
-            <span class="kl-status kl-status--blank"></span>
-            <span class="kl-derived">[DERIVED]</span>
-          </div>
+          <div class="key-level-row"><span class="kl-label">[PDH - 2345.10 - AUTO]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
+          <div class="key-level-row"><span class="kl-label">[Asia High - Manual]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
+          <div class="key-level-row"><span class="kl-label">[PDH - 2345.10 - AUTO]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
+          <div class="key-level-row"><span class="kl-label">[Asia High - Manual]</span><span class="kl-status kl-status--blank"></span><span class="kl-derived">[DERIVED]</span></div>
         </div>
       </div>
     </div>
     <div class="phase-label">Figyelési Fázis</div>
   </div>
 
-  <!-- ===== RIGHT COLUMN ===== -->
+  <!-- RIGHT COLUMN -->
   <div class="col col--right">
-
-    <!-- EXECUTION & RISK ENGINE -->
     <section class="panel panel--risk">
       <h2 class="panel__title">EXECUTION &amp; RISK ENGINE</h2>
 
-      <!-- TRADE INPUT -->
       <div class="risk-sub">
         <div class="risk-sub__title">TRADE INPUT</div>
         <div class="trade-input-row">
@@ -240,105 +215,94 @@
             <label>Take Profit</label>
             <input type="number" id="takeProfit" placeholder="" step="0.01">
           </div>
-          <div class="trade-input-lock" id="tradeLockIcon" title="Smart Bridge locked">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div class="trade-input-lock" id="tradeLockIcon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
         </div>
         <div class="trade-input-smartbridge">
-          Smart Bridge automatic filling from active Setup A toggle
-          <button class="toggle-btn" id="smartBridgeToggle" aria-label="Toggle Smart Bridge">A</button>
-          <span>and</span>
+          <span>Smart Bridge automatic filling from active Setup A toggle</span>
+          <div class="smartbridge-controls">
+            <button class="toggle-btn" id="smartBridgeA">A</button>
+            <span class="text-muted" style="font-size:0.6rem">and</span>
+          </div>
         </div>
-        <button class="execute-btn" id="executeTradeBtn" disabled>EXECUTE TRADE</button>
+        <button class="execute-btn" id="executeBtn">EXECUTE TRADE</button>
         <div class="execute-note">(active only with ecotup with Allowed setup and ilt is present)</div>
       </div>
 
-      <!-- RISK ENGINE -->
       <div class="risk-sub">
         <div class="risk-sub__title">RISK ENGINE</div>
         <div class="risk-bars">
-          <div class="risk-bar-row">
-            <span class="risk-bar-label">Napi P/L water mark</span>
-            <span class="risk-bar-label risk-bar-label--right">Napi P/L USD</span>
-            <span class="risk-bar-label risk-bar-label--right" id="livePL">Live P/L<br><strong id="livePLVal">0/0</strong></span>
-          </div>
-          <div class="risk-progress-wrap">
-            <div class="risk-progress-bar" id="dailyBar">
-              <div class="risk-progress-fill risk-progress-fill--daily" id="dailyFill" style="width:0%"></div>
+          <div class="risk-bar-block">
+            <div class="risk-bar-header">
+              <span class="risk-bar-label">Napi P/L water mark</span>
+              <span class="risk-bar-label">Napi P/L USD</span>
+              <span class="risk-bar-label" style="margin-left:auto">Live P/L</span>
+            </div>
+            <div style="text-align:right;font-size:0.6rem;color:var(--text-muted)" id="livePnlTop">0/0</div>
+            <div class="risk-bar-label-left">0 to -100 USD Hard Stop</div>
+            <div class="risk-progress-bar">
+              <div class="risk-progress-fill risk-progress-fill--daily" id="dailyPnlBar" style="width:0%"></div>
             </div>
             <div class="risk-bar-limits">
-              <span>0 to -100 USD Hard Stop</span>
-              <span class="text-red" id="dailyLimitVal">-100 USD</span>
+              <span></span><span class="text-red">-100 USD</span>
             </div>
           </div>
-          <div class="risk-bar-row">
-            <span class="risk-bar-label">Heti Risk Progress Bar</span>
-          </div>
-          <div class="risk-progress-wrap">
-            <div class="risk-progress-bar" id="weeklyBar">
-              <div class="risk-progress-fill risk-progress-fill--weekly" id="weeklyFill" style="width:0%"></div>
+          <div class="risk-bar-block">
+            <div class="risk-bar-label">Heti Risk Progress Bar</div>
+            <div class="risk-progress-bar">
+              <div class="risk-progress-fill risk-progress-fill--weekly" id="weeklyPnlBar" style="width:0%"></div>
             </div>
             <div class="risk-bar-limits">
-              <span>0 to -300 USD limit</span>
-              <span class="text-red" id="weeklyLimitVal">-300 USD</span>
+              <span class="text-muted">0 to -300 USD limit</span>
+              <span class="text-red">-300 USD</span>
             </div>
           </div>
-        </div>
-
-        <div class="risk-trades-allowed">
-          <span>Max Trades allowed today</span>
-          <div class="trades-allowed-counts">
-            <span class="text-green">GREEN: <strong id="tAllowGreen">2</strong></span>
-            <span class="text-yellow">YELLOW: <strong id="tAllowYellow">1</strong></span>
-            <span class="text-red">RED: <strong id="tAllowRed">0</strong></span>
+          <div class="risk-trades-row">
+            <div class="risk-trades-allowed">
+              <span class="risk-bar-label">Max Trades allowed today</span>
+              <div class="trades-allowed-counts">
+                <span class="text-green">GREEN: <strong id="trGreen">2</strong></span>
+                <span class="text-yellow">YELLOW: <strong id="trYellow">1</strong></span>
+                <span class="text-red">RED: <strong id="trRed">0</strong></span>
+              </div>
+            </div>
+            <div class="risk-mode-pill" id="riskModePill">
+              <span class="risk-mode-pill__title">Yellow Mode Guidance</span>
+              <span class="risk-mode-pill__desc">Yellow Mode comesescoit indicat as andionet problem.</span>
+            </div>
           </div>
-        </div>
-
-        <div class="risk-pnl-row">
-          <div class="risk-pnl-cell">
-            <span class="risk-pnl-label">Live P/L</span>
-            <span class="risk-pnl-val text-green" id="riskLivePL">296.100</span>
-          </div>
-          <div class="risk-pnl-cell">
-            <span class="risk-pnl-label">Loss Streak</span>
-            <span class="risk-pnl-val" id="riskLossStreak">23.300</span>
-          </div>
-          <div class="risk-mode-pill" id="riskModePill">
-            <span class="risk-mode-pill__title">Yellow Mode Guidance</span>
-            <span class="risk-mode-pill__desc">Yellow Mode comesecoit indicat as andionet problem.</span>
+          <div class="risk-pnl-row">
+            <div class="risk-pnl-cell">
+              <span class="risk-pnl-label">Live P/L</span>
+              <span class="risk-pnl-val text-green" id="livePnl">296.100</span>
+            </div>
+            <div class="risk-pnl-cell">
+              <span class="risk-pnl-label">Loss Streak</span>
+              <span class="risk-pnl-val text-red" id="lossStreak">23.300</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- TRADE LOG & PERFORMANCE -->
       <div class="risk-sub">
         <div class="risk-sub__title">TRADE LOG &amp; PERFORMANCE snapshot</div>
         <div class="trade-log-summary">
-          <span>Trades Today: <strong id="tlTotal">x/2</strong></span>
-          <span>Net P/L: <strong class="text-green" id="tlNetPL">+/12</strong></span>
-          <span>Avg RR: <strong id="tlAvgRR">—</strong></span>
-          <span>Rule adherence: <strong class="text-green" id="tlRule">100%</strong></span>
+          <span>Trades Today: <strong class="text-muted" id="tradesToday">×/2</strong></span>
+          <span>Net P/L: <strong class="text-green" id="netPnl">+/12</strong></span>
+          <span>Avg RR <strong id="avgRR">—</strong></span>
+          <span>Rule adherence: <strong class="text-green" id="ruleAdherence">100%</strong></span>
         </div>
         <div class="daily-snapshot-label">Daily Trade Snapshot (Mai max 2 trade)</div>
         <table class="trade-table" id="tradeTable">
           <thead>
-            <tr>
-              <th>Idő</th><th>Irány</th><th>Típus</th><th>RR</th><th>P/L</th><th>Szabály Státusz</th>
-            </tr>
+            <tr><th>Idő</th><th>Irány</th><th>Típus</th><th>RR</th><th>P/L</th><th>Szabály Státusz</th></tr>
           </thead>
           <tbody id="tradeTableBody">
-            <tr>
-              <td>06:33:35</td><td class="td-short">Short</td><td>Trade ▼</td><td>1:2.4</td><td>+0.00</td><td class="td-ok">RULE OK</td>
-            </tr>
-            <tr>
-              <td>06:30:33</td><td class="td-short">Short</td><td>Trade ▼</td><td>1:2.3</td><td>+0.00</td><td class="td-violation">VIOLATION !</td>
-            </tr>
-            <tr>
-              <td>06:30:35</td><td class="td-long">Irány</td><td>Trade ▼</td><td>1:2.4</td><td>+0.00</td><td class="td-violation">VIOLATION !</td>
-            </tr>
-            <tr>
-              <td>06:30:35</td><td class="td-short">Short</td><td>Tráde ▼</td><td>1:2.0</td><td>P/L</td><td class="td-violation">VIOLATION !</td>
-            </tr>
+            <tr><td class="font-mono">06:33:35</td><td class="td-short">Short</td><td>Trade ▼</td><td>1:2.4</td><td class="text-green">+0.00</td><td class="td-ok">✔ RULE OK</td></tr>
+            <tr><td class="font-mono">06:30:33</td><td class="td-short">Short</td><td>Trade ▼</td><td>1:2.3</td><td class="text-green">+0.00</td><td class="td-violation">VIOLATION !</td></tr>
+            <tr><td class="font-mono">06:30:35</td><td class="td-short">Irány</td><td>Trade ▼</td><td>1:2.4</td><td>P/L</td><td class="td-violation">VIOLATION !</td></tr>
+            <tr><td class="font-mono">06:30:35</td><td class="td-short">Short</td><td>Tiáde ▼</td><td>1:2.0</td><td>P/L</td><td class="td-violation">VIOLATION !</td></tr>
           </tbody>
         </table>
       </div>
@@ -348,6 +312,59 @@
 
 </main>
 
-<script src="app.js"></script>
+<script>
+// Clock
+function updateClock() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  const y = now.getFullYear(), mo = now.getMonth()+1, d = now.getDate();
+  const h = now.getHours(), mi = now.getMinutes();
+  document.getElementById("currentDate").textContent =
+    `${y}. ${pad(mo)}. ${pad(d)}. - ${pad(h)}:${pad(mi)} CEST`;
+  document.getElementById("dateCenterLabel").textContent = `${y}. ${pad(mo)}. ${pad(d)}.`;
+  const cest = now.getUTCHours() + 2;
+  let session = "Ázsiai Session", sc = "var(--text-muted)";
+  if (cest >= 8 && cest < 12) { session = "London Session"; sc = "var(--green)"; }
+  else if (cest >= 14 && cest < 17) { session = "London–NY Overlap"; sc = "var(--yellow)"; }
+  else if (cest >= 17 && cest < 22) { session = "NY Session"; sc = "var(--teal)"; }
+  const sl = document.getElementById("sessionLabel");
+  sl.textContent = "● " + session; sl.style.color = sc;
+}
+setInterval(updateClock, 1000); updateClock();
+
+// Refresh counter
+let rSec = 120;
+setInterval(() => {
+  rSec--; if(rSec<=0) rSec=120;
+  const m=Math.floor(rSec/60),s=rSec%60;
+  document.getElementById("refreshCountdown").textContent=`Next scheduled refresh: ${m}:${String(s).padStart(2,"0")} min`;
+}, 1000);
+
+// Execute button
+["entryPrice","stopLoss","takeProfit"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => {
+    const e=parseFloat(document.getElementById("entryPrice").value);
+    const s=parseFloat(document.getElementById("stopLoss").value);
+    const t=parseFloat(document.getElementById("takeProfit").value);
+    document.getElementById("executeBtn").classList.toggle("active", e>0&&s>0&&t>0);
+  });
+});
+
+// TradingView
+(function(){
+  var sc=document.createElement("script");
+  sc.src="https://s3.tradingview.com/tv.js"; sc.async=true;
+  sc.onload=function(){
+    new TradingView.widget({
+      autosize:true, symbol:"OANDA:XAUUSD", interval:"15",
+      timezone:"Europe/Budapest", theme:"dark", style:"1", locale:"en",
+      toolbar_bg:"#141416", enable_publishing:false, hide_side_toolbar:true,
+      allow_symbol_change:false, container_id:"tradingview_xau",
+      hide_top_toolbar:false, save_image:false
+    });
+  };
+  document.head.appendChild(sc);
+})();
+</script>
 </body>
 </html>
