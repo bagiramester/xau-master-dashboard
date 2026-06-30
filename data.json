@@ -1,18 +1,39 @@
 {
   "meta": {
-    "date": "2026-06-30",
-    "last_auto_sync": "2026-06-30 08:57 CEST",
-    "last_manual_update": "2026-06-30 08:57 CEST"
+    "last_updated": "2026-06-30 10:23 CEST",
+    "auto": true,
+    "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
-  "header": {
-    "session": "London",
-    "bias_direction": "SHORT",
-    "daily_status": "YELLOW",
-    "preferred_session": "London 09:00–12:00 CEST",
-    "macro_lock_active": false,
-    "focus_setup": "A",
-    "narrative": "USD-BULL + US10Y magas (4.38%) + HIKE-bias → SHORT XAU preferált. Nagy volatilitás (napi ~2-3%). US session makró-tilalmi sáv: 14:45–16:30 CEST (Chicago PMI, Consumer Confidence, JOLTS)."
+  "macro": {
+    "fedwatch": {
+      "value": "NEUTRAL/HIKE",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "CME FedWatch – FOMC 2026.07.29",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "us10y": "N/A",
+    "dxy": "101.35 – NEUTRAL",
+    "sentiment": "N/A",
+    "htf_trend": "RANGE",
+    "intraday_regime": {
+      "value": "RANGE-BEAR",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "M15 – HIGH vol, napi ~2-3% mozgás",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "volatility": "NORMÁL"
   },
+  "levels": {
+    "pdh": 4070.0,
+    "pdl": 4003.2,
+    "asia_high": null,
+    "asia_low": null,
+    "daily_open": 4032.5,
+    "htf_level": null
+  },
+  "notrade_filters": {},
   "risk": {
     "mode": "YELLOW",
     "daily_loss": 0.0,
@@ -23,107 +44,12 @@
     "max_trades_today": 1,
     "open_positions": 0
   },
-  "macro": {
-    "fedwatch": {
-      "value": "NEUTRAL/HIKE",
-      "bias": "YELLOW",
-      "source_type": "manual",
-      "source_label": "CME FedWatch – FOMC 2026.07.29",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "us10y": {
-      "value": "4.38% SIDEWAYS",
-      "bias": "YELLOW",
-      "source_type": "manual",
-      "source_label": "US10Y yield – tartósan magas",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "dxy": {
-      "value": "USD-BULL ~101",
-      "bias": "RED",
-      "source_type": "manual",
-      "source_label": "DXY – bullish struktúra",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "sentiment": {
-      "value": "FEAR ~25-27",
-      "bias": "YELLOW",
-      "source_type": "manual",
-      "source_label": "Fear & Greed – MIXED, nem tisztán XAU-támogató",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "htf_trend": {
-      "value": "BEARISH",
-      "bias": "RED",
-      "source_type": "manual",
-      "source_label": "HTF – ATH óta ~20%+ korrekció",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "intraday_regime": {
-      "value": "RANGE-BEAR",
-      "bias": "YELLOW",
-      "source_type": "manual",
-      "source_label": "M15 – HIGH vol, napi ~2-3% mozgás",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "volatility": {
-      "value": "HIGH",
-      "bias": "YELLOW",
-      "source_type": "manual",
-      "source_label": "Napi ATR – nagy gyertyák",
-      "updated_at": "2026-06-30 08:57 CEST"
-    }
-  },
-  "keylevels": {
-    "HTF Sell Zóna": {
-      "value": "4058–4068 (tágabb: 4070–4095)",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "Felső ellenállás / short trigger zóna",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "Value / Demand Zóna": {
-      "value": "3965–3970",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "Alsó érték-zóna / TP1 célterület",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "Mélyebb Támasz": {
-      "value": "3900–3930",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "TP2 / strukturális mélyebb támasz",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "PDH": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "PDL": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "Daily Open": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "Makró Tilalmi Sáv": {
-      "value": "14:45–16:30 CEST",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "Chicago PMI 15:45 + Consumer Conf 16:00 + JOLTS 16:00 CEST",
-      "updated_at": "2026-06-30 08:57 CEST"
-    }
+  "header": {
+    "bias_direction": "SHORT",
+    "bias_status": "–",
+    "risk_mode": "ZÖLD",
+    "daily_pl_usd": 0,
+    "daily_risk_usage_pct": 0
   },
   "setups": {
     "A": {
@@ -165,5 +91,5 @@
       ]
     }
   },
-  "trades": []
+  "trade_log": []
 }
