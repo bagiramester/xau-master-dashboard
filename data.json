@@ -1,67 +1,45 @@
 {
   "meta": {
-    "date": "2026-06-30",
-    "last_updated": "2026-06-30 19:03 CEST",
-    "lastautosync": "2026-06-30T19:03:00+02:00",
-    "datafreshness": "live-refresh",
-    "version": "v5",
-    "sourcestack": [
-      "investing.com/economic-calendar",
-      "cmegroup.com/fedwatch",
-      "reuters.com/markets",
-      "tradingeconomics.com",
-      "edition.cnn.com/markets/fear-and-greed",
-      "tradingview.com",
-      "manual-levels",
-      "trade-log"
-    ],
-    "note": "Teljes V5 struktúra – automatikus + manuális mezők, effectivemode logika, makró ablakok"
+    "last_updated": "2026-06-30 19:06 CEST",
+    "auto": true,
+    "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
-  "header": {
-    "session": "London-NY Overlap",
-    "bias_direction": "SHORT",
-    "bias_status": "SÁRGA",
-    "daily_status": "YELLOW",
-    "daily_status_note": "FedWatch HOLD 70.1%, US10Y 4.40% SIDEWAYS, Fear 27 (FEAR), XAU $4,030 – bearish HTF struktúra. YELLOW: max 1 setup, Score ≥8 szükséges.",
-    "preferred_session": "London 09:00–12:00 CEST / NY Overlap 14:00–19:00 CEST",
-    "focus_setup": "A",
-    "macro_lock_active": true,
-    "macro_events_today": [
-      {
-        "event": "Chicago PMI",
-        "time_cest": "15:45",
-        "impact": "HIGH",
-        "direction": "USD-erősítő / bizonytalan"
-      },
-      {
-        "event": "JOLTS Job Openings",
-        "time_cest": "16:00",
-        "impact": "HIGH",
-        "direction": "USD-erősítő / bizonytalan"
-      },
-      {
-        "event": "CB Consumer Confidence",
-        "time_cest": "16:00",
-        "impact": "HIGH",
-        "direction": "USD-erősítő / bizonytalan"
-      }
-    ],
-    "macro_notrade_windows": [
-      {
-        "start": "14:45",
-        "end": "16:30",
-        "reason": "Chicago PMI + JOLTS + CB Consumer Confidence – összevont tiltási ablak"
-      }
-    ],
-    "execution_ready": false,
-    "xauspot": 4030.32,
-    "xau_daily_change": "+0.34%",
-    "xau_prev_close": 4016.66,
-    "fed_regime_summary": "HOLD 70.1% valószínűsége – júl. 29-i FOMC-re. Semleges, enyhe SHORT XAU háttér.",
-    "narrative": "Az XAU/USD $4,030 körül konszolidál a júniusi mélypontok ($3,977) után. ATH $5,602 (jan. 2026) óta bearish struktúra. US10Y 4.40% SIDEWAYS, FedWatch HOLD dominál. Fear 27 – potenciális safe haven bounce-ok, de az alapbias SHORT marad. Makró tiltási ablak 14:45–16:30.",
-    "updated_at": "2026-06-30T19:03:00+02:00",
-    "source_label": "Reuters, TradingEconomics, Investing.com – 2026-06-30"
+  "macro": {
+    "fedwatch": {
+      "value": "CUT ~15% | HOLD ~70.1% | HIKE ~15%",
+      "next_meeting": "2026-07-29",
+      "current_rate": "3.50–3.75%",
+      "regime": "HOLD",
+      "bias": "YELLOW",
+      "bias_note": "HOLD dominál – semleges SHORT XAU háttér",
+      "source_type": "auto",
+      "source_label": "CME FedWatch via Growbeansprout – 2026-06-29",
+      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+      "updated_at": "2026-06-30T19:03:00+02:00"
+    },
+    "us10y": "N/A",
+    "dxy": "101.23 – NEUTRAL",
+    "sentiment": "N/A",
+    "htf_trend": "RANGE",
+    "intraday_regime": {
+      "value": "RANGE-BEAR",
+      "bias": "YELLOW",
+      "bias_note": "M15 – $4,000 körüli konszolidáció, bearish torzítással",
+      "source_type": "manual",
+      "source_label": "Charton ellenőrizendő – M15/H1",
+      "updated_at": "2026-06-30T19:03:00+02:00"
+    },
+    "volatility": "NORMÁL"
   },
+  "levels": {
+    "pdh": 4070.0,
+    "pdl": 4003.2,
+    "asia_high": null,
+    "asia_low": null,
+    "daily_open": 4032.5,
+    "htf_level": null
+  },
+  "notrade_filters": {},
   "risk": {
     "mode": "YELLOW",
     "daily_limit": 100.0,
@@ -78,147 +56,12 @@
     "trade_allowed_reason": "YELLOW mód + Makró ablak 14:45–16:30 CEST aktív. Trade tiltva ebben az ablakban.",
     "updated_at": "2026-06-30T19:03:00+02:00"
   },
-  "macro": {
-    "fedwatch": {
-      "value": "CUT ~15% | HOLD ~70.1% | HIKE ~15%",
-      "next_meeting": "2026-07-29",
-      "current_rate": "3.50–3.75%",
-      "regime": "HOLD",
-      "bias": "YELLOW",
-      "bias_note": "HOLD dominál – semleges SHORT XAU háttér",
-      "source_type": "auto",
-      "source_label": "CME FedWatch via Growbeansprout – 2026-06-29",
-      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "us10y": {
-      "value": "4.40%",
-      "direction": "SIDEWAYS",
-      "yield_curve_10y_2y": "+0.31pp",
-      "bias": "YELLOW",
-      "bias_note": "SIDEWAYS – semleges, nincs erős irány; ha emelkedik RED SHORT bias erősödik",
-      "source_type": "auto",
-      "source_label": "FRED via Oddpool – Jun 2026",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "dxy": {
-      "value": "101.23",
-      "h4_structure": "RANGE",
-      "bias": "YELLOW",
-      "bias_note": "RANGE – nincs erős USD irány, XAU bias semleges",
-      "source_type": "manual",
-      "source_label": "TradingView TVC:DXY – 2026-06-30 reggeli adat (frissítendő)",
-      "source_url": "https://www.tradingview.com/symbols/TVC-DXY",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "sentiment": {
-      "value": 27,
-      "category": "FEAR",
-      "bias": "YELLOW-GREEN",
-      "bias_note": "FEAR (27) – safe haven bounce lehetséges, de nem elsődleges trigger",
-      "source_type": "auto",
-      "source_label": "CNN Fear & Greed Index – 2026-06-30",
-      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "htf_trend": {
-      "value": "BEARISH",
-      "bias": "RED",
-      "bias_note": "ATH $5,602 (jan. 2026) → $3,977 mélypontig esés – egyértelműen bearish HTF struktúra",
-      "source_type": "auto",
-      "source_label": "TradingEconomics + Reuters XAUUSD historical – 2026-06-30",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "intraday_regime": {
-      "value": "RANGE-BEAR",
-      "bias": "YELLOW",
-      "bias_note": "M15 – $4,000 körüli konszolidáció, bearish torzítással",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő – M15/H1",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "volatility": {
-      "value": "HIGH",
-      "bias": "YELLOW",
-      "bias_note": "Hónap vége, quarter-end flow + bearish struktúra → emelt volatilitás",
-      "source_type": "auto",
-      "source_label": "Piaci kontextus – 2026-06-30",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    }
-  },
-  "keylevels": {
-    "PDH": {
-      "value": 4081.0,
-      "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Jun 29 high – Reuters/TwelveData",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "PDL": {
-      "value": 4002.1,
-      "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Reuters – Jun 29 low: 4,002.10",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Daily_Open": {
-      "value": 4016.3,
-      "status": "fresh",
-      "source_type": "auto",
-      "source_label": "TwelveData – Jun 30 open",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Asia_High": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő – M15/H1",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Asia_Low": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Charton ellenőrizendő – M15/H1",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "HTF_Sell_Zona": {
-      "value": "4058–4068",
-      "value_extended": "4070–4095",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "Felső ellenállás – short trigger zóna",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Value_Demand_Zona": {
-      "value": "3965–3970",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "Alsó value / TP1 zóna",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Melyebb_Tamasz": {
-      "value": "3900–3930",
-      "status": "fresh",
-      "source_type": "manual",
-      "source_label": "TP2 strukturális támasz",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Psych_4000": {
-      "value": 4000.0,
-      "status": "active",
-      "source_type": "auto",
-      "source_label": "Pszichológiai szint – XAU jún. 25 óta tesztelés alatt",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    },
-    "Makro_Tilalmi_Sv": {
-      "value": "14:45–16:30 CEST",
-      "reason": "Chicago PMI + JOLTS + CB Consumer Confidence",
-      "status": "active",
-      "source_type": "auto",
-      "source_label": "Investing.com Economic Calendar – 2026-06-30",
-      "updated_at": "2026-06-30T19:03:00+02:00"
-    }
+  "header": {
+    "bias_direction": "SHORT",
+    "bias_status": "SÁRGA",
+    "risk_mode": "ZÖLD",
+    "daily_pl_usd": 0,
+    "daily_risk_usage_pct": 0
   },
   "setups": {
     "A": {
@@ -266,17 +109,5 @@
       "updated_at": "2026-06-30T19:03:00+02:00"
     }
   },
-  "trade_log": [],
-  "performance": {
-    "trade_count": 0,
-    "win_count": 0,
-    "loss_count": 0,
-    "net_pl_usd": 0.0,
-    "avg_rr": null,
-    "rule_break_count": 0,
-    "updated_at": "2026-06-30T19:03:00+02:00"
-  },
-  "effective_mode": 1,
-  "effective_mode_label": "YELLOW",
-  "effective_mode_note": "max(header.daily_status=YELLOW, risk.mode=YELLOW) → YELLOW"
+  "trade_log": []
 }
