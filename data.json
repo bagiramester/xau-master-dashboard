@@ -1,166 +1,169 @@
 {
   "meta": {
     "date": "2026-06-30",
-    "last_auto_sync": "2026-06-30 09:00 CEST",
-    "last_manual_update": "2026-06-30 08:55 CEST"
+    "last_auto_sync": "2026-06-30 08:57 CEST",
+    "last_manual_update": "2026-06-30 08:57 CEST"
   },
   "header": {
     "session": "London",
-    "bias_direction": "LONG",
+    "bias_direction": "SHORT",
     "daily_status": "YELLOW",
-    "preferred_session": "London + Overlap",
+    "preferred_session": "London 09:00–12:00 CEST",
     "macro_lock_active": false,
     "focus_setup": "A",
-    "narrative": "CUT bias, falling US10Y, USD-BEAR, SAFEHAVEN – long XAU preferált."
+    "narrative": "USD-BULL + US10Y magas (4.38%) + HIKE-bias → SHORT XAU preferált. Nagy volatilitás (napi ~2-3%). US session makró-tilalmi sáv: 14:45–16:30 CEST (Chicago PMI, Consumer Confidence, JOLTS)."
   },
   "risk": {
     "mode": "YELLOW",
-    "daily_loss": -35.0,
+    "daily_loss": 0.0,
     "daily_limit": 100.0,
-    "weekly_loss": -120.0,
+    "weekly_loss": 0.0,
     "weekly_limit": 300.0,
-    "loss_streak": 1,
+    "loss_streak": 0,
     "max_trades_today": 1,
     "open_positions": 0
   },
   "macro": {
     "fedwatch": {
-      "value": "CUT",
-      "bias": "GREEN",
-      "source_type": "auto",
-      "source_label": "CME FedWatch",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "value": "NEUTRAL/HIKE",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "CME FedWatch – FOMC 2026.07.29",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "us10y": {
-      "value": "FALLING",
-      "bias": "GREEN",
-      "source_type": "auto",
-      "source_label": "US10Y yield",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "value": "4.38% SIDEWAYS",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "US10Y yield – tartósan magas",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "dxy": {
-      "value": "USD-BEAR",
-      "bias": "GREEN",
-      "source_type": "auto",
-      "source_label": "DXY",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "value": "USD-BULL ~101",
+      "bias": "RED",
+      "source_type": "manual",
+      "source_label": "DXY – bullish struktúra",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "sentiment": {
-      "value": "SAFEHAVEN",
-      "bias": "GREEN",
-      "source_type": "auto",
-      "source_label": "Fear & Greed",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "value": "FEAR ~25-27",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "Fear & Greed – MIXED, nem tisztán XAU-támogató",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "htf_trend": {
-      "value": "BULL",
-      "bias": "GREEN",
+      "value": "BEARISH",
+      "bias": "RED",
       "source_type": "manual",
-      "source_label": "HTF chart read",
-      "updated_at": "2026-06-30 08:30 CEST"
+      "source_label": "HTF – ATH óta ~20%+ korrekció",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "intraday_regime": {
-      "value": "TREND",
-      "bias": "GREEN",
+      "value": "RANGE-BEAR",
+      "bias": "YELLOW",
       "source_type": "manual",
-      "source_label": "M15",
-      "updated_at": "2026-06-30 08:45 CEST"
+      "source_label": "M15 – HIGH vol, napi ~2-3% mozgás",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "volatility": {
-      "value": "NORMAL",
-      "bias": "NEUTRAL",
-      "source_type": "auto",
-      "source_label": "ATR filter",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "value": "HIGH",
+      "bias": "YELLOW",
+      "source_type": "manual",
+      "source_label": "Napi ATR – nagy gyertyák",
+      "updated_at": "2026-06-30 08:57 CEST"
     }
   },
   "keylevels": {
-    "PDH": {
-      "value": 2398.5,
+    "HTF Sell Zóna": {
+      "value": "4058–4068 (tágabb: 4070–4095)",
       "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Prev day high",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "source_type": "manual",
+      "source_label": "Felső ellenállás / short trigger zóna",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "Value / Demand Zóna": {
+      "value": "3965–3970",
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "Alsó érték-zóna / TP1 célterület",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "Mélyebb Támasz": {
+      "value": "3900–3930",
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "TP2 / strukturális mélyebb támasz",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "PDH": {
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Charton ellenőrizendő",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "PDL": {
-      "value": 2355.2,
-      "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Prev day low",
-      "updated_at": "2026-06-30 08:48 CEST"
-    },
-    "Asia High": {
       "value": null,
       "status": "pending",
       "source_type": "manual",
-      "source_label": "Asia range",
-      "updated_at": "2026-06-30 08:20 CEST"
-    },
-    "Asia Low": {
-      "value": null,
-      "status": "pending",
-      "source_type": "manual",
-      "source_label": "Asia range",
-      "updated_at": "2026-06-30 08:20 CEST"
+      "source_label": "Charton ellenőrizendő",
+      "updated_at": "2026-06-30 08:57 CEST"
     },
     "Daily Open": {
-      "value": 2375.0,
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Charton ellenőrizendő",
+      "updated_at": "2026-06-30 08:57 CEST"
+    },
+    "Makró Tilalmi Sáv": {
+      "value": "14:45–16:30 CEST",
       "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Broker open",
-      "updated_at": "2026-06-30 08:48 CEST"
+      "source_type": "manual",
+      "source_label": "Chicago PMI 15:45 + Consumer Conf 16:00 + JOLTS 16:00 CEST",
+      "updated_at": "2026-06-30 08:57 CEST"
     }
   },
   "setups": {
     "A": {
-      "direction": "LONG",
-      "type": "Trend continuation",
+      "direction": "SHORT",
+      "type": "HTF sell zóna reakció",
       "bias_compatibility": "igen",
-      "entry_zone": "2370-2374",
-      "sl": "2359",
-      "tp1": "2395",
-      "tp2": "2410",
-      "rr_min": 2.4,
-      "score": 8,
-      "session": "London",
-      "invalidation": "HTF bull trend törik H1 close alatt 2359",
-      "allowed": true,
+      "entry_zone": "4058–4068 (charton pontosítandó)",
+      "sl": "4070–4075 felett (charton)",
+      "tp1": "3965–3970",
+      "tp2": "3930",
+      "rr_min": 2.0,
+      "score": 7,
+      "session": "London 09:00–12:00 CEST",
+      "invalidation": "H1 close 4075 felett – HTF sell zóna áttörve",
+      "allowed": false,
       "thesis": [
-        "HTF BULL, intraday TREND, CUT bias – long XAU kedvező",
-        "Pullback PDH–Daily Open közti zónába, normal vol",
-        "RR > 1:2, FedWatch + US10Y támogatja long irányt"
+        "USD-BULL + US10Y magas + HIKE-bias → short XAU makró háttér",
+        "HTF bearish struktúra, ATH óta ~20%+ korrekció folytatódhat",
+        "Sell zóna reakció: 4058–4068 pull-up → rejection setup London-ban"
       ]
     },
     "B": {
       "direction": "SHORT",
-      "type": "Sweep reaction",
+      "type": "Intraday range breakdown",
       "bias_compatibility": "részben",
-      "entry_zone": "2405-2410",
-      "sl": "2418",
-      "tp1": "2380",
+      "entry_zone": "Range alsó zóna törésénél (charton)",
+      "sl": "Range teteje felett (charton)",
+      "tp1": "3965–3970",
       "tp2": null,
-      "rr_min": 1.9,
-      "score": 7,
-      "session": "Overlap",
-      "invalidation": "H1 close 2418 felett",
+      "rr_min": 2.0,
+      "score": 5,
+      "session": "London / Overlap (nem makró ablakban)",
+      "invalidation": "Range visszafordul, H1 close range felett",
       "allowed": false,
       "thesis": [
-        "Liquidity sweep PDH felett, majd erős visszafordulás",
-        "Makró bias long, ezért csak extrém extended blow-off esetén érdekes",
-        "RR jelenleg 1:1.9 – szabály szerint lockolt"
+        "HIGH vol napon range breakdown lehetséges",
+        "Csak ha a range struktúra M15-ön tisztán látható",
+        "Score 5 – jelenleg score-limit alatt, SÁRGA napon ≥8 kell"
       ]
     }
   },
-  "trades": [
-    {
-      "time": "09:15",
-      "session": "London",
-      "direction": "LONG",
-      "setup_id": "A",
-      "risk_usd": 20.0,
-      "pl_usd": 25.0,
-      "rr_actual": 1.25,
-      "rule_ok": true
-    }
-  ]
+  "trades": []
 }
