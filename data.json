@@ -1,10 +1,7 @@
 {
   "meta": {
-    "last_updated": "2026-06-30 16:14 CEST",
-    "last_auto_sync": "2026-06-30 16:14 CEST",
-    "last_manual_update": "2026-06-30 13:35 CEST",
+    "last_updated": "2026-06-30 17:34 CEST",
     "auto": true,
-    "date": "2026-06-30",
     "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
   "macro": {
@@ -16,42 +13,17 @@
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "updated_at": "2026-06-30 08:57 CEST"
     },
-    "us10y": {
-      "value": "4.38%",
-      "bias": "YELLOW",
-      "source_label": "US10Y – TradingView",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "dxy": {
-      "value": "101.34 – NEUTRAL",
-      "bias": "NEUTRAL",
-      "source_label": "DXY – TradingView",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "sentiment": {
-      "value": "NEUTRAL",
-      "bias": "NEUTRAL",
-      "source_label": "Fear & Greed – CNN",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
-    "htf_trend": {
-      "value": "RANGE",
-      "bias": "NEUTRAL",
-      "source_label": "XAUUSD H4 – manuális",
-      "updated_at": "2026-06-30 08:57 CEST"
-    },
+    "us10y": "N/A",
+    "dxy": "101.14 – NEUTRAL",
+    "sentiment": "N/A",
+    "htf_trend": "RANGE",
     "intraday_regime": {
       "value": "RANGE-BEAR",
       "bias": "YELLOW",
       "source_label": "M15 – HIGH vol, napi ~2-3% mozgás",
       "updated_at": "2026-06-30 08:57 CEST"
     },
-    "volatility": {
-      "value": "NORMÁL",
-      "bias": "GREEN",
-      "source_label": "Intraday szórás – manuális",
-      "updated_at": "2026-06-30 08:57 CEST"
-    }
+    "volatility": "NORMÁL"
   },
   "levels": {
     "pdh": 4070.0,
@@ -109,15 +81,10 @@
   },
   "header": {
     "bias_direction": "SHORT",
-    "daily_status": "YELLOW",
-    "risk_mode": "YELLOW",
+    "bias_status": "–",
+    "risk_mode": "ZÖLD",
     "daily_pl_usd": 0,
-    "daily_risk_usage_pct": 0,
-    "session": "London–NY Overlap",
-    "preferred_session": "London 09:00–12:00 CEST",
-    "focus_setup": "A",
-    "macro_lock_active": true,
-    "narrative": "RANGE-BEAR nap, HIGH vol, makró ablak 14:45–16:30. London session LOCKED, Overlap részben."
+    "daily_risk_usage_pct": 0
   },
   "setups": {
     "A": {
