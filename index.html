@@ -53,6 +53,14 @@
         <span class="session-tag" id="stSetupB">[ Setup B ]</span>
       </div>
     </div>
+    <!-- OVERRIDE UNLOCK BUTTON -->
+    <div class="top-bar__override-block">
+      <button class="override-btn" id="overrideBtn" onclick="toggleOverride()">
+        <span id="overrideBtnIcon">🔓</span>
+        <span id="overrideBtnLabel">TILTÁS FELOLDÁSA</span>
+      </button>
+      <span class="top-bar__override-note" id="overrideNote">Override: OFF</span>
+    </div>
   </div>
 </header>
 
@@ -85,26 +93,26 @@
         <div class="setup-card__body">
           <div class="setup-col">
             <div class="setup-row"><span class="setup-key">Metrics:</span></div>
-            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val">7/10</span></div>
-            <div class="setup-row"><span class="setup-key">Required:</span><span class="setup-val setup-val--warn">8/10</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val" id="sA_score1">7/10</span></div>
+            <div class="setup-row"><span class="setup-key">Required:</span><span class="setup-val setup-val--warn" id="sA_req1">8/10</span></div>
             <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">Dynamic RR 1:2.4</span></div>
-            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
+            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock" id="sA_rrlock1">Locked by RR rule</span></div>
             <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
             <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
             <div class="setup-row"><span class="setup-thesis-item">🍎 M1S rejection megerősítés</span></div>
-            <div class="setup-row"><span class="setup-thesis-item">…</span></div>
+            <div class="setup-row"><span class="setup-thesis-item" id="sA_extra1">…</span></div>
           </div>
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val setup-val--amber">5/10</span></div>
-            <div class="setup-row--amber"><span class="setup-warn">Amber warning for yellow mode</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker</span><span class="setup-val setup-val--amber" id="sA_score2">5/10</span></div>
+            <div class="setup-row--amber" id="sA_amberWarn1"><span class="setup-warn">Amber warning for yellow mode</span></div>
             <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.4</span></div>
-            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
+            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock" id="sA_rrlock2">Locked by RR rule</span></div>
             <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
             <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
             <div class="setup-row"><span class="setup-thesis-item">🍎 M1S rejection megerősítés</span></div>
-            <div class="setup-row"><span class="setup-thesis-item">…</span></div>
+            <div class="setup-row"><span class="setup-thesis-item" id="sA_extra2">…</span></div>
           </div>
         </div>
         <div class="setup-card__footer">Footer: Invalidation, Session Rule, Macro Lock, Allowed status</div>
@@ -119,10 +127,10 @@
         </div>
         <div class="setup-card__body">
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score Tracker:</span><span class="setup-val">7/10</span></div>
-            <div class="setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning w/o</span></div>
+            <div class="setup-row"><span class="setup-key">Score Tracker:</span><span class="setup-val" id="sB_score1">7/10</span></div>
+            <div class="setup-row--amber" id="sB_amberWarn1"><span class="setup-warn">Required: 8/10 – Amber warning w/o</span></div>
             <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.4</span></div>
-            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock">Locked by RR rule</span></div>
+            <div class="setup-row"><span class="setup-key">RR hard-lock:</span><span class="setup-val setup-val--lock" id="sB_rrlock1">Locked by RR rule</span></div>
             <div class="setup-row"><span class="setup-key">Bias Compatible:</span><span class="setup-val text-green">IGEN</span></div>
             <div class="setup-thesis-row"><span class="setup-key">Thesis bullet pontok:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">⚡ FedWatch NEUTRAL/HIKE</span></div>
@@ -130,8 +138,8 @@
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
           </div>
           <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val setup-val--amber">5/10</span></div>
-            <div class="setup-row--amber"><span class="setup-warn">Required: 8/10 – Amber warning<br>Locked by score threshold</span></div>
+            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val setup-val--amber" id="sB_score2">5/10</span></div>
+            <div class="setup-row--amber" id="sB_amberWarn2"><span class="setup-warn">Required: 8/10 – Amber warning<br>Locked by score threshold</span></div>
             <div class="setup-row"><span class="setup-key">RR:</span><span class="setup-val">1:2.0</span></div>
             <div class="setup-row"><span class="setup-key">Thesis:</span></div>
             <div class="setup-row"><span class="setup-thesis-item">…</span></div>
@@ -227,7 +235,7 @@
           </div>
         </div>
         <button class="execute-btn" id="executeBtn">EXECUTE TRADE</button>
-        <div class="execute-note">(active only with ecotup with Allowed setup and ilt is present)</div>
+        <div class="execute-note" id="executeNote">(active only with ecotup with Allowed setup and ilt is present)</div>
       </div>
 
       <div class="risk-sub">
@@ -313,53 +321,173 @@
 </main>
 
 <script>
-// Clock
-function updateClock() {
-  const now = new Date();
-  const pad = n => String(n).padStart(2, "0");
-  const y = now.getFullYear(), mo = now.getMonth()+1, d = now.getDate();
-  const h = now.getHours(), mi = now.getMinutes();
-  document.getElementById("currentDate").textContent =
-    `${y}. ${pad(mo)}. ${pad(d)}. - ${pad(h)}:${pad(mi)} CEST`;
-  document.getElementById("dateCenterLabel").textContent = `${y}. ${pad(mo)}. ${pad(d)}.`;
-  const cest = now.getUTCHours() + 2;
-  let session = "Ázsiai Session", sc = "var(--text-muted)";
-  if (cest >= 8 && cest < 12) { session = "London Session"; sc = "var(--green)"; }
-  else if (cest >= 14 && cest < 17) { session = "London–NY Overlap"; sc = "var(--yellow)"; }
-  else if (cest >= 17 && cest < 22) { session = "NY Session"; sc = "var(--teal)"; }
-  const sl = document.getElementById("sessionLabel");
-  sl.textContent = "● " + session; sl.style.color = sc;
+// ============================
+// OVERRIDE / UNLOCK LOGIC
+// ============================
+var overrideActive = false;
+
+function toggleOverride() {
+  overrideActive = !overrideActive;
+  applyOverrideState(overrideActive);
 }
-setInterval(updateClock, 1000); updateClock();
 
-// Refresh counter
-let rSec = 120;
-setInterval(() => {
-  rSec--; if(rSec<=0) rSec=120;
-  const m=Math.floor(rSec/60),s=rSec%60;
-  document.getElementById("refreshCountdown").textContent=`Next scheduled refresh: ${m}:${String(s).padStart(2,"0")} min`;
-}, 1000);
+function applyOverrideState(active) {
+  var btn = document.getElementById('overrideBtn');
+  var icon = document.getElementById('overrideBtnIcon');
+  var label = document.getElementById('overrideBtnLabel');
+  var note = document.getElementById('overrideNote');
 
-// Execute button
-["entryPrice","stopLoss","takeProfit"].forEach(id => {
-  document.getElementById(id).addEventListener("input", () => {
-    const e=parseFloat(document.getElementById("entryPrice").value);
-    const s=parseFloat(document.getElementById("stopLoss").value);
-    const t=parseFloat(document.getElementById("takeProfit").value);
-    document.getElementById("executeBtn").classList.toggle("active", e>0&&s>0&&t>0);
+  // Lock badges
+  var lockA = document.getElementById('setupALock');
+  var lockB = document.getElementById('setupBLock');
+
+  // Amber warning rows
+  var amberEls = document.querySelectorAll('.setup-row--amber');
+
+  // RR lock vals
+  var rrLocks = document.querySelectorAll('.setup-val--lock');
+
+  // No-trade countdown
+  var ntCountdown = document.getElementById('noTradeCountdown');
+  var stNoTrade = document.getElementById('stNoTrade');
+  var cNoTrade = document.getElementById('cNoTrade');
+
+  // Execute button
+  var execBtn = document.getElementById('executeBtn');
+  var execNote = document.getElementById('executeNote');
+
+  // Bagira bubble
+  var bubble = document.getElementById('bagiruBubble');
+  var gridSpeech = document.getElementById('bagiraGridSpeech');
+
+  if (active) {
+    btn.classList.add('override-btn--active');
+    icon.textContent = '🔓';
+    label.textContent = 'FELOLDVA – VISSZAÁLLÍT';
+    note.textContent = 'Override: ON ⚠️';
+    note.style.color = 'var(--green)';
+
+    // Unlock lock badges
+    lockA.innerHTML = '✅ OPEN';
+    lockA.style.color = 'var(--green)';
+    lockA.style.borderColor = 'rgba(34,197,94,0.4)';
+    lockB.innerHTML = '✅ OPEN';
+    lockB.style.color = 'var(--green)';
+    lockB.style.borderColor = 'rgba(34,197,94,0.4)';
+
+    // Hide amber warning rows
+    amberEls.forEach(function(el) { el.style.display = 'none'; });
+
+    // Clear RR locks
+    rrLocks.forEach(function(el) { el.textContent = 'ENGEDÉLYEZETT'; el.style.color = 'var(--green)'; });
+
+    // Clear no-trade countdown
+    if (ntCountdown) ntCountdown.innerHTML = '<span style="color:var(--green)">✅ Nincs aktív tiltás</span>';
+    if (stNoTrade) { stNoTrade.classList.remove('session-tag--active'); stNoTrade.style.color = 'var(--text-muted)'; }
+    if (cNoTrade) { cNoTrade.classList.remove('session-pill--active'); }
+
+    // Enable execute button
+    execBtn.classList.add('active');
+    execNote.textContent = '⚠️ OVERRIDE AKTÍV — minden szabályszűrő feloldva';
+    execNote.style.color = 'var(--amber)';
+
+    // Update Bagira bubble
+    bubble.innerHTML = '<strong>Bagira Virtual Assistant — OVERRIDE MÓD</strong><br>⚠️ Minden tiltás manuálisan feloldva. Az adatok láthatók, de a kereskedési szabályok nem érvényesülnek. Légy óvatos!';
+    gridSpeech.innerHTML = '⚠️ Override aktív. Összes szűrő letiltva. Adatok szabadon láthatók.';
+
+    // Score values — clear amber color
+    document.getElementById('sA_score2') && (document.getElementById('sA_score2').className = 'setup-val text-green');
+    document.getElementById('sB_score2') && (document.getElementById('sB_score2').className = 'setup-val text-green');
+
+  } else {
+    // RESTORE
+    btn.classList.remove('override-btn--active');
+    icon.textContent = '🔒';
+    label.textContent = 'TILTÁS FELOLDÁSA';
+    note.textContent = 'Override: OFF';
+    note.style.color = 'var(--text-muted)';
+
+    lockA.innerHTML = '🔒 LOCKED';
+    lockA.style.color = '';
+    lockA.style.borderColor = '';
+    lockB.innerHTML = '🔒 LOCKED';
+    lockB.style.color = '';
+    lockB.style.borderColor = '';
+
+    amberEls.forEach(function(el) { el.style.display = ''; });
+    rrLocks.forEach(function(el) { el.textContent = 'Locked by RR rule'; el.style.color = ''; });
+
+    if (ntCountdown) ntCountdown.innerHTML = 'FOMC HÍR TILTÁS: <strong id="countdownMin">18 min</strong>';
+    if (stNoTrade) { stNoTrade.classList.add('session-tag--active'); stNoTrade.style.color = ''; }
+    if (cNoTrade) { cNoTrade.classList.add('session-pill--active'); }
+
+    execBtn.classList.remove('active');
+    execNote.textContent = '(active only with ecotup with Allowed setup and ilt is present)';
+    execNote.style.color = '';
+
+    bubble.innerHTML = '<strong>Bagira Virtual Assistant console bubble</strong><br>Mellette: "A pontszámok alacsonyak. Lakatolta. Nem javaslom a kötést."<br><br>vagy "Effective Mode: <span class="text-yellow">YELLOW</span>.<br>Csak trend-irányú sweep engedélyezett."';
+    gridSpeech.innerHTML = '"Kockázat korlátozva. Maximum 1 trade engedélyezett mára."';
+
+    document.getElementById('sA_score2') && (document.getElementById('sA_score2').className = 'setup-val setup-val--amber');
+    document.getElementById('sB_score2') && (document.getElementById('sB_score2').className = 'setup-val setup-val--amber');
+  }
+}
+
+// ============================
+// CLOCK
+// ============================
+function updateClock() {
+  var now = new Date();
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  var y=now.getFullYear(), mo=now.getMonth()+1, d=now.getDate();
+  var h=now.getHours(), mi=now.getMinutes();
+  document.getElementById('currentDate').textContent = y+'. '+pad(mo)+'. '+pad(d)+'. - '+pad(h)+':'+pad(mi)+' CEST';
+  document.getElementById('dateCenterLabel').textContent = y+'. '+pad(mo)+'. '+pad(d)+'.';
+  var cest = now.getUTCHours()+2;
+  var session='Ázsiai Session', sc='var(--text-muted)';
+  if(cest>=8&&cest<12){session='London Session';sc='var(--green)';}
+  else if(cest>=14&&cest<17){session='London–NY Overlap';sc='var(--yellow)';}
+  else if(cest>=17&&cest<22){session='NY Session';sc='var(--teal)';}
+  var sl=document.getElementById('sessionLabel');
+  sl.textContent='● '+session; sl.style.color=sc;
+}
+setInterval(updateClock,1000); updateClock();
+
+// ============================
+// REFRESH COUNTER
+// ============================
+var rSec=120;
+setInterval(function(){
+  rSec--; if(rSec<=0)rSec=120;
+  var m=Math.floor(rSec/60),s=rSec%60;
+  document.getElementById('refreshCountdown').textContent='Next scheduled refresh: '+m+':'+String(s).padStart(2,'0')+' min';
+},1000);
+
+// ============================
+// EXECUTE BUTTON
+// ============================
+['entryPrice','stopLoss','takeProfit'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',function(){
+    if(overrideActive) return;
+    var e=parseFloat(document.getElementById('entryPrice').value);
+    var s=parseFloat(document.getElementById('stopLoss').value);
+    var t=parseFloat(document.getElementById('takeProfit').value);
+    document.getElementById('executeBtn').classList.toggle('active',e>0&&s>0&&t>0);
   });
 });
 
-// TradingView
+// ============================
+// TRADINGVIEW
+// ============================
 (function(){
-  var sc=document.createElement("script");
-  sc.src="https://s3.tradingview.com/tv.js"; sc.async=true;
+  var sc=document.createElement('script');
+  sc.src='https://s3.tradingview.com/tv.js'; sc.async=true;
   sc.onload=function(){
     new TradingView.widget({
-      autosize:true, symbol:"OANDA:XAUUSD", interval:"15",
-      timezone:"Europe/Budapest", theme:"dark", style:"1", locale:"en",
-      toolbar_bg:"#141416", enable_publishing:false, hide_side_toolbar:true,
-      allow_symbol_change:false, container_id:"tradingview_xau",
+      autosize:true, symbol:'OANDA:XAUUSD', interval:'15',
+      timezone:'Europe/Budapest', theme:'dark', style:'1', locale:'en',
+      toolbar_bg:'#141416', enable_publishing:false, hide_side_toolbar:true,
+      allow_symbol_change:false, container_id:'tradingview_xau',
       hide_top_toolbar:false, save_image:false
     });
   };
