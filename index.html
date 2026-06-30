@@ -1,203 +1,229 @@
 <!DOCTYPE html>
-<html lang="hu" data-theme="dark">
+<html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bagira OS V1 | XAU Live Dashboard</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Bagira OS V5 | XAU Master Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ═══ TOPBAR ═══ -->
+<!-- ══ TOP BAR ══════════════════════════════════════════════════════════════ -->
 <header id="topBar">
-  <div class="tb-left">
-    <span class="live-dot" id="liveDot"></span>
-    <span class="brand">BAGIRA OS V1</span>
-    <span class="clock" id="liveClock">--:--:--</span>
-    <span class="tb-date" id="liveDate">–</span>
+  <div class="top-brand">
+    <svg class="bagira-logo" viewBox="0 0 32 32" fill="none" aria-label="Bagira">
+      <rect x="2" y="2" width="28" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8 22 L8 10 L16 10 Q21 10 21 14.5 Q21 17 18.5 18 Q22 19 22 22.5 Q22 26 16 26 L8 26 Z" fill="currentColor" opacity="0.9"/>
+    </svg>
+    <span class="brand-name">BAGIRA OS <span class="brand-v">V5</span></span>
   </div>
-  <div class="tb-center">
-    <span class="tb-label">EFFECTIVE MODE:</span>
-    <div class="eff-badge" id="effectiveBadge" data-mode="GREEN">INIT…</div>
-    <span class="tb-sep">|</span>
-    <span class="tb-label">BIAS:</span>
-    <span class="tb-val" id="topBias">–</span>
-    <span class="tb-sep">|</span>
-    <span class="tb-label">DAILY P/L:</span>
-    <span class="tb-val mono" id="topDailyPL">$0.00</span>
+  <div class="top-status">
+    <span id="topBias" class="top-pill top-pill--neutral">BIAS: –</span>
+    <span id="topDailyPL" class="top-pill top-pill--neutral">P/L: – USD</span>
+    <span class="top-clock-wrap">
+      <span id="liveDate" class="top-date"></span>
+      <span id="liveClock" class="top-clock">–:–:–</span>
+    </span>
   </div>
-  <div class="tb-right">
-    <div class="sync-info">Auto sync: <span id="topAutoSync">–</span></div>
-    <div class="sync-info">Manual: <span id="topManualSync">–</span></div>
+  <div class="top-actions">
+    <button id="topManualSync" class="top-btn" onclick="loadData()" title="Manuális frissítés">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      Frissítés
+    </button>
+    <span id="topAutoSync" class="top-sync-label">Auto: –</span>
   </div>
 </header>
 
-<!-- ═══ GUIDELINE BANNER ═══ -->
-<div class="guideline-bar" id="guidelineBar">
-  <span id="guidelineText">Betöltés…</span>
-</div>
+<!-- ══ BAGIRA MSG ════════════════════════════════════════════════════════════ -->
+<div id="bagiraMsg" class="bagira-msg hidden"></div>
 
-<!-- ═══ MACRO LOCK BANNER (feltételes) ═══ -->
-<div class="macro-lock-bar hidden" id="macroLockBar">
-  ⛔ MAKRÓ TILTÁSI ABLAK AKTÍV — <span id="macroLockDetail"></span>
-</div>
-
-<!-- ═══ MAIN GRID ═══ -->
+<!-- ══ MAIN GRID ════════════════════════════════════════════════════════════ -->
 <main id="mainGrid">
 
-  <!-- ══ BAL OSZLOP: SETUP FOCUS ══ -->
-  <section id="colLeft">
+  <!-- ── BAL OSZLOP ── -->
+  <div id="colLeft">
 
-    <!-- Bagira Guardian -->
-    <div class="panel guardian-panel">
-      <div class="guardian-wrap" id="guardianWrap">
-        <div class="guardian-ring" id="guardianRing">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bagira AI">
-            <polygon points="40,6 74,22 74,58 40,74 6,58 6,22" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <circle cx="40" cy="28" r="7" fill="currentColor" opacity="0.4"/>
-            <line x1="40" y1="35" x2="40" y2="62" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="24" y1="45" x2="56" y2="45" stroke="currentColor" stroke-width="1"/>
-          </svg>
-          <span class="guardian-label">BAGIRA AI</span>
-        </div>
-        <div class="guardian-speech">
-          <span class="speech-label">Bagira üzenet</span>
-          <p id="bagiraMsg">Inicializálás…</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Setup A -->
-    <div class="panel setup-card" id="setupCardA">
-      <div class="sc-head">
-        <div class="sc-meta">
-          <span class="dir-tag" id="dirTagA">–</span>
-          <span class="sc-name">Setup A</span>
-          <span class="sc-type" id="typeA">–</span>
-        </div>
-        <span class="lock-badge" id="lockBadgeA">–</span>
-      </div>
-      <div class="sc-score-row">
-        <span>Score: <strong id="scoreA">–</strong>/10</span>
-        <span>Required: <strong id="reqA">–</strong></span>
-        <span>RR: <strong id="rrA">–</strong></span>
-      </div>
-      <div class="sc-bar"><div class="sc-bar-fill" id="scoreBarA" style="width:0%"></div></div>
-      <div class="sc-levels">
-        <div class="lvl-row"><span class="lbl">Belépő:</span><span id="entryA">–</span></div>
-        <div class="lvl-row"><span class="lbl">SL:</span><span class="red" id="slA">–</span></div>
-        <div class="lvl-row"><span class="lbl">TP1:</span><span class="green" id="tp1A">–</span></div>
-        <div class="lvl-row"><span class="lbl">TP2:</span><span class="green" id="tp2A">–</span></div>
-      </div>
-      <div class="sc-thesis" id="thesisA"></div>
-      <div class="sc-meta-foot" id="metaA"></div>
-    </div>
-
-    <!-- Setup B -->
-    <div class="panel setup-card" id="setupCardB">
-      <div class="sc-head">
-        <div class="sc-meta">
-          <span class="dir-tag" id="dirTagB">–</span>
-          <span class="sc-name">Setup B</span>
-          <span class="sc-type" id="typeB">–</span>
-        </div>
-        <span class="lock-badge" id="lockBadgeB">–</span>
-      </div>
-      <div class="sc-score-row">
-        <span>Score: <strong id="scoreB">–</strong>/10</span>
-        <span>Required: <strong id="reqB">–</strong></span>
-        <span>RR: <strong id="rrB">–</strong></span>
-      </div>
-      <div class="sc-bar"><div class="sc-bar-fill" id="scoreBarB" style="width:0%"></div></div>
-      <div class="sc-levels">
-        <div class="lvl-row"><span class="lbl">Belépő:</span><span id="entryB">–</span></div>
-        <div class="lvl-row"><span class="lbl">SL:</span><span class="red" id="slB">–</span></div>
-        <div class="lvl-row"><span class="lbl">TP1:</span><span class="green" id="tp1B">–</span></div>
-        <div class="lvl-row"><span class="lbl">TP2:</span><span class="green" id="tp2B">–</span></div>
-      </div>
-      <div class="sc-thesis" id="thesisB"></div>
-      <div class="sc-meta-foot" id="metaB"></div>
-    </div>
-
-    <!-- Telemetria -->
-    <div class="panel tele-panel">
+    <!-- 1. Macro & Market ─────────────────────────────────────────────────── -->
+    <section class="panel" id="panelMacro">
       <div class="panel-head">
-        <span class="panel-title"><span class="dot amber"></span> Makró Telemetria</span>
-        <span class="micro-label" id="teleSync">–</span>
-      </div>
-      <div class="tele-grid" id="teleGrid"></div>
-    </div>
-
-  </section>
-
-  <!-- ══ KÖZÉP OSZLOP ══ -->
-  <section id="colMid">
-
-    <!-- TradingView Chart -->
-    <div class="panel chart-panel">
-      <div class="chart-badge"><span class="pulse-dot"></span> XAUUSD · ÉLŐ H1</div>
-      <div class="chart-status-row">
-        <span>Aktív Setup: <strong id="chartActiveSetup">–</strong></span>
-        <span>Makró Lock: <strong id="chartMacroLock" data-status="GREEN">OK</strong></span>
-        <span>Session: <strong id="chartSession">–</strong></span>
-        <span class="micro-label">Utolsó adat: <span id="chartLastData">–</span></span>
-      </div>
-      <iframe
-        src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=60&theme=dark&style=1&timezone=Europe%2FBudapest&locale=hu&hide_top_toolbar=0&hide_legend=0&save_image=0"
-        class="chart-iframe" title="XAUUSD live chart" allowtransparency="true" frameborder="0"
-        loading="lazy" width="100%" height="100%"
-      ></iframe>
-    </div>
-
-    <!-- Makró + Naptár sor -->
-    <div class="mid-bottom-row">
-
-      <!-- Makró Mátrix + Szintek -->
-      <div class="panel macro-panel">
-        <div class="panel-head">
-          <span class="panel-title"><span class="dot amber"></span> Makró Mátrix</span>
-          <span class="micro-label" id="macroUpdateTime">–</span>
-        </div>
-        <div id="macroTiles" class="macro-grid"></div>
-        <div class="panel-head" style="margin-top:12px">
-          <span class="panel-title"><span class="dot cyan"></span> Kulcsszintek</span>
-          <span class="micro-label" id="levelsStatus">–</span>
-        </div>
-        <table class="levels-table">
-          <thead><tr><th>Szint</th><th>Ár</th><th>Státusz</th></tr></thead>
-          <tbody id="levelsBody"></tbody>
-        </table>
-        <div class="panel-head" style="margin-top:12px">
-          <span class="panel-title"><span class="dot red"></span> Makró Naptár (ma)</span>
-        </div>
-        <div id="macroEventsList"></div>
+        <span class="panel-title"><span class="dot cyan"></span> Macro &amp; Market</span>
+        <span id="macroUpdateTime" class="panel-sub">–</span>
       </div>
 
-      <!-- TradingView Gazdasági Naptár -->
-      <div class="panel calendar-panel">
-        <div class="panel-head">
-          <span class="panel-title"><span class="dot red"></span> Élő Gazdasági Naptár</span>
-        </div>
-        <iframe
-          src="https://www.tradingview.com/embed-widget/events/?locale=hu&colorTheme=dark&isTransparent=true&width=100%25&height=100%25"
-          class="calendar-iframe" title="TradingView Economic Calendar"
-          frameborder="0" allowtransparency="true" loading="lazy"
-          width="100%" height="100%"
-        ></iframe>
+      <!-- Macro tiles -->
+      <div id="macroTiles" class="macro-tiles">
+        <div class="macro-tile" data-key="fedwatch">FedWatch<br><span>–</span></div>
+        <div class="macro-tile" data-key="us10y">US10Y<br><span>–</span></div>
+        <div class="macro-tile" data-key="dxy">DXY<br><span>–</span></div>
+        <div class="macro-tile" data-key="sentiment">Sentiment<br><span>–</span></div>
       </div>
 
-    </div>
-  </section>
+      <!-- Macro lock bar -->
+      <div id="macroLockBar" class="macro-lock-bar hidden">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span id="macroLockDetail">Makró tiltási ablak aktív</span>
+      </div>
 
-  <!-- ══ JOBB OSZLOP: EXECUTION & RISK ══ -->
-  <section id="colRight">
+      <!-- Trend & Vol -->
+      <div class="trend-row">
+        <div class="trend-chip" id="chartMacroLock" data-val="">Macro Lock: –</div>
+        <div class="trend-chip" id="chartActiveSetup" data-val="">Setup: –</div>
+        <div class="trend-chip" id="chartSession" data-val="">Session: –</div>
+        <div class="trend-chip" id="chartLastData" data-val="">Adat: –</div>
+      </div>
+
+      <!-- Macro events -->
+      <div class="section-label">Makró események</div>
+      <ul id="macroEventsList" class="events-list"><li class="empty-item">–</li></ul>
+
+      <!-- Key Levels ──────────────────────────────────────────────────────── -->
+      <div class="section-label" style="margin-top:10px">
+        Kulcsszintek
+        <span id="levelsStatus" class="levels-status">–</span>
+      </div>
+      <table class="levels-table">
+        <thead><tr><th>Szint</th><th>Ár (USD)</th><th>Jelleg</th></tr></thead>
+        <tbody id="levelsBody"><tr><td colspan="3" class="empty-item">–</td></tr></tbody>
+      </table>
+    </section>
+
+    <!-- 2. TradingView Chart ─────────────────────────────────────────────── -->
+    <section class="panel panel--chart" id="panelChart">
+      <div class="panel-head">
+        <span class="panel-title"><span class="dot gold"></span> XAU/USD Live Chart</span>
+      </div>
+      <div class="chart-wrap">
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div id="tradingview_xau" style="height:100%;width:100%"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+          <script type="text/javascript">
+          new TradingView.widget({
+            "width": "100%",
+            "height": "100%",
+            "symbol": "OANDA:XAUUSD",
+            "interval": "15",
+            "timezone": "Europe/Budapest",
+            "theme": "dark",
+            "style": "1",
+            "locale": "hu",
+            "toolbar_bg": "#0e0a0d",
+            "enable_publishing": false,
+            "hide_side_toolbar": true,
+            "allow_symbol_change": false,
+            "container_id": "tradingview_xau",
+            "backgroundColor": "rgba(9,0,8,1)",
+            "gridColor": "rgba(42,31,39,0.4)"
+          });
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Economic Calendar ────────────────────────────────────────────── -->
+    <section class="panel panel--calendar" id="panelCalendar">
+      <div class="panel-head">
+        <span class="panel-title"><span class="dot amber"></span> Gazdasági Naptár</span>
+      </div>
+      <div class="calendar-wrap">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+          {
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "width": "100%",
+            "height": "100%",
+            "locale": "hu",
+            "importanceFilter": "0,1",
+            "countryFilter": "us"
+          }
+          </script>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /colLeft -->
+
+  <!-- ── KÖZÉP OSZLOP ── -->
+  <div id="colCenter">
+
+    <!-- 4. Daily Header ──────────────────────────────────────────────────── -->
+    <section class="panel panel--header" id="panelHeader">
+      <div class="panel-head">
+        <span class="panel-title"><span class="dot red"></span> Daily Header</span>
+      </div>
+      <div class="header-guardian">
+        <div id="guardianRing" class="guardian-ring" data-mode="GREEN">
+          <span class="guardian-mode" id="effectiveBadge">GREEN</span>
+          <span class="guardian-label">EFFECTIVE MODE</span>
+        </div>
+        <div class="header-stats">
+          <div class="hstat"><span class="hstat-label">Napi P/L</span><span id="rDailyPL" class="hstat-val">–</span></div>
+          <div class="hstat"><span class="hstat-label">Heti P/L</span><span id="rWeeklyPL" class="hstat-val">–</span></div>
+          <div class="hstat"><span class="hstat-label">Loss streak</span><span id="rStreak" class="hstat-val">–</span></div>
+          <div class="hstat"><span class="hstat-label">Nyitott pos.</span><span id="rOpenPos" class="hstat-val">–</span></div>
+        </div>
+      </div>
+      <!-- Progress bars -->
+      <div class="limit-bars">
+        <div class="limit-row">
+          <span class="limit-label">Napi limit</span>
+          <div class="limit-bar-wrap"><div id="rDailyBar" class="limit-bar" style="width:0%"></div></div>
+          <span id="rDailyLimitText" class="limit-pct">0%</span>
+        </div>
+        <div class="limit-row">
+          <span class="limit-label">Heti limit</span>
+          <div class="limit-bar-wrap"><div id="rWeeklyBar" class="limit-bar" style="width:0%"></div></div>
+          <span id="rWeeklyLimitText" class="limit-pct">0%</span>
+        </div>
+      </div>
+      <div id="guidelineBar" class="guideline-bar">
+        <span id="guidelineText" class="guideline-text">–</span>
+      </div>
+    </section>
+
+    <!-- 5. Setup A / B ───────────────────────────────────────────────────── -->
+    <section class="panel" id="panelSetup">
+      <div class="panel-head">
+        <span class="panel-title"><span class="dot green"></span> Setup A / B</span>
+        <span id="tradeCountTag" class="panel-sub">–</span>
+      </div>
+      <div id="teleGrid" class="setup-grid">
+        <div class="setup-empty">Nincs aktív setup – töltés…</div>
+      </div>
+      <div id="teleSync" class="tele-sync hidden">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>–</span>
+      </div>
+    </section>
+
+    <!-- 6. Risk Mode ─────────────────────────────────────────────────────── -->
+    <section class="panel" id="panelRisk">
+      <div class="panel-head">
+        <span class="panel-title"><span class="dot red"></span> Risk Mode</span>
+        <span id="riskModeTag" class="risk-mode-tag" data-mode="GREEN">GREEN</span>
+      </div>
+      <div class="risk-grid">
+        <div class="risk-row"><span class="risk-label">Max trade/nap</span><span id="rMaxTrades" class="risk-val">–</span></div>
+        <div class="risk-row"><span class="risk-label">XAU nyitott</span><span id="rXauOpen" class="risk-val">–</span></div>
+      </div>
+      <p id="riskNote" class="risk-note">–</p>
+    </section>
+
+  </div><!-- /colCenter -->
+
+  <!-- ── JOBB OSZLOP ── -->
+  <div id="colRight">
 
     <!-- Hard-Lock Overlay -->
     <div id="hardLockOverlay" class="lockout-overlay hidden">
       <div class="lockout-box">
+        <button class="lockout-dismiss" id="lockoutDismissBtn" onclick="dismissHardLock()" title="Overlay elrejtése — lock AKTÍV marad" aria-label="Overlay bezárása">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
         <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-label="Zár">
           <rect x="3" y="11" width="18" height="11" rx="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -210,6 +236,11 @@
         </div>
       </div>
     </div>
+    <!-- Lock Restore Badge (látható ha overlay el van rejtve de lock aktív) -->
+    <div id="lockRestoreBadge" class="lock-restore-badge hidden" onclick="restoreHardLock()" title="Lock aktív — kattints a részletekért" role="button" tabindex="0">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      LOCK AKTÍV
+    </div>
 
     <!-- Execution Info Panel (V1: nincs live broker) -->
     <div class="panel exec-panel">
@@ -218,104 +249,48 @@
         <span class="exec-mode-tag" id="execModeTag" data-mode="GREEN">V1 · INFO</span>
       </div>
       <div class="exec-info-grid">
-        <div class="exec-kpi">
-          <span class="kpi-label">Trade Engedélyezett</span>
-          <span class="kpi-val" id="execTradeAllowed">–</span>
-        </div>
-        <div class="exec-kpi">
-          <span class="kpi-label">XAU Trade OK</span>
-          <span class="kpi-val" id="execXauAllowed">–</span>
-        </div>
-        <div class="exec-kpi">
-          <span class="kpi-label">Nyitott Poz.</span>
-          <span class="kpi-val" id="execOpenPos">0</span>
-        </div>
-        <div class="exec-kpi">
-          <span class="kpi-label">Max Trade Ma</span>
-          <span class="kpi-val" id="execMaxTrades">–</span>
-        </div>
+        <div class="exec-row"><span class="exec-label">Trade engedélyezett</span><span id="execTradeAllowed" class="exec-val">–</span></div>
+        <div class="exec-row"><span class="exec-label">XAU trade</span><span id="execXauAllowed" class="exec-val">–</span></div>
+        <div class="exec-row"><span class="exec-label">Max trade/nap</span><span id="execMaxTrades" class="exec-val">–</span></div>
+        <div class="exec-row"><span class="exec-label">Nyitott pozíció</span><span id="execOpenPos" class="exec-val">–</span></div>
+        <div class="exec-row"><span class="exec-label">No-trade ablakok</span><span id="execNoTradeWindows" class="exec-val">–</span></div>
       </div>
-      <div class="exec-reason" id="execReason">–</div>
-      <div class="exec-notrade-windows" id="execNoTradeWindows"></div>
+      <p id="execReason" class="exec-reason">–</p>
     </div>
 
-    <!-- Risk Engine -->
-    <div class="panel risk-panel">
+    <!-- Trade Log ────────────────────────────────────────────────────────── -->
+    <section class="panel" id="panelTradeLog">
       <div class="panel-head">
-        <span class="panel-title"><span class="dot amber"></span> Kockázati Kontroll OS</span>
-        <span class="risk-mode-tag" id="riskModeTag" data-mode="GREEN">GREEN</span>
+        <span class="panel-title"><span class="dot amber"></span> Trade Log</span>
       </div>
-
-      <div class="risk-stat-row">
-        <span>Napi P/L:</span>
-        <span class="mono" id="rDailyPL">$0.00</span>
-      </div>
-      <div class="risk-bar-wrap">
-        <div class="risk-bar-label">
-          <span>Napi Limit</span>
-          <span id="rDailyLimitText">$0 / $100</span>
-        </div>
-        <div class="risk-bar-track"><div class="risk-bar-fill" id="rDailyBar" style="width:0%"></div></div>
-      </div>
-
-      <div class="risk-stat-row">
-        <span>Heti P/L:</span>
-        <span class="mono" id="rWeeklyPL">$0.00</span>
-      </div>
-      <div class="risk-bar-wrap">
-        <div class="risk-bar-label">
-          <span>Heti Limit</span>
-          <span id="rWeeklyLimitText">$0 / $300</span>
-        </div>
-        <div class="risk-bar-track"><div class="risk-bar-fill" id="rWeeklyBar" style="width:0%"></div></div>
-      </div>
-
-      <div class="risk-kpi-grid">
-        <div class="risk-kpi">
-          <span class="kpi-label">Sorozatvesztes</span>
-          <span class="kpi-val" id="rStreak">0</span>
-        </div>
-        <div class="risk-kpi">
-          <span class="kpi-label">Nyitott Poz.</span>
-          <span class="kpi-val" id="rOpenPos">0</span>
-        </div>
-        <div class="risk-kpi">
-          <span class="kpi-label">Max Trade Ma</span>
-          <span class="kpi-val" id="rMaxTrades">–</span>
-        </div>
-        <div class="risk-kpi">
-          <span class="kpi-label">XAU Nyitott</span>
-          <span class="kpi-val" id="rXauOpen">0</span>
-        </div>
-      </div>
-
-      <div class="risk-note" id="riskNote">–</div>
-    </div>
-
-    <!-- Trade Log -->
-    <div class="panel tradelog-panel">
-      <div class="panel-head">
-        <span class="panel-title"><span class="dot cyan"></span> Trade Log & Snapshot</span>
-        <span class="micro-label" id="tradeCountTag">0 trade</span>
-      </div>
-      <div class="tlog-summary">
-        <div class="tlog-kpi"><span>Net P/L</span><strong id="tlNetPL">$0.00</strong></div>
-        <div class="tlog-kpi"><span>Avg RR</span><strong id="tlAvgRR">–</strong></div>
-        <div class="tlog-kpi"><span>Win%</span><strong id="tlWinPct">–</strong></div>
-        <div class="tlog-kpi"><span>Rule OK%</span><strong id="tlRuleAdh">–</strong></div>
+      <div class="tlog-stats">
+        <div class="tlog-stat"><span class="tlog-stat-label">Net P/L</span><span id="tlNetPL" class="tlog-stat-val">–</span></div>
+        <div class="tlog-stat"><span class="tlog-stat-label">Win%</span><span id="tlWinPct" class="tlog-stat-val">–</span></div>
+        <div class="tlog-stat"><span class="tlog-stat-label">Avg RR</span><span id="tlAvgRR" class="tlog-stat-val">–</span></div>
+        <div class="tlog-stat"><span class="tlog-stat-label">Szabály</span><span id="tlRuleAdh" class="tlog-stat-val">–</span></div>
       </div>
       <div class="tlog-table-wrap">
-        <table class="tlog-table">
-          <thead><tr><th>Idő</th><th>Irány</th><th>P/L</th><th>RR</th><th>Szabály</th></tr></thead>
+        <table class="tlog-table levels-table">
+          <thead>
+            <tr>
+              <th>Idő</th>
+              <th>Irány</th>
+              <th>Setup</th>
+              <th>P/L</th>
+              <th>RR</th>
+              <th>Szabály</th>
+            </tr>
+          </thead>
           <tbody id="tradeLogBody">
-            <tr><td colspan="5" class="empty-log">Még nincs lezárt trade ma.</td></tr>
+            <tr><td colspan="6" class="empty-log">Nincs rögzített trade.</td></tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
 
-  </section>
-</main>
+  </div><!-- /colRight -->
+
+</main><!-- /mainGrid -->
 
 <script src="app.js"></script>
 </body>
