@@ -1,612 +1,258 @@
 <!doctype html>
-<html lang="hu">
+<html lang="hu" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <title>XAU Master OS V5 – Desktop Dashboard</title>
+  <title>XAU Master Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --bg: #161616;
-      --bg-elevated: #1f1f1f;
-      --border: #2b2b2b;
-      --text: #f5f5f5;
-      --text-muted: #a0a0a0;
-      --accent: #d4aa2a;
-      --danger: #e74c3c;
-      --success: #2ecc71;
-      --warning: #f0ad4e;
-      --radius: 8px;
-      --space-2: 0.5rem;
-      --space-3: 0.75rem;
-      --space-4: 1rem;
-
-      --long-color: #2ecc71;
-      --long-bg: rgba(46,204,113,0.10);
-      --long-border: rgba(46,204,113,0.45);
-      --long-glow: 0 0 12px rgba(46,204,113,0.22);
-
-      --short-color: #e74c3c;
-      --short-bg: rgba(231,76,60,0.11);
-      --short-border: rgba(231,76,60,0.50);
-      --short-glow: 0 0 12px rgba(231,76,60,0.22);
-
-      --neutral-color: #f0ad4e;
-      --neutral-bg: rgba(240,173,78,0.09);
-      --neutral-border: rgba(240,173,78,0.40);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg); color: var(--text);
-      min-height: 100vh; display: flex; flex-direction: column;
-    }
-    .dashboard-root { display: flex; flex-direction: column; min-height: 100vh; }
-
-    /* TOP BAR */
-    .top-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: var(--space-3) var(--space-4);
-      border-bottom: 1px solid var(--border); background: #111;
-    }
-    .top-left { display: flex; flex-direction: column; gap: 0.25rem; }
-    .top-left strong { font-size: 0.95rem; color: var(--accent); letter-spacing: 0.04em; }
-    .top-left span { font-size: 0.78rem; color: var(--text-muted); }
-    .top-center { text-align: center; }
-    .bias-label { font-size: 1.15rem; font-weight: 700; }
-    .bias-status { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
-    .top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
-    .risk-badge {
-      padding: 0.15rem 0.7rem; border-radius: 999px;
-      font-size: 0.78rem; border: 1px solid var(--border);
-      font-weight: 600; letter-spacing: 0.04em;
-    }
-    .risk-badge.GREEN { border-color: var(--success); color: var(--success); }
-    .risk-badge.YELLOW { border-color: var(--warning); color: var(--warning); }
-    .risk-badge.RED { border-color: var(--danger); color: var(--danger); }
-    .pl-label { font-size: 0.8rem; color: var(--text-muted); }
-
-    /* MAIN GRID */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr) 340px;
-      gap: var(--space-4); padding: var(--space-4); flex: 1;
-    }
-    .panel {
-      background: var(--bg-elevated); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: var(--space-3);
-      display: flex; flex-direction: column; gap: var(--space-2);
-    }
-    .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
-    .panel-title-wrap { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
-    .panel-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
-
-    /* INFO GOMB */
-    .info-btn {
-      width: 1.15rem; height: 1.15rem; border-radius: 999px;
-      border: 1px solid var(--border);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 700;
-      color: var(--text-muted); background: #181818;
-      cursor: pointer; position: relative; flex-shrink: 0;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .info-btn:hover, .info-btn:focus { color: var(--accent); border-color: var(--accent); outline: none; }
-    .info-btn .tooltip {
-      position: absolute; left: 0; top: 1.6rem;
-      width: 240px; padding: 0.55rem 0.7rem;
-      border: 1px solid #3a3a3a; border-radius: 7px;
-      background: #0f0f0f; color: var(--text);
-      font-size: 0.73rem; line-height: 1.5; font-weight: 400;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-      display: none; z-index: 30; pointer-events: none;
-      text-transform: none; letter-spacing: 0;
-    }
-    .info-btn:hover .tooltip, .info-btn:focus .tooltip { display: block; }
-
-    /* META NOTE – forrás + idő */
-    .meta-note {
-      margin-top: 0.55rem; padding-top: 0.5rem;
-      border-top: 1px dashed #2e2e2e;
-      font-size: 0.71rem; color: #666; line-height: 1.5;
-    }
-    .meta-note strong { color: #888; }
-    .meta-note code { color: var(--accent); font-family: ui-monospace, monospace; font-size: 0.69rem; }
-
-    .panel-body { font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    th, td { padding: 0.22rem 0.35rem; text-align: left; }
-    th { color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
-    tr + tr td { border-top: 1px solid #222; }
-    .divider { border: none; border-top: 1px solid var(--border); margin: var(--space-3) 0; }
-    .pill {
-      padding: 0.1rem 0.55rem; border-radius: 999px;
-      border: 1px solid var(--border); font-size: 0.72rem; color: var(--text-muted);
-    }
-    .pill.gold { border-color: var(--accent); color: var(--accent); }
-
-    /* CHART */
-    .chart-panel { display: flex; flex-direction: column; gap: var(--space-2); }
-    .tv-container {
-      flex: 1; min-height: 480px;
-      border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden;
-    }
-    #tv-xauusd-chart { width: 100%; height: 100%; }
-    .chart-footer {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.75rem; color: var(--text-muted);
-    }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-
-    /* RIGHT COLUMN */
-    .right-column { display: flex; flex-direction: column; gap: var(--space-4); }
-    .kpi-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 0.1rem 0; }
-    .kpi-row span.value { font-weight: 600; color: var(--text); }
-    .kpi-row span.value.pos { color: var(--success); }
-    .kpi-row span.value.neg { color: var(--danger); }
-
-    /* SETUP SECTION */
-    .setup-section-panel {
-      background: linear-gradient(145deg, #1a1a1a 0%, #1e1e1e 100%);
-      border: 1px solid #333; border-radius: var(--radius);
-      padding: var(--space-3); display: flex; flex-direction: column;
-      gap: 0.55rem; position: relative; overflow: hidden;
-    }
-    .setup-section-panel::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--long-color) 0%, transparent 50%, var(--short-color) 100%);
-      opacity: 0.7;
-    }
-    .setup-section-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;
-    }
-    .setup-section-title {
-      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.09em;
-      color: var(--text-muted); font-weight: 600;
-    }
-    .setup-card {
-      border-radius: 7px; padding: 0.6rem 0.75rem; position: relative; transition: box-shadow 0.2s;
-    }
-    .setup-card.LONG  { background: var(--long-bg); border: 1px solid var(--long-border); box-shadow: var(--long-glow); }
-    .setup-card.SHORT { background: var(--short-bg); border: 1px solid var(--short-border); box-shadow: var(--short-glow); }
-    .setup-card.NEUTRAL { background: var(--neutral-bg); border: 1px solid var(--neutral-border); }
-    .setup-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.38rem; }
-    .setup-card-title { font-weight: 700; font-size: 0.84rem; color: var(--text); display: flex; align-items: center; gap: 0.3rem; }
-    .dir-pill {
-      font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.6rem; border-radius: 999px;
-      display: inline-flex; align-items: center; gap: 0.2rem; letter-spacing: 0.05em;
-    }
-    .dir-pill.LONG    { background: rgba(46,204,113,0.18); color: var(--long-color); border: 1px solid var(--long-border); }
-    .dir-pill.SHORT   { background: rgba(231,76,60,0.2);   color: var(--short-color); border: 1px solid var(--short-border); }
-    .dir-pill.NEUTRAL { background: rgba(240,173,78,0.13); color: var(--neutral-color); border: 1px solid var(--neutral-border); }
-    .setup-lines { font-size: 0.76rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.18rem; }
-    .setup-line { display: flex; align-items: baseline; gap: 0.3rem; }
-    .setup-line-label { min-width: 90px; color: #666; }
-    .setup-line-val { color: var(--text); font-weight: 500; }
-    .setup-line-val.long  { color: var(--long-color); font-weight: 700; }
-    .setup-line-val.short { color: var(--short-color); font-weight: 700; }
-    .setup-line-val.ok    { color: var(--success); }
-    .setup-line-val.no    { color: var(--danger); }
-    .setup-line-val.warn  { color: var(--warning); }
-    .score-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
-    .score-label { font-size: 0.71rem; color: #666; min-width: 44px; }
-    .score-bar-track { flex: 1; height: 6px; background: #2b2b2b; border-radius: 999px; overflow: hidden; }
-    .score-bar-fill  { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
-    .setup-card.LONG    .score-bar-fill { background: linear-gradient(90deg, #27ae60, var(--long-color)); }
-    .setup-card.SHORT   .score-bar-fill { background: linear-gradient(90deg, #c0392b, var(--short-color)); }
-    .setup-card.NEUTRAL .score-bar-fill { background: linear-gradient(90deg, #e67e22, var(--neutral-color)); }
-    .score-val { font-size: 0.77rem; font-weight: 700; min-width: 36px; text-align: right; }
-    .setup-card.LONG    .score-val { color: var(--long-color); }
-    .setup-card.SHORT   .score-val { color: var(--short-color); }
-    .setup-card.NEUTRAL .score-val { color: var(--neutral-color); }
-    .allowed-badge {
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      font-size: 0.72rem; font-weight: 700;
-      padding: 0.12rem 0.55rem; border-radius: 999px; margin-top: 0.3rem;
-    }
-    .allowed-badge.yes { background: rgba(46,204,113,0.14); color: var(--long-color); border: 1px solid var(--long-border); }
-    .allowed-badge.no  { background: rgba(231,76,60,0.14);  color: var(--short-color); border: 1px solid var(--short-border); }
-
-    /* TRADE LOG */
-    .trade-log-table { max-height: 160px; overflow-y: auto; }
-    .rule-ok        { color: var(--success); font-size: 0.72rem; }
-    .rule-violation { color: var(--danger);  font-size: 0.72rem; }
-    .rule-notrade   { color: var(--text-muted); font-size: 0.72rem; }
-
-    /* FOOTER */
-    .last-updated {
-      text-align: center; font-size: 0.7rem; color: var(--text-muted);
-      padding: 0.4rem; border-top: 1px solid var(--border);
-    }
-    .last-updated span { color: var(--accent); }
-
-    /* LOADING */
-    .loading-overlay {
-      position: fixed; inset: 0; background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: var(--text-muted); z-index: 99;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<div class="loading-overlay" id="loading">⏳ Dashboard betöltése...</div>
+  <div class="app">
 
-<div class="dashboard-root" id="app" style="display:none">
-
-  <!-- TOP BAR -->
-  <header class="top-bar">
-    <div class="top-left">
-      <strong>⚡ XAU Master OS V5 – Desktop Dashboard</strong>
-      <span id="date-session"></span>
-    </div>
-    <div class="top-center">
-      <div class="bias-label" id="bias-label"></div>
-      <div class="bias-status" id="bias-status"></div>
-    </div>
-    <div class="top-right">
-      <div class="risk-badge" id="risk-badge"></div>
-      <div class="pl-label" id="pl-label"></div>
-    </div>
-  </header>
-
-  <!-- MAIN GRID -->
-  <main class="main-grid">
-
-    <!-- BAL OSZLOP -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title-wrap">
-          <div class="panel-title">🌍 Macro Market OS</div>
-          <button class="info-btn" aria-label="Mi ez?">i
-            <span class="tooltip">Makró háttérblokk. Gyors bias-szűrő XAU-hoz: FedWatch kamatvárakozás, US10Y hozam, DXY erősség és piaci szentiment. Ha ezek egybemutatnak, erősebb a signal.</span>
-          </button>
-        </div>
+    <!-- TOP STATUS BAR -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="topbar__date" id="top-date"></div>
+        <div class="topbar__session" id="top-session"></div>
       </div>
-      <div class="panel-body">
-        <table>
-          <thead><tr><th>Elem</th><th>Rezsim</th></tr></thead>
-          <tbody id="macro-table"></tbody>
-        </table>
-        <div class="meta-note" id="macro-meta"></div>
-        <hr class="divider">
-        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
-          <div class="panel-title">📊 XAU Market Regime</div>
-          <button class="info-btn" aria-label="Mi ez?">i
-            <span class="tooltip">XAU piaci rezsim: HTF trend iránya (H4/D1), intraday jelleg (range vs. trend) és volatilitás szintje. Ez határozza meg, hogy milyen setup-típus releváns most.</span>
-          </button>
+      <div class="topbar__center">
+        <div class="topbar__bias">
+          <span class="label">Bias</span>
+          <span class="pill" id="bias-direction"></span>
+          <span class="pill pill--status" id="bias-status"></span>
         </div>
-        <table><tbody id="regime-table"></tbody></table>
-        <hr class="divider">
-        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
-          <div class="panel-title">🎯 Kulcsszintek</div>
-          <button class="info-btn" aria-label="Mi ez?">i
-            <span class="tooltip">Az aznap releváns technikai szintek: előző nap csúcsa/mélypontja (PDH/PDL), ázsiai session H/L, napi nyitóár és a legfontosabb HTF szint. Ezek adják a setup kontextusát.</span>
-          </button>
-        </div>
-        <table><tbody id="levels-table"></tbody></table>
-        <div class="meta-note" id="levels-meta"></div>
-        <hr class="divider">
-        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
-          <div class="panel-title">🚫 No-trade szűrők</div>
-          <button class="info-btn" aria-label="Mi ez?">i
-            <span class="tooltip">Kemény kizárók: magas impact makró esemény előtt 60 percig, ázsiai sessionben és rossz spread/likviditás esetén nem nyitunk új XAU trade-et.</span>
-          </button>
-        </div>
-        <div id="notrade-block" style="font-size:0.75rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.2rem;"></div>
+        <div class="topbar__narrative" id="daily-narrative"></div>
       </div>
-    </section>
-
-    <!-- KÖZÉPSŐ PANEL: chart -->
-    <section class="panel chart-panel">
-      <div class="panel-header">
-        <div class="panel-title-wrap">
-          <div class="panel-title">📈 XAUUSD – Live Chart (OANDA:XAUUSD)</div>
-          <button class="info-btn" aria-label="Mi ez?">i
-            <span class="tooltip">Élő TradingView chart. Default: M15 intraday nézet. Mindig ellenőrizd a H4/D1 HTF képet is a trend irányához. Elsődleges ablak: London 09:00–12:00 CEST, másodlagos: Overlap 14:00–19:00 CEST.</span>
-          </button>
+      <div class="topbar__right">
+        <div class="topbar__mode">
+          <span class="label">Effective mode</span>
+          <span class="mode-pill" id="effective-mode"></span>
         </div>
-        <span class="pill gold">TradingView embed</span>
-      </div>
-      <div class="tv-container"><div id="tv-xauusd-chart"></div></div>
-      <div class="chart-footer">
-        <span>Default: M15 &nbsp;·&nbsp; HTF: H4 / D1</span>
-        <div class="chip-row">
-          <span class="pill">🕘 London 09:00–12:00 CEST</span>
-          <span class="pill">🔁 Overlap 14:00–19:00 CEST</span>
-          <span class="pill">⛔ No-trade: -60/+30 min high-impact</span>
+        <div class="topbar__risk-usage">
+          <span class="label">Napi risk usage</span>
+          <div class="bar">
+            <div class="bar__fill" id="daily-risk-bar"></div>
+          </div>
+          <span class="bar__value" id="daily-risk-text"></span>
         </div>
-      </div>
-    </section>
-
-    <!-- JOBB OSZLOP -->
-    <section class="right-column">
-
-      <!-- Risk OS -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title-wrap">
-            <div class="panel-title">🛡️ Risk OS – Napi állapot</div>
-            <button class="info-btn" aria-label="Mi ez?">i
-              <span class="tooltip">Kockázati kontrollpanel. Napi limit: 100 USD, heti limit: 300 USD. Ha a napi limit elérve → PIROS, nincs új trade. Loss streak ≥ 3 → 2 nap kötelező szünet. RPT: ajánlott per-trade kockázat.</span>
-            </button>
+        <div class="topbar__sync">
+          <div class="topbar__sync-line">
+            <span class="label">Last auto sync</span>
+            <span id="last-auto-sync"></span>
+          </div>
+          <div class="topbar__sync-line">
+            <span class="label">Last manual update</span>
+            <span id="last-manual-update"></span>
           </div>
         </div>
-        <div class="panel-body" id="risk-panel"></div>
       </div>
+    </header>
 
-      <!-- SETUP EXECUTION OS -->
-      <div class="setup-section-panel">
-        <div class="setup-section-header">
-          <div class="panel-title-wrap">
-            <div class="setup-section-title">⚙️ Setup Execution OS</div>
-            <button class="info-btn" aria-label="Mi ez?">i
-              <span class="tooltip">Az aktuális kereskedési setup-ok. Minden kártyán: irány (Long/Short), bias-kompatibilitás, belépési zóna, SL, TP1, R/R és setup score (0–10). Csak ≥6/10 (ZÖLD) vagy ≥8/10 (SÁRGA) esetén nyitható.</span>
-            </button>
-          </div>
-          <span class="pill gold">🎯 Entry Engine</span>
-        </div>
-        <div id="setup-panel"></div>
-      </div>
+    <!-- MAIN GRID -->
+    <main class="layout">
 
-      <!-- Trade Log -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title-wrap">
-            <div class="panel-title">📋 Trade Log – napi snapshot</div>
-            <button class="info-btn" aria-label="Mi ez?">i
-              <span class="tooltip">Az aznapi trade-ek naplója. Tartalmazza a belépési időt, irányt, realizált R/R-t és hogy szabálykövető volt-e a végrehajtás. VIOLATION = szabályszegés, amit napi review-n elemzünk.</span>
-            </button>
+      <!-- LEFT COLUMN -->
+      <section class="col col--left">
+
+        <!-- SETUP FOCUS -->
+        <section class="panel panel--setup">
+          <div class="panel__header">
+            <h2>Setup Focus</h2>
+            <div class="panel__sub">
+              <span id="setup-guideline"></span>
+            </div>
           </div>
-        </div>
-        <div class="panel-body trade-log-table">
-          <table>
-            <thead><tr><th>Idő</th><th>Ir.</th><th>RR</th><th>Rule</th></tr></thead>
-            <tbody id="tradelog-table"></tbody>
+          <div class="setup-grid">
+            <article class="setup-card" id="setup-A"></article>
+            <article class="setup-card" id="setup-B"></article>
+          </div>
+        </section>
+
+        <!-- MACRO SUMMARY + KEY LEVELS -->
+        <section class="panel panel--macro">
+          <div class="panel__header">
+            <h2>Macro Market &amp; Kulcsszintek</h2>
+          </div>
+          <div class="macro-tiles" id="macro-tiles"></div>
+          <div class="panel__subhead">
+            <span>Kulcsszintek</span>
+            <span class="pill pill--info" id="keylevels-status">State</span>
+          </div>
+          <table class="keylevels" id="keylevels-table">
+            <thead>
+              <tr>
+                <th>Szint</th>
+                <th>Érték / státusz</th>
+                <th>Forrás</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
           </table>
-        </div>
-      </div>
+        </section>
 
-    </section>
-  </main>
+      </section>
 
-  <footer class="last-updated">
-    🕐 Adatok utolsó frissítése: <span id="last-updated-time">–</span>
-    &nbsp;·&nbsp; Forrás: GitHub Actions / Yahoo Finance / CNN F&amp;G / CME FedWatch
-    &nbsp;·&nbsp; Az oldal automatikusan újratölti az adatokat 5 percenként.
-  </footer>
-</div>
+      <!-- CENTER COLUMN -->
+      <section class="col col--center">
 
-<!-- TradingView -->
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script>
-// ─── SESSION CLOCK ───────────────────────────────────────────────
-function getSession(h) {
-  if (h >= 9 && h < 12) return '🟡 London Session (09:00–12:00)';
-  if (h >= 14 && h < 19) return '🟠 London–NY Overlap (14:00–19:00)';
-  if (h >= 2 && h < 9)  return '🔵 Ázsiai session (nem preferált)';
-  return '⚫ Off-session';
-}
-function updateClock() {
-  var now  = new Date();
-  var date = now.toLocaleDateString('hu-HU');
-  var time = now.toLocaleTimeString('hu-HU', {hour:'2-digit', minute:'2-digit'});
-  document.getElementById('date-session').textContent =
-    date + ' · ' + time + ' CEST · ' + getSession(now.getHours());
-}
-updateClock();
-setInterval(updateClock, 30000);
+        <section class="panel panel--chart">
+          <div class="panel__header panel__header--tight">
+            <div class="chart-meta">
+              <div class="chart-meta__row">
+                <span class="label">Aktív setup</span>
+                <span id="chart-active-setup"></span>
+              </div>
+              <div class="chart-meta__row">
+                <span class="label">Preferred session</span>
+                <span id="chart-session"></span>
+              </div>
+            </div>
+            <div class="chart-meta chart-meta--right">
+              <div class="chart-meta__row">
+                <span class="label">Macro lock</span>
+                <span id="chart-macro-lock" class="pill pill--status"></span>
+              </div>
+              <div class="chart-meta__row">
+                <span class="label">Last data</span>
+                <span id="chart-last-data"></span>
+              </div>
+            </div>
+          </div>
 
-// ─── HELPERS ─────────────────────────────────────────────────────
-function pill(val) {
-  return '<span class="pill">' + (val || '–') + '</span>';
-}
-function fmt(val, fallback) {
-  return (val !== null && val !== undefined) ? val : (fallback || '–');
-}
+          <div class="chart-toolbar">
+            <button class="btn btn--ghost" data-session-toggle="London">London</button>
+            <button class="btn btn--ghost" data-session-toggle="Overlap">Overlap</button>
+            <button class="btn btn--ghost" data-session-toggle="NoTrade">No-trade window</button>
+            <button class="btn btn--ghost" data-setup-focus="A">Setup A</button>
+            <button class="btn btn--ghost" data-setup-focus="B">Setup B</button>
+          </div>
 
-// ─── FORRÁS LEKÉPZÉS ─────────────────────────────────────────────
-var SOURCE_MAP = {
-  fedwatch:    { label: 'CME FedWatch', url: 'https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html' },
-  us10y:       { label: 'Yahoo Finance ^TNX', url: 'https://finance.yahoo.com/quote/%5ETNX/' },
-  dxy:         { label: 'Yahoo Finance DX-Y.NYB', url: 'https://finance.yahoo.com/quote/DX-Y.NYB/' },
-  sentiment:   { label: 'CNN Fear & Greed', url: 'https://edition.cnn.com/markets/fear-and-greed' },
-  htf_trend:   { label: 'Yahoo Finance GC=F (H4/D1)', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  intraday_regime: { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  volatility:  { label: 'Yahoo Finance GC=F (ATR)', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  pdh:         { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  pdl:         { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  daily_open:  { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
-  asia_high:   { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' },
-  asia_low:    { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' },
-  htf_level:   { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' }
-};
+          <div class="chart-container">
+            <iframe
+              id="tv-embed"
+              src="https://s.tradingview.com/widgetembed/?symbol=OANDA%3AXAUUSD&interval=15&theme=dark&style=1&timezone=Europe%2FBudapest&studies=&hideideas=1&symboledit=0&saveimage=0"
+              loading="lazy"
+              title="XAUUSD Chart"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </section>
 
-function sourceMeta(key, updated) {
-  var s = SOURCE_MAP[key];
-  if (!s) return '';
-  return '<span style="color:#555"> · <a href="' + s.url + '" target="_blank" rel="noopener" style="color:#666;text-decoration:none;" title="Forrás megnyitása">' + s.label + '</a></span>';
-}
+      </section>
 
-// ─── SETUP CARD BUILDER ─────────────────────────────────────────
-function buildSetupCard(s) {
-  var dir = s.direction || 'NEUTRAL';
-  var dirEmoji = dir === 'LONG' ? '🟢' : (dir === 'SHORT' ? '🔴' : '⚪');
-  var dirLabel = dir === 'LONG' ? '🟢 LONG' : (dir === 'SHORT' ? '🔴 SHORT' : '⚪ NEUTRAL');
-  var score = s.score !== null && s.score !== undefined ? s.score : null;
-  var barPct = score !== null ? (score / 10 * 100) + '%' : '0%';
-  var scoreText = score !== null ? score + '/10' : '–';
-  var biasColor = s.bias_compatible ? 'ok' : 'no';
-  var allowedHtml = s.allowed
-    ? '<span class="allowed-badge yes">✅ NYITHATÓ</span>'
-    : '<span class="allowed-badge no">⛔ NEM NYITHATÓ</span>';
-  var noteHtml = s.note ? '<div class="setup-line" style="margin-top:0.2rem"><span class="setup-line-label">⚠️ Megjegyzés:</span><span class="setup-line-val warn">' + s.note + '</span></div>' : '';
-  var rrClass = (s.rr && s.rr >= 2) ? 'ok' : 'warn';
-  var rrText = s.rr ? '1:' + s.rr.toFixed(1) : '–';
+      <!-- RIGHT COLUMN -->
+      <section class="col col--right">
 
-  return '<div class="setup-card ' + dir + '">' +
-    '<div class="setup-card-header">' +
-      '<span class="setup-card-title">' + dirEmoji + ' ' + s.label + '</span>' +
-      '<span class="dir-pill ' + dir + '">' + dirLabel + '</span>' +
-    '</div>' +
-    '<div class="setup-lines">' +
-      '<div class="setup-line"><span class="setup-line-label">🧭 Bias:</span><span class="setup-line-val ' + biasColor + '">' + (s.bias_compatible ? '✅ Kompatibilis' : '❌ NEM kompatibilis') + '</span></div>' +
-      '<div class="setup-line"><span class="setup-line-label">📍 Belépési zóna:</span><span class="setup-line-val">' + fmt(s.entry_zone) + '</span></div>' +
-      '<div class="setup-line"><span class="setup-line-label">🛑 SL:</span><span class="setup-line-val no">' + fmt(s.sl) + '</span></div>' +
-      '<div class="setup-line"><span class="setup-line-label">🎯 TP1:</span><span class="setup-line-val ok">' + fmt(s.tp1) + '</span></div>' +
-      '<div class="setup-line"><span class="setup-line-label">⚖️ R/R:</span><span class="setup-line-val ' + rrClass + '">' + rrText + '</span></div>' +
-      '<div class="setup-line"><span class="setup-line-label">💰 Kockázat:</span><span class="setup-line-val">' + fmt(s.risk_usd, '–') + ' USD · ' + s.units + ' egység</span></div>' +
-      noteHtml +
-    '</div>' +
-    '<div class="score-row">' +
-      '<span class="score-label">📊 Score</span>' +
-      '<div class="score-bar-track"><div class="score-bar-fill" style="width:' + barPct + '"></div></div>' +
-      '<span class="score-val">' + scoreText + '</span>' +
-    '</div>' +
-    allowedHtml +
-    '</div>';
-}
+        <!-- RISK ENGINE -->
+        <section class="panel panel--risk">
+          <div class="panel__header">
+            <h2>Risk Engine</h2>
+          </div>
+          <div class="risk-status">
+            <div class="risk-status__mode">
+              <span class="label">Effective mode</span>
+              <span class="mode-pill" id="risk-effective-mode"></span>
+            </div>
+            <div class="risk-status__note" id="risk-note"></div>
+          </div>
+          <div class="risk-bars">
+            <div class="risk-bar">
+              <div class="risk-bar__header">
+                <span class="label">Napi P/L</span>
+                <span id="risk-daily-pl"></span>
+              </div>
+            </div>
+            <div class="risk-bar">
+              <div class="risk-bar__header">
+                <span class="label">Napi veszteséglimit</span>
+                <span id="risk-daily-limit"></span>
+              </div>
+              <div class="bar">
+                <div class="bar__fill" id="risk-daily-bar"></div>
+              </div>
+              <span class="bar__value" id="risk-daily-text"></span>
+            </div>
+            <div class="risk-bar">
+              <div class="risk-bar__header">
+                <span class="label">Heti veszteséglimit</span>
+                <span id="risk-weekly-limit"></span>
+              </div>
+              <div class="bar">
+                <div class="bar__fill" id="risk-weekly-bar"></div>
+              </div>
+              <span class="bar__value" id="risk-weekly-text"></span>
+            </div>
+          </div>
+          <div class="risk-meta">
+            <div class="risk-meta__item">
+              <span class="label">Loss streak</span>
+              <span id="risk-loss-streak"></span>
+            </div>
+            <div class="risk-meta__item">
+              <span class="label">Max trade ma</span>
+              <span id="risk-max-trades"></span>
+            </div>
+            <div class="risk-meta__item">
+              <span class="label">Open positions</span>
+              <span id="risk-open-positions"></span>
+            </div>
+          </div>
+          <div class="no-trade-overlay" id="no-trade-overlay">
+            <div class="no-trade-overlay__content">
+              <h3>NO-TRADE</h3>
+              <p>A rendszer szerint ma tiltott a trade. Fókusz: chart study, replay, review.</p>
+            </div>
+          </div>
+        </section>
 
-// ─── RENDER ──────────────────────────────────────────────────────
-function render(d) {
-  var h = d.header;
-  var biasColors = { SHORT: '#e74c3c', LONG: '#2ecc71', NEUTRAL: '#f0ad4e' };
-  var biasEmojis = { SHORT: '🔴', LONG: '🟢', NEUTRAL: '⚪' };
-  var biasEl = document.getElementById('bias-label');
-  biasEl.textContent = (biasEmojis[h.bias_direction] || '') + ' Bias: ' + h.bias_direction;
-  biasEl.style.color = biasColors[h.bias_direction] || '#f5f5f5';
-  document.getElementById('bias-status').textContent = h.bias_status;
+        <!-- TRADE LOG -->
+        <section class="panel panel--trades">
+          <div class="panel__header">
+            <h2>Trade Log &amp; Performance</h2>
+          </div>
+          <div class="trade-stats">
+            <div class="trade-stats__item">
+              <span class="label">Trades today</span>
+              <span id="stat-trades-today"></span>
+            </div>
+            <div class="trade-stats__item">
+              <span class="label">Net P/L</span>
+              <span id="stat-net-pl"></span>
+            </div>
+            <div class="trade-stats__item">
+              <span class="label">Átlagos RR</span>
+              <span id="stat-avg-rr"></span>
+            </div>
+            <div class="trade-stats__item">
+              <span class="label">Rule adherence</span>
+              <span id="stat-rule-adherence"></span>
+            </div>
+          </div>
+          <table class="trades-table" id="trades-table">
+            <thead>
+              <tr>
+                <th>Idő</th>
+                <th>Sess</th>
+                <th>Dir</th>
+                <th>Setup</th>
+                <th>Risk</th>
+                <th>P/L</th>
+                <th>RR</th>
+                <th>Rule</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-  var badge = document.getElementById('risk-badge');
-  var riskEmojis = { GREEN: '🟢', YELLOW: '🟡', RED: '🔴' };
-  badge.textContent = (riskEmojis[h.risk_mode] || '') + ' Risk: ' + h.risk_mode;
-  badge.className = 'risk-badge ' + h.risk_mode;
+      </section>
+    </main>
+  </div>
 
-  var pl = h.daily_pl_usd;
-  document.getElementById('pl-label').innerHTML =
-    'Napi P/L: <strong style="color:' + (pl >= 0 ? '#2ecc71' : '#e74c3c') + '">' +
-    (pl >= 0 ? '▲ +' : '▼ ') + pl.toFixed(1) + ' USD</strong>' +
-    ' &nbsp;·&nbsp; Risk usage: ' + h.daily_risk_usage_pct + '%';
-
-  // Macro table
-  var m = d.macro;
-  var updated = d.meta.last_updated;
-  document.getElementById('macro-table').innerHTML = [
-    ['fedwatch',  '📅 FedWatch',      m.fedwatch],
-    ['us10y',     '📈 US10Y',         m.us10y],
-    ['dxy',       '💵 DXY',           m.dxy],
-    ['sentiment', '😨 Szentiment',    m.sentiment]
-  ].map(function(r){
-    return '<tr><td>' + r[1] + '</td><td>' + pill(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
-  }).join('');
-
-  // Macro meta note
-  document.getElementById('macro-meta').innerHTML =
-    '<strong>🕐 Frissítve:</strong> ' + updated +
-    ' &nbsp;·&nbsp; <strong>Források:</strong> ' +
-    '<a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">CME FedWatch</a>, ' +
-    '<a href="https://finance.yahoo.com/quote/%5ETNX/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">^TNX</a>, ' +
-    '<a href="https://finance.yahoo.com/quote/DX-Y.NYB/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">DX-Y.NYB</a>, ' +
-    '<a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">CNN F&amp;G</a>';
-
-  document.getElementById('regime-table').innerHTML = [
-    ['htf_trend',       '📐 HTF trend',       m.htf_trend],
-    ['intraday_regime', '⚡ Intraday',         m.intraday_regime],
-    ['volatility',      '💨 Volatilitás',      m.volatility]
-  ].map(function(r){
-    return '<tr><td>' + r[1] + '</td><td>' + pill(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
-  }).join('');
-
-  // Levels
-  var lv = d.levels;
-  document.getElementById('levels-table').innerHTML = [
-    ['pdh',        '🔼 PDH',        lv.pdh],
-    ['pdl',        '🔽 PDL',        lv.pdl],
-    ['asia_high',  '🌙 Asia High',  lv.asia_high],
-    ['asia_low',   '🌙 Asia Low',   lv.asia_low],
-    ['daily_open', '📌 Daily Open', lv.daily_open],
-    ['htf_level',  '🏔️ HTF szint', lv.htf_level]
-  ].map(function(r){
-    return '<tr><td>' + r[1] + '</td><td>' + fmt(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
-  }).join('');
-
-  // Levels meta note
-  document.getElementById('levels-meta').innerHTML =
-    '<strong>🕐 Frissítve:</strong> ' + updated +
-    ' &nbsp;·&nbsp; PDH/PDL/Daily Open: <a href="https://finance.yahoo.com/quote/GC%3DF/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">Yahoo GC=F</a>' +
-    ' &nbsp;·&nbsp; Asia H/L + HTF: <a href="https://www.tradingview.com/symbols/OANDA-XAUUSD/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">TradingView chart</a>';
-
-  // No-trade filters
-  var nt = d.notrade_filters;
-  document.getElementById('notrade-block').innerHTML =
-    '<div>⚠️ High impact makró: <span style="color:var(--warning)">' + nt.high_impact_macro + '</span></div>' +
-    '<div>🌙 Asia session: <span>' + nt.asia_session + '</span></div>' +
-    '<div>📡 Spread/likviditás: <span style="color:var(--success)">' + nt.spread_liquidity + '</span></div>';
-
-  // Risk panel
-  var r = d.risk;
-  document.getElementById('risk-panel').innerHTML = [
-    ['💰 Napi P/L',      (r.daily_pl_usd >= 0 ? '+' : '') + r.daily_pl_usd.toFixed(1) + ' USD', r.daily_pl_usd >= 0 ? 'pos' : 'neg'],
-    ['📊 Napi risk',     r.daily_risk_usage_pct + '% / ' + r.daily_limit_usd + ' USD', ''],
-    ['📅 Heti risk',     r.weekly_risk_usage_pct + '% / ' + r.weekly_limit_usd + ' USD', ''],
-    ['🔴 Loss streak',   r.loss_streak, ''],
-    ['🛡️ Risk mód',     r.risk_mode, ''],
-    ['💵 RPT ajánlott',  r.rpt_min_usd + '–' + r.rpt_max_usd + ' USD', ''],
-    ['📂 Nyitott poz.',  r.open_positions + ' / ' + r.max_positions + ' max', '']
-  ].map(function(row){
-    return '<div class="kpi-row"><span>' + row[0] + '</span>' +
-           '<span class="value ' + row[2] + '">' + row[1] + '</span></div>';
-  }).join('');
-
-  // Setup cards
-  document.getElementById('setup-panel').innerHTML = d.setups.map(buildSetupCard).join('');
-
-  // Trade log
-  document.getElementById('tradelog-table').innerHTML = d.trade_log.map(function(t) {
-    var dirEmoji = t.direction === 'LONG' ? '🟢' : (t.direction === 'SHORT' ? '🔴' : '');
-    var ruleHtml;
-    if (t.rule_ok === true)        ruleHtml = '<span class="rule-ok">✅ OK</span>';
-    else if (t.rule_ok === false)  ruleHtml = '<span class="rule-violation">❌ VIOLATION</span>';
-    else ruleHtml = '<span class="rule-notrade">⛔ ' + (t.note || 'NO-TRADE') + '</span>';
-    return '<tr><td>' + t.time + '</td><td>' + dirEmoji + ' ' + fmt(t.direction) + '</td>' +
-           '<td>' + (t.rr !== null && t.rr !== undefined ? (t.rr > 0 ? '+' : '') + t.rr.toFixed(1) : '–') + '</td>' +
-           '<td>' + ruleHtml + '</td></tr>';
-  }).join('');
-
-  // Last updated
-  document.getElementById('last-updated-time').textContent = updated;
-
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-}
-
-// ─── FETCH DATA.JSON ─────────────────────────────────────────────
-function loadData() {
-  fetch('./data.json?t=' + Date.now())
-    .then(function(r) { return r.json(); })
-    .then(function(d) { render(d); })
-    .catch(function(e) {
-      document.getElementById('loading').textContent = '❌ Hiba az adatok betöltésekor. Frissítsd az oldalt.';
-      console.error(e);
-    });
-}
-
-loadData();
-setInterval(loadData, 5 * 60 * 1000);
-
-// ─── TRADINGVIEW CHART ───────────────────────────────────────────
-new TradingView.widget({
-  container_id: 'tv-xauusd-chart',
-  autosize: true,
-  symbol: 'OANDA:XAUUSD',
-  interval: '15',
-  timezone: 'Europe/Budapest',
-  theme: 'dark',
-  style: '1',
-  locale: 'en',
-  toolbar_bg: '#1c1b19',
-  hide_top_toolbar: false,
-  hide_legend: false,
-  allow_symbol_change: false
-});
-</script>
+  <script src="./app.js"></script>
 </body>
 </html>

@@ -1,90 +1,166 @@
 {
   "meta": {
-    "last_updated": "2026-06-30 07:51 CEST",
-    "auto": false,
-    "note": "Reggeli research alapján frissítve. Auto-mezők (XAU, US10Y, DXY, F&G, PDH/PDL) a GitHub Actions script következő futásakor frissülnek."
+    "date": "2026-06-30",
+    "last_auto_sync": "2026-06-30 09:00 CEST",
+    "last_manual_update": "2026-06-30 08:55 CEST"
   },
   "header": {
-    "bias_direction": "NEUTRAL",
-    "bias_status": "SÁRGA – fókusz a tiszta kulcsszint-reakciókon, nem impulzus-mozgás vadászatán",
-    "risk_mode": "YELLOW",
-    "daily_pl_usd": 0.0,
-    "daily_risk_usage_pct": 0
-  },
-  "macro": {
-    "fedwatch": "NEUTRAL – következő döntés nem agresszív CUT-pricing",
-    "us10y": "4.28% – SIDEWAYS",
-    "dxy": "99.2 – NEUTRAL",
-    "sentiment": "MIXED (safe haven háttér + data-driven kockázatvállalás)",
-    "htf_trend": "BULLISH – 2026 új ATH-k, magasabb csúcsok/mélypontok",
-    "intraday_regime": "DATA-DRIVEN RANGE / expansion – US adatblokk idején breakout esély",
-    "volatility": "HIGH VOL – rekordközeli árak + US makró kombó"
-  },
-  "levels": {
-    "pdh": null,
-    "pdl": null,
-    "asia_high": null,
-    "asia_low": null,
-    "daily_open": null,
-    "htf_level": null
-  },
-  "notrade_filters": {
-    "high_impact_macro": "Chicago PMI + JOLTS + CB Consumer Confidence – 14:00–17:00 CEST TILTOTT új belépő",
-    "asia_session": "nem preferált – csak külön indoklással",
-    "spread_liquidity": "OK"
+    "session": "London",
+    "bias_direction": "LONG",
+    "daily_status": "YELLOW",
+    "preferred_session": "London + Overlap",
+    "macro_lock_active": false,
+    "focus_setup": "A",
+    "narrative": "CUT bias, falling US10Y, USD-BEAR, SAFEHAVEN – long XAU preferált."
   },
   "risk": {
-    "daily_pl_usd": 0.0,
-    "daily_risk_usage_pct": 0,
-    "daily_limit_usd": 100,
-    "weekly_risk_usage_pct": 0,
-    "weekly_limit_usd": 300,
-    "loss_streak": 0,
-    "risk_mode": "YELLOW",
-    "rpt_min_usd": 10,
-    "rpt_max_usd": 30,
-    "open_positions": 0,
-    "max_positions": 3
+    "mode": "YELLOW",
+    "daily_loss": -35.0,
+    "daily_limit": 100.0,
+    "weekly_loss": -120.0,
+    "weekly_limit": 300.0,
+    "loss_streak": 1,
+    "max_trades_today": 1,
+    "open_positions": 0
   },
-  "setups": [
-    {
-      "label": "Setup A – Intraday range-sweep short",
-      "direction": "SHORT",
-      "type": "Range / Sweep",
-      "bias_compatible": true,
-      "entry_zone": "Asia High + PDH kombinált zóna – sweep + M15 visszazárás után",
-      "sl": null,
-      "tp1": null,
-      "rr": 2.0,
-      "risk_usd": 30,
-      "units": 1,
-      "score": 7,
-      "allowed": false,
-      "note": "SÁRGA módban min 8/10 kell. HTF bull ellen intraday taktika. TP1: Daily Open / Asia range közepe. TP2: PDL. Invalid: sweep után újra fölé zár és stabilizálódik."
+  "macro": {
+    "fedwatch": {
+      "value": "CUT",
+      "bias": "GREEN",
+      "source_type": "auto",
+      "source_label": "CME FedWatch",
+      "updated_at": "2026-06-30 08:48 CEST"
     },
-    {
-      "label": "Setup B – HTF buy-the-dip (opcionális, makró-blokk után)",
-      "direction": "LONG",
-      "type": "Trend – buy-the-dip",
-      "bias_compatible": true,
-      "entry_zone": "PDL közel / HTF támasz-zóna – M15 HL megerősítés után",
-      "sl": null,
-      "tp1": null,
-      "rr": 2.0,
-      "risk_usd": 30,
-      "units": 1,
-      "score": 7,
-      "allowed": false,
-      "note": "Csak ha US makró-blokk után HTF bull struktúra NEM tört meg. Min 8/10 SÁRGA módban. TP1: Daily Open / Asia High. TP2: PDH / swing high."
+    "us10y": {
+      "value": "FALLING",
+      "bias": "GREEN",
+      "source_type": "auto",
+      "source_label": "US10Y yield",
+      "updated_at": "2026-06-30 08:48 CEST"
+    },
+    "dxy": {
+      "value": "USD-BEAR",
+      "bias": "GREEN",
+      "source_type": "auto",
+      "source_label": "DXY",
+      "updated_at": "2026-06-30 08:48 CEST"
+    },
+    "sentiment": {
+      "value": "SAFEHAVEN",
+      "bias": "GREEN",
+      "source_type": "auto",
+      "source_label": "Fear & Greed",
+      "updated_at": "2026-06-30 08:48 CEST"
+    },
+    "htf_trend": {
+      "value": "BULL",
+      "bias": "GREEN",
+      "source_type": "manual",
+      "source_label": "HTF chart read",
+      "updated_at": "2026-06-30 08:30 CEST"
+    },
+    "intraday_regime": {
+      "value": "TREND",
+      "bias": "GREEN",
+      "source_type": "manual",
+      "source_label": "M15",
+      "updated_at": "2026-06-30 08:45 CEST"
+    },
+    "volatility": {
+      "value": "NORMAL",
+      "bias": "NEUTRAL",
+      "source_type": "auto",
+      "source_label": "ATR filter",
+      "updated_at": "2026-06-30 08:48 CEST"
     }
-  ],
-  "trade_log": [
+  },
+  "keylevels": {
+    "PDH": {
+      "value": 2398.5,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Prev day high",
+      "updated_at": "2026-06-30 08:48 CEST"
+    },
+    "PDL": {
+      "value": 2355.2,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Prev day low",
+      "updated_at": "2026-06-30 08:48 CEST"
+    },
+    "Asia High": {
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Asia range",
+      "updated_at": "2026-06-30 08:20 CEST"
+    },
+    "Asia Low": {
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Asia range",
+      "updated_at": "2026-06-30 08:20 CEST"
+    },
+    "Daily Open": {
+      "value": 2375.0,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Broker open",
+      "updated_at": "2026-06-30 08:48 CEST"
+    }
+  },
+  "setups": {
+    "A": {
+      "direction": "LONG",
+      "type": "Trend continuation",
+      "bias_compatibility": "igen",
+      "entry_zone": "2370-2374",
+      "sl": "2359",
+      "tp1": "2395",
+      "tp2": "2410",
+      "rr_min": 2.4,
+      "score": 8,
+      "session": "London",
+      "invalidation": "HTF bull trend törik H1 close alatt 2359",
+      "allowed": true,
+      "thesis": [
+        "HTF BULL, intraday TREND, CUT bias – long XAU kedvező",
+        "Pullback PDH–Daily Open közti zónába, normal vol",
+        "RR > 1:2, FedWatch + US10Y támogatja long irányt"
+      ]
+    },
+    "B": {
+      "direction": "SHORT",
+      "type": "Sweep reaction",
+      "bias_compatibility": "részben",
+      "entry_zone": "2405-2410",
+      "sl": "2418",
+      "tp1": "2380",
+      "tp2": null,
+      "rr_min": 1.9,
+      "score": 7,
+      "session": "Overlap",
+      "invalidation": "H1 close 2418 felett",
+      "allowed": false,
+      "thesis": [
+        "Liquidity sweep PDH felett, majd erős visszafordulás",
+        "Makró bias long, ezért csak extrém extended blow-off esetén érdekes",
+        "RR jelenleg 1:1.9 – szabály szerint lockolt"
+      ]
+    }
+  },
+  "trades": [
     {
-      "time": "–",
-      "direction": null,
-      "rr": null,
-      "rule_ok": null,
-      "note": "Nap eleje – nincs végrehajtott trade"
+      "time": "09:15",
+      "session": "London",
+      "direction": "LONG",
+      "setup_id": "A",
+      "risk_usd": 20.0,
+      "pl_usd": 25.0,
+      "rr_actual": 1.25,
+      "rule_ok": true
     }
   ]
 }
