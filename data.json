@@ -1,7 +1,8 @@
 {
   "meta": {
-    "last_updated": "2026-06-30 07:47 CEST",
-    "note": "Reggeli research alapján frissítve. Kulcsszintek (PDH/PDL/Asia H-L/Daily Open) manuálisan pontosítandók XAUUSD charton belépő előtt."
+    "last_updated": "2026-06-30 07:51 CEST",
+    "auto": false,
+    "note": "Reggeli research alapján frissítve. Auto-mezők (XAU, US10Y, DXY, F&G, PDH/PDL) a GitHub Actions script következő futásakor frissülnek."
   },
   "header": {
     "bias_direction": "NEUTRAL",
@@ -12,12 +13,12 @@
   },
   "macro": {
     "fedwatch": "NEUTRAL – következő döntés nem agresszív CUT-pricing",
-    "us10y": "SIDEWAYS – stabilizálódó zóna, nincs friss hozam-sokk",
-    "dxy": "RANGE – enyhén leforduló, USD edge nélkül",
-    "sentiment": "MIXED – safe haven háttér + data-driven kockázatvállalás",
+    "us10y": "4.28% – SIDEWAYS",
+    "dxy": "99.2 – NEUTRAL",
+    "sentiment": "MIXED (safe haven háttér + data-driven kockázatvállalás)",
     "htf_trend": "BULLISH – 2026 új ATH-k, magasabb csúcsok/mélypontok",
     "intraday_regime": "DATA-DRIVEN RANGE / expansion – US adatblokk idején breakout esély",
-    "volatility": "HIGH VOL – rekordközeli árak + US makró kombó, spike-ok várhatók"
+    "volatility": "HIGH VOL – rekordközeli árak + US makró kombó"
   },
   "levels": {
     "pdh": null,
@@ -28,9 +29,9 @@
     "htf_level": null
   },
   "notrade_filters": {
-    "high_impact_macro": "Chicago PMI + JOLTS + CB Consumer Confidence – US session előtt 60 perccel és közben TILTOTT új belépő (kb. 14:00–17:00 CEST)",
-    "asia_session": "nem preferált – csak külön indoklással és extra scoringgal",
-    "spread_liquidity": "OK – normál London session"
+    "high_impact_macro": "Chicago PMI + JOLTS + CB Consumer Confidence – 14:00–17:00 CEST TILTOTT új belépő",
+    "asia_session": "nem preferált – csak külön indoklással",
+    "spread_liquidity": "OK"
   },
   "risk": {
     "daily_pl_usd": 0.0,
@@ -51,7 +52,7 @@
       "direction": "SHORT",
       "type": "Range / Sweep",
       "bias_compatible": true,
-      "entry_zone": "Asia High + PDH kombinált zóna – sweep + visszazárás M15/M5 után",
+      "entry_zone": "Asia High + PDH kombinált zóna – sweep + M15 visszazárás után",
       "sl": null,
       "tp1": null,
       "rr": 2.0,
@@ -59,14 +60,14 @@
       "units": 1,
       "score": 7,
       "allowed": false,
-      "note": "SÁRGA módban min 8/10 kell – HTF bull trend elleni intraday taktika, szigorú végrehajtás. Invalidáció: ha sweep után az ár újra fölé zár és stabilizálódik. TP1: Daily Open / Asia range közepe. TP2: PDL."
+      "note": "SÁRGA módban min 8/10 kell. HTF bull ellen intraday taktika. TP1: Daily Open / Asia range közepe. TP2: PDL. Invalid: sweep után újra fölé zár és stabilizálódik."
     },
     {
       "label": "Setup B – HTF buy-the-dip (opcionális, makró-blokk után)",
       "direction": "LONG",
       "type": "Trend – buy-the-dip",
       "bias_compatible": true,
-      "entry_zone": "PDL közelében vagy HTF támasz-zónában – M15 HL megerősítés után",
+      "entry_zone": "PDL közel / HTF támasz-zóna – M15 HL megerősítés után",
       "sl": null,
       "tp1": null,
       "rr": 2.0,
@@ -74,7 +75,7 @@
       "units": 1,
       "score": 7,
       "allowed": false,
-      "note": "Csak akkor aktív, ha US makró-blokk után a HTF bull struktúra NEM tört meg. SÁRGA módban min 8/10 kell. Invalidáció: HTF támaszt nagy volumennel áttöri. TP1: Daily Open / Asia High. TP2: PDH / intraday swing high."
+      "note": "Csak ha US makró-blokk után HTF bull struktúra NEM tört meg. Min 8/10 SÁRGA módban. TP1: Daily Open / Asia High. TP2: PDH / swing high."
     }
   ],
   "trade_log": [
