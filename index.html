@@ -29,7 +29,7 @@
     </span>
   </div>
   <div class="top-actions">
-    <button id="topManualSync" class="top-btn" onclick="loadData()" title="Manuális frissítés">
+    <button class="top-btn" onclick="loadData()" title="Manuális frissítés">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
       Frissítés
     </button>
@@ -52,34 +52,24 @@
         <span class="panel-title"><span class="dot cyan"></span> Macro &amp; Market</span>
         <span id="macroUpdateTime" class="panel-sub">–</span>
       </div>
-
-      <!-- Macro tiles -->
       <div id="macroTiles" class="macro-tiles">
         <div class="macro-tile" data-key="fedwatch">FedWatch<br><span>–</span></div>
         <div class="macro-tile" data-key="us10y">US10Y<br><span>–</span></div>
         <div class="macro-tile" data-key="dxy">DXY<br><span>–</span></div>
         <div class="macro-tile" data-key="sentiment">Sentiment<br><span>–</span></div>
       </div>
-
-      <!-- Macro lock bar -->
       <div id="macroLockBar" class="macro-lock-bar hidden">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         <span id="macroLockDetail">Makró tiltási ablak aktív</span>
       </div>
-
-      <!-- Trend & Vol -->
       <div class="trend-row">
-        <div class="trend-chip" id="chartMacroLock" data-val="">Macro Lock: –</div>
-        <div class="trend-chip" id="chartActiveSetup" data-val="">Setup: –</div>
-        <div class="trend-chip" id="chartSession" data-val="">Session: –</div>
-        <div class="trend-chip" id="chartLastData" data-val="">Adat: –</div>
+        <div class="trend-chip" id="chartMacroLock">Macro Lock: –</div>
+        <div class="trend-chip" id="chartActiveSetup">Setup: –</div>
+        <div class="trend-chip" id="chartSession">Session: –</div>
+        <div class="trend-chip" id="chartLastData">Adat: –</div>
       </div>
-
-      <!-- Macro events -->
       <div class="section-label">Makró események</div>
       <ul id="macroEventsList" class="events-list"><li class="empty-item">–</li></ul>
-
-      <!-- Key Levels ──────────────────────────────────────────────────────── -->
       <div class="section-label" style="margin-top:10px">
         Kulcsszintek
         <span id="levelsStatus" class="levels-status">–</span>
@@ -167,7 +157,6 @@
           <div class="hstat"><span class="hstat-label">Nyitott pos.</span><span id="rOpenPos" class="hstat-val">–</span></div>
         </div>
       </div>
-      <!-- Progress bars -->
       <div class="limit-bars">
         <div class="limit-row">
           <span class="limit-label">Napi limit</span>
@@ -218,32 +207,50 @@
   <!-- ── JOBB OSZLOP ── -->
   <div id="colRight">
 
-    <!-- Hard-Lock Overlay -->
-    <div id="hardLockOverlay" class="lockout-overlay hidden">
-      <div class="lockout-box">
-        <button class="lockout-dismiss" id="lockoutDismissBtn" onclick="dismissHardLock()" title="Overlay elrejtése — lock AKTÍV marad" aria-label="Overlay bezárása">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-label="Zár">
+    <!-- Execution Panel (position:relative szükséges az overlay-hez) -->
+    <div class="panel exec-panel" style="position:relative">
+
+      <!-- ══ HARD LOCK OVERLAY ══ -->
+      <div id="hardLockOverlay" class="lockout-overlay hidden">
+        <div class="lockout-box">
+          <!-- X dismiss gomb -->
+          <button
+            class="lockout-dismiss"
+            id="lockoutDismiss"
+            title="Overlay elrejtése — a lock AKTÍV marad"
+            aria-label="Overlay bezárása">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span class="lockout-title">HARD LOCKOUT</span>
+          <p id="lockoutReason" class="lockout-reason">Kockázati limit elérve.</p>
+          <div class="lockout-rules">
+            <div>A kockázatot kontrolláljuk, nem a hozamot.</div>
+            <div>Szabály &gt; Érzelem · Terv &gt; Impulzus.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ LOCK RESTORE BADGE ══ (látható ha overlay dismiss-elve, lock aktív) -->
+      <button
+        id="lockRestoreBadge"
+        class="lock-restore-badge hidden"
+        title="Lock aktív — kattints a részletekért"
+        aria-label="Hard Lock részletek megjelenítése">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <rect x="3" y="11" width="18" height="11" rx="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span class="lockout-title">HARD LOCKOUT</span>
-        <p id="lockoutReason" class="lockout-reason">Kockázati limit elérve.</p>
-        <div class="lockout-rules">
-          <div>A kockázatot kontrolláljuk, nem a hozamot.</div>
-          <div>Szabály &gt; Érzelem · Terv &gt; Impulzus.</div>
-        </div>
-      </div>
-    </div>
-    <!-- Lock Restore Badge (látható ha overlay el van rejtve de lock aktív) -->
-    <div id="lockRestoreBadge" class="lock-restore-badge hidden" onclick="restoreHardLock()" title="Lock aktív — kattints a részletekért" role="button" tabindex="0">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      LOCK AKTÍV
-    </div>
+        LOCK AKTÍV
+      </button>
 
-    <!-- Execution Info Panel (V1: nincs live broker) -->
-    <div class="panel exec-panel">
+      <!-- Panel header -->
       <div class="panel-head">
         <span class="panel-title"><span class="dot cyan"></span> Execution Info</span>
         <span class="exec-mode-tag" id="execModeTag" data-mode="GREEN">V1 · INFO</span>
@@ -275,14 +282,13 @@
             <tr>
               <th>Idő</th>
               <th>Irány</th>
-              <th>Setup</th>
               <th>P/L</th>
               <th>RR</th>
               <th>Szabály</th>
             </tr>
           </thead>
           <tbody id="tradeLogBody">
-            <tr><td colspan="6" class="empty-log">Nincs rögzített trade.</td></tr>
+            <tr><td colspan="5" class="empty-log">Nincs rögzített trade.</td></tr>
           </tbody>
         </table>
       </div>
