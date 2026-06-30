@@ -20,7 +20,6 @@
       --space-3: 0.75rem;
       --space-4: 1rem;
 
-      /* LONG / SHORT színek */
       --long-color: #2ecc71;
       --long-bg: rgba(46,204,113,0.10);
       --long-border: rgba(46,204,113,0.45);
@@ -78,7 +77,41 @@
       display: flex; flex-direction: column; gap: var(--space-2);
     }
     .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+    .panel-title-wrap { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
     .panel-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
+
+    /* INFO GOMB */
+    .info-btn {
+      width: 1.15rem; height: 1.15rem; border-radius: 999px;
+      border: 1px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--text-muted); background: #181818;
+      cursor: pointer; position: relative; flex-shrink: 0;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .info-btn:hover, .info-btn:focus { color: var(--accent); border-color: var(--accent); outline: none; }
+    .info-btn .tooltip {
+      position: absolute; left: 0; top: 1.6rem;
+      width: 240px; padding: 0.55rem 0.7rem;
+      border: 1px solid #3a3a3a; border-radius: 7px;
+      background: #0f0f0f; color: var(--text);
+      font-size: 0.73rem; line-height: 1.5; font-weight: 400;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      display: none; z-index: 30; pointer-events: none;
+      text-transform: none; letter-spacing: 0;
+    }
+    .info-btn:hover .tooltip, .info-btn:focus .tooltip { display: block; }
+
+    /* META NOTE – forrás + idő */
+    .meta-note {
+      margin-top: 0.55rem; padding-top: 0.5rem;
+      border-top: 1px dashed #2e2e2e;
+      font-size: 0.71rem; color: #666; line-height: 1.5;
+    }
+    .meta-note strong { color: #888; }
+    .meta-note code { color: var(--accent); font-family: ui-monospace, monospace; font-size: 0.69rem; }
+
     .panel-body { font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem; }
     table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
     th, td { padding: 0.22rem 0.35rem; text-align: left; }
@@ -111,173 +144,82 @@
     .kpi-row span.value.pos { color: var(--success); }
     .kpi-row span.value.neg { color: var(--danger); }
 
-    /* ═══════════════════════════════════════════════
-       SETUP EXECUTION OS – LÁTVÁNYOS SZEKCIÓ
-    ═══════════════════════════════════════════════ */
+    /* SETUP SECTION */
     .setup-section-panel {
       background: linear-gradient(145deg, #1a1a1a 0%, #1e1e1e 100%);
-      border: 1px solid #333;
-      border-radius: var(--radius);
-      padding: var(--space-3);
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid #333; border-radius: var(--radius);
+      padding: var(--space-3); display: flex; flex-direction: column;
+      gap: 0.55rem; position: relative; overflow: hidden;
     }
     .setup-section-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--long-color) 0%, transparent 50%, var(--short-color) 100%);
       opacity: 0.7;
     }
     .setup-section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.2rem;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;
     }
     .setup-section-title {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      color: var(--text-muted);
-      font-weight: 600;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.09em;
+      color: var(--text-muted); font-weight: 600;
     }
-
-    /* Setup kártya alap */
     .setup-card {
-      border-radius: 7px;
-      padding: 0.6rem 0.75rem;
-      position: relative;
-      transition: box-shadow 0.2s;
+      border-radius: 7px; padding: 0.6rem 0.75rem; position: relative; transition: box-shadow 0.2s;
     }
-    .setup-card.LONG {
-      background: var(--long-bg);
-      border: 1px solid var(--long-border);
-      box-shadow: var(--long-glow);
-    }
-    .setup-card.SHORT {
-      background: var(--short-bg);
-      border: 1px solid var(--short-border);
-      box-shadow: var(--short-glow);
-    }
-    .setup-card.NEUTRAL {
-      background: var(--neutral-bg);
-      border: 1px solid var(--neutral-border);
-    }
-
-    /* Setup kártya fejléc */
-    .setup-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.38rem;
-    }
-    .setup-card-title {
-      font-weight: 700;
-      font-size: 0.84rem;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    /* Irány pill */
+    .setup-card.LONG  { background: var(--long-bg); border: 1px solid var(--long-border); box-shadow: var(--long-glow); }
+    .setup-card.SHORT { background: var(--short-bg); border: 1px solid var(--short-border); box-shadow: var(--short-glow); }
+    .setup-card.NEUTRAL { background: var(--neutral-bg); border: 1px solid var(--neutral-border); }
+    .setup-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.38rem; }
+    .setup-card-title { font-weight: 700; font-size: 0.84rem; color: var(--text); display: flex; align-items: center; gap: 0.3rem; }
     .dir-pill {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.1rem 0.6rem;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-      letter-spacing: 0.05em;
+      font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.6rem; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 0.2rem; letter-spacing: 0.05em;
     }
-    .dir-pill.LONG {
-      background: rgba(46,204,113,0.18);
-      color: var(--long-color);
-      border: 1px solid var(--long-border);
-    }
-    .dir-pill.SHORT {
-      background: rgba(231,76,60,0.2);
-      color: var(--short-color);
-      border: 1px solid var(--short-border);
-    }
-    .dir-pill.NEUTRAL {
-      background: rgba(240,173,78,0.13);
-      color: var(--neutral-color);
-      border: 1px solid var(--neutral-border);
-    }
-
-    /* Setup sorok */
+    .dir-pill.LONG    { background: rgba(46,204,113,0.18); color: var(--long-color); border: 1px solid var(--long-border); }
+    .dir-pill.SHORT   { background: rgba(231,76,60,0.2);   color: var(--short-color); border: 1px solid var(--short-border); }
+    .dir-pill.NEUTRAL { background: rgba(240,173,78,0.13); color: var(--neutral-color); border: 1px solid var(--neutral-border); }
     .setup-lines { font-size: 0.76rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.18rem; }
     .setup-line { display: flex; align-items: baseline; gap: 0.3rem; }
     .setup-line-label { min-width: 90px; color: #666; }
     .setup-line-val { color: var(--text); font-weight: 500; }
-    .setup-line-val.long { color: var(--long-color); font-weight: 700; }
+    .setup-line-val.long  { color: var(--long-color); font-weight: 700; }
     .setup-line-val.short { color: var(--short-color); font-weight: 700; }
-    .setup-line-val.ok { color: var(--success); }
-    .setup-line-val.no { color: var(--danger); }
-    .setup-line-val.warn { color: var(--warning); }
-
-    /* Score bar */
-    .score-row {
-      display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem;
-    }
+    .setup-line-val.ok    { color: var(--success); }
+    .setup-line-val.no    { color: var(--danger); }
+    .setup-line-val.warn  { color: var(--warning); }
+    .score-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
     .score-label { font-size: 0.71rem; color: #666; min-width: 44px; }
-    .score-bar-track {
-      flex: 1; height: 6px; background: #2b2b2b;
-      border-radius: 999px; overflow: hidden;
-    }
-    .score-bar-fill {
-      height: 100%; border-radius: 999px;
-      transition: width 0.5s ease;
-    }
-    .setup-card.LONG  .score-bar-fill { background: linear-gradient(90deg, #27ae60, var(--long-color)); }
-    .setup-card.SHORT .score-bar-fill { background: linear-gradient(90deg, #c0392b, var(--short-color)); }
+    .score-bar-track { flex: 1; height: 6px; background: #2b2b2b; border-radius: 999px; overflow: hidden; }
+    .score-bar-fill  { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+    .setup-card.LONG    .score-bar-fill { background: linear-gradient(90deg, #27ae60, var(--long-color)); }
+    .setup-card.SHORT   .score-bar-fill { background: linear-gradient(90deg, #c0392b, var(--short-color)); }
     .setup-card.NEUTRAL .score-bar-fill { background: linear-gradient(90deg, #e67e22, var(--neutral-color)); }
-    .score-val {
-      font-size: 0.77rem; font-weight: 700; min-width: 36px; text-align: right;
-    }
-    .setup-card.LONG  .score-val { color: var(--long-color); }
-    .setup-card.SHORT .score-val { color: var(--short-color); }
+    .score-val { font-size: 0.77rem; font-weight: 700; min-width: 36px; text-align: right; }
+    .setup-card.LONG    .score-val { color: var(--long-color); }
+    .setup-card.SHORT   .score-val { color: var(--short-color); }
     .setup-card.NEUTRAL .score-val { color: var(--neutral-color); }
-
-    /* Allowed badge */
     .allowed-badge {
       display: inline-flex; align-items: center; gap: 0.3rem;
       font-size: 0.72rem; font-weight: 700;
-      padding: 0.12rem 0.55rem; border-radius: 999px;
-      margin-top: 0.3rem;
+      padding: 0.12rem 0.55rem; border-radius: 999px; margin-top: 0.3rem;
     }
-    .allowed-badge.yes {
-      background: rgba(46,204,113,0.14);
-      color: var(--long-color);
-      border: 1px solid var(--long-border);
-    }
-    .allowed-badge.no {
-      background: rgba(231,76,60,0.14);
-      color: var(--short-color);
-      border: 1px solid var(--short-border);
-    }
+    .allowed-badge.yes { background: rgba(46,204,113,0.14); color: var(--long-color); border: 1px solid var(--long-border); }
+    .allowed-badge.no  { background: rgba(231,76,60,0.14);  color: var(--short-color); border: 1px solid var(--short-border); }
 
     /* TRADE LOG */
     .trade-log-table { max-height: 160px; overflow-y: auto; }
-    .rule-ok { color: var(--success); font-size: 0.72rem; }
-    .rule-violation { color: var(--danger); font-size: 0.72rem; }
-    .rule-notrade { color: var(--text-muted); font-size: 0.72rem; }
+    .rule-ok        { color: var(--success); font-size: 0.72rem; }
+    .rule-violation { color: var(--danger);  font-size: 0.72rem; }
+    .rule-notrade   { color: var(--text-muted); font-size: 0.72rem; }
 
-    /* LAST UPDATED */
+    /* FOOTER */
     .last-updated {
       text-align: center; font-size: 0.7rem; color: var(--text-muted);
       padding: 0.4rem; border-top: 1px solid var(--border);
     }
     .last-updated span { color: var(--accent); }
 
-    /* LOADING / ERROR */
+    /* LOADING */
     .loading-overlay {
       position: fixed; inset: 0; background: var(--bg);
       display: flex; align-items: center; justify-content: center;
@@ -311,20 +253,44 @@
 
     <!-- BAL OSZLOP -->
     <section class="panel">
-      <div class="panel-header"><div class="panel-title">🌍 Macro Market OS</div></div>
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-title">🌍 Macro Market OS</div>
+          <button class="info-btn" aria-label="Mi ez?">i
+            <span class="tooltip">Makró háttérblokk. Gyors bias-szűrő XAU-hoz: FedWatch kamatvárakozás, US10Y hozam, DXY erősség és piaci szentiment. Ha ezek egybemutatnak, erősebb a signal.</span>
+          </button>
+        </div>
+      </div>
       <div class="panel-body">
         <table>
           <thead><tr><th>Elem</th><th>Rezsim</th></tr></thead>
           <tbody id="macro-table"></tbody>
         </table>
+        <div class="meta-note" id="macro-meta"></div>
         <hr class="divider">
-        <div class="panel-title" style="margin-bottom:0.4rem">📊 XAU Market Regime</div>
+        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
+          <div class="panel-title">📊 XAU Market Regime</div>
+          <button class="info-btn" aria-label="Mi ez?">i
+            <span class="tooltip">XAU piaci rezsim: HTF trend iránya (H4/D1), intraday jelleg (range vs. trend) és volatilitás szintje. Ez határozza meg, hogy milyen setup-típus releváns most.</span>
+          </button>
+        </div>
         <table><tbody id="regime-table"></tbody></table>
         <hr class="divider">
-        <div class="panel-title" style="margin-bottom:0.4rem">🎯 Kulcsszintek</div>
+        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
+          <div class="panel-title">🎯 Kulcsszintek</div>
+          <button class="info-btn" aria-label="Mi ez?">i
+            <span class="tooltip">Az aznap releváns technikai szintek: előző nap csúcsa/mélypontja (PDH/PDL), ázsiai session H/L, napi nyitóár és a legfontosabb HTF szint. Ezek adják a setup kontextusát.</span>
+          </button>
+        </div>
         <table><tbody id="levels-table"></tbody></table>
+        <div class="meta-note" id="levels-meta"></div>
         <hr class="divider">
-        <div class="panel-title" style="margin-bottom:0.4rem">🚫 No-trade szűrők</div>
+        <div class="panel-title-wrap" style="margin-bottom:0.4rem">
+          <div class="panel-title">🚫 No-trade szűrők</div>
+          <button class="info-btn" aria-label="Mi ez?">i
+            <span class="tooltip">Kemény kizárók: magas impact makró esemény előtt 60 percig, ázsiai sessionben és rossz spread/likviditás esetén nem nyitunk új XAU trade-et.</span>
+          </button>
+        </div>
         <div id="notrade-block" style="font-size:0.75rem;color:var(--text-muted);display:flex;flex-direction:column;gap:0.2rem;"></div>
       </div>
     </section>
@@ -332,7 +298,12 @@
     <!-- KÖZÉPSŐ PANEL: chart -->
     <section class="panel chart-panel">
       <div class="panel-header">
-        <div class="panel-title">📈 XAUUSD – Live Chart (OANDA:XAUUSD)</div>
+        <div class="panel-title-wrap">
+          <div class="panel-title">📈 XAUUSD – Live Chart (OANDA:XAUUSD)</div>
+          <button class="info-btn" aria-label="Mi ez?">i
+            <span class="tooltip">Élő TradingView chart. Default: M15 intraday nézet. Mindig ellenőrizd a H4/D1 HTF képet is a trend irányához. Elsődleges ablak: London 09:00–12:00 CEST, másodlagos: Overlap 14:00–19:00 CEST.</span>
+          </button>
+        </div>
         <span class="pill gold">TradingView embed</span>
       </div>
       <div class="tv-container"><div id="tv-xauusd-chart"></div></div>
@@ -351,14 +322,26 @@
 
       <!-- Risk OS -->
       <div class="panel">
-        <div class="panel-header"><div class="panel-title">🛡️ Risk OS – Napi állapot</div></div>
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <div class="panel-title">🛡️ Risk OS – Napi állapot</div>
+            <button class="info-btn" aria-label="Mi ez?">i
+              <span class="tooltip">Kockázati kontrollpanel. Napi limit: 100 USD, heti limit: 300 USD. Ha a napi limit elérve → PIROS, nincs új trade. Loss streak ≥ 3 → 2 nap kötelező szünet. RPT: ajánlott per-trade kockázat.</span>
+            </button>
+          </div>
+        </div>
         <div class="panel-body" id="risk-panel"></div>
       </div>
 
-      <!-- SETUP EXECUTION OS – LÁTVÁNYOS SZEKCIÓ -->
+      <!-- SETUP EXECUTION OS -->
       <div class="setup-section-panel">
         <div class="setup-section-header">
-          <div class="setup-section-title">⚙️ Setup Execution OS</div>
+          <div class="panel-title-wrap">
+            <div class="setup-section-title">⚙️ Setup Execution OS</div>
+            <button class="info-btn" aria-label="Mi ez?">i
+              <span class="tooltip">Az aktuális kereskedési setup-ok. Minden kártyán: irány (Long/Short), bias-kompatibilitás, belépési zóna, SL, TP1, R/R és setup score (0–10). Csak ≥6/10 (ZÖLD) vagy ≥8/10 (SÁRGA) esetén nyitható.</span>
+            </button>
+          </div>
           <span class="pill gold">🎯 Entry Engine</span>
         </div>
         <div id="setup-panel"></div>
@@ -366,7 +349,14 @@
 
       <!-- Trade Log -->
       <div class="panel">
-        <div class="panel-header"><div class="panel-title">📋 Trade Log – napi snapshot</div></div>
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <div class="panel-title">📋 Trade Log – napi snapshot</div>
+            <button class="info-btn" aria-label="Mi ez?">i
+              <span class="tooltip">Az aznapi trade-ek naplója. Tartalmazza a belépési időt, irányt, realizált R/R-t és hogy szabálykövető volt-e a végrehajtás. VIOLATION = szabályszegés, amit napi review-n elemzünk.</span>
+            </button>
+          </div>
+        </div>
         <div class="panel-body trade-log-table">
           <table>
             <thead><tr><th>Idő</th><th>Ir.</th><th>RR</th><th>Rule</th></tr></thead>
@@ -380,6 +370,7 @@
 
   <footer class="last-updated">
     🕐 Adatok utolsó frissítése: <span id="last-updated-time">–</span>
+    &nbsp;·&nbsp; Forrás: GitHub Actions / Yahoo Finance / CNN F&amp;G / CME FedWatch
     &nbsp;·&nbsp; Az oldal automatikusan újratölti az adatokat 5 percenként.
   </footer>
 </div>
@@ -412,37 +403,52 @@ function fmt(val, fallback) {
   return (val !== null && val !== undefined) ? val : (fallback || '–');
 }
 
+// ─── FORRÁS LEKÉPZÉS ─────────────────────────────────────────────
+var SOURCE_MAP = {
+  fedwatch:    { label: 'CME FedWatch', url: 'https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html' },
+  us10y:       { label: 'Yahoo Finance ^TNX', url: 'https://finance.yahoo.com/quote/%5ETNX/' },
+  dxy:         { label: 'Yahoo Finance DX-Y.NYB', url: 'https://finance.yahoo.com/quote/DX-Y.NYB/' },
+  sentiment:   { label: 'CNN Fear & Greed', url: 'https://edition.cnn.com/markets/fear-and-greed' },
+  htf_trend:   { label: 'Yahoo Finance GC=F (H4/D1)', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  intraday_regime: { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  volatility:  { label: 'Yahoo Finance GC=F (ATR)', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  pdh:         { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  pdl:         { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  daily_open:  { label: 'Yahoo Finance GC=F', url: 'https://finance.yahoo.com/quote/GC%3DF/' },
+  asia_high:   { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' },
+  asia_low:    { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' },
+  htf_level:   { label: 'Manuális / chart', url: 'https://www.tradingview.com/symbols/OANDA-XAUUSD/' }
+};
+
+function sourceMeta(key, updated) {
+  var s = SOURCE_MAP[key];
+  if (!s) return '';
+  return '<span style="color:#555"> · <a href="' + s.url + '" target="_blank" rel="noopener" style="color:#666;text-decoration:none;" title="Forrás megnyitása">' + s.label + '</a></span>';
+}
+
 // ─── SETUP CARD BUILDER ─────────────────────────────────────────
 function buildSetupCard(s) {
   var dir = s.direction || 'NEUTRAL';
-  var cardClass = 'setup-card ' + dir;
-
   var dirEmoji = dir === 'LONG' ? '🟢' : (dir === 'SHORT' ? '🔴' : '⚪');
   var dirLabel = dir === 'LONG' ? '🟢 LONG' : (dir === 'SHORT' ? '🔴 SHORT' : '⚪ NEUTRAL');
-
   var score = s.score !== null && s.score !== undefined ? s.score : null;
   var barPct = score !== null ? (score / 10 * 100) + '%' : '0%';
   var scoreText = score !== null ? score + '/10' : '–';
-
-  var biasEmoji = s.bias_compatible ? '✅' : '❌';
   var biasColor = s.bias_compatible ? 'ok' : 'no';
-
   var allowedHtml = s.allowed
     ? '<span class="allowed-badge yes">✅ NYITHATÓ</span>'
     : '<span class="allowed-badge no">⛔ NEM NYITHATÓ</span>';
-
   var noteHtml = s.note ? '<div class="setup-line" style="margin-top:0.2rem"><span class="setup-line-label">⚠️ Megjegyzés:</span><span class="setup-line-val warn">' + s.note + '</span></div>' : '';
-
   var rrClass = (s.rr && s.rr >= 2) ? 'ok' : 'warn';
   var rrText = s.rr ? '1:' + s.rr.toFixed(1) : '–';
 
-  return '<div class="' + cardClass + '">' +
+  return '<div class="setup-card ' + dir + '">' +
     '<div class="setup-card-header">' +
       '<span class="setup-card-title">' + dirEmoji + ' ' + s.label + '</span>' +
       '<span class="dir-pill ' + dir + '">' + dirLabel + '</span>' +
     '</div>' +
     '<div class="setup-lines">' +
-      '<div class="setup-line"><span class="setup-line-label">🧭 Bias:</span><span class="setup-line-val ' + biasColor + '">' + biasEmoji + ' ' + (s.bias_compatible ? 'Kompatibilis' : 'NEM kompatibilis') + '</span></div>' +
+      '<div class="setup-line"><span class="setup-line-label">🧭 Bias:</span><span class="setup-line-val ' + biasColor + '">' + (s.bias_compatible ? '✅ Kompatibilis' : '❌ NEM kompatibilis') + '</span></div>' +
       '<div class="setup-line"><span class="setup-line-label">📍 Belépési zóna:</span><span class="setup-line-val">' + fmt(s.entry_zone) + '</span></div>' +
       '<div class="setup-line"><span class="setup-line-label">🛑 SL:</span><span class="setup-line-val no">' + fmt(s.sl) + '</span></div>' +
       '<div class="setup-line"><span class="setup-line-label">🎯 TP1:</span><span class="setup-line-val ok">' + fmt(s.tp1) + '</span></div>' +
@@ -482,32 +488,51 @@ function render(d) {
 
   // Macro table
   var m = d.macro;
+  var updated = d.meta.last_updated;
   document.getElementById('macro-table').innerHTML = [
-    ['📅 FedWatch', m.fedwatch],
-    ['📈 US10Y',    m.us10y],
-    ['💵 DXY',      m.dxy],
-    ['😨 Szentiment', m.sentiment]
+    ['fedwatch',  '📅 FedWatch',      m.fedwatch],
+    ['us10y',     '📈 US10Y',         m.us10y],
+    ['dxy',       '💵 DXY',           m.dxy],
+    ['sentiment', '😨 Szentiment',    m.sentiment]
   ].map(function(r){
-    return '<tr><td>' + r[0] + '</td><td>' + pill(r[1]) + '</td></tr>';
+    return '<tr><td>' + r[1] + '</td><td>' + pill(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
   }).join('');
 
+  // Macro meta note
+  document.getElementById('macro-meta').innerHTML =
+    '<strong>🕐 Frissítve:</strong> ' + updated +
+    ' &nbsp;·&nbsp; <strong>Források:</strong> ' +
+    '<a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">CME FedWatch</a>, ' +
+    '<a href="https://finance.yahoo.com/quote/%5ETNX/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">^TNX</a>, ' +
+    '<a href="https://finance.yahoo.com/quote/DX-Y.NYB/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">DX-Y.NYB</a>, ' +
+    '<a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">CNN F&amp;G</a>';
+
   document.getElementById('regime-table').innerHTML = [
-    ['📐 HTF trend',       m.htf_trend],
-    ['⚡ Intraday',        m.intraday_regime],
-    ['💨 Volatilitás',     m.volatility]
+    ['htf_trend',       '📐 HTF trend',       m.htf_trend],
+    ['intraday_regime', '⚡ Intraday',         m.intraday_regime],
+    ['volatility',      '💨 Volatilitás',      m.volatility]
   ].map(function(r){
-    return '<tr><td>' + r[0] + '</td><td>' + pill(r[1]) + '</td></tr>';
+    return '<tr><td>' + r[1] + '</td><td>' + pill(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
   }).join('');
 
   // Levels
   var lv = d.levels;
   document.getElementById('levels-table').innerHTML = [
-    ['🔼 PDH', lv.pdh], ['🔽 PDL', lv.pdl],
-    ['🌙 Asia High', lv.asia_high], ['🌙 Asia Low', lv.asia_low],
-    ['📌 Daily Open', lv.daily_open], ['🏔️ HTF szint', lv.htf_level]
+    ['pdh',        '🔼 PDH',        lv.pdh],
+    ['pdl',        '🔽 PDL',        lv.pdl],
+    ['asia_high',  '🌙 Asia High',  lv.asia_high],
+    ['asia_low',   '🌙 Asia Low',   lv.asia_low],
+    ['daily_open', '📌 Daily Open', lv.daily_open],
+    ['htf_level',  '🏔️ HTF szint', lv.htf_level]
   ].map(function(r){
-    return '<tr><td>' + r[0] + '</td><td>' + fmt(r[1]) + '</td></tr>';
+    return '<tr><td>' + r[1] + '</td><td>' + fmt(r[2]) + sourceMeta(r[0], updated) + '</td></tr>';
   }).join('');
+
+  // Levels meta note
+  document.getElementById('levels-meta').innerHTML =
+    '<strong>🕐 Frissítve:</strong> ' + updated +
+    ' &nbsp;·&nbsp; PDH/PDL/Daily Open: <a href="https://finance.yahoo.com/quote/GC%3DF/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">Yahoo GC=F</a>' +
+    ' &nbsp;·&nbsp; Asia H/L + HTF: <a href="https://www.tradingview.com/symbols/OANDA-XAUUSD/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">TradingView chart</a>';
 
   // No-trade filters
   var nt = d.notrade_filters;
@@ -519,27 +544,27 @@ function render(d) {
   // Risk panel
   var r = d.risk;
   document.getElementById('risk-panel').innerHTML = [
-    ['💰 Napi P/L', (r.daily_pl_usd >= 0 ? '+' : '') + r.daily_pl_usd.toFixed(1) + ' USD', r.daily_pl_usd >= 0 ? 'pos' : 'neg'],
-    ['📊 Napi risk', r.daily_risk_usage_pct + '% / ' + r.daily_limit_usd + ' USD', ''],
-    ['📅 Heti risk', r.weekly_risk_usage_pct + '% / ' + r.weekly_limit_usd + ' USD', ''],
-    ['🔴 Loss streak', r.loss_streak, ''],
-    ['🛡️ Risk mód', r.risk_mode, ''],
-    ['💵 RPT ajánlott', r.rpt_min_usd + '–' + r.rpt_max_usd + ' USD', ''],
-    ['📂 Nyitott poz.', r.open_positions + ' / ' + r.max_positions + ' max', '']
+    ['💰 Napi P/L',      (r.daily_pl_usd >= 0 ? '+' : '') + r.daily_pl_usd.toFixed(1) + ' USD', r.daily_pl_usd >= 0 ? 'pos' : 'neg'],
+    ['📊 Napi risk',     r.daily_risk_usage_pct + '% / ' + r.daily_limit_usd + ' USD', ''],
+    ['📅 Heti risk',     r.weekly_risk_usage_pct + '% / ' + r.weekly_limit_usd + ' USD', ''],
+    ['🔴 Loss streak',   r.loss_streak, ''],
+    ['🛡️ Risk mód',     r.risk_mode, ''],
+    ['💵 RPT ajánlott',  r.rpt_min_usd + '–' + r.rpt_max_usd + ' USD', ''],
+    ['📂 Nyitott poz.',  r.open_positions + ' / ' + r.max_positions + ' max', '']
   ].map(function(row){
     return '<div class="kpi-row"><span>' + row[0] + '</span>' +
            '<span class="value ' + row[2] + '">' + row[1] + '</span></div>';
   }).join('');
 
-  // Setup cards – LÁTVÁNYOS SZEKCIÓ
+  // Setup cards
   document.getElementById('setup-panel').innerHTML = d.setups.map(buildSetupCard).join('');
 
   // Trade log
   document.getElementById('tradelog-table').innerHTML = d.trade_log.map(function(t) {
     var dirEmoji = t.direction === 'LONG' ? '🟢' : (t.direction === 'SHORT' ? '🔴' : '');
     var ruleHtml;
-    if (t.rule_ok === true)  ruleHtml = '<span class="rule-ok">✅ OK</span>';
-    else if (t.rule_ok === false) ruleHtml = '<span class="rule-violation">❌ VIOLATION</span>';
+    if (t.rule_ok === true)        ruleHtml = '<span class="rule-ok">✅ OK</span>';
+    else if (t.rule_ok === false)  ruleHtml = '<span class="rule-violation">❌ VIOLATION</span>';
     else ruleHtml = '<span class="rule-notrade">⛔ ' + (t.note || 'NO-TRADE') + '</span>';
     return '<tr><td>' + t.time + '</td><td>' + dirEmoji + ' ' + fmt(t.direction) + '</td>' +
            '<td>' + (t.rr !== null && t.rr !== undefined ? (t.rr > 0 ? '+' : '') + t.rr.toFixed(1) : '–') + '</td>' +
@@ -547,9 +572,8 @@ function render(d) {
   }).join('');
 
   // Last updated
-  document.getElementById('last-updated-time').textContent = d.meta.last_updated;
+  document.getElementById('last-updated-time').textContent = updated;
 
-  // Show app
   document.getElementById('loading').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
 }
