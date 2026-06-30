@@ -105,15 +105,15 @@ function renderTopBar(data) {
   if (manualSync) manualSync.textContent = safeGet(m.last_manual_update, '–');
 
   // Guideline bar
-  const status = (h.daily_status || h.risk_mode || effective).toUpperCase();
+  const effective2 = effective;
   const gbar = document.getElementById('guidelineBar');
   const gtext = document.getElementById('guidelineText');
   if (gtext) {
-    if (effective === 'RED') gtext.textContent = '🔴 PIROS NAP — NO-TRADE. Csak megfigyelés és review.';
-    else if (effective === 'YELLOW') gtext.textContent = '🟡 SÁRGA NAP — Max 1 setup, max 1 trade. Score ≥8 szükséges.';
+    if (effective2 === 'RED') gtext.textContent = '🔴 PIROS NAP — NO-TRADE. Csak megfigyelés és review.';
+    else if (effective2 === 'YELLOW') gtext.textContent = '🟡 SÁRGA NAP — Max 1 setup, max 1 trade. Score ≥8 szükséges.';
     else gtext.textContent = '🟢 ZÖLD NAP — Max 2 setup, score ≥6, szabályok szerint.';
   }
-  if (gbar) gbar.style.borderColor = effective === 'RED' ? 'rgba(239,68,68,0.3)' : effective === 'YELLOW' ? 'rgba(245,158,11,0.3)' : 'rgba(6,182,212,0.15)';
+  if (gbar) gbar.style.borderColor = effective2 === 'RED' ? 'rgba(239,68,68,0.3)' : effective2 === 'YELLOW' ? 'rgba(245,158,11,0.3)' : 'rgba(6,182,212,0.15)';
 
   // Macro lock bar
   const filters = data.notrade_filters || {};
@@ -147,7 +147,7 @@ function renderGuardian(data) {
   } else if (filters.macro_window_active) {
     const w = (filters.macro_notrade_windows || [])[0];
     msg.textContent = w
-      ? `"Makró ablak aktív (${w.start}–${w.end} CEST). Várd ki, ne siess."` 
+      ? `"Makró ablak aktív (${w.start}–${w.end} CEST). Várd ki, ne siess."`
       : '"Makró ablak aktív. Tiltási protokoll érvényes."';
     msg.style.color = 'var(--accent-amber)';
   } else if (effective === 'YELLOW') {
@@ -158,7 +158,7 @@ function renderGuardian(data) {
     const aOk = setups.A && setups.A.allowed;
     const bOk = setups.B && setups.B.allowed;
     if (aOk || bOk) {
-      msg.textContent = `"${aOk ? 'Setup A' : 'Setup B'} ALLOWED. Score és RR teljesül. London session fókusz."'`;
+      msg.textContent = `"${aOk ? 'Setup A' : 'Setup B'} ALLOWED. Score és RR teljesül. London session fókusz."`;
       msg.style.color = 'var(--accent-green)';
     } else {
       msg.textContent = '"Nincs ALLOWED setup most. No-trade döntés is helyes döntés."';
@@ -212,7 +212,6 @@ function renderSetupCard(letter, data) {
   const isAllowed = lockReasons.length === 0 && !!setup.allowed;
   const dir = (setup.direction || '').toUpperCase();
 
-  // Direction tag
   const dirEl = document.getElementById(`dirTag${letter}`);
   if (dirEl) {
     dirEl.textContent = dir || '–';
@@ -221,14 +220,12 @@ function renderSetupCard(letter, data) {
   const typeEl = document.getElementById(`type${letter}`);
   if (typeEl) typeEl.textContent = safeGet(setup.type, 'n/a');
 
-  // Lock badge
   const lb = document.getElementById(`lockBadge${letter}`);
   if (lb) {
     lb.textContent = isAllowed ? 'ALLOWED' : 'LOCKED';
     lb.dataset.state = isAllowed ? 'ALLOWED' : 'LOCKED';
   }
 
-  // Score
   const scoreEl = document.getElementById(`score${letter}`);
   if (scoreEl) scoreEl.textContent = score || '–';
   const reqEl = document.getElementById(`req${letter}`);
@@ -239,14 +236,12 @@ function renderSetupCard(letter, data) {
   const barEl = document.getElementById(`scoreBar${letter}`);
   if (barEl) barEl.style.width = `${Math.min(100, score * 10)}%`;
 
-  // Levels
   const setEl = (id, val, fallback='–') => { const e = document.getElementById(id); if(e) e.textContent = safeGet(val, fallback); };
   setEl(`entry${letter}`, setup.entry_zone);
   setEl(`sl${letter}`, setup.sl);
   setEl(`tp1${letter}`, setup.tp1);
   setEl(`tp2${letter}`, setup.tp2 !== null ? setup.tp2 : null);
 
-  // Thesis
   const thesisEl = document.getElementById(`thesis${letter}`);
   if (thesisEl) {
     const bullets = (setup.thesis || []).slice(0,3);
@@ -255,7 +250,6 @@ function renderSetupCard(letter, data) {
       : '';
   }
 
-  // Meta
   const metaEl = document.getElementById(`meta${letter}`);
   if (metaEl) {
     metaEl.textContent = lockReasons.length
@@ -264,7 +258,6 @@ function renderSetupCard(letter, data) {
     metaEl.style.color = isAllowed ? 'var(--accent-green)' : 'var(--accent-red)';
   }
 
-  // Card border
   const card = document.getElementById(`setupCard${letter}`);
   if (card) {
     card.style.borderColor = isAllowed
@@ -465,20 +458,62 @@ function renderRisk(data) {
   const note = document.getElementById('riskNote');
   if (note) note.textContent = safeGet(r.trade_allowed_reason, effective === 'RED' ? 'NO-TRADE nap.' : effective === 'YELLOW' ? 'YELLOW mód – csökkentett kockázat.' : 'GREEN – szabályos kereskedés engedélyezett.');
 
-  // Hard-Lock Overlay
-  const overlay = document.getElementById('hardLockOverlay');
-  const lockReason = document.getElementById('lockoutReason');
-  const filters = data.notrade_filters || {};
+  /* ══════════════════════════════════════════════
+     HARD LOCK OVERLAY — dismiss / restore logika
+     ══════════════════════════════════════════════ */
+  const overlay      = document.getElementById('hardLockOverlay');
+  const lockReason   = document.getElementById('lockoutReason');
+  const dismissBtn   = document.getElementById('lockoutDismiss');
+  const restoreBadge = document.getElementById('lockRestoreBadge');
+  const filters      = data.notrade_filters || {};
 
   const hardLockReasons = [];
   if (effective === 'RED') hardLockReasons.push('Effective mode RED — NO-TRADE nap.');
   if (Math.abs(dailyLoss) >= dailyLimit) hardLockReasons.push(`Napi limit elérve: $${Math.abs(dailyLoss).toFixed(2)} / $${dailyLimit}.`);
   if (Math.abs(weeklyLoss) >= weeklyLimit) hardLockReasons.push(`Heti limit elérve: $${Math.abs(weeklyLoss).toFixed(2)} / $${weeklyLimit}.`);
-  if ((r.loss_streak || 0) >= 3) hardLockReasons.push(`3 egymás utáni vesztes trade — 2 nap szünet szabály aktív.`);
+  if ((r.loss_streak || 0) >= 3) hardLockReasons.push('3 egymás utáni vesztes trade — 2 nap szünet szabály aktív.');
   if (filters.macro_window_active) hardLockReasons.push('Makró tiltási ablak aktív — 60 perces XAU stop.');
 
-  if (overlay) overlay.classList.toggle('hidden', hardLockReasons.length === 0);
+  const isHardLocked = hardLockReasons.length > 0;
+
   if (lockReason) lockReason.textContent = hardLockReasons.join(' | ');
+
+  // Csak akkor mutassuk az overlayt, ha még nem nyomták le a dismiss-t
+  // (session-szintű flag, nem perzisztált)
+  if (overlay) {
+    const alreadyDismissed = overlay.dataset.dismissed === '1';
+    overlay.classList.toggle('hidden', !isHardLocked || alreadyDismissed);
+  }
+
+  // Restore badge: látható ha van lock ÉS dismiss-elve van
+  if (restoreBadge) {
+    const alreadyDismissed = overlay ? overlay.dataset.dismissed === '1' : false;
+    restoreBadge.classList.toggle('hidden', !isHardLocked || !alreadyDismissed);
+  }
+
+  // Dismiss gomb — overlay bezárása, restore badge megjelenítése
+  if (dismissBtn && !dismissBtn._bound) {
+    dismissBtn._bound = true;
+    dismissBtn.addEventListener('click', () => {
+      if (overlay) {
+        overlay.dataset.dismissed = '1';
+        overlay.classList.add('hidden');
+      }
+      if (restoreBadge) restoreBadge.classList.remove('hidden');
+    });
+  }
+
+  // Restore badge — overlay visszahozása
+  if (restoreBadge && !restoreBadge._bound) {
+    restoreBadge._bound = true;
+    restoreBadge.addEventListener('click', () => {
+      if (overlay) {
+        overlay.dataset.dismissed = '0';
+        overlay.classList.remove('hidden');
+      }
+      restoreBadge.classList.add('hidden');
+    });
+  }
 }
 
 /* ─── EXECUTION ─── */
@@ -550,11 +585,12 @@ function renderTradeLog(data) {
     if (tr.rule_ok) ruleOk++;
 
     const dirStyle = (tr.direction||'').toUpperCase() === 'LONG' ? 'color:var(--accent-green)' : 'color:var(--accent-red)';
+    const plColor = (tr.pl_usd || 0) >= 0 ? 'color:var(--accent-green)' : 'color:var(--accent-red)';
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${safeGet(tr.time,'')}</td>
       <td style="${dirStyle}">${safeGet(tr.direction,'')}</td>
-      <td style="${netPL>=0?'color:var(--accent-green)':'color:var(--accent-red)'}">${Number(tr.pl_usd||0).toFixed(2)}</td>
+      <td style="${plColor}">${Number(tr.pl_usd||0).toFixed(2)}</td>
       <td>${tr.rr_actual !== undefined ? Number(tr.rr_actual).toFixed(2) : '–'}</td>
       <td><span class="${tr.rule_ok?'badge--ok':'badge--violation'}">${tr.rule_ok?'OK':'Viol'}</span></td>
     `;
