@@ -1,8 +1,8 @@
 {
   "meta": {
-    "last_updated": "2026-07-01 14:42 CEST",
+    "last_updated": "2026-07-01 15:31 CEST",
     "auto": true,
-    "note": "Napi mély research alapján frissítve: makró rezsim, bias, kulcsszintek, setupok. Forrás: Perplexity XAU Master OS V5."
+    "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
   "macro": {
     "fedwatch": {
@@ -17,44 +17,10 @@
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "updated_at": "2026-07-01T14:42:00+02:00"
     },
-    "us10y": {
-      "value": "4.44%",
-      "direction": "RISING",
-      "bias": "RED",
-      "bias_note": "US10Y ~4.44%, emelkedő irány a korábbi naphoz képest. Emelkedő relhozam növeli XAU opportunity cost-ját – short nyomást jelez.",
-      "source_type": "auto",
-      "source_label": "YCharts / Investing.com – 2026-06-29",
-      "source_url": "https://ycharts.com/indicators/10_year_treasury_rate",
-      "updated_at": "2026-07-01T14:42:00+02:00"
-    },
-    "dxy": {
-      "value": "101.31",
-      "direction": "USD-BULL",
-      "bias": "RED",
-      "bias_note": "DXY 101–104 zóna, több hónapos erős USD-rezsim. USD-BULL short XAU hátteret ad.",
-      "source_type": "auto",
-      "source_label": "MarketWatch / TradingView DXY – 2026-07-01",
-      "source_url": "https://www.marketwatch.com/investing/index/dxy",
-      "updated_at": "2026-07-01T14:42:00+02:00"
-    },
-    "sentiment": {
-      "value": "SAFE_HAVEN",
-      "bias": "GREEN",
-      "bias_note": "2026 rekord XAU ár, safe-haven kereslet Fed és politikai bizonytalanság miatt továbbra is erős. SAFE_HAVEN kontextus long HTF hátteret adhat.",
-      "source_type": "auto",
-      "source_label": "Reuters / CNN Fear & Greed – 2026-07-01",
-      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-01T14:42:00+02:00"
-    },
-    "htf_trend": {
-      "value": "BULL",
-      "bias": "GREEN",
-      "bias_note": "2026 elején XAU új ATH-ok fölé ment, safe-haven rush. Higher high / higher low struktúra. HTF BULL trend él.",
-      "source_type": "auto",
-      "source_label": "Reuters XAU 2026 – 2026-01-12",
-      "source_url": "https://www.reuters.com/world/india/gold-silver-notch-record-highs-safe-haven-demand-fed-rate-cut-bets-2026-01-12/",
-      "updated_at": "2026-07-01T14:42:00+02:00"
-    },
+    "us10y": "N/A",
+    "dxy": "101.51 – NEUTRAL",
+    "sentiment": "N/A",
+    "htf_trend": "RANGE",
     "intraday_regime": {
       "value": "RANGE-BULL",
       "bias": "YELLOW",
@@ -63,57 +29,15 @@
       "source_label": "Charton ellenőrizendő – M15/H1 XAUUSD",
       "updated_at": "2026-07-01T14:42:00+02:00"
     },
-    "volatility": {
-      "value": "HIGH",
-      "bias": "RED",
-      "bias_note": "Rekordközeli árak, Fed bizonytalanság és erős USD – HIGH vol rezsim. Risk OS: kisebb RPT, max 1 trade/nap.",
-      "source_type": "auto",
-      "source_label": "YCharts / Reuters – 2026-07-01",
-      "updated_at": "2026-07-01T14:42:00+02:00"
-    }
+    "volatility": "NORMÁL"
   },
   "levels": {
-    "pdh": {
-      "value": null,
-      "status": "pending",
-      "source_label": "Charton ellenőrizendő – XAUUSD D1/H1"
-    },
-    "pdl": {
-      "value": null,
-      "status": "pending",
-      "source_label": "Charton ellenőrizendő – XAUUSD D1/H1"
-    },
-    "asia_high": {
-      "value": null,
-      "status": "pending",
-      "source_label": "Charton ellenőrizendő – XAUUSD M15 ázsiai session"
-    },
-    "asia_low": {
-      "value": null,
-      "status": "pending",
-      "source_label": "Charton ellenőrizendő – XAUUSD M15 ázsiai session"
-    },
-    "daily_open": {
-      "value": null,
-      "status": "pending",
-      "source_label": "Charton ellenőrizendő – XAUUSD napi nyitóár"
-    },
-    "htf_sell_zone": {
-      "value": "4058–4068",
-      "status": "fresh",
-      "source_label": "HTF Sell Zóna – felső ellenállás, short trigger",
-      "note": "Pontos ár saját H4/D1 chart alapján korrigálandó"
-    },
-    "value_demand_zone": {
-      "value": "3965–3970",
-      "status": "fresh",
-      "source_label": "Value Demand Zóna – TP1 / lehetséges long reload"
-    },
-    "deep_support": {
-      "value": "3900–3930",
-      "status": "fresh",
-      "source_label": "Mélyebb Támasz – HTF support / TP2"
-    }
+    "pdh": 4049.7,
+    "pdl": 3962.5,
+    "asia_high": null,
+    "asia_low": null,
+    "daily_open": 4025.0,
+    "htf_level": null
   },
   "notrade_filters": {
     "macro_lock_active": true,
@@ -153,23 +77,11 @@
     "updated_at": "2026-07-01T14:42:00+02:00"
   },
   "header": {
-    "session": "Overlap 14:00–19:00 CEST",
     "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
-    "risk_mode": "YELLOW",
-    "daily_status": "SÁRGA",
-    "daily_status_note": "US10Y RISING + USD-BULL DXY + FedWatch NEUTRAL + HIGH vol + SAFE_HAVEN ellentét → vegyes, óvatos rezsim. Max 1 trade, score ≥8 kötelező.",
-    "macro_lock_active": true,
-    "execution_ready": false,
-    "preferred_session": "London 09:00–12:00 CEST (elsődleges) / Overlap 14:00–19:00 CEST (másodlagos)",
-    "focus_setup": "A",
-    "xau_spot": "~4025–4068 (pending – charton pontosítandó)",
-    "xau_daily_change": "pending",
+    "risk_mode": "ZÖLD",
     "daily_pl_usd": 0,
-    "daily_risk_usage_pct": 0,
-    "fed_regime_summary": "FedWatch HOLD 70% – semleges kamatpálya, US10Y emelkedő, DXY USD-BULL: együttesen short XAU makró háttér, de SAFE_HAVEN demand HTF bull trendet tart fenn.",
-    "narrative": "2026-07-01: US10Y emelkedő (4.44%), DXY USD-BULL, FedWatch NEUTRAL – makró short bias XAU-ra. HTF bull trend él (safe-haven), intraday RANGE-BULL, HIGH vol. Napi bias SHORT, SÁRGA státusz. London session az elsődleges végrehajtási ablak. Overlap csak tiszta, makró-mentes sávban. PDH/PDL/Asia szintek manuálisan töltendők. Ha nincs tiszta rejection a HTF sell zónánál, NO-TRADE a helyes döntés.",
-    "updated_at": "2026-07-01T14:42:00+02:00"
+    "daily_risk_usage_pct": 0
   },
   "setups": {
     "A": {
