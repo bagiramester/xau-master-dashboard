@@ -80,6 +80,7 @@ const render = (data) => {
   renderTopBar(data);
   renderChart();
   renderChartLevels(data.levels || {});
+  renderBagira(data);
   renderSetups(data);
   renderRisk(data);
   renderRelevance(data);
@@ -92,9 +93,11 @@ const render = (data) => {
 // - Először a data.json-t próbáljuk (GH Actions cron 15 percente frissíti).
 // - Ha updated_at > 30 perc → stale, client-side fallback próbál Yahoo-tól spotot húzni.
 const clientSideXauFallback = async (data) => {
+  // CORS: csak Pages/production kontextusban probaljuk
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
   try {
     // Yahoo unofficial quote endpoint
-    const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1m&range=1d', { cache: 'no-store' });
+    const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1m&range=1d', { cache: 'no-store', mode: 'cors' });
     if (!res.ok) return;
     const j = await res.json();
     const r = j?.chart?.result?.[0];
@@ -149,6 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#hard-lock').hidden = true;
   });
   load();
-  // 5 perces auto-refresh
+  // 5 perces client polling (10 perces szerver cron-t 5 percenként ellenőrzi)
   setInterval(load, 5 * 60 * 1000);
 });

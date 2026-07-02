@@ -2,123 +2,403 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Bagira XAU Master Dashboard – data.json schema v2",
   "type": "object",
-  "required": ["meta", "macro", "levels", "notrade_filters", "risk", "header", "setups", "trade_log", "performance"],
-  "additionalProperties": false,
-
+  "required": [
+    "meta",
+    "macro",
+    "levels",
+    "notrade_filters",
+    "risk",
+    "header",
+    "setups",
+    "trade_log",
+    "performance"
+  ],
+  "description": "v2.1: adds bagira AI advisory block and ai_state on setups",
+  "additionalProperties": true,
   "definitions": {
     "setupBlock": {
       "type": "object",
       "description": "Setup card wrapper: setup body under `value`, plus provenance.",
-      "required": ["value", "status", "source_type", "source_label", "updated_at"],
+      "required": [
+        "value",
+        "status",
+        "source_type",
+        "source_label",
+        "updated_at"
+      ],
       "properties": {
         "value": {
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
-            "direction":          { "type": "string", "enum": ["LONG", "SHORT", "NEUTRAL"] },
-            "type":               { "type": "string" },
-            "bias_compatibility": { "type": "string" },
-            "entry_zone":         { "type": "string" },
-            "sl":                 { "type": "string" },
-            "tp1":                { "type": "string" },
-            "tp2":                { "type": ["string", "null"] },
-            "rr_min":             { "type": "number" },
-            "score":              { "type": "integer", "minimum": 0, "maximum": 10 },
-            "session":            { "type": "string" },
-            "invalidation":       { "type": "string" },
-            "macro_support":      { "type": "array", "items": { "type": "string" } },
-            "allowed":            { "type": "boolean" },
-            "locked_reason":      { "type": ["string", "null"] },
-            "confirmed":          { "type": "boolean" },
-            "setup_quality":      { "type": "string" }
+            "direction": {
+              "type": "string",
+              "enum": [
+                "LONG",
+                "SHORT",
+                "NEUTRAL"
+              ]
+            },
+            "type": {
+              "type": "string"
+            },
+            "bias_compatibility": {
+              "type": "string"
+            },
+            "entry_zone": {
+              "type": "string"
+            },
+            "sl": {
+              "type": "string"
+            },
+            "tp1": {
+              "type": "string"
+            },
+            "tp2": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "rr_min": {
+              "type": "number"
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10
+            },
+            "session": {
+              "type": "string"
+            },
+            "invalidation": {
+              "type": "string"
+            },
+            "macro_support": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "allowed": {
+              "type": "boolean"
+            },
+            "locked_reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "confirmed": {
+              "type": "boolean"
+            },
+            "setup_quality": {
+              "type": "string"
+            }
           }
         },
-        "status":       { "type": "string", "enum": ["fresh", "stale", "pending", "error"] },
-        "source_type":  { "type": "string", "enum": ["auto", "manual", "auto+manual", "computed"] },
-        "source_label": { "type": "string" },
-        "source_url":   { "type": ["string", "null"] },
-        "updated_at":   { "type": ["string", "null"] },
-        "impact":       { "type": ["integer", "null"] }
+        "status": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "stale",
+            "pending",
+            "error"
+          ]
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "manual",
+            "auto+manual",
+            "computed",
+            "ai",
+            "ai-mock",
+            "ai-fallback"
+          ]
+        },
+        "source_label": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "impact": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "ai_state": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "SUGGESTED",
+            "CONFIRMED",
+            "REJECTED",
+            "LOCKED",
+            "EMPTY",
+            "MANUAL"
+          ]
+        }
       }
     },
     "sourceField": {
       "type": "object",
       "description": "Standard data field with provenance. Value may be null when pending.",
-      "required": ["value", "status", "source_type", "source_label", "updated_at"],
+      "required": [
+        "value",
+        "status",
+        "source_type",
+        "source_label",
+        "updated_at"
+      ],
       "additionalProperties": false,
       "properties": {
-        "value":        { "type": ["string", "number", "boolean", "null"] },
-        "display":      { "type": ["string", "null"], "description": "Human-readable label if different from value" },
-        "bias":         { "type": ["string", "null"], "enum": [null, "GREEN", "YELLOW", "RED"] },
-        "bias_note":    { "type": ["string", "null"] },
-        "impact":       { "type": ["integer", "null"], "minimum": 1, "maximum": 4, "description": "Relevance-score for the Piaci hatások table (4=critical, 1=context)" },
-        "status":       { "type": "string", "enum": ["fresh", "stale", "pending", "error"] },
-        "source_type":  { "type": "string", "enum": ["auto", "manual", "auto+manual", "computed"] },
-        "source_label": { "type": "string" },
-        "source_url":   { "type": ["string", "null"], "format": "uri" },
-        "updated_at":   { "type": ["string", "null"], "description": "ISO 8601 CEST datetime or null when pending" }
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "display": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Human-readable label if different from value"
+        },
+        "bias": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ]
+        },
+        "bias_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "impact": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Relevance-score for the Piaci hatások table (4=critical, 1=context)"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "stale",
+            "pending",
+            "error"
+          ]
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "manual",
+            "auto+manual",
+            "computed",
+            "ai",
+            "ai-mock",
+            "ai-fallback"
+          ]
+        },
+        "source_label": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ISO 8601 CEST datetime or null when pending"
+        }
       }
     }
   },
-
   "properties": {
     "meta": {
       "type": "object",
-      "required": ["schema_version", "last_updated", "auto", "note", "data_freshness"],
+      "required": [
+        "schema_version",
+        "last_updated",
+        "auto",
+        "note",
+        "data_freshness"
+      ],
       "properties": {
-        "schema_version": { "const": "v2" },
-        "last_updated":   { "type": "string" },
-        "auto":           { "type": "boolean" },
-        "note":           { "type": "string" },
-        "data_freshness": { "type": "string", "enum": ["live", "stale", "pending"] },
-        "source_stack":   { "type": "array", "items": { "type": "string" } }
+        "schema_version": {
+          "const": "v2"
+        },
+        "last_updated": {
+          "type": "string"
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        },
+        "data_freshness": {
+          "type": "string",
+          "enum": [
+            "live",
+            "stale",
+            "pending"
+          ]
+        },
+        "source_stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
-
     "macro": {
       "type": "object",
-      "required": ["fedwatch", "us10y", "dxy", "sentiment", "htf_trend", "intraday_regime", "volatility"],
+      "required": [
+        "fedwatch",
+        "us10y",
+        "dxy",
+        "sentiment",
+        "htf_trend",
+        "intraday_regime",
+        "volatility"
+      ],
       "properties": {
-        "fedwatch":         { "$ref": "#/definitions/sourceField" },
-        "us10y":            { "$ref": "#/definitions/sourceField" },
-        "dxy":              { "$ref": "#/definitions/sourceField" },
-        "sentiment":        { "$ref": "#/definitions/sourceField" },
-        "htf_trend":        { "$ref": "#/definitions/sourceField" },
-        "intraday_regime":  { "$ref": "#/definitions/sourceField" },
-        "volatility":       { "$ref": "#/definitions/sourceField" },
-        "xau_spot":         { "$ref": "#/definitions/sourceField" }
+        "fedwatch": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "us10y": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "dxy": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "sentiment": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "htf_trend": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "intraday_regime": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "volatility": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "xau_spot": {
+          "$ref": "#/definitions/sourceField"
+        }
       }
     },
-
     "levels": {
       "type": "object",
-      "required": ["pdh", "pdl", "daily_open", "asia_high", "asia_low"],
+      "required": [
+        "pdh",
+        "pdl",
+        "daily_open",
+        "asia_high",
+        "asia_low"
+      ],
       "properties": {
-        "pdh":         { "$ref": "#/definitions/sourceField" },
-        "pdl":         { "$ref": "#/definitions/sourceField" },
-        "daily_open":  { "$ref": "#/definitions/sourceField" },
-        "asia_high":   { "$ref": "#/definitions/sourceField" },
-        "asia_low":    { "$ref": "#/definitions/sourceField" },
-        "htf_supply":  { "$ref": "#/definitions/sourceField" },
-        "htf_demand":  { "$ref": "#/definitions/sourceField" },
-        "psych_level": { "$ref": "#/definitions/sourceField" }
+        "pdh": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "pdl": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "daily_open": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "asia_high": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "asia_low": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "htf_supply": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "htf_demand": {
+          "$ref": "#/definitions/sourceField"
+        },
+        "psych_level": {
+          "$ref": "#/definitions/sourceField"
+        }
       }
     },
-
     "notrade_filters": {
       "type": "object",
-      "required": ["macro_lock_active", "macro_events_today", "macro_no_trade_windows"],
+      "required": [
+        "macro_lock_active",
+        "macro_events_today",
+        "macro_no_trade_windows"
+      ],
       "properties": {
-        "macro_lock_active": { "type": "boolean" },
+        "macro_lock_active": {
+          "type": "boolean"
+        },
         "macro_events_today": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["event", "time_cest", "effect"],
+            "required": [
+              "event",
+              "time_cest",
+              "effect"
+            ],
             "properties": {
-              "event":     { "type": "string" },
-              "time_cest": { "type": "string" },
-              "effect":    { "type": "string" },
-              "note":      { "type": "string" }
+              "event": {
+                "type": "string"
+              },
+              "time_cest": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
             }
           }
         },
@@ -126,104 +406,328 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["start", "end", "reason"],
+            "required": [
+              "start",
+              "end",
+              "reason"
+            ],
             "properties": {
-              "start":  { "type": "string" },
-              "end":    { "type": "string" },
-              "reason": { "type": "string" }
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
             }
           }
         },
-        "note": { "type": "string" }
+        "note": {
+          "type": "string"
+        }
       }
     },
-
     "risk": {
       "type": "object",
-      "required": ["mode", "daily_limit", "weekly_limit", "daily_loss", "weekly_loss", "loss_streak", "max_trades_today", "open_positions", "open_xau_positions", "trade_allowed_now", "xau_trade_allowed_now", "rpt_hard_cap"],
+      "required": [
+        "mode",
+        "daily_limit",
+        "weekly_limit",
+        "daily_loss",
+        "weekly_loss",
+        "loss_streak",
+        "max_trades_today",
+        "open_positions",
+        "open_xau_positions",
+        "trade_allowed_now",
+        "xau_trade_allowed_now",
+        "rpt_hard_cap"
+      ],
       "properties": {
-        "mode":                    { "type": "string", "enum": ["GREEN", "YELLOW", "RED"] },
-        "daily_limit":             { "type": "number" },
-        "weekly_limit":            { "type": "number" },
-        "daily_loss":              { "type": "number" },
-        "daily_risk_usage_pct":    { "type": "number" },
-        "weekly_loss":             { "type": "number" },
-        "weekly_risk_usage_pct":   { "type": "number" },
-        "loss_streak":             { "type": "integer" },
-        "max_trades_today":        { "type": "integer" },
-        "open_positions":          { "type": "integer" },
-        "open_xau_positions":      { "type": "integer" },
-        "trade_allowed_now":       { "type": "boolean" },
-        "xau_trade_allowed_now":   { "type": "boolean" },
-        "trade_allowed_reason":    { "type": "string" },
-        "rpt_recommendation":      { "type": "string" },
-        "rpt_hard_cap":            { "type": "number" },
-        "updated_at":              { "type": "string" }
+        "mode": {
+          "type": "string",
+          "enum": [
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ]
+        },
+        "daily_limit": {
+          "type": "number"
+        },
+        "weekly_limit": {
+          "type": "number"
+        },
+        "daily_loss": {
+          "type": "number"
+        },
+        "daily_risk_usage_pct": {
+          "type": "number"
+        },
+        "weekly_loss": {
+          "type": "number"
+        },
+        "weekly_risk_usage_pct": {
+          "type": "number"
+        },
+        "loss_streak": {
+          "type": "integer"
+        },
+        "max_trades_today": {
+          "type": "integer"
+        },
+        "open_positions": {
+          "type": "integer"
+        },
+        "open_xau_positions": {
+          "type": "integer"
+        },
+        "trade_allowed_now": {
+          "type": "boolean"
+        },
+        "xau_trade_allowed_now": {
+          "type": "boolean"
+        },
+        "trade_allowed_reason": {
+          "type": "string"
+        },
+        "rpt_recommendation": {
+          "type": "string"
+        },
+        "rpt_hard_cap": {
+          "type": "number"
+        },
+        "updated_at": {
+          "type": "string"
+        }
       }
     },
-
     "header": {
       "type": "object",
-      "required": ["bias_direction", "bias_status", "effective_mode", "session", "session_focus"],
+      "required": [
+        "bias_direction",
+        "bias_status",
+        "effective_mode",
+        "session",
+        "session_focus"
+      ],
       "properties": {
-        "bias_direction": { "type": "string", "enum": ["LONG", "SHORT", "NEUTRAL"] },
-        "bias_status":    { "type": "string", "enum": ["ZÖLD", "SÁRGA", "PIROS"] },
-        "effective_mode": { "type": "string", "enum": ["GREEN", "YELLOW", "RED"] },
-        "session":        { "type": "string", "enum": ["Pre-market", "Asia", "London", "Overlap", "NY", "After-hours", "Closed"] },
-        "session_focus":  { "type": "string" },
-        "narrative":      { "type": "string" },
-        "fed_regime_summary": { "type": "string" }
+        "bias_direction": {
+          "type": "string",
+          "enum": [
+            "LONG",
+            "SHORT",
+            "NEUTRAL"
+          ]
+        },
+        "bias_status": {
+          "type": "string",
+          "enum": [
+            "ZÖLD",
+            "SÁRGA",
+            "PIROS"
+          ]
+        },
+        "effective_mode": {
+          "type": "string",
+          "enum": [
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ]
+        },
+        "session": {
+          "type": "string",
+          "enum": [
+            "Pre-market",
+            "Asia",
+            "London",
+            "Overlap",
+            "NY",
+            "After-hours",
+            "Closed"
+          ]
+        },
+        "session_focus": {
+          "type": "string"
+        },
+        "narrative": {
+          "type": "string"
+        },
+        "fed_regime_summary": {
+          "type": "string"
+        }
       }
     },
-
     "setups": {
       "type": "object",
-      "required": ["A", "B"],
+      "required": [
+        "A",
+        "B"
+      ],
       "properties": {
-        "A": { "$ref": "#/definitions/setupBlock" },
-        "B": { "$ref": "#/definitions/setupBlock" }
+        "A": {
+          "$ref": "#/definitions/setupBlock"
+        },
+        "B": {
+          "$ref": "#/definitions/setupBlock"
+        }
       },
       "additionalProperties": false
     },
-
     "trade_log": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["datetime", "session", "direction", "setup_type", "entry", "sl", "exit", "risk_usd", "pl_usd", "rr_actual", "score", "allowed", "rule_compliance"],
+        "required": [
+          "datetime",
+          "session",
+          "direction",
+          "setup_type",
+          "entry",
+          "sl",
+          "exit",
+          "risk_usd",
+          "pl_usd",
+          "rr_actual",
+          "score",
+          "allowed",
+          "rule_compliance"
+        ],
         "properties": {
-          "datetime":         { "type": "string" },
-          "session":          { "type": "string" },
-          "direction":        { "type": "string", "enum": ["LONG", "SHORT"] },
-          "setup_type":       { "type": "string" },
-          "bias":             { "type": "string" },
-          "daily_status":     { "type": "string" },
-          "risk_mode":        { "type": "string" },
-          "entry":            { "type": "number" },
-          "sl":               { "type": "number" },
-          "exit":             { "type": "number" },
-          "unit":             { "type": "number" },
-          "risk_usd":         { "type": "number" },
-          "pl_usd":           { "type": "number" },
-          "rr_actual":        { "type": "number" },
-          "score":            { "type": "integer" },
-          "allowed":          { "type": "boolean" },
-          "rule_compliance":  { "type": "string", "enum": ["igen", "részben", "nem"] },
-          "note":             { "type": "string" }
+          "datetime": {
+            "type": "string"
+          },
+          "session": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "LONG",
+              "SHORT"
+            ]
+          },
+          "setup_type": {
+            "type": "string"
+          },
+          "bias": {
+            "type": "string"
+          },
+          "daily_status": {
+            "type": "string"
+          },
+          "risk_mode": {
+            "type": "string"
+          },
+          "entry": {
+            "type": "number"
+          },
+          "sl": {
+            "type": "number"
+          },
+          "exit": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "number"
+          },
+          "risk_usd": {
+            "type": "number"
+          },
+          "pl_usd": {
+            "type": "number"
+          },
+          "rr_actual": {
+            "type": "number"
+          },
+          "score": {
+            "type": "integer"
+          },
+          "allowed": {
+            "type": "boolean"
+          },
+          "rule_compliance": {
+            "type": "string",
+            "enum": [
+              "igen",
+              "részben",
+              "nem"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
         }
       }
     },
-
     "performance": {
       "type": "object",
       "properties": {
-        "trade_count":       { "type": "integer" },
-        "win_count":         { "type": "integer" },
-        "loss_count":        { "type": "integer" },
-        "net_pl_usd":        { "type": "number" },
-        "avg_rr":            { "type": ["number", "null"] },
-        "rule_break_count":  { "type": "integer" },
-        "updated_at":        { "type": "string" }
+        "trade_count": {
+          "type": "integer"
+        },
+        "win_count": {
+          "type": "integer"
+        },
+        "loss_count": {
+          "type": "integer"
+        },
+        "net_pl_usd": {
+          "type": "number"
+        },
+        "avg_rr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rule_break_count": {
+          "type": "integer"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "bagira": {
+      "type": "object",
+      "description": "AI advisory block from Bagira (character-driven mentor).",
+      "properties": {
+        "narrative": {
+          "type": "string"
+        },
+        "key_watch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reasoning_summary": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "ai",
+            "ai-mock",
+            "ai-fallback",
+            "manual"
+          ]
+        },
+        "updated_at": {
+          "type": "string"
+        }
       }
     }
   }

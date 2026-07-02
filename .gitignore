@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local test files
+_test_*.png
+_v2_*.png
+_live*.png
+
+# OS
+.DS_Store
+Thumbs.db

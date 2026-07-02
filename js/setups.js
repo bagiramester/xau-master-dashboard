@@ -1,4 +1,4 @@
-// ═══ SETUPS MODULE — fix SHORT + LONG kártyák (fallback ha hiányzik) ═══
+// ═══ SETUPS MODULE — fix SHORT + LONG kártyák AI state kezeléssel ═══
 const FALLBACK_SETUP = {
   direction: 'NEUTRAL',
   type: '— (nincs setup adat)',
@@ -18,8 +18,17 @@ const FALLBACK_SETUP = {
   bias_compatibility: '–'
 };
 
+// LocalStorage-alapú confirm tracking (a data.json-t nem tudjuk kliens oldalról írni)
+const getConfirmed = (slotKey) => {
+  try { return localStorage.getItem('confirm_' + slotKey) === '1'; }
+  catch { return false; }
+};
+const setConfirmed = (slotKey, value) => {
+  try { localStorage.setItem('confirm_' + slotKey, value ? '1' : '0'); }
+  catch {}
+};
+
 const orderSetupsFixed = (setups) => {
-  // Cél: bal oldalon MINDIG SHORT és LONG kártya, fix sorrendben
   const A = (setups && setups.A && setups.A.value) || null;
   const B = (setups && setups.B && setups.B.value) || null;
   let short = null, long_ = null;
@@ -30,18 +39,43 @@ const orderSetupsFixed = (setups) => {
   return { short, long: long_ };
 };
 
+const getAiBadge = (wrap, isConfirmed) => {
+  if (!wrap) return { text: '– EMPTY', cls: 'manual' };
+  const st = wrap.ai_state;
+  const src = wrap.source_type;
+  const isAI = src && src.startsWith('ai');
+
+  if (isConfirmed) return { text: '✓ CONFIRMED', cls: 'confirmed' };
+  if (st === 'LOCKED' || !wrap.value?.allowed) return { text: '⛔ LOCKED', cls: 'locked' };
+  if (isAI && st === 'SUGGESTED') return { text: '🤖 AI SUGGESTED', cls: 'suggested' };
+  if (src === 'manual') return { text: '✏ MANUAL', cls: 'manual' };
+  return { text: st || '–', cls: 'manual' };
+};
+
 const renderSetupCard = (slot /* 'short' | 'long' */, entry) => {
   const body = entry ? entry.body : { ...FALLBACK_SETUP, direction: slot.toUpperCase() };
   const wrap = entry ? entry.wrap : null;
-  const cardClass = `setup-card setup-card--${slot}` + (!body.allowed ? ' setup-card--locked' : '');
-  const stateClass = body.allowed
+  const slotKey = entry ? entry.key : slot;
+  const isConfirmed = entry ? getConfirmed(slotKey) : false;
+
+  const cardClass = `setup-card setup-card--${slot}` + (!body.allowed && !isConfirmed ? ' setup-card--locked' : '');
+  const stateClass = (body.allowed || isConfirmed)
     ? 'setup-card__state--allowed'
     : (body.confirmed ? 'setup-card__state--watch' : 'setup-card__state--locked');
-  const stateLabel = body.allowed ? '✓ ALLOWED' : (body.confirmed ? '◐ WATCH' : '⛔ LOCKED');
+  const stateLabel = (body.allowed || isConfirmed) ? '✓ ALLOWED'
+                    : (body.confirmed ? '◐ WATCH' : '⛔ LOCKED');
   const dirClass = slot === 'long' ? 'dir-long' : 'dir-short';
   const dirEmoji = slot === 'long' ? '🟢' : '🔴';
+  const aiBadge = getAiBadge(wrap, isConfirmed);
 
-  const card = el('div', { class: cardClass, 'data-slot': entry ? entry.key : '' },
+  const macroSupport = body.macro_support && body.macro_support.length
+    ? body.macro_support.slice(0, 3).map(m => `• ${m}`).join('\n')
+    : null;
+
+  const card = el('div', { class: cardClass, 'data-slot': slotKey },
+    // AI state badge (jobb felső sarok)
+    el('span', { class: `setup-card__ai-badge setup-card__ai-badge--${aiBadge.cls}` }, aiBadge.text),
+
     el('div', { class: 'setup-card__header' },
       el('span', { class: `setup-card__direction ${dirClass}` }, `${dirEmoji} ${body.direction}`),
       el('span', { class: `setup-card__state ${stateClass}` }, stateLabel)
@@ -74,9 +108,40 @@ const renderSetupCard = (slot /* 'short' | 'long' */, entry) => {
     )
   );
 
+  // Makró support tooltip (info gomb)
+  if (macroSupport) {
+    const infoBtn = el('span', { class: 'info-btn', title: macroSupport }, 'i');
+    infoBtn.addEventListener('mouseenter', (e) => showTip(e, 'Makró alapok:\n' + macroSupport));
+    infoBtn.addEventListener('mousemove', (e) => showTip(e, 'Makró alapok:\n' + macroSupport));
+    infoBtn.addEventListener('mouseleave', hideTip);
+    card.querySelector('.setup-card__type').appendChild(infoBtn);
+  }
+
   if (body.locked_reason) {
     card.appendChild(el('div', { class: 'setup-card__reason' }, body.locked_reason));
   }
+
+  // Confirm gomb — csak AI SUGGESTED állapotnál látszik
+  if (aiBadge.cls === 'suggested' && !isConfirmed) {
+    const confirmBtn = el('button',
+      { class: 'setup-card__confirm setup-card__confirm--suggested', type: 'button' },
+      '✓ CONFIRM & TRADE');
+    confirmBtn.addEventListener('click', () => {
+      setConfirmed(slotKey, true);
+      renderSetups(currentData || {});
+    });
+    card.appendChild(confirmBtn);
+  } else if (isConfirmed) {
+    const btn = el('button',
+      { class: 'setup-card__confirm setup-card__confirm--confirmed', type: 'button' },
+      '✓ CONFIRMED (klikk = visszavonás)');
+    btn.addEventListener('click', () => {
+      setConfirmed(slotKey, false);
+      renderSetups(currentData || {});
+    });
+    card.appendChild(btn);
+  }
+
   return card;
 };
 

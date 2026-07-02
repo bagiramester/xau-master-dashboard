@@ -1,11 +1,14 @@
-name: Auto-update data.json
+name: Auto-update data.json + AI
 
 on:
   schedule:
-    # 15 percenként, hétköznap 07:00–20:00 CEST (05:00–18:00 UTC)
-    # 4 futás óránként, minden negyed órában
-    - cron: '*/15 5-18 * * 1-5'
-  workflow_dispatch:        # Manuális trigger
+    # 10 percenként, hétköznap 07:00–20:00 CEST (05:00–18:00 UTC)
+    - cron: '*/10 5-18 * * 1-5'
+  workflow_dispatch:       # Manuális trigger
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -22,19 +25,42 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install yfinance requests jsonschema
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('scripts/*.py') }}
 
-      - name: Fetch fresh data
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install yfinance requests jsonschema
+
+      - name: Fetch base market data (XAU/US10Y/DXY/F&G)
         run: python scripts/fetch_data.py
+
+      - name: Fetch economic calendar
+        run: python scripts/fetch_calendar.py || echo "[warn] calendar fetch failed, continuing"
+
+      - name: Fetch FedWatch
+        run: python scripts/fetch_fedwatch.py || echo "[warn] fedwatch fetch failed, continuing"
+
+      - name: Fetch intraday XAU + Asia H/L
+        run: python scripts/fetch_intraday.py || echo "[warn] intraday fetch failed, continuing"
+
+      - name: Run AI analysis (Bagira)
+        env:
+          PPLX_API_KEY: ${{ secrets.PPLX_API_KEY }}
+          MOCK_AI: ${{ secrets.PPLX_API_KEY == '' && 'true' || '' }}
+        run: python scripts/ai_analyze.py || echo "[warn] AI analyze failed, continuing"
 
       - name: Validate data.json against schema
         run: python scripts/validate_data.py
 
-      - name: Commit and push data.json (ha változott)
+      - name: Commit and push data.json + cache
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
-          git diff --cached --quiet || git commit -m "auto: data.json refresh $(date +'%Y-%m-%d %H:%M UTC')"
+          git add data.json cache/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "auto: refresh $(date +'%Y-%m-%d %H:%M UTC')"
           git push

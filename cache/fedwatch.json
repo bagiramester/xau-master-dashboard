@@ -1,0 +1,12 @@
+{
+  "cut_pct": null,
+  "hold_pct": null,
+  "hike_pct": null,
+  "regime": null,
+  "bias": null,
+  "note": "FedWatch adat nem elérhető — manuálisan kell beírni.",
+  "display": "N/A – manuálisan frissítendő",
+  "source_label": "Nincs adat",
+  "source_url": null,
+  "updated_at": null
+}

@@ -314,8 +314,23 @@ def main():
             "source_url": None, "updated_at": None
         }
 
-    # 4. Notrade filters, risk, header, setups, trade_log, performance – manuális
+    # 4. Notrade filters – először a friss cache-ből próbálunk olvasni, különben megtartjuk
+    calendar_cache = REPO_ROOT / "cache" / "calendar.json"
     notrade = prev.get("notrade_filters", {"macro_lock_active": False, "macro_events_today": [], "macro_no_trade_windows": []})
+    if calendar_cache.exists():
+        try:
+            with calendar_cache.open() as fc:
+                cal = json.load(fc)
+            # csak akkor váltunk, ha valóban van esemény — üres calendar ne törölje a manuális NFP-blokkot
+            if cal.get("macro_events_today"):
+                notrade = {
+                    "macro_lock_active": cal.get("macro_lock_active", False),
+                    "macro_events_today": cal.get("macro_events_today", []),
+                    "macro_no_trade_windows": cal.get("macro_no_trade_windows", []),
+                    "note": cal.get("note", ""),
+                }
+        except Exception as e:
+            print(f"[fetch_data] calendar cache read hiba: {e}")
     risk = prev.get("risk", {
         "mode": "GREEN", "daily_limit": 100.0, "weekly_limit": 300.0,
         "daily_loss": 0.0, "daily_risk_usage_pct": 0,
