@@ -14,8 +14,8 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-02T19:33:03+02:00",
-    "ai_model": "mock-fallback (sonar-reasoning-pro failed)",
+    "ai_last_run": "2026-07-02T19:54:10+02:00",
+    "ai_model": "mock-fallback (sonar-pro failed)",
     "ai_source_type": "ai-fallback"
   },
   "macro": {
@@ -255,9 +255,9 @@
       },
       "status": "fresh",
       "source_type": "ai-fallback",
-      "source_label": "AI (mock-fallback (sonar-reasoning-pro failed)) auto setup",
+      "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:33:03+02:00",
+      "updated_at": "2026-07-02T19:54:10+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     },
@@ -285,9 +285,9 @@
       },
       "status": "fresh",
       "source_type": "ai-fallback",
-      "source_label": "AI (mock-fallback (sonar-reasoning-pro failed)) auto setup",
+      "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:33:03+02:00",
+      "updated_at": "2026-07-02T19:54:10+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -311,8 +311,8 @@
     ],
     "confidence": 70,
     "reasoning_summary": "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), HTF RANGE + intraday range-bear (3/4). NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén.",
-    "model": "mock-fallback (sonar-reasoning-pro failed)",
+    "model": "mock-fallback (sonar-pro failed)",
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-02T19:33:03+02:00"
+    "updated_at": "2026-07-02T19:54:10+02:00"
   }
 }
