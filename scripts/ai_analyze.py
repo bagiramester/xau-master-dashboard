@@ -133,16 +133,30 @@ def call_perplexity(system_prompt, user_snapshot):
             {"role": "user", "content": json.dumps(user_snapshot, ensure_ascii=False, indent=2)},
         ],
         "temperature": 0.15,
-        "max_tokens": 2000,
+        "max_tokens": 2500,
+        "response_format": {"type": "json_schema", "json_schema": {
+            "schema": {
+                "type": "object",
+                "required": ["setup_A", "setup_B", "bagira_narrative", "key_watch", "confidence", "reasoning_summary"],
+                "additionalProperties": True,
+            }
+        }}
     }
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
     }
-    r = requests.post(API_URL, json=payload, headers=headers, timeout=60)
-    r.raise_for_status()
-    resp = r.json()
+    r = requests.post(API_URL, json=payload, headers=headers, timeout=90)
+    if r.status_code != 200:
+        print(f"[ai] API HTTP {r.status_code}: {r.text[:500]}", file=sys.stderr)
+        r.raise_for_status()
+    try:
+        resp = r.json()
+    except Exception as e:
+        print(f"[ai] API response non-JSON: {r.text[:500]}", file=sys.stderr)
+        raise
     content = resp["choices"][0]["message"]["content"]
+    print(f"[ai] Raw content prefix: {content[:200]}...", file=sys.stderr)
     return content
 
 
