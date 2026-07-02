@@ -34,27 +34,46 @@
           ],
           "properties": {
             "direction": {
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "LONG",
                 "SHORT",
-                "NEUTRAL"
+                "NEUTRAL",
+                null
               ]
             },
             "type": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "bias_compatibility": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "entry_zone": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "sl": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "tp1": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "tp2": {
               "type": [
@@ -63,18 +82,30 @@
               ]
             },
             "rr_min": {
-              "type": "number"
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "score": {
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "minimum": 0,
               "maximum": 10
             },
             "session": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "invalidation": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "macro_support": {
               "type": "array",
@@ -95,7 +126,10 @@
               "type": "boolean"
             },
             "setup_quality": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
