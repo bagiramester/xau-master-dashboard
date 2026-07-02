@@ -1,8 +1,8 @@
 {
   "meta": {
-    "last_updated": "2026-07-02 09:55 CEST",
+    "last_updated": "2026-07-02 09:58 CEST",
     "auto": true,
-    "note": "Frissítve: XAU spot, US10Y, DXY, FedWatch, NFP konszenzus, kulcsszintek, setups. Asia High/Low charton pontosítandó."
+    "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
   "macro": {
     "fedwatch": {
@@ -17,33 +17,10 @@
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
-    "us10y": {
-      "value": "4.48%",
-      "prev_close": "4.44%",
-      "regime": "RISING",
-      "bias": "RED",
-      "bias_note": "Júl 1-jén 4.48%-ra emelkedett (jún 30: 4.44%, jún 29: 4.38%). Emelkedő trend, magas relhozam – short XAU nyomás.",
-      "source_label": "YCharts / FRED DGS10 – 2026-07-01",
-      "updated_at": "2026-07-02T09:55:00+02:00"
-    },
-    "dxy": {
-      "value": "~99.5–99.6",
-      "regime": "USD-BULL",
-      "bias": "RED",
-      "bias_note": "DXY bullish struktúra, júliusban havi emelkedés várható. USD-BULL = headwind aranynak.",
-      "source_label": "TradingView DXY Ideas – 2026-07-01",
-      "updated_at": "2026-07-02T09:55:00+02:00"
-    },
-    "sentiment": {
-      "value": "31",
-      "label": "FEAR",
-      "regime": "SAFE_HAVEN",
-      "bias": "YELLOW",
-      "bias_note": "CNN Fear & Greed 31 (Fear, legalacsonyabb ápr 2026 óta). Safe haven kereslet fékezi a short bias-t, de nem fordítja át.",
-      "source_label": "CNN Fear & Greed / Facebook Vantage Markets – 2026-07-01",
-      "updated_at": "2026-07-02T09:55:00+02:00"
-    },
-    "htf_trend": "BEARISH pullback (200 EMA alatt, lower highs)",
+    "us10y": "N/A",
+    "dxy": "101.11 – NEUTRAL",
+    "sentiment": "N/A",
+    "htf_trend": "RANGE",
     "intraday_regime": {
       "value": "RANGE / kétoldalú",
       "bias": "YELLOW",
@@ -52,39 +29,15 @@
       "source_label": "TradingView XAUUSD ideas – 2026-07-02 reggel",
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
-    "volatility": "HIGH (NFP-nap)"
+    "volatility": "NORMÁL"
   },
   "levels": {
-    "xau_spot": 4063.0,
-    "xau_daily_range": "4031–4074",
-    "xau_daily_change_pct": 0.78,
-    "pdh": 4116.0,
-    "pdl": 4008.0,
-    "daily_open": 4031.0,
+    "pdh": 4100.0,
+    "pdl": 3963.0,
     "asia_high": null,
     "asia_low": null,
-    "htf_sell_zone_lo": 4058.0,
-    "htf_sell_zone_hi": 4068.0,
-    "conservative_sell_zone_lo": 4090.0,
-    "conservative_sell_zone_hi": 4105.0,
-    "value_demand_lo": 3965.0,
-    "value_demand_hi": 3970.0,
-    "nfp_downside_target_1": 3939.0,
-    "nfp_downside_target_2": 3885.0,
-    "deep_support_lo": 3900.0,
-    "deep_support_hi": 3930.0,
-    "note": "Asia High / Asia Low charton kézzel ellenőrizendő és kitöltendő."
-  },
-  "nfp": {
-    "release_time_cest": "14:30",
-    "consensus_nfp": 114000,
-    "prev_nfp": 172000,
-    "consensus_unemployment": "4.3%",
-    "consensus_avg_hourly_earnings_mom": "0.3%",
-    "adp_actual": 98000,
-    "adp_consensus": 118000,
-    "adp_status": "MISS – gyengébb NFP esélye nő, potenciális long flip overlay",
-    "source_label": "Investing.com NFP calendar / TradingEconomics – 2026-07-02"
+    "daily_open": 4049.2,
+    "htf_level": null
   },
   "notrade_filters": {
     "macro_lock_active": true,
@@ -126,7 +79,7 @@
   "header": {
     "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
-    "risk_mode": "YELLOW",
+    "risk_mode": "ZÖLD",
     "daily_pl_usd": 0,
     "daily_risk_usage_pct": 0
   },
