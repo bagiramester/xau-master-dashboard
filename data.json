@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-02 19:27 CEST",
+    "last_updated": "2026-07-02 20:51 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -13,10 +13,7 @@
       "cme:fedwatch (manual)",
       "investing:economic-calendar (manual)",
       "manual:trade-log"
-    ],
-    "ai_last_run": "2026-07-02T20:19:54+02:00",
-    "ai_model": "sonar-pro",
-    "ai_source_type": "ai"
+    ]
   },
   "macro": {
     "fedwatch": {
@@ -41,19 +38,19 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance ^TNX",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "dxy": {
-      "value": 100.86,
-      "display": "100.86 – RANGE",
+      "value": 100.84,
+      "display": "100.84 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "DXY 100.86 a 99–103 sávban – semleges USD-háttér.",
+      "bias_note": "DXY 100.84 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance DX-Y.NYB",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "sentiment": {
       "value": 31,
@@ -65,7 +62,7 @@
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -77,7 +74,7 @@
       "source_type": "computed",
       "source_label": "Számított ártartomány alapján",
       "source_url": null,
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "intraday_regime": {
       "value": "RANGE",
@@ -104,8 +101,8 @@
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
     "xau_spot": {
-      "value": 4132.7,
-      "display": "$4,132.70 (+1.58%)",
+      "value": 4137.2,
+      "display": "$4,137.20 (+1.69%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -113,7 +110,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     }
   },
   "levels": {
@@ -123,7 +120,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi High)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "pdl": {
       "value": 3963.0,
@@ -131,7 +128,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi Low)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "daily_open": {
       "value": 4049.2,
@@ -139,7 +136,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (mai Open)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:27:10+02:00"
+      "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "asia_high": {
       "value": null,
@@ -218,7 +215,7 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-02T19:27:10+02:00"
+    "updated_at": "2026-07-02T20:51:38+02:00"
   },
   "header": {
     "bias_direction": "SHORT",
@@ -295,19 +292,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-02T19:27:10+02:00"
-  },
-  "bagira": {
-    "narrative": "A pánter ma nem vadászik. NFP nap után, macro lock-ban a 4130 feletti ár csak zaj. A folyamat része, hogy ilyenkor csendben maradsz.",
-    "key_watch": [
-      "NFP utóhatás – H1 volatilitás és wick-ek péntekig meghatározhatják a struktúrát",
-      "US10Y 4.48% RISING – ha 4.55% fölé zár H4-en, a short bias erősödik a következő napokra",
-      "DXY 99–103 sávban – ha 101.5 felett stabilizál, az XAU-ra lefelé mutató nyomás nőhet"
-    ],
-    "confidence": 52,
-    "reasoning_summary": "Napi bias RANGE-BEAR, de a rendszer makró lockban tart az NFP csomag miatt, így a fő szabály szerint ma nincs setup. A spot 4132.7 jóval a HTF supply (4058–4105) felett, extrém zónában, de aktív tiltás mellett csak megfigyelünk. FedWatch adat hiányzik, ezért 30 ponttal csökkentett confidence, a makrók részben támogatják a későbbi short narratívát (US10Y RED, DXY YELLOW, intraday RANGE-BEAR), de ma ez még nem tradelhető edge.",
-    "model": "sonar-pro",
-    "source_type": "ai",
-    "updated_at": "2026-07-02T20:19:54+02:00"
+    "updated_at": "2026-07-02T20:51:38+02:00"
   }
 }
