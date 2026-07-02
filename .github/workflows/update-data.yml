@@ -50,8 +50,8 @@ jobs:
 
       - name: Run AI analysis (Bagira)
         env:
-          PPLX_API_KEY: ${{ secrets.PPLX_API_KEY }}
-          MOCK_AI: ${{ secrets.PPLX_API_KEY == '' && 'true' || '' }}
+          PPLX_API_KEY: ${{ secrets.BAGIRA_XAU_MASTER }}
+          MOCK_AI: ${{ secrets.BAGIRA_XAU_MASTER == '' && 'true' || '' }}
         run: python scripts/ai_analyze.py || echo "[warn] AI analyze failed, continuing"
 
       - name: Validate data.json against schema
