@@ -2,33 +2,47 @@
 
 ## fetch_data.py
 
-Napi automatikus adatlekérő script. A GitHub Actions minden hétkoznap 07:30 CEST-kor futtatja.
+Automatikus adatlekérő. A GitHub Actions 15 percenként futtatja hétköznap 07:00–20:00 CEST közt.
 
-### Mit frissít automatikusan
+### Automatikusan frissül
 
-| Adat | Forrás | Ticker |
+| Adat | Forrás | Ticker/API |
 |---|---|---|
-| XAU/USD ár, PDH, PDL, Daily Open | Yahoo Finance | `GC=F` |
-| US10Y hozam + irány | Yahoo Finance | `^TNX` |
-| DXY szint + bias | Yahoo Finance | `DX-Y.NYB` |
-| Fear & Greed index | CNN dataviz API | – |
+| XAU/USD spot, PDH, PDL, Daily Open | Yahoo Finance | `GC=F` |
+| US10Y hozam + irány + bias | Yahoo Finance | `^TNX` |
+| DXY szint + rezsim + bias | Yahoo Finance | `DX-Y.NYB` |
+| Fear & Greed Index + bias | CNN dataviz API | – |
 | HTF trend (ár alapján) | Számított | – |
+| Effective mode (szigorúbb-nyer) | Számított | – |
 
-### Amit NEM frissít (manuális marad)
+### Manuális marad
 
-- **FedWatch** – CME API fizetős ($25/hó), az előző értéket tartja meg
-- **Asia High/Low** – csak chart alapján adható meg
-- **HTF kulcsszint** – saját elemzés alapján
-- **Setup belépő/SL/TP/Score** – scoring alapján
-- **Bias döntés** – saját ítélet
+- **FedWatch** – CME hivatalos API fizetős. Előző értéket megtartjuk.
+- **Asia High/Low** – csak chart alapján adható meg.
+- **HTF supply/demand zóna** – saját elemzés.
+- **Setup A/B belépő/SL/TP/score** – saját scoring.
+- **Bias irány/status** – saját ítélet.
+- **Risk state** (napi/heti P&L, loss streak) – trader input.
+- **Trade log** – manuális naplózás.
 
-### Manuális futtatás
+### Kézi futtatás
 
 ```bash
-pip install yfinance requests
+pip install yfinance requests jsonschema
 python scripts/fetch_data.py
+python scripts/validate_data.py
 ```
 
-### GitHub Actions manuális trigger
+## validate_data.py
 
-A GitHub repo Actions fülén → `Auto-update data.json` → `Run workflow`
+Kettős védelmi vonal:
+1. JSON Schema strukturális ellenőrzés (`data-schema.json`)
+2. Hallucináció-guard — minden nem-null value-hez kötelező `updated_at`, `source_label`, `status ∈ {fresh, stale}`
+
+## Séma dokumentáció
+
+Lásd `../data-schema.json` — v2 séma.
+
+## Manuális GitHub Actions trigger
+
+Repo → Actions → **Auto-update data.json** → **Run workflow**

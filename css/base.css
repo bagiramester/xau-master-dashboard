@@ -1,0 +1,53 @@
+/* ═══ RESET & BASE ═══ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(0, 234, 255, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at bottom right, rgba(245, 158, 11, 0.04) 0%, transparent 40%),
+    linear-gradient(180deg, var(--bg) 0%, #08080a 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* ═══ TIPOGRÁFIA ═══ */
+.mono { font-family: var(--font-mono); }
+.display { font-family: var(--font-display); letter-spacing: 0.04em; }
+.text-muted { color: var(--text-muted); }
+.text-faint { color: var(--text-faint); }
+.text-uppercase { text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ═══ ACCESSIBILITY ═══ */
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}

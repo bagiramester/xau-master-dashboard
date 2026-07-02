@@ -1,443 +1,186 @@
 <!DOCTYPE html>
-<html lang="hu" data-theme="dark">
+<html lang="hu" data-theme="cyber-panther">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XAU Master Dashboard</title>
+<title>Bagira XAU Master Dashboard</title>
+<meta name="description" content="XAU:CFD döntéstámogató cockpit — Master OS v5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/theme-cyber-panther.css">
 </head>
 <body>
 
-<!-- TOP INFO BAR -->
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TOP INFO BAR — session, bias, effective mode, spot, freshness
+     ═══════════════════════════════════════════════════════════════════════ -->
 <header class="top-bar">
-  <div class="top-bar__left">
-    <div class="top-bar__datetime">
-      <span class="top-bar__date" id="currentDate">2026. 06. 30. - 08:13 CEST</span>
-      <span class="top-bar__session" id="sessionLabel">● London Session</span>
-      <span class="top-bar__refresh" id="refreshCountdown">Next scheduled refresh: 2 min</span>
-    </div>
+  <div class="top-bar__brand">
+    <span class="brand-mark">◤</span>
+    <span class="brand-text">BAGIRA · XAU MASTER OS</span>
+    <span class="brand-sub" id="tb-datetime">—</span>
   </div>
   <div class="top-bar__center">
-    <span class="top-bar__datecenter" id="dateCenterLabel">2026. 06. 30.</span>
-    <span class="top-bar__narrative" id="narrativeText">Bias: <strong>—</strong> | Töltés...</span>
+    <div class="tb-chip" data-role="session"><span class="tb-chip__label">SESSION</span><span class="tb-chip__value" id="tb-session">—</span></div>
+    <div class="tb-chip" data-role="bias"><span class="tb-chip__label">BIAS</span><span class="tb-chip__value" id="tb-bias">—</span></div>
+    <div class="tb-chip" data-role="status"><span class="tb-chip__label">STATUS</span><span class="tb-chip__value" id="tb-status">—</span></div>
+    <div class="tb-chip" data-role="effective"><span class="tb-chip__label">EFFECTIVE</span><span class="tb-chip__value" id="tb-effective">—</span></div>
+    <div class="tb-chip" data-role="lock"><span class="tb-chip__label">MACRO LOCK</span><span class="tb-chip__value" id="tb-lock">—</span></div>
   </div>
   <div class="top-bar__right">
-    <div class="top-bar__effective-block">
-      <span class="top-bar__effective-label">Derived frontend Effective Mode</span>
-      <div class="top-bar__traffic" id="effectiveModeDisplay">
-        <span class="badge badge--green" id="emGreen">GREEN</span>
-        <span class="badge badge--slash">/</span>
-        <span class="badge badge--yellow" id="emYellow">YELLOW</span>
-        <span class="badge badge--slash">/</span>
-        <span class="badge badge--red" id="emRed">RED</span>
-      </div>
+    <div class="tb-spot">
+      <span class="tb-spot__label">XAU/USD</span>
+      <span class="tb-spot__price" id="tb-spot">—</span>
     </div>
-    <div class="top-bar__countdown-block">
-      <span class="top-bar__countdown-label">Active no-trade countdown</span>
-      <span class="top-bar__countdown-value" id="noTradeCountdown">Nincs aktív tiltás</span>
+    <div class="tb-freshness">
+      <span class="tb-freshness__dot" id="tb-freshness-dot"></span>
+      <span class="tb-freshness__label" id="tb-freshness">—</span>
+      <span class="tb-freshness__time" id="tb-updated">—</span>
     </div>
-    <div class="top-bar__status-block">
-      <span class="top-bar__status-label">Today Status Pill</span>
-      <div class="top-bar__pills" id="todayStatusPills">
-        <span class="pill pill--green" id="pillTradeOk">[ TRADE OK ]</span>
-        <span class="pill pill--red" id="pillNoTrade">[ NO-TRADE ]</span>
-      </div>
-      <div class="top-bar__sessions">
-        <span class="session-tag" id="stLondon">[ London ]</span>
-        <span class="session-tag" id="stOverlap">[ Overlap ]</span>
-        <span class="session-tag session-tag--active" id="stNoTrade">[ No-Trade Window ]</span>
-        <span class="session-tag" id="stSetupA">[ Setup A ]</span>
-        <span class="session-tag" id="stSetupB">[ Setup B ]</span>
-      </div>
-    </div>
-    <!-- OVERRIDE UNLOCK BUTTON -->
-    <div class="top-bar__override-block">
-      <button class="override-btn" id="overrideBtn" onclick="toggleOverride()">
-        <span id="overrideBtnIcon">🔓</span>
-        <span id="overrideBtnLabel">TILTÁS FELOLDÁSA</span>
-      </button>
-      <span class="top-bar__override-note" id="overrideNote">Override: OFF</span>
-    </div>
+    <button class="tb-btn" id="btn-refresh" title="Kézi frissítés">↻</button>
   </div>
 </header>
 
-<!-- MAIN GRID -->
-<main class="dashboard-grid">
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MAIN — 3-oszlopos decision cockpit
+     ═══════════════════════════════════════════════════════════════════════ -->
+<main class="cockpit">
 
-  <!-- LEFT COLUMN -->
-  <div class="col col--left">
-    <section class="panel panel--setup-focus">
-      <h2 class="panel__title">SETUP FOCUS</h2>
-      <div class="setup-focus__inner">
-        <div class="setup-focus__mascot">
-          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira" width="100" height="100">
-        </div>
-        <div class="setup-focus__bubble" id="bagiruBubble">
-          <strong>Bagira Virtual Assistant</strong><br>
-          Effective Mode: <span class="text-yellow">YELLOW</span>.<br>
-          Csak trend-irányú sweep engedélyezett.
-        </div>
-      </div>
+  <!-- ═══ BAL OSZLOP: 2 FIX SETUP KÁRTYA ═══ -->
+  <aside class="col col--left">
+    <div class="col__header">
+      <span class="col__title">SETUP FOCUS</span>
+      <span class="col__hint">Előre validált forgatókönyvek</span>
+    </div>
+    <div id="setup-container" class="setup-stack">
+      <!-- SHORT setup card + LONG setup card render-el ide -->
+    </div>
+  </aside>
 
-      <!-- SETUP A -->
-      <div class="setup-card" id="setupA">
-        <div class="setup-card__header">
-          <span class="setup-card__label">Setup A</span>
-          <span class="badge badge--red" id="setupADir">SHORT</span>
-          <span class="lock-badge" id="setupALock">🔒 LOCKED</span>
-        </div>
-        <div class="setup-card__body">
-          <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Típus:</span><span class="setup-val" id="sA_type">—</span></div>
-            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val" id="sA_score">—</span></div>
-            <div class="setup-row"><span class="setup-key">Min R/R:</span><span class="setup-val" id="sA_rr">1:2</span></div>
-            <div class="setup-row"><span class="setup-key">Belépő zóna:</span><span class="setup-val" id="sA_entry">—</span></div>
-            <div class="setup-row"><span class="setup-key">SL:</span><span class="setup-val" id="sA_sl">—</span></div>
-            <div class="setup-row"><span class="setup-key">TP1:</span><span class="setup-val" id="sA_tp1">—</span></div>
-            <div class="setup-row"><span class="setup-key">TP2:</span><span class="setup-val" id="sA_tp2">—</span></div>
-            <div class="setup-row"><span class="setup-key">Bias kompatibilis:</span><span class="setup-val text-green" id="sA_bias">—</span></div>
-          </div>
-          <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Session:</span><span class="setup-val" id="sA_session">—</span></div>
-            <div class="setup-row"><span class="setup-key">Invalidáció:</span><span class="setup-val" id="sA_invalid">—</span></div>
-            <div class="setup-thesis-row"><span class="setup-key">Makró alap:</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sA_m1">—</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sA_m2">—</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sA_m3">—</span></div>
-          </div>
-        </div>
-        <div class="setup-card__footer" id="sA_quality">Setup minőség: —</div>
-      </div>
-
-      <!-- SETUP B -->
-      <div class="setup-card" id="setupB">
-        <div class="setup-card__header">
-          <span class="setup-card__label">Setup B</span>
-          <span class="badge badge--green" id="setupBDir">LONG</span>
-          <span class="lock-badge" id="setupBLock">🔒 LOCKED</span>
-        </div>
-        <div class="setup-card__body">
-          <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Típus:</span><span class="setup-val" id="sB_type">—</span></div>
-            <div class="setup-row"><span class="setup-key">Score:</span><span class="setup-val" id="sB_score">—</span></div>
-            <div class="setup-row"><span class="setup-key">Min R/R:</span><span class="setup-val" id="sB_rr">1:2</span></div>
-            <div class="setup-row"><span class="setup-key">Belépő zóna:</span><span class="setup-val" id="sB_entry">—</span></div>
-            <div class="setup-row"><span class="setup-key">SL:</span><span class="setup-val" id="sB_sl">—</span></div>
-            <div class="setup-row"><span class="setup-key">TP1:</span><span class="setup-val" id="sB_tp1">—</span></div>
-            <div class="setup-row"><span class="setup-key">TP2:</span><span class="setup-val" id="sB_tp2">—</span></div>
-            <div class="setup-row"><span class="setup-key">Bias kompatibilis:</span><span class="setup-val" id="sB_bias">—</span></div>
-          </div>
-          <div class="setup-col">
-            <div class="setup-row"><span class="setup-key">Session:</span><span class="setup-val" id="sB_session">—</span></div>
-            <div class="setup-row"><span class="setup-key">Invalidáció:</span><span class="setup-val" id="sB_invalid">—</span></div>
-            <div class="setup-thesis-row"><span class="setup-key">Makró feltételek:</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sB_m1">—</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sB_m2">—</span></div>
-            <div class="setup-row"><span class="setup-thesis-item" id="sB_m3">—</span></div>
-          </div>
-        </div>
-        <div class="setup-card__footer" id="sB_quality">Setup minőség: —</div>
-      </div>
-    </section>
-    <div class="phase-label">Tervezési Fázis</div>
-  </div>
-
-  <!-- CENTER COLUMN -->
-  <div class="col col--center">
-    <section class="panel panel--live">
-      <h2 class="panel__title">LIVE CANVAS &amp; MACRO INTEL</h2>
-      <div class="live-context-bar" id="chartContextBar">
-        <strong>Chart Context Bar</strong> (Above): Preferred session, &nbsp; Active macro lock, &nbsp; Current setup focus
-      </div>
-      <div class="chart-area" id="chartArea">
-        <div class="tradingview-widget-container" style="width:100%;height:100%;">
-          <div id="tradingview_xau" style="width:100%;height:100%;"></div>
+  <!-- ═══ KÖZÉP OSZLOP: CHART + PIACI HATÁSOK RELEVANCE-TÁBLA ═══ -->
+  <section class="col col--center">
+    <div class="chart-wrap">
+      <div class="chart-toolbar">
+        <span class="chart-title">XAU/USD Live · OANDA</span>
+        <div class="chart-levels" id="chart-levels">
+          <!-- kulcsszint chip-ek -->
         </div>
       </div>
-      <div class="live-session-pills">
-        <span class="session-pill" id="cLondon">[ London ]</span>
-        <span class="session-pill" id="cOverlap">[ Overlap ]</span>
-        <span class="session-pill session-pill--active" id="cNoTrade">[ No-Trade Window ]</span>
-      </div>
-    </section>
-    <div class="center-bottom">
-      <div class="bagira-grid-panel">
-        <div class="bagira-grid-panel__title">Bagira Virtual Assistant console grid</div>
-        <div class="bagira-grid-panel__img">
-          <img src="Gemini_Generated_Image_odawikodawikodaw.jpg" alt="Bagira AI" width="90" height="90">
-        </div>
-        <div class="bagira-grid-panel__speech" id="bagiraGridSpeech">
-          "Kockázat korlátozva. Maximum 1 trade engedélyezett mára."
-        </div>
-      </div>
-      <div class="macro-grid-panel">
-        <div class="macro-grid-panel__title">Macro Market &amp; Kulcsszintek matrix grid</div>
-        <div class="macro-heatmap" id="macroHeatmap">
-          <div class="macro-cell" id="mFedwatch">FedWatch</div>
-          <div class="macro-cell" id="mDxy">DXY</div>
-          <div class="macro-cell" id="mSentiment">Sentiment</div>
-          <div class="macro-cell" id="mHtfTrend">HTF trend</div>
-          <div class="macro-cell" id="mHtfTrend2">HTF<br>trend</div>
-          <div class="macro-cell" id="mIntraday">Intraday<br>regime</div>
-          <div class="macro-cell" id="mVolatility">Volatility<br>Regime</div>
-          <div class="macro-cell macro-cell--empty"></div>
-        </div>
-        <div class="key-levels-table">
-          <div class="key-levels-title"><strong>Table of Key Levels</strong></div>
-          <div class="key-level-row" id="kl1"><span class="kl-label">[PDH - pending]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
-          <div class="key-level-row" id="kl2"><span class="kl-label">[PDL - pending]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
-          <div class="key-level-row" id="kl3"><span class="kl-label">[Daily Open - pending]</span><span class="kl-status kl-status--stale">[ STALE - Review Needed ]</span><span class="kl-derived">[DERIVED]</span></div>
-          <div class="key-level-row" id="kl4"><span class="kl-label">[Asia High - pending]</span><span class="kl-status kl-status--blank"></span><span class="kl-derived">[DERIVED]</span></div>
-        </div>
+      <div class="chart-frame" id="chart-frame">
+        <!-- TradingView widget -->
       </div>
     </div>
-    <div class="phase-label">Figyelési Fázis</div>
-  </div>
 
-  <!-- RIGHT COLUMN -->
-  <div class="col col--right">
-    <section class="panel panel--risk">
-      <h2 class="panel__title">EXECUTION &amp; RISK ENGINE</h2>
-
-      <div class="risk-sub">
-        <div class="risk-sub__title">TRADE INPUT</div>
-        <div class="trade-input-row">
-          <div class="trade-input-field">
-            <label>Entry Price</label>
-            <input type="number" id="entryPrice" placeholder="" step="0.01">
-          </div>
-          <div class="trade-input-field">
-            <label>Stop Loss</label>
-            <input type="number" id="stopLoss" placeholder="" step="0.01">
-          </div>
-          <div class="trade-input-field">
-            <label>Take Profit</label>
-            <input type="number" id="takeProfit" placeholder="" step="0.01">
-          </div>
-          <div class="trade-input-lock" id="tradeLockIcon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-        </div>
-        <div class="trade-input-smartbridge">
-          <span>Smart Bridge automatic filling from active Setup A toggle</span>
-          <div class="smartbridge-controls">
-            <button class="toggle-btn" id="smartBridgeA">A</button>
-            <span class="text-muted" style="font-size:0.6rem">and</span>
-          </div>
-        </div>
-        <button class="execute-btn" id="executeBtn">EXECUTE TRADE</button>
-        <div class="execute-note" id="executeNote">(active only with allowed setup)</div>
+    <div class="relevance-board">
+      <div class="rel-header">
+        <span class="rel-title">PIACI HATÁSOK</span>
+        <span class="rel-subtitle">Mi mozgatja most az XAU-t? · hatáserősség szerint</span>
       </div>
-
-      <div class="risk-sub">
-        <div class="risk-sub__title">RISK ENGINE</div>
-        <div class="risk-bars">
-          <div class="risk-bar-block">
-            <div class="risk-bar-header">
-              <span class="risk-bar-label">Napi P/L water mark</span>
-              <span class="risk-bar-label">Napi P/L USD</span>
-              <span class="risk-bar-label" style="margin-left:auto">Live P/L</span>
-            </div>
-            <div style="text-align:right;font-size:0.6rem;color:var(--text-muted)" id="livePnlTop">0/0</div>
-            <div class="risk-bar-label-left">0 to -100 USD Hard Stop</div>
-            <div class="risk-progress-bar">
-              <div class="risk-progress-fill risk-progress-fill--daily" id="dailyFill" style="width:0%"></div>
-            </div>
-            <div class="risk-bar-limits">
-              <span></span><span class="text-red">-100 USD</span>
-            </div>
-          </div>
-          <div class="risk-bar-block">
-            <div class="risk-bar-label">Heti Risk Progress Bar</div>
-            <div class="risk-progress-bar">
-              <div class="risk-progress-fill risk-progress-fill--weekly" id="weeklyFill" style="width:0%"></div>
-            </div>
-            <div class="risk-bar-limits">
-              <span class="text-muted">0 to -300 USD limit</span>
-              <span class="text-red">-300 USD</span>
-            </div>
-          </div>
-          <div class="risk-trades-row">
-            <div class="risk-trades-allowed">
-              <span class="risk-bar-label">Max Trades allowed today</span>
-              <div class="trades-allowed-counts">
-                <span class="text-green">GREEN: <strong id="tAllowGreen">2</strong></span>
-                <span class="text-yellow">YELLOW: <strong id="tAllowYellow">1</strong></span>
-                <span class="text-red">RED: <strong id="tAllowRed">0</strong></span>
-              </div>
-            </div>
-            <div class="risk-mode-pill" id="riskModePill">
-              <span class="risk-mode-pill__title">Yellow Mode Guidance</span>
-              <span class="risk-mode-pill__desc">YELLOW – konzervatív, max 1 trade, NFP-nap.</span>
-            </div>
-          </div>
-          <div class="risk-pnl-row">
-            <div class="risk-pnl-cell">
-              <span class="risk-pnl-label">Live P/L</span>
-              <span class="risk-pnl-val text-green" id="riskLivePL">0.00</span>
-            </div>
-            <div class="risk-pnl-cell">
-              <span class="risk-pnl-label">Loss Streak</span>
-              <span class="risk-pnl-val text-red" id="riskLossStreak">0</span>
-            </div>
-          </div>
-        </div>
+      <div id="relevance-container" class="rel-grid">
+        <!-- driver kártyák -->
       </div>
+    </div>
+  </section>
 
-      <div class="risk-sub">
-        <div class="risk-sub__title">TRADE LOG &amp; PERFORMANCE snapshot</div>
-        <div class="trade-log-summary">
-          <span>Trades Today: <strong class="text-muted" id="tlTotal">0/2</strong></span>
-          <span>Net P/L: <strong class="text-green" id="tlNetPL">0.00</strong></span>
-          <span>Avg RR <strong id="tlAvgRR">—</strong></span>
-          <span>Rule adherence: <strong class="text-green" id="tlRule">100%</strong></span>
-        </div>
-        <div class="daily-snapshot-label">Daily Trade Snapshot (Mai max 2 trade)</div>
-        <table class="trade-table" id="tradeTable">
-          <thead>
-            <tr><th>Idő</th><th>Irány</th><th>Típus</th><th>RR</th><th>P/L</th><th>Szabály Státusz</th></tr>
-          </thead>
-          <tbody id="tradeTableBody">
-            <tr><td colspan="6" style="text-align:center;color:var(--text-faint)">Nincs lezárt trade ma</td></tr>
-          </tbody>
-        </table>
+  <!-- ═══ JOBB OSZLOP: RISK ENGINE + TRADE INPUT + WARNINGS + LOG ═══ -->
+  <aside class="col col--right">
+    <div class="risk-panel">
+      <div class="col__header">
+        <span class="col__title">RISK ENGINE</span>
+        <span class="risk-mode-badge" id="risk-mode">—</span>
       </div>
-    </section>
-    <div class="phase-label">Végrehajtási Fázis</div>
-  </div>
+      <div id="risk-container" class="risk-grid">
+        <!-- risk mezők -->
+      </div>
+    </div>
+
+    <div class="warnings-panel">
+      <div class="col__header col__header--warn">
+        <span class="col__title">FIGYELMEZTETÉSEK</span>
+      </div>
+      <ul id="warnings-container" class="warnings-list">
+        <!-- warning sorok -->
+      </ul>
+    </div>
+
+    <div class="tradeinput-panel">
+      <div class="col__header">
+        <span class="col__title">QUICK TRADE INPUT</span>
+      </div>
+      <form id="trade-form" class="trade-form" onsubmit="return false;">
+        <div class="trade-row">
+          <label>Irány
+            <select id="ti-direction"><option value="LONG">LONG</option><option value="SHORT">SHORT</option></select>
+          </label>
+          <label>Setup
+            <select id="ti-setup"><option value="A">A</option><option value="B">B</option><option value="manual">Manuális</option></select>
+          </label>
+        </div>
+        <div class="trade-row">
+          <label>Belépő<input type="number" step="0.01" id="ti-entry"></label>
+          <label>SL<input type="number" step="0.01" id="ti-sl"></label>
+          <label>TP<input type="number" step="0.01" id="ti-tp"></label>
+        </div>
+        <div class="trade-row">
+          <label>Risk USD<input type="number" step="0.5" id="ti-risk"></label>
+          <label>Egység<input type="number" step="0.01" id="ti-unit" value="1"></label>
+        </div>
+        <div class="trade-row trade-row--calc">
+          <span class="trade-calc-label">Számított RR:</span>
+          <span class="trade-calc-value" id="ti-rr-calc">—</span>
+        </div>
+        <button type="button" class="trade-submit" id="ti-submit" disabled>Naplózás (SL/TP kötelező)</button>
+      </form>
+    </div>
+
+    <div class="log-panel">
+      <div class="col__header">
+        <span class="col__title">TRADE LOG</span>
+        <span class="log-mini" id="log-mini">0 trade · 0 W / 0 L · $0.00</span>
+      </div>
+      <div id="log-container" class="log-container">
+        <!-- log sorok vagy "nincs trade ma" placeholder -->
+      </div>
+    </div>
+  </aside>
 
 </main>
 
-<script>
-// ============================
-// OVERRIDE / UNLOCK LOGIC
-// ============================
-var overrideActive = false;
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HARD LOCK OVERLAY — RED/PIROS effektív módnál aktív, X-szel zárható
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="hard-lock" id="hard-lock" hidden>
+  <div class="hard-lock__panel">
+    <button class="hard-lock__close" id="hard-lock-close" title="Bezárás">✕</button>
+    <div class="hard-lock__mark">⛔</div>
+    <div class="hard-lock__title">NO-TRADE ZÓNA</div>
+    <div class="hard-lock__reason" id="hard-lock-reason">—</div>
+    <div class="hard-lock__meta">Effektív mód: <strong id="hard-lock-mode">RED</strong></div>
+  </div>
+</div>
 
-function toggleOverride() {
-  overrideActive = !overrideActive;
-  applyOverrideState(overrideActive);
-}
+<!-- ═══════════════════════════════════════════════════════════════════════
+     INFO TOOLTIP HOST
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div id="tooltip" class="tooltip" hidden></div>
 
-function applyOverrideState(active) {
-  var btn = document.getElementById('overrideBtn');
-  var icon = document.getElementById('overrideBtnIcon');
-  var label = document.getElementById('overrideBtnLabel');
-  var note = document.getElementById('overrideNote');
-  var lockA = document.getElementById('setupALock');
-  var lockB = document.getElementById('setupBLock');
-  var amberEls = document.querySelectorAll('.setup-row--amber');
-  var rrLocks = document.querySelectorAll('.setup-val--lock');
-  var ntCountdown = document.getElementById('noTradeCountdown');
-  var stNoTrade = document.getElementById('stNoTrade');
-  var cNoTrade = document.getElementById('cNoTrade');
-  var execBtn = document.getElementById('executeBtn');
-  var execNote = document.getElementById('executeNote');
-  var bubble = document.getElementById('bagiruBubble');
-  var gridSpeech = document.getElementById('bagiraGridSpeech');
+<footer class="page-footer">
+  <span>Bagira XAU Master Dashboard · v2 séma</span>
+  <span id="footer-updated">—</span>
+  <a href="https://github.com/bagiramester/xau-master-dashboard" target="_blank" rel="noopener">GitHub</a>
+</footer>
 
-  if (active) {
-    btn.classList.add('override-btn--active');
-    icon.textContent = '🔓';
-    label.textContent = 'FELOLDVA – VISSZAÁLLÍT';
-    note.textContent = 'Override: ON ⚠️';
-    note.style.color = 'var(--green)';
-    lockA.innerHTML = '✅ OPEN'; lockA.style.color = 'var(--green)';
-    lockB.innerHTML = '✅ OPEN'; lockB.style.color = 'var(--green)';
-    amberEls.forEach(function(el) { el.style.display = 'none'; });
-    rrLocks.forEach(function(el) { el.textContent = 'ENGEDÉLYEZETT'; el.style.color = 'var(--green)'; });
-    if (ntCountdown) ntCountdown.innerHTML = '<span style="color:var(--green)">✅ Nincs aktív tiltás</span>';
-    if (stNoTrade) { stNoTrade.classList.remove('session-tag--active'); }
-    if (cNoTrade) { cNoTrade.classList.remove('session-pill--active'); }
-    execBtn.classList.add('active');
-    execNote.textContent = '⚠️ OVERRIDE AKTÍV — minden szabályszűrő feloldva';
-    execNote.style.color = 'var(--amber)';
-    bubble.innerHTML = '<strong>Bagira Virtual Assistant — OVERRIDE MÓD</strong><br>⚠️ Minden tiltás manuálisan feloldva. Az adatok láthatók, de a kereskedési szabályok nem érvényesülnek. Légy óvatos!';
-    gridSpeech.innerHTML = '⚠️ Override aktív. Összes szűrő letiltva.';
-  } else {
-    btn.classList.remove('override-btn--active');
-    icon.textContent = '🔒';
-    label.textContent = 'TILTÁS FELOLDÁSA';
-    note.textContent = 'Override: OFF';
-    note.style.color = 'var(--text-muted)';
-    lockA.innerHTML = '🔒 LOCKED'; lockA.style.color = '';
-    lockB.innerHTML = '🔒 LOCKED'; lockB.style.color = '';
-    amberEls.forEach(function(el) { el.style.display = ''; });
-    rrLocks.forEach(function(el) { el.textContent = 'Locked by RR rule'; el.style.color = ''; });
-    if (stNoTrade) { stNoTrade.classList.add('session-tag--active'); }
-    if (cNoTrade) { cNoTrade.classList.add('session-pill--active'); }
-    execBtn.classList.remove('active');
-    execNote.textContent = '(active only with allowed setup)';
-    execNote.style.color = '';
-    bubble.innerHTML = '<strong>Bagira Virtual Assistant</strong><br>Effective Mode: <span class="text-yellow">YELLOW</span>.<br>Csak trend-irányú sweep engedélyezett.';
-    gridSpeech.innerHTML = '"Kockázat korlátozva. Maximum 1 trade engedélyezett mára."';
-  }
-}
-
-// ============================
-// CLOCK
-// ============================
-function updateClock() {
-  var now = new Date();
-  var pad = function(n){ return String(n).padStart(2,'0'); };
-  var y=now.getFullYear(), mo=now.getMonth()+1, d=now.getDate();
-  var h=now.getHours(), mi=now.getMinutes();
-  document.getElementById('currentDate').textContent = y+'. '+pad(mo)+'. '+pad(d)+'. - '+pad(h)+':'+pad(mi)+' CEST';
-  document.getElementById('dateCenterLabel').textContent = y+'. '+pad(mo)+'. '+pad(d)+'.';
-  var cestH = (now.getUTCHours()+2) % 24;
-  var session='Ázsiai Session', sc='var(--text-muted)';
-  if(cestH>=8&&cestH<12){session='London Session';sc='var(--green)';}
-  else if(cestH>=14&&cestH<17){session='London–NY Overlap';sc='var(--yellow)';}
-  else if(cestH>=17&&cestH<22){session='NY Session';sc='var(--teal)';}
-  var sl=document.getElementById('sessionLabel');
-  sl.textContent='● '+session; sl.style.color=sc;
-}
-setInterval(updateClock,1000); updateClock();
-
-// ============================
-// REFRESH COUNTER
-// ============================
-var rSec=120;
-setInterval(function(){
-  rSec--; if(rSec<=0)rSec=120;
-  var m=Math.floor(rSec/60),s=rSec%60;
-  document.getElementById('refreshCountdown').textContent='Next scheduled refresh: '+m+':'+String(s).padStart(2,'0')+' min';
-},1000);
-
-// ============================
-// EXECUTE BUTTON
-// ============================
-['entryPrice','stopLoss','takeProfit'].forEach(function(id){
-  document.getElementById(id).addEventListener('input',function(){
-    if(overrideActive) return;
-    var e=parseFloat(document.getElementById('entryPrice').value);
-    var s=parseFloat(document.getElementById('stopLoss').value);
-    var t=parseFloat(document.getElementById('takeProfit').value);
-    document.getElementById('executeBtn').classList.toggle('active',e>0&&s>0&&t>0);
-  });
-});
-
-// ============================
-// TRADINGVIEW
-// ============================
-(function(){
-  var sc=document.createElement('script');
-  sc.src='https://s3.tradingview.com/tv.js'; sc.async=true;
-  sc.onload=function(){
-    new TradingView.widget({
-      autosize:true, symbol:'OANDA:XAUUSD', interval:'15',
-      timezone:'Europe/Budapest', theme:'dark', style:'1', locale:'en',
-      toolbar_bg:'#141416', enable_publishing:false, hide_side_toolbar:true,
-      allow_symbol_change:false, container_id:'tradingview_xau',
-      hide_top_toolbar:false, save_image:false
-    });
-  };
-  document.head.appendChild(sc);
-})();
-</script>
-<script src="app.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/macro.js"></script>
+<script src="js/setups.js"></script>
+<script src="js/risk.js"></script>
+<script src="js/relevance.js"></script>
+<script src="js/warnings.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

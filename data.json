@@ -1,49 +1,189 @@
 {
   "meta": {
-    "last_updated": "2026-07-02 18:04 CEST",
+    "schema_version": "v2",
+    "last_updated": "2026-07-02 18:10 CEST",
     "auto": true,
-    "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
+    "note": "v2 séma. Auto: XAU/US10Y/DXY/F&G (Yahoo/CNN). Manuális: FedWatch, kulcsszintek, risk/log.",
+    "data_freshness": "live",
+    "source_stack": [
+      "yfinance:GC=F",
+      "yfinance:^TNX",
+      "yfinance:DX-Y.NYB",
+      "cnn:fear-greed",
+      "cme:fedwatch",
+      "investing:economic-calendar",
+      "manual:trade-log"
+    ]
   },
   "macro": {
     "fedwatch": {
-      "value": "HOLD ~70.1% | HIKE ~69% kumulált 2026-ra | CUT ~0%",
-      "next_meeting": "2026-07-29",
-      "current_rate": "3.50–3.75%",
-      "regime": "NEUTRAL/HIKE",
+      "value": "HOLD ~70% | 2026 kumulált HIKE ~69% | CUT ~0%",
+      "display": "NEUTRAL / HIKE (2026)",
       "bias": "YELLOW",
-      "bias_note": "HOLD dominál júl 29-re, de 2026-ra kumulált hike-valószínűség ~69%. Cut-várakozás eltűnt. Negatív XAU carry-háttér.",
-      "source_type": "auto",
-      "source_label": "CME FedWatch via Growbeansprout – 2026-06-28",
+      "bias_note": "HOLD dominál júl 29-re, 2026-os hike-odds ~69%. Cut-várakozás eltűnt. Negatív carry-háttér az aranynak.",
+      "impact": 4,
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "CME FedWatch (manuális olvasat)",
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
-    "us10y": "N/A",
-    "dxy": "100.77 – NEUTRAL",
-    "sentiment": "N/A",
-    "htf_trend": "RANGE",
-    "intraday_regime": {
-      "value": "RANGE / kétoldalú",
+    "us10y": {
+      "value": null,
+      "display": "N/A",
+      "bias": null,
+      "bias_note": "Yahoo ^TNX lekérés folyamatban a következő workflow futásnál.",
+      "impact": 4,
+      "status": "pending",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance ^TNX",
+      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
+      "updated_at": null
+    },
+    "dxy": {
+      "value": 100.75,
+      "display": "100.75 – NEUTRAL",
       "bias": "YELLOW",
-      "bias_note": "Ázsiai sessionben $4000 fölött pattogás, éjszakai spike ~4100-ig majd fade. Nem tiszta trend, range jelleg.",
+      "bias_note": "99–103 sávban. Nem erős USD-headwind, de nem is támogatja a long XAU-t.",
+      "impact": 4,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance DX-Y.NYB",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    },
+    "sentiment": {
+      "value": null,
+      "display": "N/A",
+      "bias": null,
+      "bias_note": "CNN Fear & Greed lekérés folyamatban.",
+      "impact": 2,
+      "status": "pending",
+      "source_type": "auto",
+      "source_label": "CNN Fear & Greed Index",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "updated_at": null
+    },
+    "htf_trend": {
+      "value": "RANGE",
+      "display": "RANGE ($3963–$4100)",
+      "bias": "YELLOW",
+      "bias_note": "PDL 3963 – PDH 4100 sávban, ATH-hoz képest korrekció, de nem trendfordulás.",
+      "impact": 3,
+      "status": "fresh",
+      "source_type": "computed",
+      "source_label": "Számított ártartomány alapján",
+      "source_url": null,
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    },
+    "intraday_regime": {
+      "value": "RANGE",
+      "display": "RANGE / kétoldalú",
+      "bias": "YELLOW",
+      "bias_note": "Ázsiai session $4000 fölött pattogás, spike ~4100-ig majd fade. Nem tiszta trend.",
+      "impact": 3,
+      "status": "fresh",
       "source_type": "auto+manual",
-      "source_label": "TradingView XAUUSD ideas – 2026-07-02 reggel",
+      "source_label": "TradingView OANDA:XAUUSD",
+      "source_url": "https://www.tradingview.com/symbols/OANDA-XAUUSD/",
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
-    "volatility": "NORMÁL"
+    "volatility": {
+      "value": "HIGH",
+      "display": "HIGH (NFP-nap)",
+      "bias": "YELLOW",
+      "bias_note": "NFP-nap → várható intraday ATR jelentősen a norma felett. SL-t szélesíteni, méretet csökkenteni.",
+      "impact": 3,
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "NFP-nap előzetes",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00"
+    },
+    "xau_spot": {
+      "value": 4030.32,
+      "display": "$4,030.32 (+0.34%)",
+      "bias": null,
+      "bias_note": null,
+      "impact": 4,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F",
+      "source_url": "https://finance.yahoo.com/quote/GC=F",
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    }
   },
   "levels": {
-    "pdh": 4100.0,
-    "pdl": 3963.0,
-    "asia_high": null,
-    "asia_low": null,
-    "daily_open": 4049.2,
-    "htf_level": null
+    "pdh": {
+      "value": 4100.0,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi High)",
+      "source_url": null,
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    },
+    "pdl": {
+      "value": 3963.0,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi Low)",
+      "source_url": null,
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    },
+    "daily_open": {
+      "value": 4049.2,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (mai Open)",
+      "source_url": null,
+      "updated_at": "2026-07-02T18:04:00+02:00"
+    },
+    "asia_high": {
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Charton olvasandó (Ázsiai session 01:00–08:00 CEST)",
+      "source_url": null,
+      "updated_at": null
+    },
+    "asia_low": {
+      "value": null,
+      "status": "pending",
+      "source_type": "manual",
+      "source_label": "Charton olvasandó (Ázsiai session 01:00–08:00 CEST)",
+      "source_url": null,
+      "updated_at": null
+    },
+    "htf_supply": {
+      "value": "4058–4105",
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "Setup A short-zóna",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00"
+    },
+    "htf_demand": {
+      "value": "3900–3930",
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "Setup A TP2 zóna",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00"
+    },
+    "psych_level": {
+      "value": 4000,
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "$4,000 pszichológiai szint",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00"
+    }
   },
   "notrade_filters": {
     "macro_lock_active": true,
     "macro_events_today": [
       {
-        "event": "US NFP csomag (Nonfarm Payrolls, munkanélküliség, átlagbér, initial/continuing claims)",
+        "event": "US NFP csomag (Nonfarm Payrolls, unemployment rate, average hourly earnings, initial/continuing claims)",
         "time_cest": "14:30",
         "effect": "HIGH-IMPACT – XAU high vol trigger",
         "note": "Legjelentősebb havi US makróadat. Minden forgatókönyvben tiltott sáv aktiválódik."
@@ -65,13 +205,14 @@
     "daily_loss": 0.0,
     "daily_risk_usage_pct": 0,
     "weekly_loss": 0.0,
+    "weekly_risk_usage_pct": 0,
     "loss_streak": 0,
     "max_trades_today": 1,
     "open_positions": 0,
     "open_xau_positions": 0,
     "trade_allowed_now": true,
     "xau_trade_allowed_now": true,
-    "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható ha M15/H1 rejection tiszta és score ≥8.",
+    "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
     "updated_at": "2026-07-02T09:55:00+02:00"
@@ -79,60 +220,84 @@
   "header": {
     "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
-    "risk_mode": "ZÖLD",
-    "daily_pl_usd": 0,
-    "daily_risk_usage_pct": 0
+    "effective_mode": "YELLOW",
+    "session": "London",
+    "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
+    "narrative": "SHORT bias, SÁRGA nap: FedWatch neutral/hike + DXY 100.75 + US10Y magas → short XAU háttér. RANGE HTF trend, HIGH vol az NFP miatt. Kizárólag Setup A jöhet szóba London sessionben tiszta rejection esetén.",
+    "fed_regime_summary": "HOLD dominál 2026 júliusra, hike-odds 2026-ra ~69% → negatív carry-háttér az aranynak."
   },
   "setups": {
     "A": {
-      "direction": "SHORT",
-      "type": "HTF sell-zóna / intraday premium reakció",
-      "bias_compatibility": "igen – SHORT bias-szal egyező",
-      "entry_zone": "4058–4105 (konzervatív: 4090–4105; HTF core: 4058–4068)",
-      "sl": "4110–4115 felett M15 zárás alapján (konzervatív belépőnél); 4075–4080 felett H1 close alapján (HTF core belépőnél)",
-      "tp1": "3965–3970 (Value Demand Zóna)",
-      "tp2": "3900–3930 (Mélyebb Támasz)",
-      "rr_min": 2.0,
-      "score": 8,
-      "session": "London 09:00–12:00 CEST (elsődleges – NFP előtt)",
-      "invalidation": "H1 close 4115 felett (konzervatív) vagy 4080 felett (HTF core) – bull struktúra erősödik, short edge megszűnik",
-      "macro_support": [
-        "FedWatch NEUTRAL/HIKE – nincs cut-bid aranynak",
-        "US10Y 4.48% RISING – magas relhozam, opportunity cost aranynak",
-        "DXY USD-BULL ~99.5 – headwind XAU-nak",
-        "ADP miss (98K vs 118K) – ha NFP is miss, USD gyengülhet, de London sessionben ez még nem ismert"
-      ],
-      "allowed": true,
-      "locked_reason": null,
-      "confirmed": false,
-      "setup_quality": "erős (ha M15/H1 rejection tiszta és 13:30 előtt formálódik)",
-      "updated_at": "2026-07-02T09:55:00+02:00"
+      "value": {
+        "direction": "SHORT",
+        "type": "HTF sell-zóna / intraday premium reakció",
+        "bias_compatibility": "igen – SHORT bias-szal egyező",
+        "entry_zone": "4058–4105 (konzervatív: 4090–4105; HTF core: 4058–4068)",
+        "sl": "4110–4115 felett M15 close (konzervatív); 4075–4080 felett H1 close (HTF core)",
+        "tp1": "3965–3970 (Value Demand Zóna)",
+        "tp2": "3900–3930 (Mélyebb Támasz)",
+        "rr_min": 2.0,
+        "score": 8,
+        "session": "London 09:00–12:00 CEST (elsődleges – NFP előtt)",
+        "invalidation": "H1 close 4115 felett (konzervatív) vagy 4080 felett (HTF core) – bull struktúra erősödik, short edge megszűnik",
+        "macro_support": [
+          "FedWatch NEUTRAL/HIKE – nincs cut-bid aranynak",
+          "DXY ~100.75 (nem headwind, de nem tailwind sem)",
+          "US10Y magas (pending confirm)",
+          "ADP miss (98K vs 118K) – ha NFP is miss, USD gyengülhet"
+        ],
+        "allowed": true,
+        "locked_reason": null,
+        "confirmed": false,
+        "setup_quality": "erős (ha M15/H1 rejection tiszta és 13:30 előtt formálódik)"
+      },
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "XAU Master OS Setup Execution",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00",
+      "impact": null
     },
     "B": {
-      "direction": "LONG",
-      "type": "NFP-utáni flush + demand sweep / safe haven mean reversion",
-      "bias_compatibility": "részben – kontratrend, csak makróforduló esetén",
-      "entry_zone": "3965–3970 flush/sweep (Asia Low + PDL letörés után V-reversal)",
-      "sl": "3925–3930 alatt H1 close alapján",
-      "tp1": "Daily Open / Asia High (charton pontosítandó)",
-      "tp2": "4058–4068 (HTF sell zóna, ha makró egyértelműen long irányba fordul)",
-      "rr_min": 2.0,
-      "score": 6,
-      "session": "London–NY overlap 15:00–19:00 CEST (csak NFP után)",
-      "invalidation": "H1 close 3930 alatt, vagy új mélyebb low 3900 alatt – flush nem sweep, hanem trendváltás",
-      "macro_support": [
-        "Csak akkor engedélyezett, ha NFP significantly miss (jóval 114K alatt)",
-        "US10Y vissza 4.3% alá kell esnie",
-        "DXY gyengülés szükséges (99 alá)",
-        "FedWatch hike-odds csökkenése NFP után",
-        "ADP miss előjel – de csak NFP után validált"
-      ],
-      "allowed": false,
-      "locked_reason": "Csak NFP után (15:00 CEST+) és csak makróforduló esetén engedélyezett. Jelenleg NO-TRADE.",
-      "confirmed": false,
-      "setup_quality": "közepes (erős edge csak hawkish→dovish makróforduló esetén)",
-      "updated_at": "2026-07-02T09:55:00+02:00"
+      "value": {
+        "direction": "LONG",
+        "type": "NFP-utáni flush + demand sweep / safe haven mean reversion",
+        "bias_compatibility": "részben – kontratrend, csak makróforduló esetén",
+        "entry_zone": "3965–3970 flush/sweep (Asia Low + PDL letörés után V-reversal)",
+        "sl": "3925–3930 alatt H1 close",
+        "tp1": "Daily Open / Asia High (charton pontosítandó)",
+        "tp2": "4058–4068 (HTF sell zóna, ha makró egyértelműen long irányba fordul)",
+        "rr_min": 2.0,
+        "score": 6,
+        "session": "London–NY overlap 15:00–19:00 CEST (csak NFP után)",
+        "invalidation": "H1 close 3930 alatt, vagy új mélyebb low 3900 alatt – flush nem sweep, hanem trendváltás",
+        "macro_support": [
+          "Csak akkor engedélyezett, ha NFP significantly miss (< 114K)",
+          "US10Y vissza 4.3% alá",
+          "DXY < 99",
+          "FedWatch hike-odds csökken NFP után"
+        ],
+        "allowed": false,
+        "locked_reason": "Csak NFP után (15:00 CEST+) és csak makróforduló esetén engedélyezett. Jelenleg NO-TRADE.",
+        "confirmed": false,
+        "setup_quality": "közepes (erős edge csak hawkish→dovish makróforduló esetén)"
+      },
+      "status": "fresh",
+      "source_type": "manual",
+      "source_label": "XAU Master OS Setup Execution",
+      "source_url": null,
+      "updated_at": "2026-07-02T09:55:00+02:00",
+      "impact": null
     }
   },
-  "trade_log": []
+  "trade_log": [],
+  "performance": {
+    "trade_count": 0,
+    "win_count": 0,
+    "loss_count": 0,
+    "net_pl_usd": 0.0,
+    "avg_rr": null,
+    "rule_break_count": 0,
+    "updated_at": "2026-07-02T18:04:00+02:00"
+  }
 }
