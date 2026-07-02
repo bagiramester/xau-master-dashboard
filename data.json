@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-02 19:19 CEST",
+    "last_updated": "2026-07-02 19:22 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -14,7 +14,7 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-02T19:19:15+02:00",
+    "ai_last_run": "2026-07-02T19:22:37+02:00",
     "ai_model": "mock-fallback (sonar-reasoning-pro failed)",
     "ai_source_type": "ai-fallback"
   },
@@ -41,7 +41,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance ^TNX",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "dxy": {
       "value": 100.85,
@@ -53,7 +53,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance DX-Y.NYB",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "sentiment": {
       "value": 31,
@@ -65,7 +65,7 @@
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -77,7 +77,7 @@
       "source_type": "computed",
       "source_label": "Számított ártartomány alapján",
       "source_url": null,
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "intraday_regime": {
       "value": "RANGE",
@@ -104,8 +104,8 @@
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
     "xau_spot": {
-      "value": 4131.5,
-      "display": "$4,131.50 (+1.55%)",
+      "value": 4130.0,
+      "display": "$4,130.00 (+1.52%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -113,7 +113,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     }
   },
   "levels": {
@@ -123,7 +123,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi High)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "pdl": {
       "value": 3963.0,
@@ -131,7 +131,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi Low)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "daily_open": {
       "value": 4049.2,
@@ -139,7 +139,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (mai Open)",
       "source_url": null,
-      "updated_at": "2026-07-02T19:19:12+02:00"
+      "updated_at": "2026-07-02T19:22:33+02:00"
     },
     "asia_high": {
       "value": null,
@@ -218,7 +218,7 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-02T19:19:12+02:00"
+    "updated_at": "2026-07-02T19:22:33+02:00"
   },
   "header": {
     "bias_direction": "SHORT",
@@ -257,7 +257,7 @@
       "source_type": "ai-fallback",
       "source_label": "AI (mock-fallback (sonar-reasoning-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:19:15+02:00",
+      "updated_at": "2026-07-02T19:22:37+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     },
@@ -287,7 +287,7 @@
       "source_type": "ai-fallback",
       "source_label": "AI (mock-fallback (sonar-reasoning-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:19:15+02:00",
+      "updated_at": "2026-07-02T19:22:37+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -300,7 +300,7 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-02T19:19:12+02:00"
+    "updated_at": "2026-07-02T19:22:33+02:00"
   },
   "bagira": {
     "narrative": "A pánter csendben ül. NFP küszöbén vagyunk — semmi sem tiszta. A 4090 zóna prémium, de várni kell a rejectiont. A short bias makró oldalról ép, de a nyomás a szabályokból jön: 60 perc tiltás.",
@@ -313,6 +313,6 @@
     "reasoning_summary": "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), HTF RANGE + intraday range-bear (3/4). NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén.",
     "model": "mock-fallback (sonar-reasoning-pro failed)",
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-02T19:19:15+02:00"
+    "updated_at": "2026-07-02T19:22:37+02:00"
   }
 }

@@ -3,10 +3,10 @@
   "asia_low": 4065.2,
   "atr_15m": 11.76,
   "intraday_regime": "TREND-BULL",
-  "intraday_regime_note": "Bullish trend: +1.28% az utolsó 5 órában.",
+  "intraday_regime_note": "Bullish trend: +1.27% az utolsó 5 órában.",
   "volatility_regime": "NORMAL",
   "volatility_note": "ATR15m $11.76 (0.28%) — normál piaci vol.",
-  "last_price": 4130.5,
+  "last_price": 4130.0,
   "source_label": "Yahoo GC=F 15m intraday computed",
-  "updated_at": "2026-07-02T19:19:15+02:00"
+  "updated_at": "2026-07-02T19:22:36+02:00"
 }
