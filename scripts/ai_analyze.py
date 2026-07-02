@@ -171,19 +171,39 @@ def call_perplexity(system_prompt, user_snapshot):
 
 def extract_json_from_text(text):
     """Az AI válaszból kinyeri a JSON-t (markdown fence-t, thinking blokkot eltávolít)."""
-    # <think> blokk eltávolítása (reasoning modelleknél)
     import re
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.S)
-    # markdown fence
     m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
     if m:
         return m.group(1)
-    # Ha nincs fence, keresi a legnagyobb JSON blokkot
     start = text.find("{")
     end = text.rfind("}")
     if start >= 0 and end > start:
         return text[start:end+1]
     return text
+
+
+def parse_ai_json(text):
+    """Hibatűrő JSON parsing: szigorú → json5 → regex cleanup."""
+    import re
+    json_str = extract_json_from_text(text)
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError as e:
+        print(f"[ai] Szigorú parse hiba: {e}", file=sys.stderr)
+    try:
+        import json5
+        return json5.loads(json_str)
+    except ImportError:
+        print("[ai] json5 nincs, regex cleanup", file=sys.stderr)
+    except Exception as e:
+        print(f"[ai] json5 hiba: {e}", file=sys.stderr)
+    fixed = re.sub(r",\s*([\]}])", r"\1", json_str)
+    try:
+        return json.loads(fixed)
+    except json.JSONDecodeError as e:
+        print(f"[ai] Cleanup parse hiba: {e}", file=sys.stderr)
+    raise ValueError(f"AI response nem parseolhato. Elso 500: {json_str[:500]}")
 
 
 def mock_response(snapshot):
@@ -278,8 +298,7 @@ def analyze():
             system_prompt = PROMPT_PATH.read_text()
             print(f"[ai] Perplexity {MODEL} hívás...")
             content = call_perplexity(system_prompt, snapshot)
-            json_str = extract_json_from_text(content)
-            result = json.loads(json_str)
+            result = parse_ai_json(content)
             source_type = "ai"
             model_name = MODEL
             print("[ai] Sikeres AI válasz.")

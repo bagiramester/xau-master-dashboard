@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install requests jsonschema
+          pip install requests jsonschema json5
 
       - name: Run Bagira AI analysis
         env:
