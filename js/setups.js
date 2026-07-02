@@ -32,10 +32,16 @@ const orderSetupsFixed = (setups) => {
   const A = (setups && setups.A && setups.A.value) || null;
   const B = (setups && setups.B && setups.B.value) || null;
   let short = null, long_ = null;
+  // Direct match
   if (A && A.direction === 'SHORT') short = { key: 'A', body: A, wrap: setups.A };
   else if (A && A.direction === 'LONG') long_ = { key: 'A', body: A, wrap: setups.A };
   if (B && B.direction === 'SHORT') short = short || { key: 'B', body: B, wrap: setups.B };
   else if (B && B.direction === 'LONG') long_ = long_ || { key: 'B', body: B, wrap: setups.B };
+  // Fallback: null direction esete— sorrend szerint az elso ures slotba
+  if (A && !A.direction && !short) short = { key: 'A', body: {...A, direction: 'SHORT'}, wrap: setups.A };
+  else if (A && !A.direction && !long_) long_ = { key: 'A', body: {...A, direction: 'LONG'}, wrap: setups.A };
+  if (B && !B.direction && !long_) long_ = { key: 'B', body: {...B, direction: 'LONG'}, wrap: setups.B };
+  else if (B && !B.direction && !short) short = { key: 'B', body: {...B, direction: 'SHORT'}, wrap: setups.B };
   return { short, long: long_ };
 };
 
