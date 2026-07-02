@@ -30,7 +30,7 @@ CACHE_DIR = REPO / "cache"
 API_KEY = os.getenv("PPLX_API_KEY", "").strip()
 MOCK = os.getenv("MOCK_AI", "").lower() in ("1", "true", "yes") or not API_KEY
 
-MODEL = "sonar-reasoning-pro"  # alternatívák: "sonar", "sonar-pro"
+MODEL = os.getenv("PPLX_MODEL", "sonar-pro")  # alternatívák: "sonar", "sonar-reasoning-pro"
 API_URL = "https://api.perplexity.ai/chat/completions"
 
 
@@ -154,10 +154,18 @@ def call_perplexity(system_prompt, user_snapshot):
     except Exception:
         print(f"[ai] API response non-JSON: {r.text[:800]}", file=sys.stderr)
         raise
-    content = resp["choices"][0]["message"]["content"]
-    print(f"[ai] Content length: {len(content)} chars", file=sys.stderr)
-    print(f"[ai] Content prefix: {content[:300]!r}", file=sys.stderr)
-    print(f"[ai] Content suffix: {content[-200:]!r}", file=sys.stderr)
+    msg = resp["choices"][0]["message"]
+    content = msg.get("content") or ""
+    # Reasoning modelleknel a content mellett lehet reasoning_content is
+    if not content and msg.get("reasoning_content"):
+        content = msg["reasoning_content"]
+        print("[ai] Using reasoning_content fallback", file=sys.stderr)
+    print(f"[ai] Content length: {len(content)} chars (model={MODEL})", file=sys.stderr)
+    if content:
+        print(f"[ai] Content prefix: {content[:300]!r}", file=sys.stderr)
+        print(f"[ai] Content suffix: {content[-200:]!r}", file=sys.stderr)
+    else:
+        print(f"[ai] Full response: {json.dumps(resp)[:800]}", file=sys.stderr)
     return content
 
 
