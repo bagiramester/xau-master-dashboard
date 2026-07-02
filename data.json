@@ -14,9 +14,9 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-02T19:54:10+02:00",
-    "ai_model": "mock-fallback (sonar-pro failed)",
-    "ai_source_type": "ai-fallback"
+    "ai_last_run": "2026-07-02T19:58:46+02:00",
+    "ai_model": "sonar-pro",
+    "ai_source_type": "ai"
   },
   "macro": {
     "fedwatch": {
@@ -232,62 +232,61 @@
   "setups": {
     "A": {
       "value": {
-        "direction": "SHORT",
-        "type": "HTF sell-zóna / intraday premium reakció",
-        "bias_compatibility": "igen — SHORT bias-szal egyező",
-        "entry_zone": "4058-4105 (konzervatív: 4090-4105; HTF core: 4058-4068)",
-        "sl": "4115 felett M15 close (konzervatív); 4080 felett H1 close (HTF core)",
-        "tp1": "3965 (Value Demand Zóna)",
-        "tp2": "3900 (Mélyebb Támasz)",
+        "direction": null,
+        "type": "liquidity sweep reaction",
+        "bias_compatibility": "nincs — makró tiltás aktív",
+        "entry_zone": "4135-4148",
+        "sl": "4156 felett H1 close alapján",
+        "tp1": "4105",
+        "tp2": "4088",
         "rr_min": 2.0,
-        "score": 8,
-        "session": "London 09:00-12:00 CEST (NFP előtt)",
-        "invalidation": "H1 close 4080/4115 felett — bull struktúra erősödik",
+        "score": 0,
+        "session": "NY 14:00-19:00 CEST",
+        "invalidation": "bármelyik long esetén H1 visszazárás 4130 alá",
         "macro_support": [
-          "US10Y 4.48% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
-          "DXY 100.86 — nem tailwind long-nak",
-          "FedWatch NEUTRAL/HIKE — nincs cut-bid"
+          "US10Y 4.48% RISING → aranynak kedvezőtlen háttér",
+          "DXY RANGE, de nem elég a tiltás feloldásához"
         ],
         "allowed": false,
         "locked_reason": "Makró tiltási ablak aktív",
         "confirmed": false,
-        "setup_quality": "erős"
+        "setup_quality": "nincs"
       },
       "status": "fresh",
-      "source_type": "ai-fallback",
-      "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
+      "source_type": "ai",
+      "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:54:10+02:00",
+      "updated_at": "2026-07-02T19:58:46+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     },
     "B": {
       "value": {
-        "direction": "LONG",
-        "type": "NFP-utáni flush + demand sweep",
-        "bias_compatibility": "részben — kontratrend, csak makróforduló esetén",
-        "entry_zone": "3965-3970 flush/sweep után V-reversal",
-        "sl": "3925 alatt H1 close",
-        "tp1": "Daily Open / Asia High",
-        "tp2": "4058-4068 (HTF sell zóna)",
+        "direction": null,
+        "type": "range reversal",
+        "bias_compatibility": "nincs — makró tiltás aktív",
+        "entry_zone": "4058-4105",
+        "sl": "null",
+        "tp1": "null",
+        "tp2": "null",
         "rr_min": 2.0,
-        "score": 6,
-        "session": "Overlap 15:00-19:00 CEST (csak NFP után)",
-        "invalidation": "H1 close 3930 alatt",
+        "score": 0,
+        "session": "NY 14:00-19:00 CEST",
+        "invalidation": "null",
         "macro_support": [
-          "Csak akkor engedélyezett, ha NFP significantly miss",
-          "US10Y vissza 4.3% alá kell essen"
+          "FedWatch N/A — confidence csökkentett",
+          "NFP csomag ma 14:30 CEST, no-trade ablak aktív"
         ],
         "allowed": false,
-        "locked_reason": "Csak NFP után (15:00 CEST+) és makróforduló esetén",
+        "locked_reason": "Makró tiltási ablak aktív",
         "confirmed": false,
-        "setup_quality": "közepes"
+        "setup_quality": "nincs"
       },
       "status": "fresh",
-      "source_type": "ai-fallback",
-      "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
+      "source_type": "ai",
+      "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T19:54:10+02:00",
+      "updated_at": "2026-07-02T19:58:46+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -303,16 +302,16 @@
     "updated_at": "2026-07-02T19:27:10+02:00"
   },
   "bagira": {
-    "narrative": "A pánter csendben ül. NFP küszöbén vagyunk — semmi sem tiszta. A 4090 zóna prémium, de várni kell a rejectiont. A short bias makró oldalról ép, de a nyomás a szabályokból jön: 60 perc tiltás.",
+    "narrative": "A pánter figyel. NFP nap van, a csend most edge. US10Y emelkedik, de a tiltás erősebb, mint az impulzus. Ma nem vadászok, csak várok a blokkon túl.",
     "key_watch": [
-      "M15 rejection a 4090-nél — ha jön, az edge élesedik",
-      "NFP 14:30 — 13:30-tól teljes tiltás",
-      "US10Y > 4.55% → short momentum felerősödik"
+      "13:30-15:00 CEST között teljes NO-TRADE az NFP miatt",
+      "US10Y 4.48% emelkedés → long oldal gyenge háttér",
+      "4130 feletti tartás csak akkor számít, ha a makró tiltás lejár"
     ],
-    "confidence": 70,
-    "reasoning_summary": "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), HTF RANGE + intraday range-bear (3/4). NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén.",
-    "model": "mock-fallback (sonar-pro failed)",
-    "source_type": "ai-fallback",
-    "updated_at": "2026-07-02T19:54:10+02:00"
+    "confidence": 86,
+    "reasoning_summary": "Makró tiltás aktív, ezért mindkét setup zárolt. A piaci kép önmagában RANGE-BEAR, US10Y emelkedő és DXY semleges, de a 13:30-15:00 CEST NFP blokk miatt nincs engedélyezett trade. A spot a 4058-4105 supply fölé ment, így az intraday kép zajos és eseményvezérelt.",
+    "model": "sonar-pro",
+    "source_type": "ai",
+    "updated_at": "2026-07-02T19:58:46+02:00"
   }
 }
