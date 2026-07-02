@@ -125,38 +125,39 @@ def build_snapshot(data):
 
 
 def call_perplexity(system_prompt, user_snapshot):
-    """Éles Perplexity API hívás."""
+    """Éles Perplexity API hívás. A sonar-reasoning-pro <think> blokkot ad + JSON."""
+    # Erősített prompt: kényszerítjük a tiszta JSON kimenetet
+    hardened_system = system_prompt + (
+        "\n\n**KRITIKUS**: A válasz csak és kizárólag egy JSON objektum legyen. "
+        "Ne használj markdown code fence-t (```), ne írj magyarázatot a JSON előtt vagy után. "
+        "A válasz az első karakterrel `{` kezdődik és az utolsóval `}` ér véget."
+    )
     payload = {
         "model": MODEL,
         "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": json.dumps(user_snapshot, ensure_ascii=False, indent=2)},
+            {"role": "system", "content": hardened_system},
+            {"role": "user", "content": "Bemenet:\n" + json.dumps(user_snapshot, ensure_ascii=False, indent=2) + "\n\nAdj egy JSON objektumot a rendszer prompt szerinti schémával."},
         ],
         "temperature": 0.15,
         "max_tokens": 2500,
-        "response_format": {"type": "json_schema", "json_schema": {
-            "schema": {
-                "type": "object",
-                "required": ["setup_A", "setup_B", "bagira_narrative", "key_watch", "confidence", "reasoning_summary"],
-                "additionalProperties": True,
-            }
-        }}
     }
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
     }
-    r = requests.post(API_URL, json=payload, headers=headers, timeout=90)
+    r = requests.post(API_URL, json=payload, headers=headers, timeout=120)
     if r.status_code != 200:
-        print(f"[ai] API HTTP {r.status_code}: {r.text[:500]}", file=sys.stderr)
+        print(f"[ai] API HTTP {r.status_code}: {r.text[:800]}", file=sys.stderr)
         r.raise_for_status()
     try:
         resp = r.json()
-    except Exception as e:
-        print(f"[ai] API response non-JSON: {r.text[:500]}", file=sys.stderr)
+    except Exception:
+        print(f"[ai] API response non-JSON: {r.text[:800]}", file=sys.stderr)
         raise
     content = resp["choices"][0]["message"]["content"]
-    print(f"[ai] Raw content prefix: {content[:200]}...", file=sys.stderr)
+    print(f"[ai] Content length: {len(content)} chars", file=sys.stderr)
+    print(f"[ai] Content prefix: {content[:300]!r}", file=sys.stderr)
+    print(f"[ai] Content suffix: {content[-200:]!r}", file=sys.stderr)
     return content
 
 

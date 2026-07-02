@@ -646,3 +646,28 @@
   color: var(--green);
   border: 1px solid rgba(16,185,129,0.4);
 }
+
+/* ═══ BAGIRA STATUS ÜZENETEK ═══ */
+.bagira-status {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  border: 1px solid;
+  animation: fade-in 200ms;
+}
+.bagira-status--success {
+  background: var(--green-dim);
+  color: var(--green);
+  border-color: rgba(16,185,129,0.4);
+}
+.bagira-status--error {
+  background: var(--red-dim);
+  color: var(--red);
+  border-color: rgba(239,68,68,0.4);
+}
+.bagira-status--warning {
+  background: var(--yellow-dim);
+  color: var(--yellow);
+  border-color: rgba(245,158,11,0.4);
+}

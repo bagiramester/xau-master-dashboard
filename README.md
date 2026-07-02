@@ -62,3 +62,36 @@ Setup A/B kártyák, kulcsszintek (Asia H/L, HTF zónák), risk state, trade log
 - Trade Log OS (18 kötelező mező)
 - Review OS (napi 3 tanulság, heti aggregáció)
 - No-Trade Playbook (RED/PIROS trigger + protokoll)
+
+## Bagira AI — manuális trigger beállítás
+
+A Bagira AI elemzést csak **manuálisan** indítod a dashboard `🧠 Új elemzés` gombjával. Ez elkerüli a felesleges API költséget és biztosítja, hogy a Bagira tanácsok csak akkor frissüljenek, amikor tényleg kell.
+
+### GitHub Personal Access Token (PAT) létrehozása
+
+1. Menj ide: [github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new)
+2. **Token name**: `bagira-ai-trigger`
+3. **Expiration**: 90 nap (majd megújítod)
+4. **Repository access**: **Only select repositories** → `bagiramester/xau-master-dashboard`
+5. **Permissions** — repository permissions:
+   - **Actions**: `Read and write` (ez a kritikus)
+   - **Contents**: `Read` (a workflow file olvasáshoz)
+   - **Metadata**: `Read` (automatikus)
+6. **Generate token** → másold ki a `github_pat_...` kezdetű string-et
+
+### Beállítás a dashboardon
+
+1. Nyisd meg a dashboard-ot: [bagiramester.github.io/xau-master-dashboard](https://bagiramester.github.io/xau-master-dashboard)
+2. Kattints a `🧠 Új elemzés` gombra a Bagira panelen
+3. Beugrik egy prompt — illeszd be a PAT-ot
+4. A token a böngésződ **localStorage**-jában tárolódik, **soha nem kerül a repóba**, csak Te látod
+
+### Használat
+
+- Gomb megnyomása → GitHub API triggereli a `ai-refresh` workflow-t
+- ~30–90 mp múlva új Bagira elemzés jelenik meg a dashboardon
+- A gomb magának is polling-ol, automatikusan újratölti amikor a data.json frissült
+
+### Ha lejár vagy elveszíted a PAT-ot
+
+Kattints ismét a gombra — új tokent kér. Ha valaki más letiltana, változtatná: mindig regeneráld a `xau-master-dashboard` repóhoz kötött legszigorúbb scope-pal.
