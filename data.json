@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-07-02 10:49 CEST",
+    "last_updated": "2026-07-02 11:48 CEST",
     "auto": true,
     "note": "Automatikusan frissítve: XAU, US10Y, DXY, Fear&Greed. FedWatch manuális."
   },
@@ -18,7 +18,7 @@
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
     "us10y": "N/A",
-    "dxy": "100.97 – NEUTRAL",
+    "dxy": "101.01 – NEUTRAL",
     "sentiment": "N/A",
     "htf_trend": "RANGE",
     "intraday_regime": {
