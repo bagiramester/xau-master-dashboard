@@ -14,98 +14,98 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-03T09:26:14+02:00",
+    "ai_last_run": "2026-07-03T09:27:03+02:00",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai",
-    "deep_research_last_run": "2026-07-03T09:26:14+02:00",
+    "deep_research_last_run": "2026-07-03T09:27:03+02:00",
     "deep_research_model": "sonar-pro",
     "deep_research_source_type": "ai",
-    "deep_research_citations": 10
+    "deep_research_citations": 9
   },
   "macro": {
     "fedwatch": {
-      "value": "Szeptemberre mérsékelt hike-odds, júlira tartás domináns",
-      "display": "NEUTRAL → LIGHT HIKE BIAS",
+      "value": "Szeptember első vágás esélye csökkent, de a soron következő ülésre továbbra is HOLD a bázis-szcenárió, miközben a hawkish hang nem tűnt el teljesen.",
+      "display": "NEUTRAL → enyhe CUT-BIAS 2026H2-re",
       "bias": "YELLOW",
-      "bias_note": "A gyenge June NFP (57K vs ~110K konszenzus) csökkenti a korábbi agresszív hike-scenáriók hitelességét, de az inflációs aggodalmak miatt az árazás továbbra is legalább egy 2026-os emelést tartalmaz, így a FedWatch-rezsim összességében enyhén kamatemelés-párti, nem kifejezetten dovish.[3][4]",
+      "bias_note": "A júniusi NFP miss (57K vs ~110K várakozás) enyhíti a közeli hike-várakozásokat, de a Fed friss dot plotja és kommunikációja továbbra is óvatos, infláció-fókuszú, így rövid távon HOLD, 2026 második felére fókuszált, enyhén dovesebb pálya látszik.[1][4][9]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "us10y": {
       "value": 4.49,
       "display": "4.49% – RISING",
       "bias": "RED",
-      "bias_note": "A 10 éves US hozam ~4,49%-on emelkedő trendben van, ami magas reálhozam- és opportunity cost-környezetet jelez az aranyhoz képest, strukturálisan inkább short XAU háttér, még ha a gyenge NFP rövid távon enyhíti is a hike-árakat.[4]",
+      "bias_note": "A 10 éves US hozam kb. 4,49%-on emelkedő trendben van, a legutóbbi dot plot és a továbbra is szigorú reálkamat-környezet miatt a hozamok magas szinten stabilizálódtak, ami strukturálisan negatív az arany számára (magas opportunity cost és reálhozam).[4]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "dxy": {
-      "value": 100.68,
-      "display": "100.68 – RANGE",
+      "value": 100.7,
+      "display": "100.7 – RANGE / enyhe USD-BEAR intraday",
       "bias": "YELLOW",
-      "bias_note": "A DXY továbbra is a 99–103-as sávban mozog, a NFP-miss nem okozott extrém USD-eladási hullámot, inkább range, ami intraday aranyrallyt enged, de HTF oldalon még nem ad egyértelmű USD-bear jelet.[2][6]",
+      "bias_note": "A DXY továbbra is a 99–103-as sávban mozog, a júniusi NFP gyenge adat (57K, várakozás 110K) nem okozott extrém USD-eladási hullámot, csak enyhe gyengülést a range alsó feléhez közel, ami intraday engedi az aranyrallyt, de HTF szinten még nem jelent egyértelmű USD-BEAR törést.[1][2][7]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "sentiment": {
       "value": 32,
       "display": "32 – FEAR (SAFE_HAVEN)",
       "bias": "GREEN",
-      "bias_note": "A félelem/kapzsiság mutató 30–35 közeli, azaz FEAR zónában jár, ami kedvez a safe haven eszközöknek, köztük az aranynak; a gyenge munkaerőpiaci adat és korábbi NFP-revíziók növelik a gazdasági bizonytalanság narratíváját.[4][5]",
+      "bias_note": "A globális kockázati étvágy továbbra is visszafogott (CNN Fear & Greed index körülbelül 30–35-ös zónában van), ami FEAR / SAFE_HAVEN hangulatnak felel meg; ez támogatja az aranyat, különösen, ha a részvénypiaci volatilitás emelkedik és a gyenge munkaerőpiaci adat növeli a bizonytalanságot.[6]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
-      "display": "RANGE (HTF oldalirányú struktúra)",
+      "display": "RANGE (felső bandán bull-kísérlet)",
       "bias": "YELLOW",
-      "bias_note": "HTF szinten az arany továbbra is nagyobb, 3900–4200-as sávban oldalaz, a 50/200 SMA-k környékén nem alakult ki tiszta death cross vagy golden cross trend, így a trend helyett sávkereskedés a domináns.[4]",
+      "bias_note": "HTF-en az arany továbbra is széles range-ben mozog, a 50 és 200 napos SMA-k közel vannak egymáshoz, nincs egyértelmű, tiszta trend-break; a mostani emelkedés inkább a range felső szegmensének tesztelése gyenge NFP után, nem strukturális, többhónapos bull-trend.[4][5]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BULL",
       "display": "TREND-BULL",
-      "bias": "GREEN",
-      "bias_note": "A gyenge, várakozásoktól elmaradó NFP után az arany intraday szinten erős recovery-bull mozgást mutat, PDH fölé rugaszkodva 4200 környékéig, ami ma inkább trend-follow pullback-vételi rezsimet indokol.[2][4]",
+      "bias": "YELLOW",
+      "bias_note": "A tegnapi NFP-miss után ma intraday tovább fut az XAU bull-impulzus, a spot az Asia-session felfelé mozgása után London elején is a magas tartományban kereskedik, ami TREND-BULL környezetet jelez; ugyanakkor a HTF range és a magas US10Y miatt ez inkább 'recovery / relief rally', nem teljes értékű makró bull-trend.[1][2][5]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "volatility": {
       "value": "NORMAL",
-      "display": "NORMAL → ELEVATED környéke",
+      "display": "NORMAL→ enyhén emelkedett NFP után",
       "bias": "YELLOW",
-      "bias_note": "Az NFP utáni első teljes kereskedési napon a volatilitás a szokásos makró-hírnapoknál mérsékeltebb, de az 57K-s NFP-miss és az előző hónapok jelentős revíziói miatt a makróheadline-k érzékeny környezetet teremtenek.[4][5]",
+      "bias_note": "A 15 perces ATR továbbra is mérsékelt, NFP utáni első hullám lecsengett, így a mai napra inkább normalizálódó, de hír utáni elevated volatilitás várható, főként az előző napi spike-zónák körül.[4][5]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "xau_spot": {
       "value": 4190.9,
@@ -127,7 +127,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "pdl": {
       "value": 4062.0,
@@ -135,7 +135,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "daily_open": {
       "value": 4138.0,
@@ -143,7 +143,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "asia_high": {
       "value": 4208.3,
@@ -151,7 +151,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "asia_low": {
       "value": 4065.2,
@@ -159,7 +159,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "htf_supply": {
       "value": "4058–4105",
@@ -167,7 +167,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "htf_demand": {
       "value": "3900–3930",
@@ -175,7 +175,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     },
     "psych_level": {
       "value": 4000,
@@ -183,7 +183,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00"
+      "updated_at": "2026-07-03T09:27:03+02:00"
     }
   },
   "notrade_filters": {
@@ -192,10 +192,10 @@
     "macro_no_trade_windows": [],
     "note": "NFP-nap manuális beállítás",
     "us_market_closed": false,
-    "us_market_note": "US piac ma nyitva, a hét fő makróeseménye (June NFP) tegnap, július 2-án volt.",
+    "us_market_note": "US piac nyitva, normál kereskedési nap; a júniusi NFP-t tegnap hozták ki előrehozva az ünnep miatt.[1][3][9]",
     "is_clean_day": true,
-    "clean_day_note": "Ma nincs friss high-impact US adat; a June NFP tegnap 8:30 ET-kor jött ki, nagy miss-szel a konszenzushoz képest.[3][4][6]",
-    "updated_at": "2026-07-03T09:26:14+02:00",
+    "clean_day_note": "Ma nincs új high-impact US makroadat; a júniusi NFP tegnap volt és jelentős miss-t hozott (57K actual vs ~110K konszenzus).[1][5][8]",
+    "updated_at": "2026-07-03T09:27:03+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "risk": {
@@ -223,28 +223,28 @@
     "effective_mode": "RED",
     "session": "London",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
-    "narrative": "A júniusi NFP csak 57K új munkahelyet mutatott a várt ~110K helyett, ami érdemben gyengébb munkaerőpiacot jelez és középtávon támogatja az aranyat a Fed-hike árazás enyhülésén keresztül.[3][4][8] Ugyanakkor a 10 éves US hozam ~4,49% mellett emelkedő pályán van, ami magas opportunity costot jelent az aranynak, így a HTF kép vegyes, intraday pedig a gyenge NFP utáni bull-rally dominál.[4] A semleges DXY-sáv és félelembe hajló szentiment miatt ma óvatos, nem agresszív long-bias indokolt, elsősorban intraday pullback-vételekre fókuszálva, erős risk-managementtel.",
-    "fed_regime_summary": "Az arany ma NFP-utóhatásos, emelkedő hozamok és semleges USD mellett intraday bull trendben, de HTF range-ben kereskedik, óvatos long-bias-szal."
+    "narrative": "A júniusi NFP mindössze 57K új munkahelyet mutatott szemben a ~110K várakozással és a májusi 129K lefelé módosított értékkel, ami egyértelműen gyengébb munkaerőpiaci dinamikára utal, rövid távon enyhítve a Fed-hike narratívát és támogatva az aranyat.[1][5][9] Ugyanakkor a 10 éves US hozam ~4,49%-on emelkedő szinten van, a reálhozam- és opportunity cost-környezet strukturálisan nem kedvez a tartós XAU-rallynak, így a mai bias inkább óvatos, szelektív intraday LONG, HTF-en továbbra is limitált upside mellett.[4] A DXY inkább range-ben maradt, a gyenge NFP nem indított masszív USD-eladási hullámot, így az arany bull-momentum ugyan érvényesülhet intraday, de HTF szinten nincs tiszta USD-BEAR break, ezért a bias SÁRGA kockázati módban marad.[2][7]",
+    "fed_regime_summary": "A tegnapi gyenge NFP-miss után ma tiszta, de makróban vegyes háttérben folytatódik az XAU intraday bull, emelkedő US10Y és range-ben maradó DXY mellett, ezért óvatos, szelektív long-bias indokolt, agresszív üldözés nélkül."
   },
   "setups": {
     "A": {
       "value": {
         "direction": "SHORT",
         "type": "range reversal",
-        "bias_compatibility": "igen — HTF short háttérrel egyező",
-        "entry_zone": "4205-4215 (Asia high környéki sweep)",
-        "entry_zone_status": "közelít — spot már 4190 fölött, de még a prémium zóna alatt",
-        "sl": "4235 felett M15/H1 close alapján",
-        "tp1": "4138-4140 (Daily Open + PDH retest)",
-        "tp2": "4058-4065 (HTF supply alja / előző range alja)",
+        "bias_compatibility": "igen — HTF RANGE, intraday BULL, de hozam-RED miatt strukturális SHORT bias",
+        "entry_zone": "4205-4215 (Asia high környéki stopvadás zóna)",
+        "entry_zone_status": "közelít — spot már 4190.9, de még a prémium zóna alatt",
+        "sl": "4230 felett M15/H1 close alapján",
+        "tp1": "4138-4140 (Daily Open + PDH visszateszt)",
+        "tp2": "4065-4070 (pdl/asia_low övezet)",
         "rr_min": 2.2,
         "score": 8,
-        "session": "London 09:00-12:00 CEST",
-        "invalidation": "H1 close 4240 felett — bull trend extension, nincs több short próbálkozás ezen a napon",
+        "session": "London 09:30-12:00 CEST",
+        "invalidation": "H1 close 4230 felett → trend-bull kiterjesztés, nincs több range-short",
         "macro_support": [
-          "US10Y 4.49% RISING → strukturális short XAU háttér[1]",
-          "DXY 100.68 RANGE → nem támasztja alá agresszív további XAU-rallyt[2]",
-          "Fear & Greed 32 FEAR → rövid távon támasztja a safe haven bidet, de HTF-ben nem törte meg a hozamok vörös státuszát"
+          "US10Y 4.49% RISING, RED bias → strukturális nyomás az aranyon[1][2][6]",
+          "DXY 100.7 RANGE, enyhe USD-BEAR csak intraday engedékeny, de HTF-ben nem támasztja a tartós rallyt",
+          "Fear & Greed 32 – FEAR → safe haven bid már beárazva, könnyű profit-taking spike után"
         ],
         "allowed": true,
         "locked_reason": null,
@@ -255,55 +255,55 @@
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00",
+      "updated_at": "2026-07-03T09:27:03+02:00",
       "impact": null,
       "ai_state": "SUGGESTED"
     },
     "B": {
       "value": {
         "direction": "LONG",
-        "type": "trend continuation",
-        "bias_compatibility": "részben — intraday bull trenddel egyező, HTF hozamokkal szembemenő",
-        "entry_zone": "4138-4150 (Daily Open / PDH körüli pullback)",
-        "entry_zone_status": "inaktív — spot jóval felette, csak mélyebb korrekció után aktiválódik",
-        "sl": "4105 alatt M15/H1 close (HTF supply alja alatt intraday invalidáció)",
-        "tp1": "4205-4215 (Asia high / felső sweep zóna újrateszt)",
-        "tp2": "4250-4265 (trend-extenzió, csak részleges zárás tervezett)",
+        "type": "trend continuation / breakout pullback",
+        "bias_compatibility": "igen — intraday TREND-BULL-lal egyező, HTF RANGE-ben felső szél kitörési kísérlet",
+        "entry_zone": "4180-4190 (előző impulzus pullback, spot jelenleg a zóna tetején)",
+        "entry_zone_status": "aktív — spot 4190.9 a tervezett beszállóövezetben",
+        "sl": "4148-4150 alatt M15 close (PDH/Daily Open alatti lezárás)",
+        "tp1": "4208-4215 (Asia High + felső spike zóna)",
+        "tp2": "4250-4260 (HTF range fölé extrém kiterjesztés, csak részleges realizáció)",
         "rr_min": 2.0,
-        "score": 6,
-        "session": "London–Overlap 10:00-17:00 CEST",
-        "invalidation": "H1 close 4100 alatt — intraday bull struktúra törése, long bias off",
+        "score": 7,
+        "session": "London → Overlap folytatás 09:30-18:00 CEST",
+        "invalidation": "M15/H1 close 4145 alatt → intraday TREND-BULL törik, long forgatókönyv lezárva",
         "macro_support": [
-          "Fear & Greed 32 FEAR → safe haven kereslet támogatja a visszavételt mélyebb pullback után",
-          "DXY RANGE → nem akadályozza agresszíven az intraday XAU-rallyt",
-          "US10Y magas, RED → long csak intraday jelleggel, HTF-fel ellentétes"
+          "Intraday regime TREND-BULL, volatilitás NORMAL → tiszta trend continuation struktúra",
+          "DXY enyhe USD-BEAR intraday, engedi az arany ralit, amíg HTF RANGE-ben marad",
+          "Fear & Greed 32 – FEAR safe haven háttér, amíg nincs hozam-spike felfelé"
         ],
-        "allowed": false,
-        "locked_reason": "YELLOW risk módban a counter-trend long csak akkor engedett, ha M15 bull struktúra tisztán megmarad a 4138-as zóna fölött és a hozamok enyhülnek — jelenleg csak tervezési forgatókönyv.",
+        "allowed": true,
+        "locked_reason": null,
         "confirmed": false,
-        "setup_quality": "közepes"
+        "setup_quality": "jó"
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:26:14+02:00",
+      "updated_at": "2026-07-03T09:27:03+02:00",
       "impact": null,
-      "ai_state": "LOCKED"
+      "ai_state": "SUGGESTED"
     }
   },
   "bagira": {
-    "narrative": "A pánter fentről néz: 4190 fölött már levegősebb az ár. US10Y vörös, a DXY csak oldalaz — a prémium short zóna 4205-4215 között nyílik. Nem kergetjük a csúcsot; rejectionre várunk, majd a sell futtatja magát, ha a struktúra engedi.",
+    "narrative": "A pánter figyel: az ár már a HTF supply fölött táncol, miközben a 10Y hozam vörösben emelkedik. Fent prémium a short, lent a trend még tart. Először a 4208 körüli stopvadás érdekel, utána döntöm el, melyik karmot használom.",
     "key_watch": [
-      "M15 wick/sweep 4205-4215 között, volume spike-kal — innen aktiválódik a short terv",
-      "H1 close viszonya a 4138-4140 zónához — bull vagy range visszarendeződésre utal",
-      "US10Y intraday mozgása 4.49% körül — ha tovább emelkedik, erősíti a short narratívát"
+      "M15 price action 4205-4215 között – wick + gyors elutasítás esetén élesedik a range SHORT",
+      "M15 close 4145-4150 alatt vagy felett – eldől, hogy a LONG trend continuation invalid vagy él",
+      "US10Y intraday mozgás 4.49% felett – újabb hozam-spike erősíti a felső short forgatókönyvet"
     ],
     "confidence": 62,
-    "reasoning_summary": "Napi bias: óvatos SHORT 8/10 HTF hozamok miatt, intraday TREND-BULL-lal szemben. FedWatch adat hiányzik, ezért 30-cal vágott confidence; a fő edge a 4205-4215-ös prémium zónában keresett rejection, RR mindkét setupnál ≥ 1:2.",
+    "reasoning_summary": "Napi bias enyhén SHORT HTF szinten: US10Y magas és emelkedő, DXY csak enyhén gyenge, a jelenlegi aranyrally inkább safe haven + intraday TREND-BULL. A terv: fent prémium zónában agresszív short, középen kontrollált long a trend folytatására, mindkettő RR ≥ 1:2 mellett, YELLOW risk módban fegyelmezett végrehajtással.",
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-07-03T09:26:14+02:00"
+    "updated_at": "2026-07-03T09:27:03+02:00"
   },
   "trade_log": [],
   "performance": {
