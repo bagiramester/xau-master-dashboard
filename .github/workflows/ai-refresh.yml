@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install requests jsonschema json5
+          pip install requests jsonschema json5 json-repair
 
       - name: AI analysis + commit + push (retry on conflict)
         env:

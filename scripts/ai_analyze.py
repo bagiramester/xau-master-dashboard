@@ -184,13 +184,24 @@ def extract_json_from_text(text):
 
 
 def parse_ai_json(text):
-    """Hibatűrő JSON parsing: szigorú → json5 → regex cleanup."""
+    """Hibatűrő JSON parsing: json-repair → json5 → regex cleanup.
+    Az LLM-ek gyakran nem szigorú JSON-t adnak (sortörés stringben,
+    hiányzó vessző, trunccált válasz), ezért json-repair-t használunk elsődlegesen."""
     import re
     json_str = extract_json_from_text(text)
+
+    # 1. json-repair — LLM JSON-ok javítására optimalizálva
     try:
-        return json.loads(json_str)
-    except json.JSONDecodeError as e:
-        print(f"[ai] Szigorú parse hiba: {e}", file=sys.stderr)
+        import json_repair
+        repaired = json_repair.repair_json(json_str, return_objects=True)
+        if isinstance(repaired, (dict, list)):
+            return repaired
+    except ImportError:
+        print("[ai] json-repair nincs telepítve", file=sys.stderr)
+    except Exception as e:
+        print(f"[ai] json-repair hiba: {e}", file=sys.stderr)
+
+    # 2. json5 (trailing comma, idézőjel nélküli kulcsok)
     try:
         import json5
         return json5.loads(json_str)
@@ -198,6 +209,8 @@ def parse_ai_json(text):
         print("[ai] json5 nincs, regex cleanup", file=sys.stderr)
     except Exception as e:
         print(f"[ai] json5 hiba: {e}", file=sys.stderr)
+
+    # 3. Regex cleanup fallback
     fixed = re.sub(r",\s*([\]}])", r"\1", json_str)
     try:
         return json.loads(fixed)
