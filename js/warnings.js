@@ -5,14 +5,12 @@ const buildWarnings = (data) => {
   const h = data.header || {};
   const nt = data.notrade_filters || {};
 
-  // Aktív tiltások
-  if (h.effective_mode === 'RED') {
-    warnings.push({ level: 'active', icon: '⛔', text: 'NO-TRADE (RED effektív mód)' });
-  }
+  // Aktív tiltások — CSAK a valódi makró tiltásra (macro_lock_active),
+  // ne az effective_mode=RED-re (ami csak óvatossági szint, pl. magas US10Y).
   if (nt.macro_lock_active) {
     const w = nt.macro_no_trade_windows && nt.macro_no_trade_windows[0];
-    warnings.push({ level: 'active', icon: '📅',
-      text: `Makró tiltási ablak aktív${w ? ` (${w.start}–${w.end}: ${w.reason})` : ''}` });
+    warnings.push({ level: 'active', icon: '⛔',
+      text: `NO-TRADE — makró tiltási ablak aktív${w ? ` (${w.start}–${w.end}: ${w.reason})` : ''}` });
   }
   if ((r.loss_streak || 0) >= 3) {
     warnings.push({ level: 'active', icon: '🔻', text: `Loss streak = ${r.loss_streak} → kötelező szünet` });
@@ -25,6 +23,9 @@ const buildWarnings = (data) => {
   }
 
   // Figyelendő
+  if (h.effective_mode === 'RED' && warnings.filter(w => w.level==='active').length === 0) {
+    warnings.push({ level: 'watch', icon: '⚠', text: 'RED effektív mód (óvatos) — magas makró kockázat, csak nagyon tiszta setup' });
+  }
   if (h.effective_mode === 'YELLOW' && warnings.filter(w => w.level==='active').length === 0) {
     warnings.push({ level: 'watch', icon: '⚠', text: 'YELLOW mód: max 1 setup, Score ≥ 8 kötelező' });
   }
