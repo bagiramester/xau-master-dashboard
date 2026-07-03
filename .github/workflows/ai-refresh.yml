@@ -1,6 +1,10 @@
 name: Refresh Bagira AI
 
 on:
+  schedule:
+    # Minden munkanap 08:48 CEST (06:48 UTC) — napi mély kutatás,
+    # 9 órára garantáltan friss eredmény a dashboard-on.
+    - cron: '48 6 * * 1-5'
   workflow_dispatch:
     inputs:
       note:
