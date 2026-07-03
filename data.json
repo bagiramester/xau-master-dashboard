@@ -1,10 +1,10 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-02 20:51 CEST",
+    "last_updated": "2026-07-03 08:11 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
-    "data_freshness": "live",
+    "data_freshness": "stale",
     "source_stack": [
       "yfinance:GC=F",
       "yfinance:^TNX",
@@ -13,10 +13,7 @@
       "cme:fedwatch (manual)",
       "investing:economic-calendar (manual)",
       "manual:trade-log"
-    ],
-    "ai_last_run": "2026-07-03T08:07:44+02:00",
-    "ai_model": "mock-fallback (sonar-pro failed)",
-    "ai_source_type": "ai-fallback"
+    ]
   },
   "macro": {
     "fedwatch": {
@@ -37,35 +34,35 @@
       "bias": "RED",
       "bias_note": "US10Y 4.48% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
       "impact": 4,
-      "status": "fresh",
+      "status": "stale",
       "source_type": "auto",
       "source_label": "Yahoo Finance ^TNX",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
       "updated_at": "2026-07-02T20:51:38+02:00"
     },
     "dxy": {
-      "value": 100.84,
-      "display": "100.84 – RANGE",
+      "value": 100.74,
+      "display": "100.74 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "DXY 100.84 a 99–103 sávban – semleges USD-háttér.",
+      "bias_note": "DXY 100.74 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance DX-Y.NYB",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "sentiment": {
-      "value": 31,
-      "display": "31 – FEAR",
+      "value": 32,
+      "display": "32 – FEAR",
       "bias": "YELLOW",
-      "bias_note": "FEAR (31) – enyhén long XAU-kedvező.",
+      "bias_note": "FEAR (32) – enyhén long XAU-kedvező.",
       "impact": 2,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -77,7 +74,7 @@
       "source_type": "computed",
       "source_label": "Számított ártartomány alapján",
       "source_url": null,
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "intraday_regime": {
       "value": "RANGE",
@@ -104,8 +101,8 @@
       "updated_at": "2026-07-02T09:55:00+02:00"
     },
     "xau_spot": {
-      "value": 4137.2,
-      "display": "$4,137.20 (+1.69%)",
+      "value": 4183.0,
+      "display": "$4,183.00 (+1.71%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -113,33 +110,33 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     }
   },
   "levels": {
     "pdh": {
-      "value": 4100.0,
+      "value": 4140.1,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi High)",
       "source_url": null,
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "pdl": {
-      "value": 3963.0,
+      "value": 4062.0,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi Low)",
       "source_url": null,
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "daily_open": {
-      "value": 4049.2,
+      "value": 4138.0,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (mai Open)",
       "source_url": null,
-      "updated_at": "2026-07-02T20:51:38+02:00"
+      "updated_at": "2026-07-03T08:11:10+02:00"
     },
     "asia_high": {
       "value": null,
@@ -218,13 +215,13 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-02T20:51:38+02:00"
+    "updated_at": "2026-07-03T08:11:10+02:00"
   },
   "header": {
     "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
     "effective_mode": "RED",
-    "session": "NY",
+    "session": "Asia",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
     "narrative": "SHORT bias, SÁRGA nap: FedWatch neutral/hike + DXY 100.75 + US10Y magas → short XAU háttér. RANGE HTF trend, HIGH vol az NFP miatt. Kizárólag Setup A jöhet szóba London sessionben tiszta rejection esetén.",
     "fed_regime_summary": "HOLD dominál 2026 júliusra, hike-odds 2026-ra ~69% → negatív carry-háttér az aranynak."
@@ -300,19 +297,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-02T20:51:38+02:00"
-  },
-  "bagira": {
-    "narrative": "A pánter csendben ül. NFP küszöbén vagyunk — semmi sem tiszta. A 4090 zóna prémium, de várni kell a rejectiont. A short bias makró oldalról ép, de a nyomás a szabályokból jön: 60 perc tiltás.",
-    "key_watch": [
-      "M15 rejection a 4090-nél — ha jön, az edge élesedik",
-      "NFP 14:30 — 13:30-tól teljes tiltás",
-      "US10Y > 4.55% → short momentum felerősödik"
-    ],
-    "confidence": 70,
-    "reasoning_summary": "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), HTF RANGE + intraday range-bear (3/4). NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén.",
-    "model": "mock-fallback (sonar-pro failed)",
-    "source_type": "ai-fallback",
-    "updated_at": "2026-07-03T08:07:44+02:00"
+    "updated_at": "2026-07-03T08:11:10+02:00"
   }
 }
