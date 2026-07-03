@@ -68,8 +68,8 @@ const renderSetupCard = (slot /* 'short' | 'long' */, entry) => {
   const stateClass = (body.allowed || isConfirmed)
     ? 'setup-card__state--allowed'
     : (body.confirmed ? 'setup-card__state--watch' : 'setup-card__state--locked');
-  const stateLabel = (body.allowed || isConfirmed) ? '✓ ALLOWED'
-                    : (body.confirmed ? '◐ WATCH' : '⛔ LOCKED');
+  const stateLabel = (body.allowed || isConfirmed) ? '✓ ENGEDÉLYEZETT'
+                    : (body.confirmed ? '◐ FIGYEL' : '⛔ ZÁROLVA');
   const dirClass = slot === 'long' ? 'dir-long' : 'dir-short';
   const dirEmoji = slot === 'long' ? '🟢' : '🔴';
   const aiBadge = getAiBadge(wrap, isConfirmed);
@@ -87,26 +87,50 @@ const renderSetupCard = (slot /* 'short' | 'long' */, entry) => {
       el('span', { class: `setup-card__state ${stateClass}` }, stateLabel)
     ),
     el('div', { class: 'setup-card__type' }, body.type),
-    el('div', { class: 'setup-card__body' },
-      el('span', { class: 'setup-card__label' }, 'Belépő'),
-      el('span', { class: 'setup-card__value setup-card__value--entry' }, body.entry_zone || '–'),
-      el('span', { class: 'setup-card__label' }, 'SL'),
-      el('span', { class: 'setup-card__value setup-card__value--sl' }, body.sl || '–'),
-      el('span', { class: 'setup-card__label' }, 'TP1'),
-      el('span', { class: 'setup-card__value setup-card__value--tp' }, body.tp1 || '–'),
-      body.tp2 ? el('span', { class: 'setup-card__label' }, 'TP2') : null,
-      body.tp2 ? el('span', { class: 'setup-card__value setup-card__value--tp' }, body.tp2) : null,
-      el('span', { class: 'setup-card__label' }, 'RR min'),
-      el('span', { class: 'setup-card__value' }, body.rr_min ? String(body.rr_min) : '–'),
-      el('span', { class: 'setup-card__label' }, 'Session'),
-      el('span', { class: 'setup-card__value' }, body.session || '–'),
-      el('span', { class: 'setup-card__label' }, 'Bias'),
-      el('span', { class: 'setup-card__value' }, body.bias_compatibility || '–'),
-      el('span', { class: 'setup-card__label' }, 'Invalid.'),
-      el('span', { class: 'setup-card__value', style: 'font-size: 0.72rem;' }, body.invalidation || '–')
+
+    // Belépő / SL / TP1 nagy kártyák
+    el('div', { class: 'setup-card__levels' },
+      el('div', { class: 'setup-level setup-level--entry' },
+        el('span', { class: 'setup-level__label' }, 'Belépő zóna'),
+        el('span', { class: 'setup-level__value' }, body.entry_zone || '–')
+      ),
+      el('div', { class: 'setup-level setup-level--sl' },
+        el('span', { class: 'setup-level__label' }, 'SL (invalidáció)' ),
+        el('span', { class: 'setup-level__value' }, body.sl || '–')
+      ),
+      el('div', { class: 'setup-level setup-level--tp' },
+        el('span', { class: 'setup-level__label' }, 'TP1' ),
+        el('span', { class: 'setup-level__value' }, body.tp1 || '–')
+      )
     ),
+
+    // Meta rács: RR, Session, Bias, TP2, Invalidáció
+    el('div', { class: 'setup-card__meta' },
+      el('div', { class: 'setup-card__meta-row' },
+        el('span', { class: 'setup-card__meta-label' }, 'RR min'),
+        el('span', { class: 'setup-card__meta-value' }, body.rr_min ? `${body.rr_min}R` : '–')
+      ),
+      el('div', { class: 'setup-card__meta-row' },
+        el('span', { class: 'setup-card__meta-label' }, 'Session'),
+        el('span', { class: 'setup-card__meta-value' }, body.session || '–')
+      ),
+      body.tp2 ? el('div', { class: 'setup-card__meta-row' },
+        el('span', { class: 'setup-card__meta-label' }, 'TP2'),
+        el('span', { class: 'setup-card__meta-value' }, body.tp2)
+      ) : null,
+      el('div', { class: 'setup-card__meta-row' },
+        el('span', { class: 'setup-card__meta-label' }, 'Bias'),
+        el('span', { class: 'setup-card__meta-value' }, body.bias_compatibility || '–')
+      ),
+      el('div', { class: 'setup-card__meta-row', style: 'grid-column: 1 / -1;' },
+        el('span', { class: 'setup-card__meta-label' }, 'Invalidáció'),
+        el('span', { class: 'setup-card__meta-value' }, body.invalidation || '–')
+      )
+    ),
+
+    // Score sáv
     el('div', { class: 'setup-card__score' },
-      el('span', { class: 'setup-card__label' }, 'Score'),
+      el('span', { class: 'setup-card__meta-label' }, 'Score'),
       el('div', { class: 'score-bar' },
         el('div', { class: 'score-bar__fill', style: `width: ${(body.score||0)*10}%` })
       ),
@@ -114,17 +138,20 @@ const renderSetupCard = (slot /* 'short' | 'long' */, entry) => {
     )
   );
 
-  // Makró support tooltip (info gomb)
+  // Makró support info gomb a type sor végére
   if (macroSupport) {
-    const infoBtn = el('span', { class: 'info-btn', title: macroSupport }, 'i');
+    const infoBtn = el('span', { class: 'info-btn', tabindex: '0', title: macroSupport }, 'i');
     infoBtn.addEventListener('mouseenter', (e) => showTip(e, 'Makró alapok:\n' + macroSupport));
     infoBtn.addEventListener('mousemove', (e) => showTip(e, 'Makró alapok:\n' + macroSupport));
     infoBtn.addEventListener('mouseleave', hideTip);
     card.querySelector('.setup-card__type').appendChild(infoBtn);
   }
 
+  // Zárolás oka — kiemelten, olvashatóan
   if (body.locked_reason) {
-    card.appendChild(el('div', { class: 'setup-card__reason' }, body.locked_reason));
+    card.appendChild(el('div', { class: 'setup-card__reason' },
+      el('b', {}, '⛔ Zárolva: '), body.locked_reason
+    ));
   }
 
   // Confirm gomb — csak AI SUGGESTED állapotnál látszik

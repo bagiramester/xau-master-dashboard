@@ -145,7 +145,7 @@ const load = async () => {
 // ═══ INIT ═══
 document.addEventListener('DOMContentLoaded', () => {
   wireTradeForm();
-  $('#btn-refresh').addEventListener('click', load);
+  $('#btn-refresh').addEventListener('click', refreshAllData);
   $('#hard-lock-close').addEventListener('click', () => {
     hardLockDismissed = true;
     $('#hard-lock').hidden = true;

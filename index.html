@@ -21,27 +21,53 @@
 <header class="top-bar">
   <div class="top-bar__brand">
     <span class="brand-mark">◤</span>
-    <span class="brand-text">BAGIRA · XAU MASTER OS</span>
-    <span class="brand-sub" id="tb-datetime">—</span>
+    <div class="brand-text-wrap">
+      <span class="brand-text">BAGIRA · XAU MASTER OS</span>
+      <span class="brand-sub" id="tb-datetime">—</span>
+    </div>
   </div>
+
   <div class="top-bar__center">
-    <div class="tb-chip" data-role="session"><span class="tb-chip__label">SESSION</span><span class="tb-chip__value" id="tb-session">—</span></div>
-    <div class="tb-chip" data-role="bias"><span class="tb-chip__label">BIAS</span><span class="tb-chip__value" id="tb-bias">—</span></div>
-    <div class="tb-chip" data-role="status"><span class="tb-chip__label">STATUS</span><span class="tb-chip__value" id="tb-status">—</span></div>
-    <div class="tb-chip" data-role="effective"><span class="tb-chip__label">EFFECTIVE</span><span class="tb-chip__value" id="tb-effective">—</span></div>
-    <div class="tb-chip" data-role="lock"><span class="tb-chip__label">MACRO LOCK</span><span class="tb-chip__value" id="tb-lock">—</span></div>
-  </div>
-  <div class="top-bar__right">
     <div class="tb-spot">
-      <span class="tb-spot__label">XAU/USD</span>
+      <span class="tb-spot__label">XAU / USD · SPOT</span>
       <span class="tb-spot__price" id="tb-spot">—</span>
+      <span class="tb-spot__delta" id="tb-spot-delta"></span>
+    </div>
+  </div>
+
+  <div class="top-bar__right">
+    <div class="tb-chips" id="tb-chips">
+      <div class="tb-chip" data-role="session">
+        <span class="tb-chip__label">Munkamenet</span>
+        <span class="tb-chip__value" id="tb-session">—</span>
+        <span class="tb-info" id="tb-info-session" tabindex="0">i</span>
+      </div>
+      <div class="tb-chip" data-role="bias">
+        <span class="tb-chip__label">Irány</span>
+        <span class="tb-chip__value" id="tb-bias">—</span>
+        <span class="tb-info" id="tb-info-bias" tabindex="0">i</span>
+      </div>
+      <div class="tb-chip" data-role="status">
+        <span class="tb-chip__label">Státusz</span>
+        <span class="tb-chip__value" id="tb-status">—</span>
+        <span class="tb-info" id="tb-info-status" tabindex="0">i</span>
+      </div>
+      <div class="tb-chip" data-role="effective">
+        <span class="tb-chip__label">Effektív</span>
+        <span class="tb-chip__value" id="tb-effective">—</span>
+        <span class="tb-info" id="tb-info-effective" tabindex="0">i</span>
+      </div>
+      <div class="tb-chip" data-role="lock">
+        <span class="tb-chip__label">Makró zár</span>
+        <span class="tb-chip__value" id="tb-lock">—</span>
+        <span class="tb-info" id="tb-info-lock" tabindex="0">i</span>
+      </div>
     </div>
     <div class="tb-freshness">
       <span class="tb-freshness__dot" id="tb-freshness-dot"></span>
       <span class="tb-freshness__label" id="tb-freshness">—</span>
-      <span class="tb-freshness__time" id="tb-updated">—</span>
     </div>
-    <button class="tb-btn" id="btn-refresh" title="Kézi frissítés">↻</button>
+    <button class="tb-btn" id="btn-refresh" title="Minden adat frissítése (kivéve Bagira)">↻ Frissítés</button>
   </div>
 </header>
 
@@ -89,27 +115,8 @@
     </div>
   </section>
 
-  <!-- ═══ JOBB OSZLOP: RISK ENGINE + TRADE INPUT + WARNINGS + LOG ═══ -->
+  <!-- ═══ JOBB OSZLOP: QUICK TRADE INPUT + RISK ENGINE + WARNINGS + LOG ═══ -->
   <aside class="col col--right">
-    <div class="risk-panel">
-      <div class="col__header">
-        <span class="col__title">RISK ENGINE</span>
-        <span class="risk-mode-badge" id="risk-mode">—</span>
-      </div>
-      <div id="risk-container" class="risk-grid">
-        <!-- risk mezők -->
-      </div>
-    </div>
-
-    <div class="warnings-panel">
-      <div class="col__header col__header--warn">
-        <span class="col__title">FIGYELMEZTETÉSEK</span>
-      </div>
-      <ul id="warnings-container" class="warnings-list">
-        <!-- warning sorok -->
-      </ul>
-    </div>
-
     <div class="tradeinput-panel">
       <div class="col__header">
         <span class="col__title">QUICK TRADE INPUT</span>
@@ -138,6 +145,25 @@
         </div>
         <button type="button" class="trade-submit" id="ti-submit" disabled>Naplózás (SL/TP kötelező)</button>
       </form>
+    </div>
+
+    <div class="risk-panel">
+      <div class="col__header">
+        <span class="col__title">RISK ENGINE</span>
+        <span class="risk-mode-badge" id="risk-mode">—</span>
+      </div>
+      <div id="risk-container" class="risk-grid">
+        <!-- risk mezők -->
+      </div>
+    </div>
+
+    <div class="warnings-panel">
+      <div class="col__header col__header--warn">
+        <span class="col__title">FIGYELMEZTETÉSEK</span>
+      </div>
+      <ul id="warnings-container" class="warnings-list">
+        <!-- warning sorok -->
+      </ul>
     </div>
 
     <div class="log-panel">
