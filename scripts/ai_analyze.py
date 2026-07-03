@@ -308,6 +308,27 @@ def analyze():
             source_type = "ai-fallback"
             model_name = f"mock-fallback ({MODEL} failed)"
 
+    # Normalizálás: az AI néha a bagira mezőket (narrative, confidence,
+    # key_watch, reasoning_summary) a setup_A/setup_B blokkon belülre teszi a
+    # top-level helyett. Hoistoljuk fel, és eltávolítjuk a setup blokkokból,
+    # hogy a data.json bagira panelje mindig kapjon értéket.
+    BAGIRA_KEYS = ("bagira_narrative", "confidence", "key_watch", "reasoning_summary")
+    if isinstance(result, dict):
+        for k in BAGIRA_KEYS:
+            if result.get(k) in (None, "", [], {}):
+                for slot in ("setup_A", "setup_B"):
+                    body = result.get(slot)
+                    if isinstance(body, dict) and body.get(k) not in (None, "", [], {}):
+                        result[k] = body[k]
+                        print(f"[ai] hoist: {k} <- {slot}", file=sys.stderr)
+                        break
+        # Misplaced másolatok eltávolítása a setup blokkokból
+        for slot in ("setup_A", "setup_B"):
+            body = result.get(slot)
+            if isinstance(body, dict):
+                for k in BAGIRA_KEYS:
+                    body.pop(k, None)
+
     # Beírjuk a data.json-ba
     def wrap_setup(body, slot):
         if not body:
