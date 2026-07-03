@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-03 09:21 CEST",
+    "last_updated": "2026-07-03 10:11 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -16,11 +16,7 @@
     ],
     "ai_last_run": "2026-07-03T10:05:43+02:00",
     "ai_model": "sonar-pro",
-    "ai_source_type": "ai",
-    "deep_research_last_run": "2026-07-03T10:05:43+02:00",
-    "deep_research_model": "sonar-pro",
-    "deep_research_source_type": "ai",
-    "deep_research_citations": 10
+    "ai_source_type": "ai"
   },
   "macro": {
     "fedwatch": {
@@ -39,49 +35,49 @@
       "value": 4.49,
       "display": "4.49% – RISING",
       "bias": "RED",
-      "bias_note": "A 10 éves US Treasury hozam ~4.49% körül, emelkedő trendben marad, a gyenge NFP ellenére sem tört le érdemben, így a magas kockázatmentes hozamszint továbbra is alternatívát kínál az arannyal szemben és strukturálisan inkább short-bias a nemesfémre.[1][2]",
+      "bias_note": "US10Y 4.49% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
       "impact": 4,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance ^TNX",
+      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "dxy": {
-      "value": 100.7,
-      "display": "100.7 – USD-BEAR (enyhe, rövid táv) / RANGE",
+      "value": 100.69,
+      "display": "100.69 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "A gyengébb NFP adat dollárgyengülést indított, de a DXY nagyobb timeframe-en továbbra is oldalazó tartományban marad, tiszta bearish break nélkül, ezért az USD-gyengülés inkább intraday, mint strukturális XAU-támogató faktor.[1][2][9]",
+      "bias_note": "DXY 100.69 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance DX-Y.NYB",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "sentiment": {
       "value": 32,
-      "display": "32 – FEAR (SAFE_HAVEN)",
-      "bias": "GREEN",
-      "bias_note": "A félelem-vezérelt szentiment (alacsonyabb risk-on étvágy) historikusan kedvez az olyan menedékeszközöknek, mint az arany, különösen akkor, ha a dollár oldalazik vagy gyengül, így ez ma nettó XAU-támogató háttér.",
-      "impact": 4,
+      "display": "32 – FEAR",
+      "bias": "YELLOW",
+      "bias_note": "FEAR (32) – enyhén long XAU-kedvező.",
+      "impact": 2,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "CNN Fear & Greed Index",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
-      "display": "RANGE-BOUND (HTF oldalazás)",
+      "display": "RANGE",
       "bias": "YELLOW",
-      "bias_note": "A 50/200 SMA és a strukturális swing high/low-k alapján az XAU nagyobb timeframe-en inkább oldalazó tartományban mozog, sem tisztán bull, sem tisztán bear trend nincs, ami a HTF szinten inkább mean-reversion, zónakereskedés felé tereli a stratégiát.",
-      "impact": 4,
+      "bias_note": "Ár 3800–4300 sávban – range/transition.",
+      "impact": 3,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "computed",
+      "source_label": "Számított ártartomány alapján",
+      "source_url": null,
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BULL",
@@ -108,8 +104,8 @@
       "updated_at": "2026-07-03T10:05:43+02:00"
     },
     "xau_spot": {
-      "value": 4190.9,
-      "display": "$4,190.90 (+1.9%)",
+      "value": 4193.6,
+      "display": "$4,193.60 (+1.97%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -117,33 +113,33 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-03T09:21:06+02:00"
+      "updated_at": "2026-07-03T10:11:08+02:00"
     }
   },
   "levels": {
     "pdh": {
       "value": 4140.1,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi High)",
+      "source_url": null,
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "pdl": {
-      "value": 4062,
+      "value": 4062.0,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi Low)",
+      "source_url": null,
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "daily_open": {
-      "value": 4138,
+      "value": 4138.0,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T10:05:43+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (mai Open)",
+      "source_url": null,
+      "updated_at": "2026-07-03T10:11:08+02:00"
     },
     "asia_high": {
       "value": 4208.3,
@@ -215,7 +211,7 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-03T09:21:06+02:00"
+    "updated_at": "2026-07-03T10:11:08+02:00"
   },
   "header": {
     "bias_direction": "LONG",
@@ -309,6 +305,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-03T09:21:06+02:00"
+    "updated_at": "2026-07-03T10:11:08+02:00"
   }
 }
