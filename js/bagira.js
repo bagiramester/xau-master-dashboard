@@ -132,7 +132,12 @@ const triggerAiRefresh = async () => {
       // sikeres dispatch
       btn.textContent = '✓ Fut... (~60 mp)';
       showBagiraStatus('AI elemzés fut a szerveren, 30–90 mp múlva frissül a dashboard.', 'success');
-      // Poll: 15 mp múlva kezdjük nézni a raw.githubusercontent.com-ot
+      // rögzítjük az indítás pillanatában érvényes data.json commit SHA-ját
+      try {
+        const cr = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?path=data.json&per_page=1`, { headers: { 'Accept': 'application/vnd.github+json' } });
+        if (cr.ok) { const cj = await cr.json(); window.__bagiraPreSha = cj[0]?.sha || ''; }
+      } catch (e) { /* non-critical */ }
+      // Poll: 15 mp múlva kezdjük nézni a commit SHA-t
       setTimeout(() => pollForNewAiResult(0), 15000);
     } else if (res.status === 401) {
       showBagiraStatus('PAT érvénytelen. Frissítsd (kattints újra).', 'error');
@@ -165,24 +170,36 @@ const pollForNewAiResult = async (attempt) => {
   if (attempt > 18) {
     // 18 × 10 mp = 180 mp után feladjuk
     if (btn) { btn.textContent = '🧠 Új elemzés'; btn.disabled = false; }
-    showBagiraStatus('Az AI futás elhúzódott. A data.json frissült, de a Pages CDN még régit szolgál — töltsd újra az oldalt (Ctrl+Shift+R).', 'warning');
+    showBagiraStatus('Az AI futás elhúzódott. A data.json valószínűleg frissült — töltsd újra az oldalt (Ctrl+Shift+R).', 'warning');
     return;
   }
-  const oldUpdated = (currentData?.bagira?.updated_at) || '';
   try {
-    // A Pages CDN (max-age=600) akár 10 percig régit szolgál, ezért a poll
-    // a raw.githubusercontent.com-ot olvassa — az frissebb (max-age=300,
-    // source-age: 0 revalidál) és CORS-engedélyezett.
-    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data.json?t=${Date.now()}`, { cache: 'no-store', mode: 'cors' });
-    if (res.ok) {
-      const data = await res.json();
-      const newUpdated = data?.bagira?.updated_at || '';
-      if (newUpdated && newUpdated !== oldUpdated) {
-        currentData = data;
-        render(data);
-        showBagiraStatus('✓ Új Bagira elemzés érkezett.', 'success');
-        if (btn) { btn.textContent = '🧠 Új elemzés'; btn.disabled = false; }
-        return;
+    // A Pages CDN és a raw branch URL is cache-el (max-age 600 ill. 300),
+    // a ?t= cache-buster nem bypassolja. Ezért a GitHub API-n nézzük a
+    // data.json legutolsó commit SHA-ját; ha megváltozott, az AI commit-elt.
+    // Ezután a SHA-pinned raw URL-t töltjük le — az immutable, sose stale.
+    const cr = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?path=data.json&per_page=1`, { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json' } });
+    if (cr.ok) {
+      const cj = await cr.json();
+      const newSha = cj[0]?.sha || '';
+      const preSha = window.__bagiraPreSha || '';
+      if (newSha && newSha !== preSha) {
+        // Új commit landolt — SHA-pinned raw URL (mindig friss)
+        const rr = await fetch(`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${newSha}/data.json`, { cache: 'no-store', mode: 'cors' });
+        if (rr.ok) {
+          const data = await rr.json();
+          const newUpdated = data?.bagira?.updated_at || '';
+          const oldUpdated = (currentData?.bagira?.updated_at) || '';
+          if (newUpdated && newUpdated !== oldUpdated) {
+            currentData = data;
+            render(data);
+            showBagiraStatus('✓ Új Bagira elemzés érkezett.', 'success');
+          } else {
+            showBagiraStatus('✓ AI futás befejeződött (a tartalom nem változott).', 'success');
+          }
+          if (btn) { btn.textContent = '🧠 Új elemzés'; btn.disabled = false; }
+          return;
+        }
       }
     }
   } catch (e) { /* silent */ }
