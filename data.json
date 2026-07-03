@@ -13,7 +13,10 @@
       "cme:fedwatch (manual)",
       "investing:economic-calendar (manual)",
       "manual:trade-log"
-    ]
+    ],
+    "ai_last_run": "2026-07-03T07:54:22+02:00",
+    "ai_model": "sonar-pro",
+    "ai_source_type": "ai"
   },
   "macro": {
     "fedwatch": {
@@ -229,57 +232,67 @@
   "setups": {
     "A": {
       "value": {
-        "direction": null,
-        "type": null,
-        "bias_compatibility": null,
-        "entry_zone": null,
-        "sl": null,
-        "tp1": null,
-        "tp2": null,
+        "direction": "SHORT",
+        "type": "range reversal",
+        "bias_compatibility": "igen — SHORT bias-szal egyező",
+        "entry_zone": "4058-4105",
+        "sl": "H1 close 4112 felett",
+        "tp1": "4049.2",
+        "tp2": "3963.0",
         "rr_min": 2.0,
-        "score": 0,
-        "session": "NY 14:00-19:00 CEST",
-        "invalidation": null,
-        "macro_support": [],
+        "score": 7,
+        "session": "NY 14:00-19:00 CEST (NFP után)",
+        "invalidation": "H1 close 4112 felett",
+        "macro_support": [
+          "US10Y 4.48% RISING → short háttér",
+          "DXY 100.84 RANGE → semleges USD-háttér"
+        ],
         "allowed": false,
-        "locked_reason": "Makró tiltási ablak aktív – NFP nap, rendszer szerint NO-TRADE.",
+        "locked_reason": "Makró tiltási ablak aktív (13:30–15:00 CEST)",
         "confirmed": false,
-        "setup_quality": null,
-        "entry_zone_status": null
+        "setup_quality": "erős",
+        "entry_zone_status": "aktív",
+        "confidence": 68,
+        "bagira_narrative": "A pánter figyel. 4100 fölött még a vásárlók dolgoznak, de a 4.48%-os hozam nehéz súly az aranyon. NFP előtt csend kell; a short csak a tiltás feloldása után él."
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T20:19:54+02:00",
+      "updated_at": "2026-07-03T07:54:22+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     },
     "B": {
       "value": {
-        "direction": null,
-        "type": null,
-        "bias_compatibility": null,
-        "entry_zone": null,
-        "sl": null,
-        "tp1": null,
-        "tp2": null,
+        "direction": "LONG",
+        "type": "liquidity sweep reaction",
+        "bias_compatibility": "részben — makró-fordulós counter",
+        "entry_zone": "3963-3930 flush/sweep után",
+        "sl": "H1 close 3924 alatt",
+        "tp1": "4049.2",
+        "tp2": "4058-4105",
         "rr_min": 2.0,
-        "score": 0,
-        "session": "NY 14:00-19:00 CEST",
-        "invalidation": null,
-        "macro_support": [],
+        "score": 6,
+        "session": "NY 15:00-19:00 CEST (csak NFP után)",
+        "invalidation": "H1 close 3924 alatt",
+        "macro_support": [
+          "Csak NFP miss vagy hozamforduló esetén",
+          "US10Y visszaesés < 4.3%"
+        ],
         "allowed": false,
-        "locked_reason": "Makró tiltási ablak aktív – NFP nap, rendszer szerint NO-TRADE.",
+        "locked_reason": "Makró tiltási ablak aktív (13:30–15:00 CEST)",
         "confirmed": false,
-        "setup_quality": null,
-        "entry_zone_status": null
+        "setup_quality": "közepes",
+        "entry_zone_status": "nem aktív",
+        "confidence": 42,
+        "bagira_narrative": "A pánter a mélyebb sweepet figyeli. Ha a hozam elcsendesül és a price visszaveszi a 3963 környékét, akkor jöhet a visszapattanás. Addig ez csak terv, nem végrehajtás."
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-02T20:19:54+02:00",
+      "updated_at": "2026-07-03T07:54:22+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -293,5 +306,14 @@
     "avg_rr": null,
     "rule_break_count": 0,
     "updated_at": "2026-07-02T20:51:38+02:00"
+  },
+  "bagira": {
+    "narrative": "",
+    "key_watch": [],
+    "confidence": 0,
+    "reasoning_summary": "",
+    "model": "sonar-pro",
+    "source_type": "ai",
+    "updated_at": "2026-07-03T07:54:22+02:00"
   }
 }
