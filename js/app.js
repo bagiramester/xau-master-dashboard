@@ -10,15 +10,19 @@ const applyHardLock = (data) => {
 
   if (hardLockDismissed) { hl.hidden = true; return; }
 
-  const isLocked = eff === 'RED' || nt.macro_lock_active;
-  if (!isLocked) { hl.hidden = true; return; }
+  // A hard lock overlay CSAK a valódi makró tiltásra (macro_lock_active)
+  // aktiválódjon — nem az effective_mode=RED-re, ami csak óvatossági szint
+  // (pl. magas US10Y hozam). A RED effektív mód a chip-eken és figyelmeztetéseken
+  // keresztül jelződik, de nem nyit automatikus NO-TRADE overlay-t.
+  const isMacroLocked = nt.macro_lock_active === true;
+  if (!isMacroLocked) { hl.hidden = true; return; }
 
   let reason = '—';
-  if (eff === 'RED') {
-    reason = 'RED effektív mód — a Risk OS és/vagy Macro állapot alapján ma nincs XAU trade. A rendszer szigorúbb-nyer logikával lockolta a setup panelt.';
-  } else if (nt.macro_lock_active) {
-    const w = nt.macro_no_trade_windows && nt.macro_no_trade_windows[0];
-    reason = w ? `Makró tiltási ablak (${w.start}–${w.end} CEST): ${w.reason}` : 'Makró tiltási ablak aktív.';
+  const w = nt.macro_no_trade_windows && nt.macro_no_trade_windows[0];
+  if (w) {
+    reason = `Makró tiltási ablak (${w.start}–${w.end} CEST): ${w.reason}`;
+  } else {
+    reason = 'Makró tiltási ablak aktív — high-impact esemény környéke, nincs új XAU trade.';
   }
   $('#hard-lock-reason').textContent = reason;
   $('#hard-lock-mode').textContent = eff || 'YELLOW';

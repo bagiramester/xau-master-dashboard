@@ -136,11 +136,10 @@ const refreshAllData = async () => {
     }
     currentData = freshData;
     render(freshData);
-    // Ha a spot stale, élő fallback
-    const spot = freshData.macro?.xau_spot?.updated_at;
-    if (isStale(spot, 30)) {
-      await clientSideXauFallback(freshData);
-    }
+    // A ↻ frissítés gomb MINDIG húz egy élő spot-ot a gold-api.com-ból,
+    // függetlenül attól, hogy a data.json cron mikor futott utoljára.
+    // Így a középső árfolyam a gomb megnyomására garantáltan frissül.
+    await clientSideXauFallback(freshData);
     const ts = new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     showRefreshStatus(`Frissítve: ${ts}`, 'success');
   } catch (e) {
