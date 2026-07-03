@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-03 08:14 CEST",
+    "last_updated": "2026-07-03 09:21 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -16,11 +16,7 @@
     ],
     "ai_last_run": "2026-07-03T09:18:29+02:00",
     "ai_model": "sonar-pro",
-    "ai_source_type": "ai",
-    "deep_research_last_run": "2026-07-03T09:18:29+02:00",
-    "deep_research_model": "sonar-pro",
-    "deep_research_source_type": "ai",
-    "deep_research_citations": 10
+    "ai_source_type": "ai"
   },
   "macro": {
     "fedwatch": {
@@ -39,49 +35,49 @@
       "value": 4.49,
       "display": "4.49% – RISING",
       "bias": "RED",
-      "bias_note": "A TradingEconomics adatai szerint a 10 éves US hozam június végén–július elején ~4.5% körül jár és emelkedő trendben van, ami tartósan magas finanszírozási költséget és opportunity costot jelent az arany számára.[5] Ez makró szinten egyértelműen short XAU háttér.",
+      "bias_note": "US10Y 4.49% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
       "impact": 4,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance ^TNX",
+      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "dxy": {
-      "value": 100.73,
-      "display": "100.73 – USD-BEAR (rövid táv, NFP-utóhatás)",
+      "value": 100.68,
+      "display": "100.68 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "A júniusi NFP 57K-s miss-e után a DXY a 99–103-as széles sávon belül inkább a 100–101 tartományba húzódik vissza, rövid távú gyengülést mutat a korábbi 101+ csúcsokról.[2][5] Ez rövid távon XAU-long hátteret ad, de a magas hozam miatt csak vegyes (YELLOW) bias indokolt.",
+      "bias_note": "DXY 100.68 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance DX-Y.NYB",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "sentiment": {
       "value": 32,
       "display": "32 – FEAR",
-      "bias": "GREEN",
-      "bias_note": "A CNN/Fear & Greed típusú mutatók a 30–35-ös zónában járnak, ami „Fear” tartományt jelez, fokozott kockázatkerülést és potenciális safe-haven keresletet az arany irányába.[5] Ez makró szinten kedvezőbb XAU-long környezet, ezért GREEN bias.",
-      "impact": 4,
+      "bias": "YELLOW",
+      "bias_note": "FEAR (32) – enyhén long XAU-kedvező.",
+      "impact": 2,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "CNN Fear & Greed Index",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
       "display": "RANGE",
       "bias": "YELLOW",
-      "bias_note": "A HTF chartok alapján az XAU jelenleg inkább széles sávban oldalaz, kulcs-SMA-k közelében, egyes források death cross-t említenek, de a legfrissebb struktúra inkább range-es jellegű, ami nem ad egyértelmű trend-long vagy trend-short makró hátteret.[3] Ezért a hosszabb távú trend bias vegyes (YELLOW).",
-      "impact": 4,
+      "bias_note": "Ár 3800–4300 sávban – range/transition.",
+      "impact": 3,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "computed",
+      "source_label": "Számított ártartomány alapján",
+      "source_url": null,
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BULL",
@@ -108,8 +104,8 @@
       "updated_at": "2026-07-03T09:18:29+02:00"
     },
     "xau_spot": {
-      "value": 4178.8,
-      "display": "$4,178.80 (+1.61%)",
+      "value": 4190.9,
+      "display": "$4,190.90 (+1.9%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -117,33 +113,33 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-03T08:14:21+02:00"
+      "updated_at": "2026-07-03T09:21:06+02:00"
     }
   },
   "levels": {
     "pdh": {
       "value": 4140.1,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi High)",
+      "source_url": null,
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "pdl": {
       "value": 4062.0,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi Low)",
+      "source_url": null,
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "daily_open": {
       "value": 4138.0,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T09:18:29+02:00"
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (mai Open)",
+      "source_url": null,
+      "updated_at": "2026-07-03T09:21:06+02:00"
     },
     "asia_high": {
       "value": 4208.3,
@@ -215,13 +211,13 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-03T08:14:21+02:00"
+    "updated_at": "2026-07-03T09:21:06+02:00"
   },
   "header": {
     "bias_direction": "LONG",
     "bias_status": "SÁRGA",
     "effective_mode": "RED",
-    "session": "Asia",
+    "session": "London",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
     "narrative": "A júniusi NFP 57K lett, jóval a ~110K konszenzus alatt, ami munkaerőpiaci lassulást és enyhébb Fed-pályát jelez, rövid távon USD- és yield-nyomással, XAU-nak kedvező módon.[2][5] Ugyanakkor a 10 éves US hozam ~4.5% körül, emelkedő trendben marad, ami magas opportunity costot jelent az arany számára, és középtávon hawkish környezetet tükröz.[5] A DXY a 99–103-as sávban, 100–101 közelében oldalaz, nem kap erős irányjelet; a sentiment Fear zónában van, ami safe-haven keresletet támogathat.[5] Emiatt az összkép inkább óvatos, taktikai LONG XAU-bias, de makró szinten vegyes és volatilis, így SÁRGA kockázati státusz indokolt.",
     "fed_regime_summary": "A júniusi US NFP-t tegnap (július 2., csütörtök) hozták ki az ünnep miatt: +57K vs ~110K konszenzus, ami jelentős miss és lassuló munkaerőpiacot jelez.[2][5][8] Az NFP gyenge adat rövid távon USD-gyengítő és XAU-támogató háttér, de a magas és emelkedő US10Y hozam, valamint a közelgő CPI/Fed kilátások miatt az összkép továbbra is hawkishabb, ezért csak óvatos LONG bias indokolt.[5][8]"
@@ -292,16 +288,6 @@
       "ai_state": "SUGGESTED"
     }
   },
-  "trade_log": [],
-  "performance": {
-    "trade_count": 0,
-    "win_count": 0,
-    "loss_count": 0,
-    "net_pl_usd": 0.0,
-    "avg_rr": null,
-    "rule_break_count": 0,
-    "updated_at": "2026-07-03T08:14:21+02:00"
-  },
   "bagira": {
     "narrative": "A pánter most nem kergeti az árat, figyeli, hol fárad el a bika. 4208 körül keresem a feszültséget, ott dől el a nap. Ha csak visszatesztet kapunk 4140 környékére, a long folytatás is játékban marad. Türelem, a struktúra beszél, nem a vágy.",
     "key_watch": [
@@ -314,5 +300,15 @@
     "model": "sonar-pro",
     "source_type": "ai",
     "updated_at": "2026-07-03T09:18:29+02:00"
+  },
+  "trade_log": [],
+  "performance": {
+    "trade_count": 0,
+    "win_count": 0,
+    "loss_count": 0,
+    "net_pl_usd": 0.0,
+    "avg_rr": null,
+    "rule_break_count": 0,
+    "updated_at": "2026-07-03T09:21:06+02:00"
   }
 }
