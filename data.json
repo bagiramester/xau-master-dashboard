@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-03 13:02 CEST",
+    "last_updated": "2026-07-03 15:07 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -32,28 +32,28 @@
       "updated_at": "2026-07-03T11:54:31+02:00"
     },
     "us10y": {
-      "value": 4.49,
-      "display": "4.49% – RISING",
+      "value": 4.48,
+      "display": "4.48% – RISING",
       "bias": "RED",
-      "bias_note": "US10Y 4.49% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
+      "bias_note": "US10Y 4.48% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance ^TNX",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "dxy": {
-      "value": 100.76,
-      "display": "100.76 – RANGE",
+      "value": 100.78,
+      "display": "100.78 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "DXY 100.76 a 99–103 sávban – semleges USD-háttér.",
+      "bias_note": "DXY 100.78 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance DX-Y.NYB",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "sentiment": {
       "value": 32,
@@ -65,7 +65,7 @@
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -77,7 +77,7 @@
       "source_type": "computed",
       "source_label": "Számított ártartomány alapján",
       "source_url": null,
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BULL",
@@ -104,8 +104,8 @@
       "updated_at": "2026-07-03T11:54:31+02:00"
     },
     "xau_spot": {
-      "value": 4190.1,
-      "display": "$4,190.10 (+1.88%)",
+      "value": 4185.8,
+      "display": "$4,185.80 (+1.78%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -113,7 +113,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     }
   },
   "levels": {
@@ -123,7 +123,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi High)",
       "source_url": null,
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "pdl": {
       "value": 4062.0,
@@ -131,7 +131,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi Low)",
       "source_url": null,
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "daily_open": {
       "value": 4138.0,
@@ -139,7 +139,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (mai Open)",
       "source_url": null,
-      "updated_at": "2026-07-03T13:02:58+02:00"
+      "updated_at": "2026-07-03T15:07:27+02:00"
     },
     "asia_high": {
       "value": 4208.3,
@@ -211,13 +211,13 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-03T13:02:58+02:00"
+    "updated_at": "2026-07-03T15:07:27+02:00"
   },
   "header": {
     "bias_direction": "LONG",
     "bias_status": "SÁRGA",
     "effective_mode": "RED",
-    "session": "London",
+    "session": "Overlap",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
     "narrative": "A tegnapi júniusi NFP 57K lett a 110K konszenzussal szemben, ami gyengébb munkaerőpiaci képet és enyhébb Fed-szigorítási nyomást sugall, ez rövid távon támogatja az aranyat.[4][7][9] Ezt azonban ellensúlyozza, hogy az US10Y 4.49% körül emelkedő maradt, ami növeli az arany tartási költségét, miközben a DXY nem gyenge trendben, hanem inkább range-ben mozog.[6][7] A mai háttér ezért enyhén long, de holiday-liquidity mellett inkább visszateszt-vásárlás, mint agresszív kitörésvadászat.",
     "fed_regime_summary": "A tegnapi gyenge NFP továbbra is aranytámogató, de a 4.49%-os emelkedő US10Y és a range-es DXY miatt a mai long csak pullback-alapon, nem breakout-chase módban értelmezhető."
@@ -308,6 +308,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-03T13:02:58+02:00"
+    "updated_at": "2026-07-03T15:07:27+02:00"
   }
 }
