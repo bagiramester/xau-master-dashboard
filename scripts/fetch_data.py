@@ -106,28 +106,53 @@ def fetch_xau():
         return {"ok": False, "error": str(e)}
 
 # ── 2. US10Y hozam (Yahoo ^TNX) ──────────────────────────────────────────────
+def _yahoo_rest_quote(symbol):
+    """Robusztus árlekérés a Yahoo v8 chart REST API-n keresztül.
+    Visszaadja (price, prevClose). Akkor használjuk, ha a yfinance history
+    DataFrame-e túl rövid (pl. ünnep/half-day miatt)."""
+    import urllib.parse
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(symbol, safe='')}?interval=1d&range=5d"
+    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
+    r.raise_for_status()
+    meta = r.json()["chart"]["result"][0]["meta"]
+    price = meta.get("regularMarketPrice")
+    prev = meta.get("chartPreviousClose") or meta.get("previousClose")
+    if price is None:
+        raise ValueError(f"nincs regularMarketPrice: {symbol}")
+    return price, prev
+
+
 def fetch_us10y():
     try:
         tnx = yf.Ticker("^TNX")
         hist = tnx.history(period="5d")
+        if hist is None or len(hist) < 2:
+            # yfinance üres/rövid DataFrame (pl. ünnep, half-day) → REST fallback
+            raise ValueError("history túl rövid")
         curr = round(float(hist["Close"].iloc[-1]), 2)
         prev = round(float(hist["Close"].iloc[-2]), 2)
-        direction = "RISING" if curr > prev else "FALLING" if curr < prev else "SIDEWAYS"
-        # Bias logika: magas + emelkedő → RED (short XAU háttér)
-        if curr >= 4.2 and direction == "RISING":
-            bias, note = "RED", f"US10Y {curr}% és emelkedik – magas opportunity cost aranynak, short XAU háttér."
-        elif curr < 4.0 or direction == "FALLING":
-            bias, note = "GREEN", f"US10Y {curr}%, {direction.lower()} – kedvezőbb long XAU háttér."
-        else:
-            bias, note = "YELLOW", f"US10Y {curr}%, {direction.lower()} – vegyes."
-        return make_field(curr, display=f"{curr}% – {direction}",
-                          bias=bias, bias_note=note, impact=4,
-                          source_type="auto",
-                          source_label="Yahoo Finance ^TNX",
-                          source_url="https://finance.yahoo.com/quote/%5ETNX")
     except Exception as e:
-        print(f"[ERROR] US10Y fetch: {e}")
-        return None
+        print(f"[warn] US10Y yfinance hiba ({e}), REST API fallback...")
+        try:
+            p, prevc = _yahoo_rest_quote("^TNX")
+            curr = round(float(p), 2)
+            prev = round(float(prevc), 2) if prevc else curr
+        except Exception as e2:
+            print(f"[ERROR] US10Y REST fallback is sikertelen: {e2}")
+            return None
+    direction = "RISING" if curr > prev else "FALLING" if curr < prev else "SIDEWAYS"
+    # Bias logika: magas + emelkedő → RED (short XAU háttér)
+    if curr >= 4.2 and direction == "RISING":
+        bias, note = "RED", f"US10Y {curr}% és emelkedik – magas opportunity cost aranynak, short XAU háttér."
+    elif curr < 4.0 or direction == "FALLING":
+        bias, note = "GREEN", f"US10Y {curr}%, {direction.lower()} – kedvezőbb long XAU háttér."
+    else:
+        bias, note = "YELLOW", f"US10Y {curr}%, {direction.lower()} – vegyes."
+    return make_field(curr, display=f"{curr}% – {direction}",
+                      bias=bias, bias_note=note, impact=4,
+                      source_type="auto",
+                      source_label="Yahoo Finance ^TNX",
+                      source_url="https://finance.yahoo.com/quote/%5ETNX")
 
 # ── 3. DXY (Yahoo DX-Y.NYB) ──────────────────────────────────────────────────
 def fetch_dxy():

@@ -90,38 +90,37 @@ const render = (data) => {
 };
 
 // ═══ HYBRID REFRESH ═══
-// - Először a data.json-t próbáljuk (GH Actions cron 15 percente frissíti).
-// - Ha updated_at > 30 perc → stale, client-side fallback próbál Yahoo-tól spotot húzni.
+// - Először a data.json-t próbáljuk (GH Actions cron frissíti).
+// - Ha updated_at > 30 perc → stale, client-side fallback: gold-api.com (CORS-kompatibilis)
+//   a Yahoo query1.finance.yahoo.com böngészőből CORS-blokkolt, ezért nem használható.
 const clientSideXauFallback = async (data) => {
-  // CORS: csak Pages/production kontextusban probaljuk
+  // csak production Pages kontextusban próbáljuk
   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
   try {
-    // Yahoo unofficial quote endpoint
-    const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1m&range=1d', { cache: 'no-store', mode: 'cors' });
+    const res = await fetch('https://api.gold-api.com/price/XAU', { cache: 'no-store', mode: 'cors' });
     if (!res.ok) return;
     const j = await res.json();
-    const r = j?.chart?.result?.[0];
-    if (!r) return;
-    const price = r.meta?.regularMarketPrice;
-    const prevClose = r.meta?.previousClose;
-    if (price && prevClose) {
-      const change = ((price - prevClose) / prevClose * 100).toFixed(2);
-      data.macro = data.macro || {};
-      data.macro.xau_spot = {
-        value: Math.round(price*100)/100,
-        display: `$${price.toFixed(2)} (${change >= 0 ? '+' : ''}${change}%) [client]`,
-        bias: null, bias_note: 'Client-side Yahoo fallback',
-        impact: 4, status: 'fresh',
-        source_type: 'auto', source_label: 'Yahoo Finance GC=F (client fallback)',
-        source_url: 'https://finance.yahoo.com/quote/GC=F',
-        updated_at: new Date().toISOString()
-      };
-      // Frissítjük a meta-t is
-      data.meta = data.meta || {};
-      data.meta.data_freshness = 'live';
-      render(data);
-      console.log('[hybrid-refresh] Client fallback sikeres:', price);
-    }
+    const price = j?.price;
+    if (!price || !isFinite(price)) return;
+    data.macro = data.macro || {};
+    const prev = data.macro.xau_spot?.value || price;
+    const change = ((price - prev) / prev * 100);
+    data.macro.xau_spot = {
+      value: Math.round(price*100)/100,
+      display: `$${price.toFixed(2)} (${change >= 0 ? '+' : ''}${change.toFixed(2)}%) [live]`,
+      bias: null, bias_note: 'Client-side gold-api.com live fallback',
+      impact: 4, status: 'fresh',
+      source_type: 'auto', source_label: 'gold-api.com (client live fallback)',
+      source_url: 'https://gold-api.com/',
+      updated_at: new Date().toISOString()
+    };
+    data.meta = data.meta || {};
+    data.meta.data_freshness = 'live';
+    render(data);
+    // frissességjelző pip élő adatra vált
+    const dot = $('#tb-freshness-dot');
+    if (dot) dot.classList.add('freshness-live');
+    console.log('[hybrid-refresh] Client live fallback sikeres:', price);
   } catch (e) {
     console.warn('[hybrid-refresh] Client fallback hiba:', e);
   }
