@@ -398,6 +398,12 @@ def main():
     )
     freshness = "live" if all_fresh else "stale"
 
+    # A Bagira AI blokkot megőrizzük a korábbi data.json-ből — az update-data
+    # cron NEM törli az AI elemzést. Az ai_analyze.py külön frissíti, amikor a
+    # felhasználó a gombot nyomja. Ugyanez igaz a meta.ai_* mezőkre.
+    bagira = prev.get("bagira", {})
+    prev_meta = prev.get("meta", {})
+
     data = {
         "meta": {
             "schema_version": "v2",
@@ -410,6 +416,9 @@ def main():
                 "cnn:fear-greed", "cme:fedwatch (manual)",
                 "investing:economic-calendar (manual)", "manual:trade-log",
             ],
+            "ai_last_run": prev_meta.get("ai_last_run"),
+            "ai_model": prev_meta.get("ai_model"),
+            "ai_source_type": prev_meta.get("ai_source_type"),
         },
         "macro": macro,
         "levels": levels,
@@ -417,6 +426,7 @@ def main():
         "risk": risk,
         "header": header,
         "setups": setups,
+        "bagira": bagira,
         "trade_log": trade_log,
         "performance": performance,
     }

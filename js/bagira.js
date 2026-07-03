@@ -132,8 +132,8 @@ const triggerAiRefresh = async () => {
       // sikeres dispatch
       btn.textContent = '✓ Fut... (~60 mp)';
       showBagiraStatus('AI elemzés fut a szerveren, 30–90 mp múlva frissül a dashboard.', 'success');
-      // Poll: 20 mp múlva kezdjük nézni a data.json-t
-      setTimeout(() => pollForNewAiResult(0), 20000);
+      // Poll: 15 mp múlva kezdjük nézni a raw.githubusercontent.com-ot
+      setTimeout(() => pollForNewAiResult(0), 15000);
     } else if (res.status === 401) {
       showBagiraStatus('PAT érvénytelen. Frissítsd (kattints újra).', 'error');
       setPat(''); // töröljük a rossz PAT-ot
@@ -162,19 +162,23 @@ const triggerAiRefresh = async () => {
 
 const pollForNewAiResult = async (attempt) => {
   const btn = $('#bagira-trigger-btn');
-  if (attempt > 15) {
-    // 15 × 10 mp = 150 mp után feladjuk
+  if (attempt > 18) {
+    // 18 × 10 mp = 180 mp után feladjuk
     if (btn) { btn.textContent = '🧠 Új elemzés'; btn.disabled = false; }
-    showBagiraStatus('Az AI futás elhúzódott. Próbáld pár perc múlva a dashboard frissítést.', 'warning');
+    showBagiraStatus('Az AI futás elhúzódott. A data.json frissült, de a Pages CDN még régit szolgál — töltsd újra az oldalt (Ctrl+Shift+R).', 'warning');
     return;
   }
   const oldUpdated = (currentData?.bagira?.updated_at) || '';
   try {
-    const res = await fetch(`data.json?t=${Date.now()}`, { cache: 'no-store' });
+    // A Pages CDN (max-age=600) akár 10 percig régit szolgál, ezért a poll
+    // a raw.githubusercontent.com-ot olvassa — az frissebb (max-age=300,
+    // source-age: 0 revalidál) és CORS-engedélyezett.
+    const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data.json?t=${Date.now()}`, { cache: 'no-store', mode: 'cors' });
     if (res.ok) {
       const data = await res.json();
       const newUpdated = data?.bagira?.updated_at || '';
       if (newUpdated && newUpdated !== oldUpdated) {
+        currentData = data;
         render(data);
         showBagiraStatus('✓ Új Bagira elemzés érkezett.', 'success');
         if (btn) { btn.textContent = '🧠 Új elemzés'; btn.disabled = false; }
