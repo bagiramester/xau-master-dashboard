@@ -329,6 +329,41 @@ def analyze():
                 for k in BAGIRA_KEYS:
                     body.pop(k, None)
 
+    # Végső fallback: ha az AI egyáltalán nem adott narrative/confidence/key_watch
+    # mezőket, szintetizálunk egyet setup_A adataiból, hogy a panel sose legyen üres.
+    sa = result.get("setup_A") or {}
+    if not result.get("bagira_narrative"):
+        dir_a = sa.get("direction", "—")
+        score_a = sa.get("score", "—")
+        qual = sa.get("setup_quality", "—")
+        allowed_a = sa.get("allowed")
+        if allowed_a:
+            result["bagira_narrative"] = (
+                f"A pánter {dir_a.lower()} setupot lát ({score_a}/10, {qual}). "
+                f"Várom a megerősítést a belépési zónában — addig csendben ülök.")
+        else:
+            reason = sa.get("locked_reason") or "a mai nap nem enged trade-t"
+            result["bagira_narrative"] = (
+                f"A pánter figyel, de nem lép. {reason}. "
+                f"A terv {dir_a.lower()} irányban készen áll, ha a lock feloldódik.")
+        print("[ai] fallback: bagira_narrative szintetizálva setup_A-ból", file=sys.stderr)
+    if result.get("confidence") in (None, "", 0):
+        try:
+            result["confidence"] = int(sa.get("score", 0)) * 10
+        except Exception:
+            result["confidence"] = 50
+        print(f"[ai] fallback: confidence szintetizálva = {result['confidence']}", file=sys.stderr)
+    if not result.get("key_watch"):
+        kw = []
+        if sa.get("entry_zone"):
+            kw.append(f"Belépési zóna: {sa.get('entry_zone')}")
+        if sa.get("invalidation"):
+            kw.append(f"Invalidáció: {sa.get('invalidation')}")
+        if not kw:
+            kw.append("Makró naptár és DXY/US10Y olvasat figyelése")
+        result["key_watch"] = kw
+        print("[ai] fallback: key_watch szintetizálva", file=sys.stderr)
+
     # Beírjuk a data.json-ba
     def wrap_setup(body, slot):
         if not body:
