@@ -14,7 +14,7 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-03T08:20:18+02:00",
+    "ai_last_run": "2026-07-03T08:22:42+02:00",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai"
   },
@@ -233,19 +233,19 @@
     "A": {
       "value": {
         "direction": "LONG",
-        "type": "trend continuation",
-        "bias_compatibility": "igen — LONG bias-szal egyező",
-        "entry_zone": "4180-4192",
-        "sl": "4162 alatt H1 close alapján",
+        "type": "range reversal",
+        "bias_compatibility": "igen — LONG intraday bullish regime-mel egyezik",
+        "entry_zone": "4168-4174",
+        "sl": "4154 alatt H1 close alapján",
         "tp1": "4208",
         "tp2": "4235",
         "rr_min": 2.0,
         "score": 6,
-        "session": "Asia → London átmenet",
-        "invalidation": "H1 close 4160 alatt",
+        "session": "Asia 08:00-09:00 CEST",
+        "invalidation": "H1 close 4150 alatt",
         "macro_support": [
-          "Intraday regime TREND-BULL",
-          "Fear/Greed 32 – FEAR, de US10Y emelkedés csak részben fékezi"
+          "DXY 100.73 RANGE → semleges USD-háttér",
+          "Fear 32 → risk-off félelem még tart, long squeeze lehetőség"
         ],
         "allowed": false,
         "locked_reason": "Makró tiltási ablak aktív (13:30–15:00 CEST)",
@@ -257,7 +257,7 @@
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T08:20:18+02:00",
+      "updated_at": "2026-07-03T08:22:42+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     },
@@ -265,29 +265,28 @@
       "value": {
         "direction": "SHORT",
         "type": "liquidity sweep reaction",
-        "bias_compatibility": "igen — short oldali visszaforduló terv",
-        "entry_zone": "4208-4220 sweep után",
-        "sl": "4238 felett H1 close alapján",
+        "bias_compatibility": "részben — counter a bull intraday, de US10Y RED háttérrel összhangban",
+        "entry_zone": "4208-4215 sweep után",
+        "sl": "4228 felett H1 close alapján",
         "tp1": "4140",
         "tp2": "4105",
         "rr_min": 2.0,
-        "score": 7,
-        "session": "London 09:00-12:00 CEST",
-        "invalidation": "H1 close 4240 felett",
+        "session": "Asia / London áthúzódás",
+        "invalidation": "H1 close 4230 felett",
         "macro_support": [
           "US10Y 4.49% RISING → short háttér",
-          "DXY 100.73 RANGE → nem akadályozza a visszahúzódást"
+          "NFP nap: sweep után gyors visszafordulás lehetséges"
         ],
         "allowed": false,
         "locked_reason": "Makró tiltási ablak aktív (13:30–15:00 CEST)",
         "confirmed": false,
-        "setup_quality": "erős"
+        "setup_quality": "közepes"
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-03T08:20:18+02:00",
+      "updated_at": "2026-07-03T08:22:42+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -303,16 +302,16 @@
     "updated_at": "2026-07-03T08:14:21+02:00"
   },
   "bagira": {
-    "narrative": "A pánter látja a szintet: 4180 fölött még él a felfelé nyomás, de ez csak addig tiszta, míg a lock zárva marad. US10Y magas, a légzés szűkebb az aranynak. NFP előtt nem üldözöm az árat. Most csak terv van, nem végrehajtás.",
+    "narrative": "A pánter figyel. A piac most felfelé húz, de az NFP-árnyék felette ül. 4208 körül a vadászmező, addig csak tervezünk, nem támadunk. A tiltás feloldása után jön a valódi mozgás.",
     "key_watch": [
-      "4208 körüli sweep és rejection",
-      "13:30-tól NFP tiltás indul",
-      "US10Y 4.49% fölötti tartás"
+      "4208-4215 liquidity zone és Asia high reakció",
+      "13:30-tól NFP blokk, előtte nincs trade",
+      "US10Y 4.49% tovább emelkedik-e"
     ],
-    "confidence": 74,
-    "reasoning_summary": "A napi kép vegyes: intraday bull, de a magas és emelkedő US10Y short-háttérként dolgozik, miközben a macro_lock aktív, ezért végrehajtás most nem engedett. A két terv a 4208 körüli likviditásra és a 4140/4105 visszatesztre épül.",
+    "confidence": 56,
+    "reasoning_summary": "A napi bias vegyes: intraday bullish, de a 4.49%-os emelkedő US10Y és a NFP-lock miatt a végrehajtás tiltott. A két tervet a 4208-as likviditási zóna és a 4140/4105 visszateszt köré raktam, RR mindkét oldalon legalább 1:2.",
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-07-03T08:20:18+02:00"
+    "updated_at": "2026-07-03T08:22:42+02:00"
   }
 }
