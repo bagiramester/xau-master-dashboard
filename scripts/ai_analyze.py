@@ -122,6 +122,17 @@ def build_snapshot(data):
         },
         "session": header.get("session"),
         "cest_now": NOW.strftime("%Y-%m-%d %H:%M"),
+        # A napi mély kutatás eredményei — Bagira ezeket használja a setup elemzéshez
+        "daily_research": {
+            "daily_summary": header.get("fed_regime_summary"),
+            "bias_narrative": header.get("narrative"),
+            "news_drivers": data.get("bagira", {}).get("key_watch", []) if isinstance(data.get("bagira"), dict) else [],
+            "us_market_closed": notrade.get("us_market_closed"),
+            "us_market_note": notrade.get("us_market_note"),
+            "is_clean_day": notrade.get("is_clean_day"),
+            "clean_day_note": notrade.get("clean_day_note"),
+            "research_date": data.get("meta", {}).get("deep_research_last_run"),
+        },
     }
 
 
@@ -131,16 +142,18 @@ def call_perplexity(system_prompt, user_snapshot):
     hardened_system = system_prompt + (
         "\n\n**KRITIKUS**: A válasz csak és kizárólag egy JSON objektum legyen. "
         "Ne használj markdown code fence-t (```), ne írj magyarázatot a JSON előtt vagy után. "
-        "A válasz az első karakterrel `{` kezdődik és az utolsóval `}` ér véget."
+        "A válasz az első karakterrel `{` kezdődik és az utolsóval `}` ér véget. "
+        "Web search használata engedélyezett és ajánlott — ha egy szint, esemény vagy adat "
+        "nem egyértelmű a bemenetből, keress utána a friss adatokért."
     )
     payload = {
         "model": MODEL,
         "messages": [
             {"role": "system", "content": hardened_system},
-            {"role": "user", "content": "Bemenet:\n" + json.dumps(user_snapshot, ensure_ascii=False, indent=2) + "\n\nAdj egy JSON objektumot a rendszer prompt szerinti schémával."},
+            {"role": "user", "content": "Bemenet (az összes aktuális adat + napi mély kutatás):\n" + json.dumps(user_snapshot, ensure_ascii=False, indent=2) + "\n\nVégezd el a setup elemzést és finomítást, adj egy JSON objektumot a schéma szerint."},
         ],
         "temperature": 0.15,
-        "max_tokens": 2500,
+        "max_tokens": 3000,
     }
     headers = {
         "Authorization": f"Bearer {API_KEY}",
