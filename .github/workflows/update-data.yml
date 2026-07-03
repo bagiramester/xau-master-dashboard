@@ -36,35 +36,41 @@ jobs:
           pip install --upgrade pip
           pip install yfinance requests jsonschema
 
-      - name: Fetch base market data (XAU/US10Y/DXY/F&G)
-        run: python scripts/fetch_data.py
-
-      - name: Fetch economic calendar
-        run: python scripts/fetch_calendar.py || echo "[warn] calendar fetch failed"
-
-      - name: Fetch FedWatch
-        run: python scripts/fetch_fedwatch.py || echo "[warn] fedwatch fetch failed"
-
-      - name: Fetch intraday XAU + Asia H/L
-        run: python scripts/fetch_intraday.py || echo "[warn] intraday fetch failed"
-
-      - name: Validate data.json against schema
-        run: python scripts/validate_data.py
-
-      - name: Commit and push data.json + cache
+      - name: Fetch + commit + push (retry on conflict)
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json cache/ 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "[commit] nincs változás, skip"
-            exit 0
-          fi
-          git commit -m "data: refresh $(date +'%Y-%m-%d %H:%M UTC')"
-          for i in 1 2 3; do
-            git push && exit 0
-            echo "[push] $i. próba failed, rebase..."
-            git pull --rebase --autostash || true
-            sleep 2
+
+          for i in 1 2 3 4 5; do
+            echo "=== iteration $i ==="
+            # Mindig a legfrisebb main-re szinkronizálunk, hogy a generátor
+            # a legújabb data.json-on dolgozzon (megőrzi a többi workflow mezőit).
+            git fetch origin main
+            git reset --hard origin/main
+
+            # Generátorok futtatása a friss adatokon (load-modify-save: setups megmarad)
+            python scripts/fetch_data.py
+            python scripts/fetch_calendar.py || echo "[warn] calendar fetch failed"
+            python scripts/fetch_fedwatch.py || echo "[warn] fedwatch fetch failed"
+            python scripts/fetch_intraday.py || echo "[warn] intraday fetch failed"
+
+            # Séma validáció
+            python scripts/validate_data.py
+
+            git add data.json cache/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "[commit] nincs változás, skip"
+              exit 0
+            fi
+            git commit -m "data: refresh $(date +'%Y-%m-%d %H:%M UTC')"
+
+            if git push origin main; then
+              echo "[push] sikeres ($i. próba)"
+              exit 0
+            fi
+            echo "[push] $i. próba elbukott (másik workflow is írt közben) — újrapróbálkozás friss main-nel..."
+            sleep 3
           done
+          echo "[push] 5 próba után is sikertelen"
           exit 1
