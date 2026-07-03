@@ -25,6 +25,7 @@ NOW_ISO = NOW.isoformat(timespec="seconds")
 REPO = Path(__file__).resolve().parent.parent
 DATA_PATH = REPO / "data.json"
 PROMPT_PATH = REPO / "prompts" / "ai_setup_prompt.md"
+DEEP_RESEARCH_PROMPT_PATH = REPO / "prompts" / "deep_research_prompt.md"
 CACHE_DIR = REPO / "cache"
 
 API_KEY = os.getenv("PPLX_API_KEY", "").strip()
@@ -169,6 +170,308 @@ def call_perplexity(system_prompt, user_snapshot):
     return content
 
 
+# ═══ NAPI MÉLY MAKRÓ KUTATÁS ═══
+# A Perplexity egy második hívásával mély, forrás-alapú kutatást végzünk,
+# ami frissíti a naptárt, bias-t, rezsimet és kulcsszinteket — nem csak narratívát.
+
+DEEP_RESEARCH_MODEL = os.getenv("PPLX_DEEP_MODEL", "sonar-pro")
+
+
+def call_perplexity_with_search(system_prompt, user_question):
+    """Perplexity hívás web search-sel a mély kutatáshoz (sonar-pro online modellek)."""
+    hardened_system = system_prompt + (
+        "\n\n**KRITIKUS**: A válasz csak és kizárólag egy JSON objektum legyen. "
+        "Ne használj markdown code fence-t (```), ne írj magyarázatot a JSON előtt vagy után. "
+        "A válasz az első karakterrel `{` kezdődik és az utolsóval `}` ér véget. "
+        "Web search kötelező — használd a mai dátumhoz tartozó friss forrásokat."
+    )
+    payload = {
+        "model": DEEP_RESEARCH_MODEL,
+        "messages": [
+            {"role": "system", "content": hardened_system},
+            {"role": "user", "content": user_question},
+        ],
+        "temperature": 0.2,
+        "max_tokens": 4000,
+    }
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+    }
+    r = requests.post(API_URL, json=payload, headers=headers, timeout=180)
+    if r.status_code != 200:
+        print(f"[deep] API HTTP {r.status_code}: {r.text[:800]}", file=sys.stderr)
+        r.raise_for_status()
+    resp = r.json()
+    msg = resp["choices"][0]["message"]
+    content = msg.get("content") or ""
+    if not content and msg.get("reasoning_content"):
+        content = msg["reasoning_content"]
+    # citations (ha vannak)
+    citations = resp.get("citations") or []
+    print(f"[deep] Content length: {len(content)} chars, citations: {len(citations)} (model={DEEP_RESEARCH_MODEL})", file=sys.stderr)
+    if content:
+        print(f"[deep] Content prefix: {content[:300]!r}", file=sys.stderr)
+    return content, citations
+
+
+def mock_deep_research(snapshot):
+    """Fejlesztői mock a mély kutatáshoz — a példa jelentés alapján (NFP után)."""
+    return {
+        "research_date": NOW.strftime("%Y-%m-%d"),
+        "daily_summary": "A gyenge júniusi NFP (+57K vs 110K) rövidtávú DXY-gyengülést és XAU rally-t hozott. De hawkish Fed + rövidített US nap miatt SÁRGA státusz tartandó.",
+        "events_today": [],
+        "us_market_closed": True,
+        "us_market_note": "US piac ZÁRVA (Independence Day observed).",
+        "is_clean_day": True,
+        "clean_day_note": "Ma nincs high-impact adat — az NFP tegnap volt.",
+        "bias_direction": "LONG",
+        "bias_status": "SÁRGA",
+        "bias_narrative": "Gyenge NFP → DXY gyengülés → XAU rövid távú long háttér. De HTF Death Cross korlátozza a felfelé teret.",
+        "macro_regimes": {
+            "fedwatch": {
+                "value": "HOLD ~70% (júl 29) | ~80% hike szeptemberre",
+                "display": "NEUTRAL → HIKE BIAS",
+                "bias": "YELLOW",
+                "bias_note": "69% hold júl 29-i FOMC-on, de ~80% hike szeptemberre — HAWKISH HOLD.",
+            },
+            "us10y": {
+                "value": 4.49,
+                "display": "4.49% – RISING",
+                "bias": "RED",
+                "bias_note": "4.48–4.51%, heti emelkedő trend; magas opportunity cost aranynak.",
+            },
+            "dxy": {
+                "value": 100.73,
+                "display": "100.73 – USD-BEAR (rövid táv)",
+                "bias": "YELLOW",
+                "bias_note": "NFP miss után ~100.31–100.85; a 101+ csúcsokról visszaesett.",
+            },
+            "sentiment": {
+                "value": 30,
+                "display": "30 – FEAR",
+                "bias": "GREEN",
+                "bias_note": "Fear & Greed 30 (Fear) — enyhén long XAU-kedvező.",
+            },
+            "htf_trend": {
+                "value": "BEARISH",
+                "display": "BEARISH (Death Cross)",
+                "bias": "RED",
+                "bias_note": "Death Cross aktív (50-SMA < 200-SMA); ár az összes major SMA alatt.",
+            },
+            "intraday_regime": {
+                "value": "RECOVERY BOUNCE",
+                "display": "RECOVERY BOUNCE",
+                "bias": "YELLOW",
+                "bias_note": "NFP után bullish impulzus, de ellenállás a 21-SMA (~$4,176) zónában.",
+            },
+            "volatility": {
+                "value": "ELEVATED",
+                "display": "ELEVATED",
+                "bias": "YELLOW",
+                "bias_note": "Post-NFP amplitúdó + rövidített US nap = alacsonyabb likviditás, tágabb spread.",
+            },
+        },
+        "key_levels": {
+            "pdh": 4179,
+            "pdl": 4030,
+            "daily_open": 4163,
+            "asia_high": 4183,
+            "asia_low": 4158,
+            "htf_supply": "4176–4180",
+            "htf_demand": "3950–3970",
+            "psych_level": 4000,
+        },
+        "news_drivers": [
+            "NFP aftershock: +57K vs 110K — nagy miss, XAU $4,060→$4,177 rally",
+            "US–Irán béketárgyalások: Qatar pozitív előrehaladás — safe-haven premium csökken",
+            "Warsh Fed Chair hawkish, 80% szeptemberi hike-odds",
+        ],
+        "no_trade_windows": [],
+        "sources": [
+            {"label": "BLS Employment Situation", "url": "https://www.bls.gov/news.release/empsit.nr0.htm"},
+            {"label": "CME FedWatch", "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"},
+        ],
+    }
+
+
+def run_deep_research(snapshot):
+    """Mély kutatás futtatása: Perplexity web search hívás vagy mock.
+    Visszatér: (research_dict, source_type, model_name, citations)"""
+    if MOCK:
+        print("[deep] MOCK mode (nincs PPLX_API_KEY vagy MOCK_AI=true)")
+        return mock_deep_research(snapshot), "ai-mock", "mock-v1", []
+    try:
+        system_prompt = DEEP_RESEARCH_PROMPT_PATH.read_text()
+        question = (
+            f"Ma: {NOW.strftime('%Y-%m-%d %H:%M CEST')} ({NOW.strftime('%A')}).\n"
+            f"Aktuális snapshot (a spot/regime mezőket csak kontextusként használd, "
+            f"a web search-ből frissítsd őket):\n"
+            + json.dumps(snapshot, ensure_ascii=False, indent=2)
+            + "\n\nVégezd el a mai napi mély makró kutatást és adj egy JSON objektumot a schéma szerint."
+        )
+        print(f"[deep] Perplexity {DEEP_RESEARCH_MODEL} hívás (web search)...")
+        content, citations = call_perplexity_with_search(system_prompt, question)
+        research = parse_ai_json(content)
+        print("[deep] Sikeres mély kutatás.")
+        return research, "ai", DEEP_RESEARCH_MODEL, citations
+    except Exception as e:
+        print(f"[deep] Éles hívás hiba, fallback mock: {e}", file=sys.stderr)
+        return mock_deep_research(snapshot), "ai-fallback", f"mock-fallback ({DEEP_RESEARCH_MODEL} failed)", []
+
+
+def _level_field(value):
+    """Egy kulcsszint mező wrapper — source_type=ai (mély kutatás)."""
+    return {
+        "value": value,
+        "status": "fresh" if value is not None else "pending",
+        "source_type": "ai",
+        "source_label": "AI mély kutatás (Perplexity)",
+        "source_url": "https://www.perplexity.ai/",
+        "updated_at": NOW_ISO,
+    }
+
+
+def _regime_field(reg, fallback_display=None, impact=4):
+    """Egy macro_regime mező wrapper a deep research-ből."""
+    if not isinstance(reg, dict):
+        return None
+    value = reg.get("value")
+    return {
+        "value": value,
+        "display": reg.get("display") or fallback_display or (str(value) if value is not None else None),
+        "bias": reg.get("bias"),
+        "bias_note": reg.get("bias_note"),
+        "impact": impact,
+        "status": "fresh" if value is not None else "pending",
+        "source_type": "ai",
+        "source_label": "AI mély kutatás (Perplexity)",
+        "source_url": "https://www.perplexity.ai/",
+        "updated_at": NOW_ISO,
+    }
+
+
+def apply_deep_research(data, research, source_type, model_name, citations):
+    """A mély kutatás eredményeit beírja a data.json megfelelő mezőibe.
+    Frissíti: header (bias), macro regimes, levels, notrade_filters (calendar), meta."""
+    if not isinstance(research, dict):
+        print("[deep] research nem dict, skip apply", file=sys.stderr)
+        return
+
+    updated_count = 0
+
+    # 1. Header bias + narrative
+    header = data.get("header", {})
+    if research.get("bias_direction"):
+        header["bias_direction"] = research["bias_direction"]
+        updated_count += 1
+    if research.get("bias_status"):
+        header["bias_status"] = research["bias_status"]
+        updated_count += 1
+    if research.get("bias_narrative"):
+        header["narrative"] = research["bias_narrative"]
+    if research.get("daily_summary"):
+        header["fed_regime_summary"] = research["daily_summary"]
+    data["header"] = header
+
+    # 2. Macro regimes (csak a deep research-ben lévőket írjuk felül, auto-jegyeket nem bántjuk)
+    macro = data.get("macro", {})
+    regimes = research.get("macro_regimes", {}) or {}
+    regime_map = {
+        "fedwatch": "fedwatch",
+        "us10y": "us10y",
+        "dxy": "dxy",
+        "sentiment": "sentiment",
+        "htf_trend": "htf_trend",
+        "intraday_regime": "intraday_regime",
+        "volatility": "volatility",
+    }
+    for rkey, dkey in regime_map.items():
+        if rkey in regimes:
+            field = _regime_field(regimes[rkey])
+            if field:
+                macro[dkey] = field
+                updated_count += 1
+    data["macro"] = macro
+
+    # 3. Kulcsszintek (csak ahol a deep research ad értéket)
+    levels = data.get("levels", {})
+    kl = research.get("key_levels", {}) or {}
+    for lk, dk in [
+        ("pdh", "pdh"), ("pdl", "pdl"), ("daily_open", "daily_open"),
+        ("asia_high", "asia_high"), ("asia_low", "asia_low"),
+        ("htf_supply", "htf_supply"), ("htf_demand", "htf_demand"),
+        ("psych_level", "psych_level"),
+    ]:
+        if lk in kl and kl[lk] is not None:
+            levels[dk] = _level_field(kl[lk])
+            updated_count += 1
+    data["levels"] = levels
+
+    # 4. Naptár + no_trade_windows (a deep research-ből, elavult tisztítással)
+    nt = apply_calendar_cleanup(data.get("notrade_filters", {}), research)
+    data["notrade_filters"] = nt
+    updated_count += 1
+
+    # 5. Meta
+    meta = data.get("meta", {})
+    meta["deep_research_last_run"] = NOW_ISO
+    meta["deep_research_model"] = model_name
+    meta["deep_research_source_type"] = source_type
+    meta["deep_research_citations"] = len(citations) if citations else 0
+    data["meta"] = meta
+
+    print(f"[deep] {updated_count} mező frissítve a mély kutatásból (source={source_type}).")
+    return updated_count
+
+
+def apply_calendar_cleanup(existing_nt, research):
+    """Naptár tisztítás + frissítés a deep research alapján.
+    - Törli a tegnapi/lejárt eseményeket (dátum ellenőrzés).
+    - Ha a research ma tiszta napot jelez (events_today=[]), törli a windows-t.
+    - US piacpihenőnap jelölése."""
+    today_str = NOW.strftime("%Y-%m-%d")
+    nt = dict(existing_nt) if isinstance(existing_nt, dict) else {}
+
+    # Deep research adatok felülírják
+    events_today = research.get("events_today", [])
+    if events_today is None:
+        events_today = []
+    no_trade_windows = research.get("no_trade_windows", [])
+    if no_trade_windows is None:
+        no_trade_windows = []
+
+    nt["macro_events_today"] = events_today
+    nt["macro_no_trade_windows"] = no_trade_windows
+
+    # Lock aktív-e MOST (a mai windows alapján)
+    now_hm = NOW.strftime("%H:%M")
+    lock_active = False
+    for w in no_trade_windows:
+        try:
+            if w.get("start", "") <= now_hm <= w.get("end", ""):
+                lock_active = True
+                break
+        except Exception:
+            continue
+    nt["macro_lock_active"] = lock_active
+
+    # US piacpihenőnap jelölése
+    if research.get("us_market_closed"):
+        nt["us_market_closed"] = True
+        nt["us_market_note"] = research.get("us_market_note", "US piac zárva.")
+    else:
+        nt["us_market_closed"] = False
+        nt["us_market_note"] = research.get("us_market_note", "US piac nyitva.")
+
+    # Clean day jelölés
+    nt["is_clean_day"] = research.get("is_clean_day", len(events_today) == 0)
+    nt["clean_day_note"] = research.get("clean_day_note", "")
+    nt["updated_at"] = NOW_ISO
+    nt["source_label"] = "AI mély kutatás (Perplexity)"
+    return nt
+
+
 def extract_json_from_text(text):
     """Az AI válaszból kinyeri a JSON-t (markdown fence-t, thinking blokkot eltávolít)."""
     import re
@@ -300,6 +603,18 @@ def analyze():
         return None
 
     snapshot = build_snapshot(data)
+
+    # ═══ NAPI MÉLY KUTATÁS — frissíti a bias/naptár/rezsim/szinteket ═══
+    # A setup elemzés ELŐTT fut, hogy a setup prompt már a frissített
+    # makró kontextust lássa (pl. helyes bias, tiszta naptár).
+    print("[ai] ═══ Napi mély kutatás indítása ═══")
+    try:
+        research, dr_source, dr_model, dr_citations = run_deep_research(snapshot)
+        apply_deep_research(data, research, dr_source, dr_model, dr_citations)
+        # Ha a deep research frissítette a bias-t/naptárt, a snapshot-t újraépítjük
+        snapshot = build_snapshot(data)
+    except Exception as e:
+        print(f"[ai] Mély kutatás hiba (folytatódik setup elemzés nélküle): {e}", file=sys.stderr)
 
     if MOCK:
         print("[ai] MOCK mode (nincs PPLX_API_KEY vagy MOCK_AI=true)")
