@@ -73,8 +73,27 @@ const attachInfo = (host, text) => {
   return btn;
 };
 
-// Fetch data.json (cache-buster)
+// Fetch data.json — CDN-bypass stratégiával.
+// A Pages CDN (max-age=600) és a raw branch URL is cache-el, a ?t= nem bypassolja.
+// Ezért: GitHub API → legutolsó data.json commit SHA → SHA-pinned raw URL (immutable,
+// sose stale). Ha az API vagy a raw hibás, fallback a relatív data.json-re.
 const fetchData = async () => {
+  const owner = 'bagiramester', repo = 'xau-master-dashboard';
+  // 1. Próba: SHA-pinned raw (mindig friss)
+  try {
+    const cr = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?path=data.json&per_page=1`,
+      { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json' } });
+    if (cr.ok) {
+      const cj = await cr.json();
+      const sha = cj[0]?.sha;
+      if (sha) {
+        const rr = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${sha}/data.json`,
+          { cache: 'no-store', mode: 'cors' });
+        if (rr.ok) return rr.json();
+      }
+    }
+  } catch (e) { /* fallback below */ }
+  // 2. Fallback: relatív data.json (Pages CDN, akár 10 percig stale)
   const res = await fetch(`data.json?t=${Date.now()}`, { cache: 'no-store' });
   if (!res.ok) throw new Error(`data.json HTTP ${res.status}`);
   return res.json();
