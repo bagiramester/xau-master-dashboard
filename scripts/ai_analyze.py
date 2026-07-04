@@ -45,7 +45,6 @@ def load_json(path, default=None):
         print(f"[ai] load hiba: {path}: {e}", file=sys.stderr)
         return default
 
-
 def build_snapshot(data):
     """Kompakt piaci állapot összeállítása a prompt bemenetére."""
     macro = data.get("macro", {})
@@ -76,6 +75,65 @@ def build_snapshot(data):
             "htf_demand": get_val(levels.get("htf_demand")),
             "psych": get_val(levels.get("psych_level")),
         },
+        "macro": {
+            "dxy": {
+                "value": get_val(macro.get("dxy")),
+                "display": get_val(macro.get("dxy"), "display"),
+                "bias": get_val(macro.get("dxy"), "bias"),
+                "note": get_val(macro.get("dxy"), "bias_note"),
+            },
+            "us10y": {
+                "value": get_val(macro.get("us10y")),
+                "display": get_val(macro.get("us10y"), "display"),
+                "bias": get_val(macro.get("us10y"), "bias"),
+                "note": get_val(macro.get("us10y"), "bias_note"),
+            },
+            "fedwatch": {
+                "regime": fedwatch.get("regime"),
+                "bias": fedwatch.get("bias"),
+                "display": fedwatch.get("display"),
+                "note": fedwatch.get("note"),
+            },
+            "fear_greed": {
+                "value": get_val(macro.get("sentiment")),
+                "display": get_val(macro.get("sentiment"), "display"),
+                "bias": get_val(macro.get("sentiment"), "bias"),
+            },
+            "htf_trend": get_val(macro.get("htf_trend")),
+            "intraday_regime": intraday.get("intraday_regime") or get_val(macro.get("intraday_regime")),
+            "volatility": intraday.get("volatility_regime") or get_val(macro.get("volatility")),
+            "atr_15m": intraday.get("atr_15m"),
+        },
+        "notrade": {
+            "macro_lock_active": (
+                calendar.get("macro_lock_active") if calendar.get("macro_events_today")
+                else notrade.get("macro_lock_active", False)
+            ),
+            "events_today": calendar.get("macro_events_today") or notrade.get("macro_events_today", []),
+            "no_trade_windows": calendar.get("macro_no_trade_windows") or notrade.get("macro_no_trade_windows", []),
+        },
+        "risk_state": {
+            "mode": risk.get("mode"),
+            "daily_loss": risk.get("daily_loss", 0),
+            "weekly_loss": risk.get("weekly_loss", 0),
+            "loss_streak": risk.get("loss_streak", 0),
+            "open_xau": risk.get("open_xau_positions", 0),
+        },
+        "session": header.get("session"),
+        "cest_now": NOW.strftime("%Y-%m-%d %H:%M"),
+        # A napi mély kutatás eredményei — a DEDIKÁLT data.daily_research blokkból
+        # (nem a bagira.key_watch-ból, hogy ne cirkuláljon a tegnapi kimenet).
+        "daily_research": (lambda dr: {
+            "daily_summary": dr.get("daily_summary") or header.get("fed_regime_summary"),
+            "bias_narrative": dr.get("bias_narrative") or header.get("narrative"),
+            "news_drivers": dr.get("news_drivers") or [],
+            "us_market_closed": dr.get("us_market_closed", notrade.get("us_market_closed")),
+            "us_market_note": dr.get("us_market_note") or notrade.get("us_market_note"),
+            "is_clean_day": dr.get("is_clean_day", notrade.get("is_clean_day")),
+            "clean_day_note": dr.get("clean_day_note") or notrade.get("clean_day_note"),
+            "research_date": dr.get("research_date") or data.get("meta", {}).get("deep_research_last_run"),
+        })(data.get("daily_research", {}) if isinstance(data.get("daily_research"), dict) else {}),
+    }
         "macro": {
             "dxy": {
                 "value": get_val(macro.get("dxy")),
