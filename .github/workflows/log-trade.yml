@@ -1,0 +1,35 @@
+name: Log Trade
+
+on:
+  workflow_dispatch:
+    inputs:
+      trade:
+        description: 'JSON string of the closed trade'
+        required: true
+        type: string
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Append trade to data.json
+        env:
+          TRADE_JSON: ${{ inputs.trade }}
+        run: python scripts/append_trade.py
+
+      - name: Commit updated data.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --cached --quiet || git commit -m "chore: append trade log entry [skip ci]"
+          git push
