@@ -122,18 +122,18 @@ def build_snapshot(data):
         },
         "session": header.get("session"),
         "cest_now": NOW.strftime("%Y-%m-%d %H:%M"),
-        # A napi mély kutatás eredményei — Bagira ezeket használja a setup elemzéshez
-        "daily_research": {
-            "daily_summary": header.get("fed_regime_summary"),
-            "bias_narrative": header.get("narrative"),
-            "news_drivers": data.get("bagira", {}).get("key_watch", []) if isinstance(data.get("bagira"), dict) else [],
-            "us_market_closed": notrade.get("us_market_closed"),
-            "us_market_note": notrade.get("us_market_note"),
-            "is_clean_day": notrade.get("is_clean_day"),
-            "clean_day_note": notrade.get("clean_day_note"),
-            "research_date": data.get("meta", {}).get("deep_research_last_run"),
-        },
-    }
+               # A napi mély kutatás eredményei — a DEDIKÁLT data.daily_research blokkból
+        # (nem a bagira.key_watch-ból, hogy ne cirkuláljon a tegnapi kimenet).
+        "daily_research": (lambda dr: {
+            "daily_summary": dr.get("daily_summary") or header.get("fed_regime_summary"),
+            "bias_narrative": dr.get("bias_narrative") or header.get("narrative"),
+            "news_drivers": dr.get("news_drivers") or [],
+            "us_market_closed": dr.get("us_market_closed", notrade.get("us_market_closed")),
+            "us_market_note": dr.get("us_market_note") or notrade.get("us_market_note"),
+            "is_clean_day": dr.get("is_clean_day", notrade.get("is_clean_day")),
+            "clean_day_note": dr.get("clean_day_note") or notrade.get("clean_day_note"),
+            "research_date": dr.get("research_date") or data.get("meta", {}).get("deep_research_last_run"),
+        })(data.get("daily_research", {}) if isinstance(data.get("daily_research"), dict) else {}),
 
 
 def call_perplexity(system_prompt, user_snapshot):
@@ -421,21 +421,11 @@ def apply_deep_research(data, research, source_type, model_name, citations):
             updated_count += 1
     data["levels"] = levels
 
-    # 4. Naptár + no_trade_windows (a deep research-ből, elavult tisztítással)
+      # 4. Naptár + no_trade_windows (a deep research-ből, elavult tisztítással)
     nt = apply_calendar_cleanup(data.get("notrade_filters", {}), research)
     data["notrade_filters"] = nt
     updated_count += 1
 
-    # 5. Meta
-    meta = data.get("meta", {})
-    meta["deep_research_last_run"] = NOW_ISO
-    meta["deep_research_model"] = model_name
-    meta["deep_research_source_type"] = source_type
-    meta["deep_research_citations"] = len(citations) if citations else 0
-    data["meta"] = meta
-
-    print(f"[deep] {updated_count} mező frissítve a mély kutatásból (source={source_type}).")
-    return updated_count
     # 5. Friss napi kutatás dedikált blokkba — a setup-hívás EBBŐL olvas,
     #    így sosem a tegnapi bagira.key_watch cirkulál vissza.
     data["daily_research"] = {
@@ -451,6 +441,17 @@ def apply_deep_research(data, research, source_type, model_name, citations):
         "updated_at": NOW_ISO,
     }
     updated_count += 1
+
+    # 6. Meta
+    meta = data.get("meta", {})
+    meta["deep_research_last_run"] = NOW_ISO
+    meta["deep_research_model"] = model_name
+    meta["deep_research_source_type"] = source_type
+    meta["deep_research_citations"] = len(citations) if citations else 0
+    data["meta"] = meta
+
+    print(f"[deep] {updated_count} mező frissítve a mély kutatásból (source={source_type}).")
+    return updated_count
          
 def apply_calendar_cleanup(existing_nt, research):
     """Naptár tisztítás + frissítés a deep research alapján.
