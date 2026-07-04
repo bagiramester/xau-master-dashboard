@@ -1,13 +1,4 @@
 // ═══ APP — orchestration + hard lock + trade form + hybrid refresh ═══
-//
-// A Bagira advisory modul KÜLÖN fájlban van: js/bagira.js
-// (GITHUB_OWNER, renderBagira, getPat, triggerAiRefresh, pollForNewAiResult,
-//  showBagiraStatus stb. ott vannak definiálva — ITT NEM ismételjük meg).
-//
-// BETÖLTÉSI SORREND (index.html):
-//   ... js/bagira.js  ->  js/panels.js  ->  js/tradelog.js  ->  js/app.js
-//   (a submitTradeLog a tradelog.js-ben; a renderBagira a bagira.js-ben van)
-
 let currentData = null;
 let hardLockDismissed = false;
 
@@ -15,14 +6,9 @@ const applyHardLock = (data) => {
   const eff = data.header && data.header.effective_mode;
   const nt = data.notrade_filters || {};
   const hl = $('#hard-lock');
-
   if (hardLockDismissed) { hl.hidden = true; return; }
-
-  // A hard lock overlay CSAK a valódi makró tiltásra (macro_lock_active)
-  // aktiválódjon — nem az effective_mode=RED-re, ami csak óvatossági szint.
   const isMacroLocked = nt.macro_lock_active === true;
   if (!isMacroLocked) { hl.hidden = true; return; }
-
   let reason = '—';
   const w = nt.macro_no_trade_windows && nt.macro_no_trade_windows[0];
   if (w) {
@@ -60,7 +46,6 @@ const renderTradeLog = (data) => {
 const wireTradeForm = () => {
   const entry = $('#ti-entry'), sl = $('#ti-sl'), tp = $('#ti-tp');
   const dir = $('#ti-direction'), submit = $('#ti-submit'), rrCalc = $('#ti-rr-calc');
-
   const recompute = () => {
     const e = parseFloat(entry.value), s = parseFloat(sl.value), t = parseFloat(tp.value);
     if (!isFinite(e) || !isFinite(s) || !isFinite(t)) {
@@ -79,8 +64,6 @@ const wireTradeForm = () => {
       : !okDirection ? 'Irány/SL/TP inkonzisztens' : 'Trade naplózása';
   };
   [entry, sl, tp, dir].forEach(x => x.addEventListener('input', recompute));
-
-  // ── PATCH: régi alert() helyett a valódi data.json naplózás (tradelog.js) ──
   submit.addEventListener('click', submitTradeLog);
 };
 
@@ -98,7 +81,6 @@ const render = (data) => {
   applyHardLock(data);
 };
 
-// ═══ HYBRID REFRESH ═══
 const clientSideXauFallback = async (data) => {
   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
   try {
@@ -124,7 +106,6 @@ const clientSideXauFallback = async (data) => {
     render(data);
     const dot = $('#tb-freshness-dot');
     if (dot) dot.classList.add('freshness-live');
-    console.log('[hybrid-refresh] Client live fallback sikeres:', price);
   } catch (e) {
     console.warn('[hybrid-refresh] Client fallback hiba:', e);
   }
@@ -136,7 +117,6 @@ const load = async () => {
     render(data);
     const spot = data.macro?.xau_spot?.updated_at;
     if (isStale(spot, 30)) {
-      console.log('[hybrid-refresh] data.json stale → client fallback...');
       await clientSideXauFallback(data);
     }
   } catch (e) {
@@ -145,7 +125,6 @@ const load = async () => {
   }
 };
 
-// ═══ INIT ═══
 document.addEventListener('DOMContentLoaded', () => {
   wireTradeForm();
   $('#btn-refresh').addEventListener('click', refreshAllData);
