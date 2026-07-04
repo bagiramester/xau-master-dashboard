@@ -436,8 +436,22 @@ def apply_deep_research(data, research, source_type, model_name, citations):
 
     print(f"[deep] {updated_count} mező frissítve a mély kutatásból (source={source_type}).")
     return updated_count
-
-
+    # 5. Friss napi kutatás dedikált blokkba — a setup-hívás EBBŐL olvas,
+    #    így sosem a tegnapi bagira.key_watch cirkulál vissza.
+    data["daily_research"] = {
+        "research_date": research.get("research_date") or NOW.strftime("%Y-%m-%d"),
+        "daily_summary": research.get("daily_summary"),
+        "bias_narrative": research.get("bias_narrative"),
+        "news_drivers": research.get("news_drivers") or [],
+        "us_market_closed": research.get("us_market_closed", False),
+        "us_market_note": research.get("us_market_note", ""),
+        "is_clean_day": research.get("is_clean_day"),
+        "clean_day_note": research.get("clean_day_note", ""),
+        "source_type": source_type,
+        "updated_at": NOW_ISO,
+    }
+    updated_count += 1
+         
 def apply_calendar_cleanup(existing_nt, research):
     """Naptár tisztítás + frissítés a deep research alapján.
     - Törli a tegnapi/lejárt eseményeket (dátum ellenőrzés).
