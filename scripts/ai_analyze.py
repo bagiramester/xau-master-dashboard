@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
-Bagira XAU AI Analyzer — Perplexity Sonar Reasoning Pro integration.
+Bagira XAU AI Analyzer — Deep Research + Setup Analyst pipeline.
 
-Bemenet: az aktuális data.json + cache/*.json fájlok (calendar, fedwatch, intraday)
-Kimenet: setup_A, setup_B, bagira_narrative, key_watch, confidence, reasoning_summary
-         → beírja a data.json-ba (setups, bagira blokk)
+Bemenet:
+- data.json
+- cache/*.json (calendar, fedwatch, intraday)
 
-Mode:
-  - Ha PPLX_API_KEY env var van → éles Perplexity API hívás
-  - Ha MOCK_AI=true env var vagy nincs kulcs → mock válaszok (dev mode)
+Kimenet:
+- daily_research v3 mentése data.json-ba
+- setups A/B
+- bagira narrative / key_watch / confidence / reasoning_summary
+- score_breakdown / conflicts_resolved
 """
+
 import json
 import os
 import sys
@@ -31,7 +34,8 @@ CACHE_DIR = REPO / "cache"
 API_KEY = os.getenv("PPLX_API_KEY", "").strip()
 MOCK = os.getenv("MOCK_AI", "").lower() in ("1", "true", "yes") or not API_KEY
 
-MODEL = os.getenv("PPLX_MODEL", "sonar-pro")  # alternatívák: "sonar", "sonar-reasoning-pro"
+MODEL = os.getenv("PPLX_ANALYST_MODEL", os.getenv("PPLX_MODEL", "sonar-reasoning-pro"))
+DEEP_RESEARCH_MODEL = os.getenv("PPLX_DEEP_MODEL", os.getenv("PPLX_MODEL", "sonar-pro"))
 API_URL = "https://api.perplexity.ai/chat/completions"
 
 
@@ -39,11 +43,24 @@ def load_json(path, default=None):
     if not path.exists():
         return default
     try:
-        with path.open() as f:
+        with path.open(encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
         print(f"[ai] load hiba: {path}: {e}", file=sys.stderr)
         return default
+
+
+def get_val(field, key="value"):
+    if isinstance(field, dict):
+        return field.get(key)
+    return field
+
+
+def last_n_trades(data, n=5):
+    log = data.get("trade_log", [])
+    if not isinstance(log, list):
+        return []
+    return log[-n:]
 
 
 def build_snapshot(data):
@@ -54,14 +71,15 @@ def build_snapshot(data):
     notrade = data.get("notrade_filters", {})
     header = data.get("header", {})
 
-    def get_val(field, key="value"):
-        if isinstance(field, dict):
-            return field.get(key)
-        return field
-
     calendar = load_json(CACHE_DIR / "calendar.json", {})
-    fedwatch = load_json(CACHE_DIR / "fedwatch.json", {})
+    fedwatch_cache = load_json(CACHE_DIR / "fedwatch.json", {})
     intraday = load_json(CACHE_DIR / "intraday.json", {})
+
+    dr = data.get("daily_research", {}) if isinstance(data.get("daily_research"), dict) else {}
+    dr_interpretation = dr.get("interpretation", {}) if isinstance(dr.get("interpretation"), dict) else {}
+    dr_calendar = dr.get("calendar", {}) if isinstance(dr.get("calendar"), dict) else {}
+    dr_facts = dr.get("facts", {}) if isinstance(dr.get("facts"), dict) else {}
+    dr_data_quality = dr.get("data_quality", {}) if isinstance(dr.get("data_quality"), dict) else {}
 
     return {
         "spot": get_val(macro.get("xau_spot")),
@@ -76,46 +94,46 @@ def build_snapshot(data):
             "htf_demand": get_val(levels.get("htf_demand")),
             "psych": get_val(levels.get("psych_level")),
         },
-    "macro": {
-        "dxy": {
-            "value": get_val(macro.get("dxy")),
-            "display": get_val(macro.get("dxy"), "display"),
-            "bias": get_val(macro.get("dxy"), "bias"),
-            "note": get_val(macro.get("dxy"), "bias_note"),
+        "macro": {
+            "dxy": {
+                "value": get_val(macro.get("dxy")),
+                "display": get_val(macro.get("dxy"), "display"),
+                "bias": get_val(macro.get("dxy"), "bias"),
+                "note": get_val(macro.get("dxy"), "bias_note"),
+            },
+            "us10y": {
+                "value": get_val(macro.get("us10y")),
+                "display": get_val(macro.get("us10y"), "display"),
+                "bias": get_val(macro.get("us10y"), "bias"),
+                "note": get_val(macro.get("us10y"), "bias_note"),
+            },
+            "real_yield": {
+                "value": get_val(macro.get("real_yield")),
+                "display": get_val(macro.get("real_yield"), "display"),
+                "bias": get_val(macro.get("real_yield"), "bias"),
+                "note": get_val(macro.get("real_yield"), "bias_note"),
+            },
+            "fedwatch": {
+                "regime": get_val(macro.get("fedwatch")) or fedwatch_cache.get("regime"),
+                "bias": get_val(macro.get("fedwatch"), "bias") or fedwatch_cache.get("bias"),
+                "display": get_val(macro.get("fedwatch"), "display") or fedwatch_cache.get("display"),
+                "note": get_val(macro.get("fedwatch"), "bias_note") or fedwatch_cache.get("note"),
+            },
+            "fear_greed": {
+                "value": get_val(macro.get("sentiment")),
+                "display": get_val(macro.get("sentiment"), "display"),
+                "bias": get_val(macro.get("sentiment"), "bias"),
+            },
+            "cot": macro.get("cot") or {},
+            "htf_trend": get_val(macro.get("htf_trend")),
+            "intraday_regime": intraday.get("intraday_regime") or get_val(macro.get("intraday_regime")),
+            "volatility": intraday.get("volatility_regime") or get_val(macro.get("volatility")),
+            "atr_15m": intraday.get("atr_15m"),
         },
-        "us10y": {
-            "value": get_val(macro.get("us10y")),
-            "display": get_val(macro.get("us10y"), "display"),
-            "bias": get_val(macro.get("us10y"), "bias"),
-            "note": get_val(macro.get("us10y"), "bias_note"),
-        },
-        "real_yield": {
-            "value": get_val(macro.get("real_yield")),
-            "display": get_val(macro.get("real_yield"), "display"),
-            "bias": get_val(macro.get("real_yield"), "bias"),
-            "note": get_val(macro.get("real_yield"), "bias_note"),
-        },
-        "fedwatch": {
-            "regime": fedwatch.get("regime"),
-            "bias": fedwatch.get("bias"),
-            "display": fedwatch.get("display"),
-            "note": fedwatch.get("note"),
-        },
-        "fear_greed": {
-            "value": get_val(macro.get("sentiment")),
-            "display": get_val(macro.get("sentiment"), "display"),
-            "bias": get_val(macro.get("sentiment"), "bias"),
-        },
-        "cot": macro.get("cot") or {},
-        "htf_trend": get_val(macro.get("htf_trend")),
-        "intraday_regime": intraday.get("intraday_regime") or get_val(macro.get("intraday_regime")),
-        "volatility": intraday.get("volatility_regime") or get_val(macro.get("volatility")),
-        "atr_15m": intraday.get("atr_15m"),
-    },
-             
         "notrade": {
             "macro_lock_active": (
-                calendar.get("macro_lock_active") if calendar.get("macro_events_today")
+                calendar.get("macro_lock_active")
+                if calendar.get("macro_events_today")
                 else notrade.get("macro_lock_active", False)
             ),
             "events_today": calendar.get("macro_events_today") or notrade.get("macro_events_today", []),
@@ -128,45 +146,39 @@ def build_snapshot(data):
             "loss_streak": risk.get("loss_streak", 0),
             "open_xau": risk.get("open_xau_positions", 0),
         },
-            "session": header.get("session"),
-    "cest_now": NOW.strftime("%Y-%m-%d %H:%M"),
+        "session": header.get("session"),
+        "cest_now": NOW.strftime("%Y-%m-%d %H:%M"),
+        "daily_research": {
+            "research_date": dr.get("research_date") or data.get("meta", {}).get("deep_research_last_run"),
+            "generated_at_cest": dr.get("generated_at_cest") or NOW.strftime("%Y-%m-%d %H:%M"),
+            "daily_summary": dr.get("daily_summary") or header.get("fed_regime_summary"),
+            "bias_direction": dr_interpretation.get("bias_direction") or header.get("bias_direction"),
+            "bias_status": dr_interpretation.get("bias_status") or header.get("bias_status"),
+            "bias_narrative": dr_interpretation.get("bias_narrative") or header.get("narrative"),
+            "macro_regimes": dr_interpretation.get("macro_regimes") or dr.get("macro_regimes") or {},
+            "conflicts": dr_interpretation.get("conflicts") or dr.get("conflicts") or [],
+            "facts": dr_facts,
+            "calendar": dr_calendar or {
+                "us_market_closed": notrade.get("us_market_closed"),
+                "us_market_note": notrade.get("us_market_note"),
+                "is_clean_day": notrade.get("is_clean_day"),
+                "clean_day_note": notrade.get("clean_day_note"),
+                "events_today": notrade.get("macro_events_today", []),
+                "yesterday_drivers": [],
+                "no_trade_windows": notrade.get("macro_no_trade_windows", []),
+            },
+            "news_drivers": dr.get("news_drivers") or [],
+            "data_quality": dr_data_quality or {
+                "tier1_all_fresh": True,
+                "stale_fields": [],
+                "confidence_note": None,
+            },
+        },
+        "recent_trades": last_n_trades(data, 5),
+    }
 
-    # A napi mély kutatás v3 eredményei — facts + interpretation + conflicts + data_quality
-    "daily_research": (lambda dr: {
-        # high-level summary
-        "research_date": dr.get("research_date") or data.get("meta", {}).get("deep_research_last_run"),
-        "generated_at_cest": dr.get("generated_at_cest") or NOW.strftime("%Y-%m-%d %H:%M"),
-        "daily_summary": dr.get("daily_summary") or header.get("fed_regime_summary"),
-        # interpretation-ból
-        "bias_direction": dr.get("interpretation", {}).get("bias_direction") or header.get("bias_direction"),
-        "bias_status": dr.get("interpretation", {}).get("bias_status") or header.get("bias_status"),
-        "bias_narrative": dr.get("interpretation", {}).get("bias_narrative") or header.get("narrative"),
-        "macro_regimes": dr.get("interpretation", {}).get("macro_regimes") or {},
-        "conflicts": dr.get("interpretation", {}).get("conflicts") or [],
-        # facts-ból (Tier-1 és kontextus)
-        "facts": dr.get("facts") or {},
-        # naptár + no-trade
-        "calendar": dr.get("calendar") or {
-            "us_market_closed": notrade.get("us_market_closed"),
-            "us_market_note": notrade.get("us_market_note"),
-            "is_clean_day": notrade.get("is_clean_day"),
-            "clean_day_note": notrade.get("clean_day_note"),
-            "events_today": notrade.get("macro_events_today", []),
-            "yesterday_drivers": [],
-            "no_trade_windows": notrade.get("macro_no_trade_windows", []),
-        },
-        # news_drivers v3
-        "news_drivers": dr.get("news_drivers") or [],
-        # data_quality
-        "data_quality": dr.get("data_quality") or {
-            "tier1_all_fresh": True,
-            "stale_fields": [],
-            "confidence_note": None,
-        },
-    })(data.get("daily_research", {}) if isinstance(data.get("daily_research"), dict) else {}),
 
 def call_perplexity(system_prompt, user_snapshot):
-    """Éles Perplexity API hívás. A sonar-reasoning-pro <think> blokkot ad + JSON."""
     hardened_system = system_prompt + (
         "\n\n**KRITIKUS**: A válasz csak és kizárólag egy JSON objektum legyen. "
         "Ne használj markdown code fence-t (```), ne írj magyarázatot a JSON előtt vagy után. "
@@ -196,11 +208,7 @@ def call_perplexity(system_prompt, user_snapshot):
     if r.status_code != 200:
         print(f"[ai] API HTTP {r.status_code}: {r.text[:800]}", file=sys.stderr)
         r.raise_for_status()
-    try:
-        resp = r.json()
-    except Exception:
-        print(f"[ai] API response non-JSON: {r.text[:800]}", file=sys.stderr)
-        raise
+    resp = r.json()
     msg = resp["choices"]["message"]
     content = msg.get("content") or ""
     if not content and msg.get("reasoning_content"):
@@ -210,18 +218,10 @@ def call_perplexity(system_prompt, user_snapshot):
     if content:
         print(f"[ai] Content prefix: {content[:300]!r}", file=sys.stderr)
         print(f"[ai] Content suffix: {content[-200:]!r}", file=sys.stderr)
-    else:
-        print(f"[ai] Full response: {json.dumps(resp)[:800]}", file=sys.stderr)
     return content
 
 
-# ═══ NAPI MÉLY MAKRÓ KUTATÁS ═══
-
-DEEP_RESEARCH_MODEL = os.getenv("PPLX_DEEP_MODEL", "sonar-pro")
-
-
 def call_perplexity_with_search(system_prompt, user_question):
-    """Perplexity hívás web search-sel a mély kutatáshoz (sonar-pro online modellek)."""
     hardened_system = system_prompt + (
         "\n\n**KRITIKUS**: A válasz csak és kizárólag egy JSON objektum legyen. "
         "Ne használj markdown code fence-t (```), ne írj magyarázatot a JSON előtt vagy után. "
@@ -261,61 +261,100 @@ def call_perplexity_with_search(system_prompt, user_question):
 
 
 def mock_deep_research(snapshot):
-    """Fejlesztői mock a mély kutatáshoz — a példa jelentés alapján (NFP után)."""
     return {
         "research_date": NOW.strftime("%Y-%m-%d"),
-        "daily_summary": "A gyenge júniusi NFP (+57K vs 110K) rövidtávú DXY-gyengülést és XAU rally-t hozott. De hawkish Fed + rövidített US nap miatt SÁRGA státusz tartandó.",
-        "events_today": [],
-        "us_market_closed": True,
-        "us_market_note": "US piac ZÁRVA (Independence Day observed).",
-        "is_clean_day": True,
-        "clean_day_note": "Ma nincs high-impact adat — az NFP tegnap volt.",
-        "bias_direction": "LONG",
-        "bias_status": "SÁRGA",
-        "bias_narrative": "Gyenge NFP → DXY gyengülés → XAU rövid távú long háttér. De HTF Death Cross korlátozza a felfelé teret.",
-        "macro_regimes": {
-            "fedwatch": {
-                "value": "HOLD ~70% (júl 29) | ~80% hike szeptemberre",
-                "display": "NEUTRAL → HIKE BIAS",
-                "bias": "YELLOW",
-                "bias_note": "69% hold júl 29-i FOMC-on, de ~80% hike szeptemberre — HAWKISH HOLD.",
+        "generated_at_cest": NOW.strftime("%Y-%m-%d %H:%M"),
+        "daily_summary": "A mai XAU-kép vegyes: a rövid távú ármozgást a makró és a likviditás együtt határozza meg.",
+        "calendar": {
+            "us_market_closed": False,
+            "us_market_note": "US piac nyitva.",
+            "is_clean_day": True,
+            "clean_day_note": "Ma nincs high-impact US adat.",
+            "events_today": [],
+            "yesterday_drivers": [],
+            "no_trade_windows": [],
+        },
+        "facts": {
+            "spot": {"value": snapshot.get("spot"), "asof_cest": NOW.strftime("%H:%M"), "source": "snapshot", "url": ""},
+            "dxy": {"value": 100.73, "prev": 100.86, "direction": "FALLING", "source": "mock", "url": ""},
+            "us10y_nominal": {"value": 4.49, "prev": 4.45, "direction": "RISING", "source": "mock", "url": ""},
+            "real_yield_10y": {"value": 2.20, "prev": 2.24, "direction": "FALLING", "source": "mock", "url": ""},
+            "fedwatch": {"next_odds": "HOLD 70% / CUT 30%", "following_odds": "hike-bias", "source": "mock", "url": ""},
+            "fear_greed": {"value": 30, "label": "FEAR", "source": "mock", "url": ""},
+            "cot": {"noncommercial_net": "extreme long", "asof": NOW.strftime("%Y-%m-%d"), "source": "mock", "url": ""},
+        },
+        "interpretation": {
+            "bias_direction": "LONG",
+            "bias_status": "SÁRGA",
+            "bias_narrative": "Eső reálhozam támogatja a long oldalt, de a túlzsúfolt positioning és a vegyes struktúra miatt csak szelektív long engedhető.",
+            "macro_regimes": {
+                "real_yield": {
+                    "value": "2.20% FALLING",
+                    "display": "REÁLHOZAM ESIK",
+                    "bias": "GREEN",
+                    "weight": "TIER-1",
+                    "bias_note": "Eső reálhozam long XAU-t támogat.",
+                },
+                "fedwatch": {
+                    "value": "HOLD 70% / hike-bias később",
+                    "display": "NEUTRAL → HIKE BIAS",
+                    "bias": "YELLOW",
+                    "weight": "TIER-1",
+                    "bias_note": "Rövid távon semleges, középtávon nem tiszta long-tailwind.",
+                },
+                "dxy": {
+                    "value": 100.73,
+                    "display": "100.73 – USD-BEAR",
+                    "bias": "GREEN",
+                    "weight": "TIER-1",
+                    "bias_note": "Gyengülő USD rövid távon segíti az XAU-t.",
+                },
+                "us10y": {
+                    "value": 4.49,
+                    "display": "4.49% RISING",
+                    "bias": "RED",
+                    "weight": "TIER-2",
+                    "bias_note": "Nominális hozam emelkedik, de a reálhozam a mérvadóbb.",
+                },
+                "sentiment": {
+                    "value": 30,
+                    "display": "30 – FEAR",
+                    "bias": "GREEN",
+                    "weight": "TIER-3",
+                    "bias_note": "Fear safe-haven támogatást adhat.",
+                },
+                "cot": {
+                    "value": "extreme long",
+                    "display": "COT EXTRÉM LONG",
+                    "bias": "YELLOW",
+                    "weight": "TIER-3",
+                    "bias_note": "A positioning túlzsúfolt, felfelé korlátozhat.",
+                },
+                "htf_trend": {
+                    "value": "RANGE",
+                    "display": "RANGE",
+                    "bias": "YELLOW",
+                    "weight": "STRUCTURE",
+                    "bias_note": "Vegyes HTF szerkezet.",
+                },
+                "intraday_regime": {
+                    "value": "RECOVERY BOUNCE",
+                    "display": "RECOVERY BOUNCE",
+                    "bias": "YELLOW",
+                    "weight": "STRUCTURE",
+                    "bias_note": "Rövid távú visszapattanás.",
+                },
+                "volatility": {
+                    "value": "ELEVATED",
+                    "display": "ELEVATED",
+                    "bias": "YELLOW",
+                    "weight": "STRUCTURE",
+                    "bias_note": "Tágabb mozgás és spread.",
+                },
             },
-            "us10y": {
-                "value": 4.49,
-                "display": "4.49% – RISING",
-                "bias": "RED",
-                "bias_note": "4.48–4.51%, heti emelkedő trend; magas opportunity cost aranynak.",
-            },
-            "dxy": {
-                "value": 100.73,
-                "display": "100.73 – USD-BEAR (rövid táv)",
-                "bias": "YELLOW",
-                "bias_note": "NFP miss után ~100.31–100.85; a 101+ csúcsokról visszaesett.",
-            },
-            "sentiment": {
-                "value": 30,
-                "display": "30 – FEAR",
-                "bias": "GREEN",
-                "bias_note": "Fear & Greed 30 (Fear) — enyhén long XAU-kedvező.",
-            },
-            "htf_trend": {
-                "value": "BEARISH",
-                "display": "BEARISH (Death Cross)",
-                "bias": "RED",
-                "bias_note": "Death Cross aktív (50-SMA < 200-SMA); ár az összes major SMA alatt.",
-            },
-            "intraday_regime": {
-                "value": "RECOVERY BOUNCE",
-                "display": "RECOVERY BOUNCE",
-                "bias": "YELLOW",
-                "bias_note": "NFP után bullish impulzus, de ellenállás a 21-SMA (~$4,176) zónában.",
-            },
-            "volatility": {
-                "value": "ELEVATED",
-                "display": "ELEVATED",
-                "bias": "YELLOW",
-                "bias_note": "Post-NFP amplitúdó + rövidített US nap = alacsonyabb likviditás, tágabb spread.",
-            },
+            "conflicts": [
+                "Nominális US10Y emelkedik, de reálhozam esik → a reálhozam vezetőbb XAU-driver.",
+            ],
         },
         "key_levels": {
             "pdh": 4179,
@@ -328,27 +367,28 @@ def mock_deep_research(snapshot):
             "psych_level": 4000,
         },
         "news_drivers": [
-            "NFP aftershock: +57K vs 110K — nagy miss, XAU $4,060→$4,177 rally",
-            "US–Irán béketárgyalások: Qatar pozitív előrehaladás — safe-haven premium csökken",
-            "Warsh Fed Chair hawkish, 80% szeptemberi hike-odds",
+            "Reálhozam-esés támogatja az XAU-t.",
+            "DXY enyhén gyengül.",
+            "COT positioning túlzsúfolt long.",
         ],
-        "no_trade_windows": [],
+        "data_quality": {
+            "tier1_all_fresh": True,
+            "stale_fields": [],
+            "confidence_note": "Mock adat — fejlesztői mód.",
+        },
         "sources": [
-            {"label": "BLS Employment Situation", "url": "https://www.bls.gov/news.release/empsit.nr0.htm"},
-            {"label": "CME FedWatch", "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"},
+            {"label": "Mock source", "url": "https://www.perplexity.ai/"},
         ],
     }
 
 
 def run_deep_research(snapshot):
-    """Mély kutatás futtatása: Perplexity web search hívás vagy mock.
-    Visszatér: (research_dict, source_type, model_name, citations)
-    """
     if MOCK:
         print("[deep] MOCK mode (nincs PPLX_API_KEY vagy MOCK_AI=true)")
         return mock_deep_research(snapshot), "ai-mock", "mock-v1", []
+
     try:
-        system_prompt = DEEP_RESEARCH_PROMPT_PATH.read_text()
+        system_prompt = DEEP_RESEARCH_PROMPT_PATH.read_text(encoding="utf-8")
         question = (
             f"Ma: {NOW.strftime('%Y-%m-%d %H:%M CEST')} ({NOW.strftime('%A')}).\n"
             f"Aktuális snapshot (a spot/regime mezőket csak kontextusként használd, "
@@ -367,7 +407,6 @@ def run_deep_research(snapshot):
 
 
 def _level_field(value):
-    """Egy kulcsszint mező wrapper — source_type=ai (mély kutatás)."""
     return {
         "value": value,
         "status": "fresh" if value is not None else "pending",
@@ -379,7 +418,6 @@ def _level_field(value):
 
 
 def _regime_field(reg, fallback_display=None, impact=4):
-    """Egy macro_regime mező wrapper a deep research-ből."""
     if not isinstance(reg, dict):
         return None
     value = reg.get("value")
@@ -398,33 +436,38 @@ def _regime_field(reg, fallback_display=None, impact=4):
 
 
 def apply_deep_research(data, research, source_type, model_name, citations):
-    """A mély kutatás eredményeit beírja a data.json megfelelő mezőibe."""
     if not isinstance(research, dict):
         print("[deep] research nem dict, skip apply", file=sys.stderr)
         return
 
     updated_count = 0
 
+    interpretation = research.get("interpretation", {}) if isinstance(research.get("interpretation"), dict) else {}
+    calendar = research.get("calendar", {}) if isinstance(research.get("calendar"), dict) else {}
+    facts = research.get("facts", {}) if isinstance(research.get("facts"), dict) else {}
+    regimes = interpretation.get("macro_regimes", {}) or research.get("macro_regimes", {}) or {}
+
     header = data.get("header", {})
-    if research.get("bias_direction"):
-        header["bias_direction"] = research["bias_direction"]
+    if interpretation.get("bias_direction"):
+        header["bias_direction"] = interpretation["bias_direction"]
         updated_count += 1
-    if research.get("bias_status"):
-        header["bias_status"] = research["bias_status"]
+    if interpretation.get("bias_status"):
+        header["bias_status"] = interpretation["bias_status"]
         updated_count += 1
-    if research.get("bias_narrative"):
-        header["narrative"] = research["bias_narrative"]
+    if interpretation.get("bias_narrative"):
+        header["narrative"] = interpretation["bias_narrative"]
     if research.get("daily_summary"):
         header["fed_regime_summary"] = research["daily_summary"]
     data["header"] = header
 
     macro = data.get("macro", {})
-    regimes = research.get("macro_regimes", {}) or {}
     regime_map = {
+        "real_yield": "real_yield",
         "fedwatch": "fedwatch",
         "us10y": "us10y",
         "dxy": "dxy",
         "sentiment": "sentiment",
+        "cot": "cot",
         "htf_trend": "htf_trend",
         "intraday_regime": "intraday_regime",
         "volatility": "volatility",
@@ -435,6 +478,23 @@ def apply_deep_research(data, research, source_type, model_name, citations):
             if field:
                 macro[dkey] = field
                 updated_count += 1
+
+    if isinstance(facts.get("real_yield_10y"), dict) and not macro.get("real_yield"):
+        ry = facts["real_yield_10y"]
+        macro["real_yield"] = {
+            "value": ry.get("value"),
+            "display": f"{ry.get('value')} – {ry.get('direction')}" if ry.get("value") is not None else None,
+            "bias": "GREEN" if str(ry.get("direction", "")).upper() == "FALLING" else "RED",
+            "bias_note": "facts.real_yield_10y alapján töltve",
+            "impact": 4,
+            "status": "fresh" if ry.get("value") is not None else "pending",
+            "source_type": "ai",
+            "source_label": "AI mély kutatás (Perplexity)",
+            "source_url": ry.get("url") or "https://www.perplexity.ai/",
+            "updated_at": NOW_ISO,
+        }
+        updated_count += 1
+
     data["macro"] = macro
 
     levels = data.get("levels", {})
@@ -454,19 +514,22 @@ def apply_deep_research(data, research, source_type, model_name, citations):
             updated_count += 1
     data["levels"] = levels
 
-    nt = apply_calendar_cleanup(data.get("notrade_filters", {}), research)
+    nt = apply_calendar_cleanup(data.get("notrade_filters", {}), calendar)
     data["notrade_filters"] = nt
     updated_count += 1
 
     data["daily_research"] = {
         "research_date": research.get("research_date") or NOW.strftime("%Y-%m-%d"),
+        "generated_at_cest": research.get("generated_at_cest") or NOW.strftime("%Y-%m-%d %H:%M"),
         "daily_summary": research.get("daily_summary"),
-        "bias_narrative": research.get("bias_narrative"),
+        "calendar": calendar,
+        "facts": facts,
+        "interpretation": interpretation,
+        "macro_regimes": regimes,
+        "conflicts": interpretation.get("conflicts") or research.get("conflicts") or [],
         "news_drivers": research.get("news_drivers") or [],
-        "us_market_closed": research.get("us_market_closed", False),
-        "us_market_note": research.get("us_market_note", ""),
-        "is_clean_day": research.get("is_clean_day"),
-        "clean_day_note": research.get("clean_day_note", ""),
+        "data_quality": research.get("data_quality") or {},
+        "sources": research.get("sources") or [],
         "source_type": source_type,
         "updated_at": NOW_ISO,
     }
@@ -483,16 +546,11 @@ def apply_deep_research(data, research, source_type, model_name, citations):
     return updated_count
 
 
-def apply_calendar_cleanup(existing_nt, research):
-    """Naptár tisztítás + frissítés a deep research alapján."""
+def apply_calendar_cleanup(existing_nt, calendar):
     nt = dict(existing_nt) if isinstance(existing_nt, dict) else {}
 
-    events_today = research.get("events_today", [])
-    if events_today is None:
-        events_today = []
-    no_trade_windows = research.get("no_trade_windows", [])
-    if no_trade_windows is None:
-        no_trade_windows = []
+    events_today = calendar.get("events_today", []) or []
+    no_trade_windows = calendar.get("no_trade_windows", []) or []
 
     nt["macro_events_today"] = events_today
     nt["macro_no_trade_windows"] = no_trade_windows
@@ -508,25 +566,23 @@ def apply_calendar_cleanup(existing_nt, research):
             continue
     nt["macro_lock_active"] = lock_active
 
-    if research.get("us_market_closed"):
+    if calendar.get("us_market_closed"):
         nt["us_market_closed"] = True
-        nt["us_market_note"] = research.get("us_market_note", "US piac zárva.")
+        nt["us_market_note"] = calendar.get("us_market_note", "US piac zárva.")
     else:
         nt["us_market_closed"] = False
-        nt["us_market_note"] = research.get("us_market_note", "US piac nyitva.")
+        nt["us_market_note"] = calendar.get("us_market_note", "US piac nyitva.")
 
-    nt["is_clean_day"] = research.get("is_clean_day", len(events_today) == 0)
-    nt["clean_day_note"] = research.get("clean_day_note", "")
+    nt["is_clean_day"] = calendar.get("is_clean_day", len(events_today) == 0)
+    nt["clean_day_note"] = calendar.get("clean_day_note", "")
     nt["updated_at"] = NOW_ISO
     nt["source_label"] = "AI mély kutatás (Perplexity)"
     return nt
 
 
 def extract_json_from_text(text):
-    """Az AI válaszból kinyeri a JSON-t."""
     import re
-
-    text = re.sub(r"<think>.*?</think>", "", text, flags=re.S)
+    text = re.sub(r"<think>.*?</think>", "", text or "", flags=re.S)
     m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
     if m:
         return m.group(1)
@@ -538,14 +594,12 @@ def extract_json_from_text(text):
 
 
 def parse_ai_json(text):
-    """Hibatűrő JSON parsing."""
     import re
 
     json_str = extract_json_from_text(text)
 
     try:
         import json_repair
-
         repaired = json_repair.repair_json(json_str, return_objects=True)
         if isinstance(repaired, (dict, list)):
             return repaired
@@ -556,7 +610,6 @@ def parse_ai_json(text):
 
     try:
         import json5
-
         return json5.loads(json_str)
     except ImportError:
         print("[ai] json5 nincs, regex cleanup", file=sys.stderr)
@@ -568,84 +621,73 @@ def parse_ai_json(text):
         return json.loads(fixed)
     except json.JSONDecodeError as e:
         print(f"[ai] Cleanup parse hiba: {e}", file=sys.stderr)
-    raise ValueError(f"AI response nem parseolhato. Elso 500: {json_str[:500]}")
+        raise ValueError(f"AI response nem parseolható. Elso 500: {json_str[:500]}")
 
 
 def mock_response(snapshot):
-    """Fejlesztői mock."""
-    dxy = snapshot["macro"]["dxy"].get("value") or 100
     lock = snapshot["notrade"]["macro_lock_active"]
-    us10y_note = snapshot["macro"]["us10y"].get("note", "")
-
-    if lock:
-        bagira = (
-            "A pánter csendben ül. NFP küszöbén vagyunk — semmi sem tiszta. "
-            "A 4090 zóna prémium, de várni kell a rejectiont. A short bias "
-            "makró oldalról ép, de a nyomás a szabályokból jön: 60 perc tiltás."
-        )
-    else:
-        bagira = (
-            "A pánter figyel. DXY nyugodt, hozamok magasak — a short zsigerileg "
-            "helyes. A prémium a 4058–4105 sávban. Ha M15/H1 rejection tiszta, "
-            "a setup önmagát futtatja a 3965 zónáig."
-        )
+    real_yield_note = snapshot["macro"].get("real_yield", {}).get("note", "")
+    dxy = snapshot["macro"]["dxy"].get("value") or 100
 
     return {
         "setup_A": {
-            "direction": "SHORT",
-            "type": "HTF sell-zóna / intraday premium reakció",
-            "bias_compatibility": "igen — SHORT bias-szal egyező",
-            "entry_zone": "4058-4105 (konzervatív: 4090-4105; HTF core: 4058-4068)",
-            "sl": "4115 felett M15 close (konzervatív); 4080 felett H1 close (HTF core)",
-            "tp1": "3965 (Value Demand Zóna)",
-            "tp2": "3900 (Mélyebb Támasz)",
-            "rr_min": 2.0,
+            "direction": "LONG",
+            "type": "range reversal / demand reaction",
+            "bias_compatibility": "igen — LONG bias-szal egyező",
+            "entry_zone": "3950-3970 demand reakció",
+            "sl": "3925 alatt H1 close",
+            "tp1": "4058",
+            "tp2": "4176-4180",
+            "rr_min": 2.1,
             "score": 8,
-            "session": "London 09:00-12:00 CEST (NFP előtt)",
-            "invalidation": "H1 close 4080/4115 felett — bull struktúra erősödik",
+            "session": "London 09:00-12:00 CEST",
+            "invalidation": "H1 close 3925 alatt",
             "macro_support": [
-                us10y_note or "US10Y magas → opportunity cost aranynak",
-                f"DXY {dxy} — nem tailwind long-nak",
-                "FedWatch NEUTRAL/HIKE — nincs cut-bid",
+                real_yield_note or "Reálhozam esik → long háttér",
+                f"DXY {dxy} → gyengülő USD segítheti az XAU-t",
+                "FedWatch rövid távon nem agresszíven hawkish",
             ],
             "allowed": not lock,
             "locked_reason": "Makró tiltási ablak aktív" if lock else None,
-            "confirmed": False,
+            "entry_zone_status": "pending",
             "setup_quality": "erős",
         },
         "setup_B": {
-            "direction": "LONG",
-            "type": "NFP-utáni flush + demand sweep",
-            "bias_compatibility": "részben — kontratrend, csak makróforduló esetén",
-            "entry_zone": "3965-3970 flush/sweep után V-reversal",
-            "sl": "3925 alatt H1 close",
-            "tp1": "Daily Open / Asia High",
-            "tp2": "4058-4068 (HTF sell zóna)",
+            "direction": "SHORT",
+            "type": "HTF supply rejection",
+            "bias_compatibility": "részben — alternatív, ha long kifullad",
+            "entry_zone": "4176-4180 rejection",
+            "sl": "4205 felett M15/H1 close",
+            "tp1": "4105",
+            "tp2": "4058",
             "rr_min": 2.0,
             "score": 6,
-            "session": "Overlap 15:00-19:00 CEST (csak NFP után)",
-            "invalidation": "H1 close 3930 alatt",
+            "session": "Overlap 14:00-19:00 CEST",
+            "invalidation": "H1 close 4205 felett",
             "macro_support": [
-                "Csak akkor engedélyezett, ha NFP significantly miss",
-                "US10Y vissza 4.3% alá kell essen",
+                "COT extrém long → upside korlátozott lehet",
+                "Csak rejection esetén érvényes",
             ],
             "allowed": False,
-            "locked_reason": "Csak NFP után (15:00 CEST+) és makróforduló esetén",
-            "confirmed": False,
+            "locked_reason": "Alternatív counter forgatókönyv",
+            "entry_zone_status": "pending",
             "setup_quality": "közepes",
         },
-        "bagira_narrative": bagira,
-        "key_watch": [
-            "M15 rejection a 4090-nél — ha jön, az edge élesedik",
-            "NFP 14:30 — 13:30-tól teljes tiltás",
-            "US10Y > 4.55% → short momentum felerősödik",
+        "score_breakdown": {
+            "setup_A": {"trend": 1, "level": 2, "volatility": 1, "tier1_macro": 3, "rr": 1, "total": 8},
+            "setup_B": {"trend": 1, "level": 2, "volatility": 1, "tier1_macro": 1, "rr": 1, "total": 6},
+        },
+        "conflicts_resolved": [
+            "A nominális US10Y emelkedése ellenére a reálhozam esése fontosabb long-driver az XAU-nál.",
         ],
-        "confidence": 70 if lock else 82,
-        "reasoning_summary": (
-            "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), "
-            "HTF RANGE + intraday range-bear (3/4). "
-            "NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén."
-        ),
+        "bagira_narrative": "A pánter long felé hajlik, de csak tiszta demand reakcióból. Ha a struktúra nem tart, nem üldözöm az árat.",
+        "key_watch": [
+            "3950-3970 demand zóna reakciója",
+            "DXY további gyengül-e",
+            "Macro lock / session likviditás",
+        ],
+        "confidence": 78 if not lock else 62,
+        "reasoning_summary": "A Tier-1 driver-kép enyhén long, mert a reálhozam fontosabb jel, mint a nominális US10Y. A short csak supply rejection alternatíva.",
     }
 
 
@@ -672,7 +714,7 @@ def analyze():
         model_name = "mock-v1"
     else:
         try:
-            system_prompt = PROMPT_PATH.read_text()
+            system_prompt = PROMPT_PATH.read_text(encoding="utf-8")
             print(f"[ai] Perplexity {MODEL} hívás...")
             content = call_perplexity(system_prompt, snapshot)
             result = parse_ai_json(content)
@@ -685,7 +727,15 @@ def analyze():
             source_type = "ai-fallback"
             model_name = f"mock-fallback ({MODEL} failed)"
 
-    BAGIRA_KEYS = ("bagira_narrative", "confidence", "key_watch", "reasoning_summary")
+    BAGIRA_KEYS = (
+        "bagira_narrative",
+        "confidence",
+        "key_watch",
+        "reasoning_summary",
+        "score_breakdown",
+        "conflicts_resolved",
+    )
+
     if isinstance(result, dict):
         for k in BAGIRA_KEYS:
             if result.get(k) in (None, "", [], {}):
@@ -702,6 +752,7 @@ def analyze():
                     body.pop(k, None)
 
     sa = result.get("setup_A") or {}
+
     if not result.get("bagira_narrative"):
         dir_a = sa.get("direction", "—")
         score_a = sa.get("score", "—")
@@ -718,14 +769,12 @@ def analyze():
                 f"A pánter figyel, de nem lép. {reason}. "
                 f"A terv {dir_a.lower()} irányban készen áll, ha a lock feloldódik."
             )
-        print("[ai] fallback: bagira_narrative szintetizálva setup_A-ból", file=sys.stderr)
 
     if result.get("confidence") in (None, "", 0):
         try:
             result["confidence"] = int(sa.get("score", 0)) * 10
         except Exception:
             result["confidence"] = 50
-        print(f"[ai] fallback: confidence szintetizálva = {result['confidence']}", file=sys.stderr)
 
     if not result.get("key_watch"):
         kw = []
@@ -736,9 +785,18 @@ def analyze():
         if not kw:
             kw.append("Makró naptár és DXY/US10Y olvasat figyelése")
         result["key_watch"] = kw
-        print("[ai] fallback: key_watch szintetizálva", file=sys.stderr)
 
-    def wrap_setup(body, slot):
+    if not result.get("conflicts_resolved"):
+        result["conflicts_resolved"] = snapshot.get("daily_research", {}).get("conflicts", [])
+
+    if not result.get("score_breakdown"):
+        score_a = int(sa.get("score", 0) or 0)
+        result["score_breakdown"] = {
+            "setup_A": {"trend": None, "level": None, "volatility": None, "tier1_macro": None, "rr": None, "total": score_a},
+            "setup_B": {"trend": None, "level": None, "volatility": None, "tier1_macro": None, "rr": None, "total": int((result.get("setup_B") or {}).get("score", 0) or 0)},
+        }
+
+    def wrap_setup(body):
         if not body:
             body = None
         return {
@@ -753,18 +811,21 @@ def analyze():
         }
 
     data["setups"] = {
-        "A": wrap_setup(result.get("setup_A"), "A"),
-        "B": wrap_setup(result.get("setup_B"), "B"),
+        "A": wrap_setup(result.get("setup_A")),
+        "B": wrap_setup(result.get("setup_B")),
     }
     data["bagira"] = {
         "narrative": result.get("bagira_narrative", ""),
         "key_watch": result.get("key_watch", []),
         "confidence": result.get("confidence", 0),
         "reasoning_summary": result.get("reasoning_summary", ""),
+        "score_breakdown": result.get("score_breakdown", {}),
+        "conflicts_resolved": result.get("conflicts_resolved", []),
         "model": model_name,
         "source_type": source_type,
         "updated_at": NOW_ISO,
     }
+
     data["meta"] = data.get("meta", {})
     data["meta"]["ai_last_run"] = NOW_ISO
     data["meta"]["ai_model"] = model_name
@@ -772,6 +833,7 @@ def analyze():
 
     with DATA_PATH.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
 
     print(
         f"[ai] data.json frissítve: setup_A allowed={result.get('setup_A', {}).get('allowed')}, "
