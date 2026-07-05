@@ -209,7 +209,7 @@ def call_perplexity(system_prompt, user_snapshot):
         print(f"[ai] API HTTP {r.status_code}: {r.text[:800]}", file=sys.stderr)
         r.raise_for_status()
     resp = r.json()
-    msg = resp["choices"]["message"]
+    msg = resp["choices"][0]["message"]
     content = msg.get("content") or ""
     if not content and msg.get("reasoning_content"):
         content = msg["reasoning_content"]
