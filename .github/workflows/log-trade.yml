@@ -1,0 +1,77 @@
+name: Log closed trade
+
+on:
+  workflow_dispatch:
+    inputs:
+      trade:
+        description: 'Closed trade JSON payload'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  PYTHONUTF8: "1"
+
+jobs:
+  log-trade:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show triggered trade payload (sanity log)
+        run: |
+          echo "TRADEJSON input:"
+          echo '${{ github.event.inputs.trade }}'
+
+      - name: Set TRADEJSON env
+        run: |
+          echo "TRADEJSON<<EOF" >> $GITHUB_ENV
+          echo '${{ github.event.inputs.trade }}' >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Append trade to data.json
+        env:
+          TRADEJSON: ${{ env.TRADEJSON }}
+        run: |
+          python scripts/append_trade.py
+
+      - name: Validate data.json
+        run: |
+          python scripts/validatedata.py
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "bagira-trade-bot"
+          git config user.email "bagira-trade-bot@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          if git status --porcelain | grep -q "data.json"; then
+            git add data.json
+            git commit -m "Log closed trade via workflow (log-trade.yml)"
+          else
+            echo "No changes in data.json; skipping commit."
+          fi
+
+      - name: Push changes
+        if: success()
+        run: |
+          if git log -1 --pretty=%B | grep -q "Log closed trade via workflow"; then
+            git push
+          else
+            echo "No new commit to push."
+          fi
