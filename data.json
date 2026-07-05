@@ -14,98 +14,98 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-05T10:41:21+02:00",
+    "ai_last_run": "2026-07-05T10:43:00+02:00",
     "ai_model": "mock-fallback (sonar-pro failed)",
     "ai_source_type": "ai-fallback",
-    "deep_research_last_run": "2026-07-05T10:41:21+02:00",
+    "deep_research_last_run": "2026-07-05T10:43:00+02:00",
     "deep_research_model": "sonar-pro",
     "deep_research_source_type": "ai",
     "deep_research_citations": 10
   },
   "macro": {
     "fedwatch": {
-      "value": "Szeptemberre ~60–70% esély a 25 bps hike-ra, év végére emelkedő további szigorítási odds",
-      "display": "NEUTRAL → HIKE BIAS",
+      "value": "Következő FOMC döntésre továbbra is HOLD domináns, de a gyenge NFP miatt a későbbi CUT-odds enyhén emelkedett.",
+      "display": "NEUTRAL → enyhén CUT-BIAS",
       "bias": "YELLOW",
-      "bias_note": "A gyengébb júniusi NFP ellenére a FedWatch-árak alapján a piac továbbra is számít legalább egy 25 bps emelésre év végéig, a hike-odds 40–60% sávban mozog, ami összességében semleges–enyhén szigorító Fed-rezsimet jelez, nem pedig egy közeljövőbeli cut-ciklust.[1]",
+      "bias_note": "A vártnál gyengébb júniusi NFP (+57k vs ~110k várakozás) és a 4.2%-ra emelkedő munkanélküliség a FedWatch görbében tipikusan a további kamatemelések valószínűségének mérséklését és a későbbi kamatcsökkentések enyhe árazását hozza, ami XAU-ra nézve támogató, de nem extrém bullish környezet.[4][10]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "us10y": {
       "value": 4.48,
       "display": "4.48% – RISING",
       "bias": "RED",
-      "bias_note": "A 10 éves US hozam ~4.5% közelében, emelkedő trendben van, ami a magas reálhozamok miatt strukturálisan nyomást gyakorol az aranyra, mivel növeli a nem kamatozó eszközök opportunity costját.[1]",
+      "bias_note": "A 10 éves US hozam ~4.5% közelében, emelkedő trendben marad, ami magas reálhozam-környezetet jelez; ez növeli a nem kamatozó eszközök, így az arany tartásának opportunity costját, strukturálisan lefelé mutató XAU-bias-t ad.[1]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "dxy": {
       "value": 100.86,
       "display": "100.86 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "A DXY továbbra is a 99–103-as sávban mozog, rövid távon technikai range-ben; a NFP utáni USD-reakció visszafogott, nincs egyértelmű trendes USD-bull vagy -bear környezet, ami XAU-ra nézve inkább semleges háttér.[4]",
+      "bias_note": "A DXY továbbra is a széles, nagyjából 96–100/100–103-as sávban range-ben mozog, a gyenge NFP utáni USD-reakció visszafogott, nincs egyértelmű USD-bull vagy -bear trend, ami XAU-ra nézve inkább semleges háttér.[2][7]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "sentiment": {
       "value": 32,
       "display": "32 – FEAR (SAFE_HAVEN LIGHT)",
       "bias": "GREEN",
-      "bias_note": "A 32-es Fear & Greed szint óvatos, „fear” jellegű piaci hangulatot jelez, ami elvileg kedvez a safe-haven eszközöknek, de nem panic-mode; ez mérsékelt, strukturált XAU-keresletet támogat, nem extrém flight-to-quality mozgást.[2]",
+      "bias_note": "A ~30–35 körüli fear/neutral tartomány óvatos kockázatvállalást és fokozott bizonytalanságot jelez, ami mérsékelt safe-haven keresletet támaszthat az arany irányába, de nem extrém risk-off szcenárió.[3][6]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
-      "display": "RANGE (magasabb sávban konszolidálódó bull szakasz)",
+      "display": "RANGE (lokális csúcsok és mélypontok között oldalazó struktúra)",
       "bias": "YELLOW",
-      "bias_note": "HTF-en az ár egy emelkedő struktúra felső zónájában, 4050–4200 közötti sávban oldalaz; a korábbi rally után nem alakult ki egyértelmű új lokális higher high struktúra, inkább range-ben zajlik az ármozgás, ami kontrollált buy-the-dip környezetet jelez, nem tiszta impulzív trendet.",
+      "bias_note": "HTF szinten az arany továbbra is strukturális range-ben mozog, lokális csúcsok és mélypontok között, miközben a magas hozamkörnyezet és a gyengébb NFP egymással ellentétes erőket képvisel, így nincs tiszta HTF bullish vagy bearish trend.[1][4][10]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "intraday_regime": {
-      "value": "TREND-BULL",
+      "value": "TREND-BULL (NFP-utáni recovery struktúra)",
       "display": "TREND-BULL",
-      "bias": "GREEN",
-      "bias_note": "Intraday a snapshot szerint bull trendben, magasabb mélypontokkal és erősítéssel mozog az ár; a pénteki NFP utáni felpattanás és a 4150 fölötti tartózkodás egy recovery-bull intraday kontextust ad, ami pullback-long setupokat támogat, amíg a struktúra nem törik.",
+      "bias": "YELLOW",
+      "bias_note": "Az NFP utáni első reakció egy USD-gyengülés és részvénypiaci felpattanás volt, ami intraday szinten bullish arany-recoveryt hozott; azonban vasárnapra a likviditás drasztikusan visszaesik, így a pénteki intraday trend ma kevésbé releváns, inkább óvatos, átmeneti bull-regime.[3][4]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "volatility": {
       "value": "NORMAL",
       "display": "NORMAL",
       "bias": "YELLOW",
-      "bias_note": "A 15 perces ATR ~10–11 USD körül mozog, ami normál–kissé emelt intraday volatilitást jelez; NFP után csökkent a spike-vol, de még nem tért vissza teljesen a pre-event nyugalmi szintre, így a méret- és kockázatkezeléshez óvatosság indokolt.",
+      "bias_note": "A pénteki NFP körüli kiemelkedő intraday volatilitás után vasárnapra jellemzően normalizálódik az implied és realized volatilitás, de az alacsony likviditás miatt a micro-structure spike-ok kockázata nagyobb, így a rezsim inkább óvatosan normál.[6]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "xau_spot": {
       "value": 4187.3,
@@ -127,7 +127,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "pdl": {
       "value": 4062.0,
@@ -135,7 +135,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "daily_open": {
       "value": 4138.0,
@@ -143,7 +143,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "asia_high": {
       "value": 4208.3,
@@ -151,7 +151,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "asia_low": {
       "value": 4065.2,
@@ -159,7 +159,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "htf_supply": {
       "value": "4058–4105",
@@ -167,7 +167,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "htf_demand": {
       "value": "3900–3930",
@@ -175,7 +175,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     },
     "psych_level": {
       "value": 4000,
@@ -183,7 +183,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00"
+      "updated_at": "2026-07-05T10:43:00+02:00"
     }
   },
   "notrade_filters": {
@@ -192,10 +192,10 @@
     "macro_no_trade_windows": [],
     "note": "NFP-nap manuális beállítás",
     "us_market_closed": true,
-    "us_market_note": "US részvénypiac ma zárva (vasárnap), a fő határidős és FX piacok technikailag nyitva, de gyakorlatilag nagyon alacsony likviditás és szűk orderflow várható.",
+    "us_market_note": "US részvénypiac ma zárva (vasárnap); a fő határidős és FX piacok technikailag nyitva, de gyakorlatilag nagyon alacsony likviditás és szűk orderflow várható.",
     "is_clean_day": true,
-    "clean_day_note": "Ma nincs high-impact US adat; a fő driver a pénteken (2026-07-03) publikált, konszenzus alatti júniusi NFP és az ahhoz kapcsolódó Fed–repricing, illetve a hozam- és dollárreakciók.",
-    "updated_at": "2026-07-05T10:41:21+02:00",
+    "clean_day_note": "Ma nincs high-impact US makroadat; a fő driver a pénteken közzétett, várakozásoktól elmaradó júniusi NFP és az ehhez kapcsolódó Fed–repricing, hozam- és USD-reakciók.[4][10]",
+    "updated_at": "2026-07-05T10:43:00+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "risk": {
@@ -223,8 +223,8 @@
     "effective_mode": "RED",
     "session": "London",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
-    "narrative": "A júniusi NFP mindössze +57k új munkahelyet mutatott, ami jóval a ~113k körüli piaci várakozás alatt maradt, miközben a munkanélküliségi ráta 4.2%-ra emelkedett.[6][7] Ez enyhébb munkaerőpiaci lendületet és óvatosabb Fed-szigorítási pályát áraz, ami rövid távon támogatja az aranyat és korlátozza a további USD-erősödést.[6] Ugyanakkor a ~4.5% közelében maradó, emelkedő US10Y hozam továbbra is magas opportunity costot jelent a nem kamatozó eszközöknek, ami fékezi az agresszív XAU-rallyt, ezért a bias óvatos, pullback-long jellegű, nem full risk-on trendnap.[1]",
-    "fed_regime_summary": "A pénteki visszafogott júniusi NFP (+57k, 4.2% munkanélküliség) és a továbbra is magas, ~4.5% körüli US10Y hozam együtt egy óvatos, pullback-alapú long XAU környezetet ad, miközben vasárnapi, alacsony likviditású kereskedésben a NO-TRADE opció is reális."
+    "narrative": "A júniusi NFP mindössze +57k új munkahelyet mutat, jelentősen elmaradva az ~110k körüli konszenzustól, miközben a munkanélküliség 4.2%-ra emelkedett, ami enyhébb munkaerőpiaci dinamika és óvatosabb Fed-szigorítási pálya árazását hozza, rövid távon támogatva az aranyat.[4][10] Ugyanakkor a ~4.5% közelében maradó, emelkedő US10Y hozam továbbra is magas reálhozam-környezetet jelez, ami strukturálisan fékezi az agresszív XAU-rallyt, ezért a bias csak pullback-long jellegű, nem erős trend-long.[1] A vasárnapi, gyengébb likviditású környezet és a piaci zárvatartás miatt a kockázatkezelés elsődleges, a NO-TRADE döntés teljesen valid.",
+    "fed_regime_summary": "Vasárnapi, alacsony likviditású kereskedési környezetben a pénteki, vártnál gyengébb júniusi NFP és a továbbra is magas, ~4.5% körüli US10Y hozam együtt óvatos, pullback-alapú long XAU bias-t ad, miközben a NO-TRADE opció reális."
   },
   "setups": {
     "A": {
@@ -241,7 +241,7 @@
         "session": "London 09:00-12:00 CEST (NFP előtt)",
         "invalidation": "H1 close 4080/4115 felett — bull struktúra erősödik",
         "macro_support": [
-          "A 10 éves US hozam ~4.5% közelében, emelkedő trendben van, ami a magas reálhozamok miatt strukturálisan nyomást gyakorol az aranyra, mivel növeli a nem kamatozó eszközök opportunity costját.[1]",
+          "A 10 éves US hozam ~4.5% közelében, emelkedő trendben marad, ami magas reálhozam-környezetet jelez; ez növeli a nem kamatozó eszközök, így az arany tartásának opportunity costját, strukturálisan lefelé mutató XAU-bias-t ad.[1]",
           "DXY 100.86 — nem tailwind long-nak",
           "FedWatch NEUTRAL/HIKE — nincs cut-bid"
         ],
@@ -254,7 +254,7 @@
       "source_type": "ai-fallback",
       "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00",
+      "updated_at": "2026-07-05T10:43:00+02:00",
       "impact": null,
       "ai_state": "SUGGESTED"
     },
@@ -284,7 +284,7 @@
       "source_type": "ai-fallback",
       "source_label": "AI (mock-fallback (sonar-pro failed)) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-05T10:41:21+02:00",
+      "updated_at": "2026-07-05T10:43:00+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
@@ -300,7 +300,7 @@
     "reasoning_summary": "SHORT bias 8/10: US10Y magas + emelkedő (4/4), DXY neutral (2/4), HTF RANGE + intraday range-bear (3/4). NFP előtti YELLOW nap miatt Setup B (LONG) locked, csak makróforduló esetén.",
     "model": "mock-fallback (sonar-pro failed)",
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-05T10:41:21+02:00"
+    "updated_at": "2026-07-05T10:43:00+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -314,18 +314,18 @@
   },
   "daily_research": {
     "research_date": "2026-07-05",
-    "daily_summary": "A pénteki visszafogott júniusi NFP (+57k, 4.2% munkanélküliség) és a továbbra is magas, ~4.5% körüli US10Y hozam együtt egy óvatos, pullback-alapú long XAU környezetet ad, miközben vasárnapi, alacsony likviditású kereskedésben a NO-TRADE opció is reális.",
-    "bias_narrative": "A júniusi NFP mindössze +57k új munkahelyet mutatott, ami jóval a ~113k körüli piaci várakozás alatt maradt, miközben a munkanélküliségi ráta 4.2%-ra emelkedett.[6][7] Ez enyhébb munkaerőpiaci lendületet és óvatosabb Fed-szigorítási pályát áraz, ami rövid távon támogatja az aranyat és korlátozza a további USD-erősödést.[6] Ugyanakkor a ~4.5% közelében maradó, emelkedő US10Y hozam továbbra is magas opportunity costot jelent a nem kamatozó eszközöknek, ami fékezi az agresszív XAU-rallyt, ezért a bias óvatos, pullback-long jellegű, nem full risk-on trendnap.[1]",
+    "daily_summary": "Vasárnapi, alacsony likviditású kereskedési környezetben a pénteki, vártnál gyengébb júniusi NFP és a továbbra is magas, ~4.5% körüli US10Y hozam együtt óvatos, pullback-alapú long XAU bias-t ad, miközben a NO-TRADE opció reális.",
+    "bias_narrative": "A júniusi NFP mindössze +57k új munkahelyet mutat, jelentősen elmaradva az ~110k körüli konszenzustól, miközben a munkanélküliség 4.2%-ra emelkedett, ami enyhébb munkaerőpiaci dinamika és óvatosabb Fed-szigorítási pálya árazását hozza, rövid távon támogatva az aranyat.[4][10] Ugyanakkor a ~4.5% közelében maradó, emelkedő US10Y hozam továbbra is magas reálhozam-környezetet jelez, ami strukturálisan fékezi az agresszív XAU-rallyt, ezért a bias csak pullback-long jellegű, nem erős trend-long.[1] A vasárnapi, gyengébb likviditású környezet és a piaci zárvatartás miatt a kockázatkezelés elsődleges, a NO-TRADE döntés teljesen valid.",
     "news_drivers": [
-      "A júniusi NFP jelentés +57k új munkahelyet és 4.2%-os munkanélküliségi rátát mutatott, jóval a piaci konszenzus (kb. 113k) alatt, ami a munkaerőpiac lassulását és óvatosabb Fed-szigorítást áraz.[6][7]",
-      "A magasabb, ~4.5% körüli US10Y hozamok és az emelkedő reálhozamok strukturálisan fékezik az aranyrallyt, mivel növelik a nem kamatozó eszközök opportunity costját.[1]",
-      "A BLS NFP-sorozat körüli technikai és benchmark-revíziós bizonytalanság fokozza a munkaerőpiaci adatok körüli volatilitást, ami érzékennyé teszi a piacot a további foglalkoztatási és Fed-kommunikációs hírekre.[2][9][10]"
+      "A júniusi US NFP jelentés szerint a nem-mezőgazdasági foglalkoztatottak száma mindössze 57k-val nőtt, jóval az ~110k körüli konszenzus alatt, miközben a munkanélküliségi ráta 4.2%-ra emelkedett; ez gyengébb munkaerőpiaci lendületet és óvatosabb Fed-szigorítást áraz, ami rövid távon támogatja az aranyat.[4][10]",
+      "A továbbra is ~4.5% közelében lévő, emelkedő US10Y hozam és a magas reálhozamok strukturálisan nyomást gyakorolnak az aranyra, mivel növelik a nem kamatozó eszközök opportunity costját.[1]",
+      "A gyenge NFP utáni USD-reakció visszafogott, a DXY továbbra is többször tesztelt, széles range-ben mozog, így nincs tiszta, erős USD-trend; ez XAU számára inkább semleges/hullámzó FX-hátteret jelent.[2][7]"
     ],
     "us_market_closed": true,
-    "us_market_note": "US részvénypiac ma zárva (vasárnap), a fő határidős és FX piacok technikailag nyitva, de gyakorlatilag nagyon alacsony likviditás és szűk orderflow várható.",
+    "us_market_note": "US részvénypiac ma zárva (vasárnap); a fő határidős és FX piacok technikailag nyitva, de gyakorlatilag nagyon alacsony likviditás és szűk orderflow várható.",
     "is_clean_day": true,
-    "clean_day_note": "Ma nincs high-impact US adat; a fő driver a pénteken (2026-07-03) publikált, konszenzus alatti júniusi NFP és az ahhoz kapcsolódó Fed–repricing, illetve a hozam- és dollárreakciók.",
+    "clean_day_note": "Ma nincs high-impact US makroadat; a fő driver a pénteken közzétett, várakozásoktól elmaradó júniusi NFP és az ehhez kapcsolódó Fed–repricing, hozam- és USD-reakciók.[4][10]",
     "source_type": "ai",
-    "updated_at": "2026-07-05T10:41:21+02:00"
+    "updated_at": "2026-07-05T10:43:00+02:00"
   }
 }
