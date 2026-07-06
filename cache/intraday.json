@@ -1,12 +1,12 @@
 {
   "asia_high": 4187.3,
   "asia_low": 4156.4,
-  "atr_15m": 24.81,
+  "atr_15m": 27.47,
   "intraday_regime": "RANGE-BEAR",
-  "intraday_regime_note": "Range with bear bias: -0.47%, tartomány 1.06%.",
+  "intraday_regime_note": "Range with bear bias: -0.30%, tartomány 1.12%.",
   "volatility_regime": "HIGH",
-  "volatility_note": "ATR15m $24.81 (0.60%) — magas volatilitás, óvatosan.",
-  "last_price": 4149.9,
+  "volatility_note": "ATR15m $27.47 (0.66%) — magas volatilitás, óvatosan.",
+  "last_price": 4153.1,
   "source_label": "Yahoo GC=F 15m intraday computed",
-  "updated_at": "2026-07-06T14:57:55+02:00"
+  "updated_at": "2026-07-06T18:26:42+02:00"
 }
