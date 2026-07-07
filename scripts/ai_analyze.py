@@ -34,7 +34,7 @@ CACHE_DIR = REPO / "cache"
 API_KEY = os.getenv("PPLX_API_KEY", "").strip()
 MOCK = os.getenv("MOCK_AI", "").lower() in ("1", "true", "yes") or not API_KEY
 
-MODEL = os.getenv("PPLX_ANALYST_MODEL", os.getenv("PPLX_MODEL", "sonar-reasoning-pro"))
+MODEL = os.getenv("PPLX_ANALYST_MODEL", os.getenv("PPLX_MODEL", "sonar-pro"))
 DEEP_RESEARCH_MODEL = os.getenv("PPLX_DEEP_MODEL", os.getenv("PPLX_MODEL", "sonar-pro"))
 API_URL = "https://api.perplexity.ai/chat/completions"
 
