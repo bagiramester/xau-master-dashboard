@@ -14,94 +14,98 @@
       "investing:economic-calendar (manual)",
       "manual:trade-log"
     ],
-    "ai_last_run": "2026-07-08T07:34:06+02:00",
+    "ai_last_run": "2026-07-08T10:22:04+02:00",
     "ai_model": "sonar-pro",
-    "ai_source_type": "ai"
+    "ai_source_type": "ai",
+    "deep_research_last_run": "2026-07-08T10:22:04+02:00",
+    "deep_research_model": "sonar-pro",
+    "deep_research_source_type": "ai",
+    "deep_research_citations": 10
   },
   "macro": {
     "fedwatch": {
       "value": "HOLD ~70% / CUT ~30%",
-      "display": "NEUTRAL – ENYHE CUT-BIAS",
+      "display": "NEUTRAL FED – ENYHE CUT-BIAS",
       "bias": "YELLOW",
-      "bias_note": "A piac többsége a következő FOMC-on tartást vár, csak mérsékelt későbbi kamatcsökkentési várakozással; önmagában nem erős long-trigger, inkább semleges Fed-kép.",
+      "bias_note": "A piac túlnyomórészt tartást vár, csak mérsékelt későbbi kamatcsökkentési várakozással; önmagában nem erős driver, de nem is ad markáns long-támaszt az aranynak.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "us10y": {
       "value": 4.53,
-      "display": "4.53% – RISING",
+      "display": "4.53% RISING",
       "bias": "RED",
-      "bias_note": "US10Y 4.53% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
+      "bias_note": "Magas és emelkedő nominális hozam – magas opportunity cost aranynak, erősíti a reálhozam-vezérelt short-bias-t.",
       "impact": 4,
       "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Yahoo Finance ^TNX",
-      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-08T09:30:15+02:00"
-    },
-    "dxy": {
-      "value": 101.08,
-      "display": "101.08 – RANGE",
-      "bias": "YELLOW",
-      "bias_note": "DXY továbbra is a 99–103-as sávban mozog, ami semleges USD-háttér, nem ad erős irány-bias az XAU-nak.",
-      "impact": 4,
-      "status": "stale",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
+    },
+    "dxy": {
+      "value": 101.1,
+      "display": "101.1 – RANGE TETEJE FELÉ, ENYHE USD-ERŐSÖDÉS",
+      "bias": "RED",
+      "bias_note": "A DXY a 99–103-as sáv felső felébe mozdul, ami enyhe USD-pozitív háttér, inkább enyhén nyomást gyakorol az XAU-ra.",
+      "impact": 4,
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "sentiment": {
       "value": 43,
-      "display": "43 – FEAR",
-      "bias": "YELLOW",
-      "bias_note": "FEAR (43) – enyhén long XAU-kedvező.",
-      "impact": 2,
+      "display": "43 – FEAR / ENYHE KOCKÁZATKERÜLÉS",
+      "bias": "GREEN",
+      "bias_note": "Enyhe félelem támogatja a safe-haven keresletet, ami részben ellensúlyozhatja a reálhozam- és hozam-nyomást az XAU-n.",
+      "impact": 4,
       "status": "fresh",
-      "source_type": "auto",
-      "source_label": "CNN Fear & Greed Index",
-      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-08T09:30:15+02:00"
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
-      "display": "RANGE",
+      "display": "HTF RANGE",
       "bias": "YELLOW",
-      "bias_note": "HTF szinten az XAU továbbra is range-ben kereskedik; a 50/200 SMA viszony nem jelez tiszta bull vagy bear trendet.",
+      "bias_note": "A 50/200 SMA viszonya alapján az XAU inkább oldalazó, range-struktúrában, nincs tiszta HTF trend-edge.",
       "impact": 4,
-      "status": "stale",
+      "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BEAR",
-      "display": "TREND-BEAR",
+      "display": "INTRADAY TREND-BEAR",
       "bias": "RED",
-      "bias_note": "Intraday szinten jelenleg inkább egy trend-bear struktúra látható – lokális short-bias, de makró oldalról csak óvatosan támogatott.",
+      "bias_note": "London délelőttre az intraday struktúra lower high / lower low mintázatot mutat normál volatilitással – ehhez illeszkedik a makró short-bias, de csak tiszta setupoknál releváns.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "volatility": {
       "value": "NORMAL",
-      "display": "NORMAL",
+      "display": "NORMAL VOL",
       "bias": "YELLOW",
-      "bias_note": "A volatilitás normál; nincs extrém spike vagy vol-crush, a normál intraday setupok működhetnek.",
+      "bias_note": "Normál intraday ATR/volatilitás – nincs extrém squeeze vagy crash környezet, a risk-kezelés standard maradhat.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "xau_spot": {
       "value": 4123.2,
@@ -114,6 +118,30 @@
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
       "updated_at": "2026-07-07T22:25:48+02:00"
+    },
+    "real_yield": {
+      "value": "2.27% RISING",
+      "display": "REÁLHOZAM EMELKEDIK",
+      "bias": "RED",
+      "bias_note": "Az emelkedő 10Y TIPS hozam növeli az arany tartásának alternatív költségét, strukturálisan short-bias az XAU-nak.",
+      "impact": 4,
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-08T10:22:04+02:00"
+    },
+    "cot": {
+      "value": null,
+      "display": "NINCS FRISS EXTRÉM JEL",
+      "bias": "YELLOW",
+      "bias_note": "COT-adat ma nem kulcs-driver; nincs megerősített extrém long/short pozicionálási jel, kontextusként kezelendő.",
+      "impact": 4,
+      "status": "pending",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-08T10:22:04+02:00"
     }
   },
   "levels": {
@@ -123,7 +151,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "pdl": {
       "value": 4134.2,
@@ -131,7 +159,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "daily_open": {
       "value": 4176.4,
@@ -139,7 +167,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "asia_high": {
       "value": 4152.4,
@@ -147,7 +175,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "asia_low": {
       "value": 4127.7,
@@ -155,7 +183,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "htf_supply": {
       "value": "4058–4105",
@@ -163,7 +191,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "htf_demand": {
       "value": "3900–3930",
@@ -171,7 +199,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     },
     "psych_level": {
       "value": 4000,
@@ -179,7 +207,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00"
+      "updated_at": "2026-07-08T10:22:04+02:00"
     }
   },
   "notrade_filters": {
@@ -191,7 +219,7 @@
     "us_market_note": "US piac nyitva, normál szerda.",
     "is_clean_day": true,
     "clean_day_note": "A fő naptárforrások szerint ma nincs kiemelt high-impact US adat (CPI, NFP, FOMC); a fókusz továbbra is a hozamokon, Fed-várakozásokon és a risk-sentimenten van.",
-    "updated_at": "2026-07-08T07:34:06+02:00",
+    "updated_at": "2026-07-08T10:22:04+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "risk": {
@@ -214,94 +242,95 @@
     "updated_at": "2026-07-08T09:30:15+02:00"
   },
   "header": {
-    "bias_direction": "NEUTRAL",
+    "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
     "effective_mode": "RED",
     "session": "London",
     "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
-    "narrative": "A nominális US10Y hozam magas és enyhén emelkedő, ami alapvetően short-háttér az aranynak, ugyanakkor a DXY csak range-ben mozog, a FedWatch dominánsan HOLD-ot áraz enyhe CUT-bias-szal, a reálhozam pedig adat-hiány miatt pending, így nincs tiszta, erős trend-bias; intraday szinten az XAU struktúrája inkább TREND-BEAR, de makró oldalról ez csak óvatos, szint- és setup-alapú short-szűrőt indokol, ahol a NO-TRADE teljesen valid, ha nincs tiszta R:R.",
-    "fed_regime_summary": "Az XAU jelenleg enyhén bearish intraday struktúrában kereskedik normál volatilitással, miközben a magas, enyhén emelkedő nominális US10Y és semleges Fed/DXY háttér mellett a reálhozam-adat frissítése hiányos, így a makró bias összességében óvatos, inkább szint- és setup-alapú, NEUTRAL–light short szűrővel, ahol a NO-TRADE opció továbbra is valid."
+    "narrative": "A 10 éves amerikai reálhozam frissen 2,27% körül van és emelkedik, a nominális US10Y hozam 4,5% felett szintén felfelé tart, miközben a DXY a sáv teteje felé mozdul és a FedWatch továbbra is HOLD-ot áraz enyhe későbbi CUT-bias-szal; ez összességében magas opportunity costot és makró-alapú short-hátteret ad az aranynak, de mivel a Fed nem agresszíven hawkish, a risk-sentiment pedig inkább enyhe félelemben van, az intraday TREND-BEAR struktúra inkább óvatos, szint- és setup-alapú short-szűrőt indokol, ahol a NO-TRADE továbbra is teljesen valid, ha nincs tiszta momentum + R:R konstelláció.",
+    "fed_regime_summary": "Az XAU jelenleg enyhén bearish intraday struktúrában kereskedik normál volatilitással, miközben a friss, emelkedő reálhozam és magas US10Y hozam, semleges–enyhén USD-pozitív háttér és Fed HOLD-bias összességében óvatos, makró-alapú SHORT szűrőt ad, ahol a NO-TRADE opció továbbra is valid, ha nincs tiszta R:R."
   },
   "setups": {
     "A": {
       "value": {
         "direction": "SHORT",
-        "type": "trend continuation / liquidity sweep reaction",
-        "bias_compatibility": "igen — Tier-1 nominális hozam + intraday TREND-BEAR",
-        "entry_zone": "4135-4150 (PDL fölötti visszateszt + Asia high alatt)",
-        "sl": "4178 felett M15 close (Daily Open fölött, struktúra-törés)",
-        "tp1": "4105 (HTF supply teteje)",
-        "tp2": "4065-4058 (HTF supply közepe-alja)",
-        "rr_min": 2.2,
-        "score": 7,
+        "type": "trend continuation",
+        "bias_compatibility": "igen — Tier-1 bias-szal egyező",
+        "entry_zone": "4150-4165 (asia high–daily open zóna visszateszt)",
+        "sl": "4185 felett M15 close (PDH alatt, last LH fölött)",
+        "tp1": "4105 (htf_supply teteje)",
+        "tp2": "4065-4058 (htf_supply közepe–alja)",
+        "rr_min": 2.3,
+        "score": 8,
         "session": "London 09:00-12:00 CEST",
-        "invalidation": "H1 close 4178 felett – intraday bear struktúra törik, range-visszatérés",
+        "invalidation": "H1 close 4190 felett (PDH feletti reclaim, intraday bear struktúra törik)",
         "macro_support": [
-          "US10Y nominális 4.53% RISING → struktúrálisan short XAU háttér",
-          "Reálhozam pending → makró-bizalom közepes, de magas hozamkörnyezet valószínű",
-          "DXY RANGE, FedWatch HOLD/CUT semleges → nem üti a light short-szűrőt"
+          "Reálhozam 2.27% és EMELKEDŐ → strukturális SHORT háttér",
+          "US10Y 4.53% RISING → magas opportunity cost az aranynak",
+          "DXY 101.1 és emelkedő → enyhe USD-pozitív, XAU-ra nyomás",
+          "FedWatch HOLD ~70% / CUT ~30% → nem ad erős long-támaszt"
         ],
-        "allowed": false,
-        "locked_reason": "SÁRGA bias + Tier-1 reálhozam pending → csak tiszta London setup; aktuális After-hoursban NO-TRADE, csak tervezés.",
-        "entry_zone_status": "spot alatt, visszapattanásra vár",
-        "setup_quality": "jó, de makró-bizalom közepes"
+        "allowed": true,
+        "locked_reason": null,
+        "entry_zone_status": "közelít — spot 4123, felfelé korrekció kell a belépőhöz",
+        "setup_quality": "erős"
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00",
+      "updated_at": "2026-07-08T10:22:04+02:00",
       "impact": null,
-      "ai_state": "LOCKED"
+      "ai_state": "SUGGESTED"
     },
     "B": {
       "value": {
         "direction": "LONG",
-        "type": "range reversal / liquidity sweep reaction",
-        "bias_compatibility": "részben — counter a nominális hozam-bias ellen, csak mély HTF supply reakcióval",
-        "entry_zone": "4058-4070 (HTF supply zóna mély sweep után)",
-        "sl": "4028 alatt H1 close (HTF supply teljes törés)",
-        "tp1": "4134-4138 (PDL / lokális intraday ellenállás)",
-        "tp2": "4170-4176 (Daily Open környéke, felső range-határ)",
-        "rr_min": 2.4,
+        "type": "liquidity sweep reaction / range reversal",
+        "bias_compatibility": "részben — makróval ellentétes, csak intraday mean reversion + safe-haven esetén",
+        "entry_zone": "4058-4035 sweep után (htf_supply alja, psych 4000 felé kiterjedő stop-vadászat)",
+        "sl": "3990 alatt H1 close (psych 4000 tiszta áttörés, range alsó fél teljesen feladva)",
+        "tp1": "4105 (htf_supply visszateszt)",
+        "tp2": "4150-4160 (asia high–daily open zóna, intraday range közepe-felső része)",
+        "rr_min": 2.0,
         "score": 6,
         "session": "Overlap 14:00-19:00 CEST",
-        "invalidation": "H1 close 4028 alatt – HTF range alsó kiterjesztés, long-szcenárió bukik",
+        "invalidation": "H1 close 3990 alatt (psych 4000 nem tart, HTF range alsó kitörés)",
         "macro_support": [
-          "Csak akkor vállalható, ha US10Y megáll / enyhén esik és a risk-sentiment továbbra is FEAR → safe-haven támasz",
-          "DXY marad range-ben vagy gyengül London/US során"
+          "Csak akkor aktiv, ha reálhozam/US10Y enyhén visszaesik vagy DXY korrigál lejjebb",
+          "Safe-haven kereslet (Fear & Greed 43 – FEAR) erősödik és intraday capitulation jelet mutat a 4000 alatti sweepnél"
         ],
         "allowed": false,
-        "locked_reason": "Counter-bias setup, SÁRGA nap → csak akkor aktiválható, ha intraday price action tisztán igazolja; jelenleg tervezési szint.",
-        "entry_zone_status": "spot felett, jelentős lejjebb mozgást igényel",
-        "setup_quality": "közepes – technikailag tiszta, makró oldalról gyenge"
+        "locked_reason": "SÁRGA bias + makró short-háttér mellett countertrend long csak extrém sweep esetén, tervezési setup, alapállapotban NO-TRADE",
+        "entry_zone_status": "pending — jelentős lefelé kiterjedés kell a triggerhez",
+        "setup_quality": "közepes"
       },
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI (sonar-pro) auto setup",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-08T07:34:06+02:00",
+      "updated_at": "2026-07-08T10:22:04+02:00",
       "impact": null,
       "ai_state": "LOCKED"
     }
   },
   "bagira": {
-    "narrative": "Arany intraday bear, HTF továbbra is range. A nominális hozam magas, reáladat hiányos, ezért csak tiszta kulcsszinteknél játszunk. Első terv short PDH–PDL visszatesztből, második egy mély 4058-ös sweep long reakcióra.",
+    "narrative": "Makró short-háttér, intraday TREND-BEAR, HTF-ben csak range. Elsődlegesen a 4150-4165 visszatesztet shortoljuk a 4058-ig. Long csak mély 4000 körüli sweepnél, alapállapotban parkol.",
     "key_watch": [
-      "US10Y mozgás London előtt/közben – tovább emelkedik-e vagy megáll",
-      "Reálhozam adat frissül-e; ha igen, iránya (emelkedő → erősebb short, csökkenő → visszafogott short)",
-      "Price action a 4135-4150 zónában – tiszta rejection-e vagy átütés Daily Open felett"
+      "4150-4165 zóna: asia high + daily open, hogyan reagál az ár (rejection vs. reclaim)",
+      "4105-4058 HTF supply viselkedése: beenged-e még egy lábat le, vagy erős absorpció jön",
+      "Reálhozam / US10Y intraday mozgása vs. DXY — marad-e a hozam-emelkedés és USD-erő, vagy fordul"
     ],
-    "confidence": 45,
-    "reasoning_summary": "Intraday struktúra TREND-BEAR, HTF range, nominális hozam magas, reálhozam pending – ezért az elsődleges setup egy kulcsszint-alapú short PDH/PDL visszatesztből, alternatív forgatókönyvként pedig csak mély HTF supply sweep után tervezett counter-long. A SÁRGA makró-bias és hiányos Tier-1 adatok miatt a nap alapállása NO-TRADE, amíg Londonban nincs tiszta R:R jel.",
+    "confidence": 70,
+    "reasoning_summary": "Tier-1 makró (emelkedő reálhozam, US10Y, DXY) tiszta short-szűrőt ad, London intraday struktúra TREND-BEAR, ezért a setup A egy kulcsszintre (asia high–daily open) illesztett trendfolytató short magas score-t kap. A setup B csak extrém 4000 alatti sweep esetén játszható countertrend mean reversion, makróval szembemenve, ezért tiltva marad alapállapotban.",
     "score_breakdown": {
       "setup_A": {
         "trend": 2,
         "level": 2,
         "volatility": 1,
-        "tier1_macro": 1,
-        "rr": 1,
-        "total": 7
+        "tier1_macro": 3,
+        "rr": 2,
+        "total": 10
       },
       "setup_B": {
         "trend": 1,
@@ -313,13 +342,13 @@
       }
     },
     "conflicts_resolved": [
-      "Reálhozam adat pending, nominális US10Y magas és emelkedő → feltételezett magas reálkörnyezet, de bizonytalan. Ezért a short-bias csak light szűrő, nem agresszív push.",
-      "Intraday TREND-BEAR shortot támogat, miközben DXY és FedWatch semleges → struktúra kapja a fő súlyt, makró csak óvatos szűrő.",
-      "Fear & Greed FEAR-zónában, ami safe-haven keresletet adhatna, de a magas hozamkörnyezet ezt ellensúlyozza → long csak extrém jó szintről (HTF supply alja) tervezett."
+      "Reálhozam és nominális US10Y egyaránt emelkedik, miközben az XAU HTF-ben csak range-ben van és intraday eladás nem agresszív — a döntésben a reálhozam vezet, ezért az elsődleges bias SHORT marad, a HTF range csak a célzónák finomítására szolgál.",
+      "FedWatch HOLD-bias enyhe CUT-várakozással kevésbé hawkish, mint amit az emelkedő hozamkép sugallna — ilyenkor a hozamok (reálhozam + US10Y) kapnak nagyobb súlyt, a Fed-bias csak tompítja a short-intenzitást, de nem fordítja longba.",
+      "Sentiment FEAR (43) safe-haven keresletet adna az aranynak, ami magyarázza az agresszív szakadás hiányát; azonban ez Tier-3 driver, így csak a counter setup B-t indokolja, az A setup irányát nem."
     ],
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-07-08T07:34:06+02:00"
+    "updated_at": "2026-07-08T10:22:04+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -330,5 +359,271 @@
     "avg_rr": null,
     "rule_break_count": 0,
     "updated_at": "2026-07-08T09:30:15+02:00"
+  },
+  "daily_research": {
+    "research_date": "2026-07-08",
+    "generated_at_cest": "2026-07-08 10:22",
+    "daily_summary": "Az XAU jelenleg enyhén bearish intraday struktúrában kereskedik normál volatilitással, miközben a friss, emelkedő reálhozam és magas US10Y hozam, semleges–enyhén USD-pozitív háttér és Fed HOLD-bias összességében óvatos, makró-alapú SHORT szűrőt ad, ahol a NO-TRADE opció továbbra is valid, ha nincs tiszta R:R.",
+    "calendar": {
+      "us_market_closed": false,
+      "us_market_note": "US piac nyitva, normál szerda.",
+      "is_clean_day": true,
+      "clean_day_note": "A fő naptárforrások szerint ma nincs kiemelt high-impact US adat (CPI, NFP, FOMC); a fókusz továbbra is a hozamokon, Fed-várakozásokon és a risk-sentimenten van.",
+      "events_today": [],
+      "yesterday_drivers": [],
+      "no_trade_windows": []
+    },
+    "facts": {
+      "spot": {
+        "value": 4120.0,
+        "asof_cest": "10:20",
+        "source": "TradingView OANDA:XAUUSD snapshot (London délelőtt)",
+        "url": "https://www.tradingview.com/symbols/OANDA-XAUUSD"
+      },
+      "real_yield_10y": {
+        "value": 2.27,
+        "prev": 2.23,
+        "direction": "RISING",
+        "asof": "2026-07-07",
+        "source": "TradingEconomics / FRED DFII10 – US 10Y TIPS yield",
+        "url": "https://tradingeconomics.com/united-states/10-year-tips-yield"
+      },
+      "us10y_nominal": {
+        "value": 4.53,
+        "prev": 4.49,
+        "direction": "RISING",
+        "source": "CNBC US10Y / TradingView TVC:US10Y",
+        "url": ""
+      },
+      "breakeven_10y": {
+        "value": 2.26,
+        "source": "FRED T10YIE – 10-Year Breakeven Inflation Rate",
+        "url": ""
+      },
+      "dxy": {
+        "value": 101.1,
+        "prev": 100.9,
+        "direction": "RISING",
+        "source": "TradingView TVC:DXY",
+        "url": "https://www.tradingview.com/symbols/TVC-DXY"
+      },
+      "fedwatch": {
+        "next_fomc_date": "2026-07-29",
+        "next_odds": "HOLD ~70% / CUT ~30%",
+        "following_odds": "Enyhe cut-bias a későbbi ülésekre, hike-odds alacsony",
+        "source": "CME FedWatch Tool",
+        "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
+      },
+      "fear_greed": {
+        "value": 43,
+        "label": "FEAR",
+        "source": "CNN Fear & Greed Index",
+        "url": "https://edition.cnn.com/markets/fear-and-greed"
+      },
+      "cot": {
+        "noncommercial_net": null,
+        "asof": null,
+        "note": "Friss COT-adat ma még nem elérhető vagy nem releváns a jelenlegi intraday döntéshez.",
+        "source": "CFTC / CME QuikStrike",
+        "url": "https://www.cmegroup.com/tools-information/quikstrike/commitment-of-traders.html"
+      },
+      "wti_oil": {
+        "value": 68.5,
+        "direction": "SIDEWAYS",
+        "source": "TradingView TVC:USOIL snapshot",
+        "url": ""
+      },
+      "usdjpy": {
+        "value": 148.5,
+        "direction": "RISING",
+        "source": "TradingView FX:USDJPY snapshot",
+        "url": ""
+      }
+    },
+    "interpretation": {
+      "bias_direction": "SHORT",
+      "bias_status": "SÁRGA",
+      "bias_narrative": "A 10 éves amerikai reálhozam frissen 2,27% körül van és emelkedik, a nominális US10Y hozam 4,5% felett szintén felfelé tart, miközben a DXY a sáv teteje felé mozdul és a FedWatch továbbra is HOLD-ot áraz enyhe későbbi CUT-bias-szal; ez összességében magas opportunity costot és makró-alapú short-hátteret ad az aranynak, de mivel a Fed nem agresszíven hawkish, a risk-sentiment pedig inkább enyhe félelemben van, az intraday TREND-BEAR struktúra inkább óvatos, szint- és setup-alapú short-szűrőt indokol, ahol a NO-TRADE továbbra is teljesen valid, ha nincs tiszta momentum + R:R konstelláció.",
+      "macro_regimes": {
+        "real_yield": {
+          "value": "2.27% RISING",
+          "display": "REÁLHOZAM EMELKEDIK",
+          "bias": "RED",
+          "weight": "TIER-1",
+          "bias_note": "Az emelkedő 10Y TIPS hozam növeli az arany tartásának alternatív költségét, strukturálisan short-bias az XAU-nak."
+        },
+        "fedwatch": {
+          "value": "HOLD ~70% / CUT ~30%",
+          "display": "NEUTRAL FED – ENYHE CUT-BIAS",
+          "bias": "YELLOW",
+          "weight": "TIER-1",
+          "bias_note": "A piac túlnyomórészt tartást vár, csak mérsékelt későbbi kamatcsökkentési várakozással; önmagában nem erős driver, de nem is ad markáns long-támaszt az aranynak."
+        },
+        "dxy": {
+          "value": 101.1,
+          "display": "101.1 – RANGE TETEJE FELÉ, ENYHE USD-ERŐSÖDÉS",
+          "bias": "RED",
+          "weight": "TIER-1",
+          "bias_note": "A DXY a 99–103-as sáv felső felébe mozdul, ami enyhe USD-pozitív háttér, inkább enyhén nyomást gyakorol az XAU-ra."
+        },
+        "us10y": {
+          "value": 4.53,
+          "display": "4.53% RISING",
+          "bias": "RED",
+          "weight": "TIER-2",
+          "bias_note": "Magas és emelkedő nominális hozam – magas opportunity cost aranynak, erősíti a reálhozam-vezérelt short-bias-t."
+        },
+        "sentiment": {
+          "value": 43,
+          "display": "43 – FEAR / ENYHE KOCKÁZATKERÜLÉS",
+          "bias": "GREEN",
+          "weight": "TIER-3",
+          "bias_note": "Enyhe félelem támogatja a safe-haven keresletet, ami részben ellensúlyozhatja a reálhozam- és hozam-nyomást az XAU-n."
+        },
+        "cot": {
+          "value": null,
+          "display": "NINCS FRISS EXTRÉM JEL",
+          "bias": "YELLOW",
+          "weight": "TIER-3",
+          "bias_note": "COT-adat ma nem kulcs-driver; nincs megerősített extrém long/short pozicionálási jel, kontextusként kezelendő."
+        },
+        "htf_trend": {
+          "value": "RANGE",
+          "display": "HTF RANGE",
+          "bias": "YELLOW",
+          "weight": "STRUCTURE",
+          "bias_note": "A 50/200 SMA viszonya alapján az XAU inkább oldalazó, range-struktúrában, nincs tiszta HTF trend-edge."
+        },
+        "intraday_regime": {
+          "value": "TREND-BEAR",
+          "display": "INTRADAY TREND-BEAR",
+          "bias": "RED",
+          "weight": "STRUCTURE",
+          "bias_note": "London délelőttre az intraday struktúra lower high / lower low mintázatot mutat normál volatilitással – ehhez illeszkedik a makró short-bias, de csak tiszta setupoknál releváns."
+        },
+        "volatility": {
+          "value": "NORMAL",
+          "display": "NORMAL VOL",
+          "bias": "YELLOW",
+          "weight": "STRUCTURE",
+          "bias_note": "Normál intraday ATR/volatilitás – nincs extrém squeeze vagy crash környezet, a risk-kezelés standard maradhat."
+        }
+      },
+      "conflicts": [
+        "Enyhén emelkedő reálhozam és nominális US10Y hozam mellett az XAU még nem mutat agresszív intraday eladási nyomást – safe-haven kereslet és range HTF-struktúra részben tompítja a makró short-jelet.",
+        "A FedWatch továbbra is HOLD-bias, enyhe későbbi CUT-várakozással; ez nem illeszkedik teljesen a reálhozam-emelkedéshez, ami inkább hawkishabb környezetet sugallna – a piac kevert üzenetet áraz a hozamok és Fed-szignálok között."
+      ]
+    },
+    "macro_regimes": {
+      "real_yield": {
+        "value": "2.27% RISING",
+        "display": "REÁLHOZAM EMELKEDIK",
+        "bias": "RED",
+        "weight": "TIER-1",
+        "bias_note": "Az emelkedő 10Y TIPS hozam növeli az arany tartásának alternatív költségét, strukturálisan short-bias az XAU-nak."
+      },
+      "fedwatch": {
+        "value": "HOLD ~70% / CUT ~30%",
+        "display": "NEUTRAL FED – ENYHE CUT-BIAS",
+        "bias": "YELLOW",
+        "weight": "TIER-1",
+        "bias_note": "A piac túlnyomórészt tartást vár, csak mérsékelt későbbi kamatcsökkentési várakozással; önmagában nem erős driver, de nem is ad markáns long-támaszt az aranynak."
+      },
+      "dxy": {
+        "value": 101.1,
+        "display": "101.1 – RANGE TETEJE FELÉ, ENYHE USD-ERŐSÖDÉS",
+        "bias": "RED",
+        "weight": "TIER-1",
+        "bias_note": "A DXY a 99–103-as sáv felső felébe mozdul, ami enyhe USD-pozitív háttér, inkább enyhén nyomást gyakorol az XAU-ra."
+      },
+      "us10y": {
+        "value": 4.53,
+        "display": "4.53% RISING",
+        "bias": "RED",
+        "weight": "TIER-2",
+        "bias_note": "Magas és emelkedő nominális hozam – magas opportunity cost aranynak, erősíti a reálhozam-vezérelt short-bias-t."
+      },
+      "sentiment": {
+        "value": 43,
+        "display": "43 – FEAR / ENYHE KOCKÁZATKERÜLÉS",
+        "bias": "GREEN",
+        "weight": "TIER-3",
+        "bias_note": "Enyhe félelem támogatja a safe-haven keresletet, ami részben ellensúlyozhatja a reálhozam- és hozam-nyomást az XAU-n."
+      },
+      "cot": {
+        "value": null,
+        "display": "NINCS FRISS EXTRÉM JEL",
+        "bias": "YELLOW",
+        "weight": "TIER-3",
+        "bias_note": "COT-adat ma nem kulcs-driver; nincs megerősített extrém long/short pozicionálási jel, kontextusként kezelendő."
+      },
+      "htf_trend": {
+        "value": "RANGE",
+        "display": "HTF RANGE",
+        "bias": "YELLOW",
+        "weight": "STRUCTURE",
+        "bias_note": "A 50/200 SMA viszonya alapján az XAU inkább oldalazó, range-struktúrában, nincs tiszta HTF trend-edge."
+      },
+      "intraday_regime": {
+        "value": "TREND-BEAR",
+        "display": "INTRADAY TREND-BEAR",
+        "bias": "RED",
+        "weight": "STRUCTURE",
+        "bias_note": "London délelőttre az intraday struktúra lower high / lower low mintázatot mutat normál volatilitással – ehhez illeszkedik a makró short-bias, de csak tiszta setupoknál releváns."
+      },
+      "volatility": {
+        "value": "NORMAL",
+        "display": "NORMAL VOL",
+        "bias": "YELLOW",
+        "weight": "STRUCTURE",
+        "bias_note": "Normál intraday ATR/volatilitás – nincs extrém squeeze vagy crash környezet, a risk-kezelés standard maradhat."
+      }
+    },
+    "conflicts": [
+      "Enyhén emelkedő reálhozam és nominális US10Y hozam mellett az XAU még nem mutat agresszív intraday eladási nyomást – safe-haven kereslet és range HTF-struktúra részben tompítja a makró short-jelet.",
+      "A FedWatch továbbra is HOLD-bias, enyhe későbbi CUT-várakozással; ez nem illeszkedik teljesen a reálhozam-emelkedéshez, ami inkább hawkishabb környezetet sugallna – a piac kevert üzenetet áraz a hozamok és Fed-szignálok között."
+    ],
+    "news_drivers": [
+      "US hozamkörnyezet: 10Y TIPS reálhozam 2,27% körül és emelkedő, nominális US10Y 4,5% felett – magas és emelkedő hozamkörnyezet nyomást gyakorol az aranyra, mint nem kamatozó eszközre.",
+      "USD-kép: a DXY a 99–103-as sáv felső fele felé mozdul, enyhén erősödő dollár-háttérrel, ami inkább fékezi az XAU felfelé mozgásait.",
+      "Fed-várakozások: a CME FedWatch továbbra is HOLD ~70% / CUT ~30% mixet jelez a következő FOMC-ra, enyhe későbbi kamatcsökkentési várakozással, de agresszív hike-féle félelem nélkül – ez a kevert Fed-kép tompítja a trend-bias-t, így a hozamok válnak fő driver-ré."
+    ],
+    "data_quality": {
+      "tier1_all_fresh": true,
+      "stale_fields": [],
+      "confidence_note": "A reálhozam, DXY és FedWatch adatok frissen vannak frissítve, így a Tier-1 makró kép megbízható; az XAU intraday struktúra és kulcsszintek a jelenlegi London délelőtti snapshotot tükrözik."
+    },
+    "sources": [
+      {
+        "label": "TradingView XAUUSD",
+        "url": "https://www.tradingview.com/symbols/OANDA-XAUUSD"
+      },
+      {
+        "label": "TradingEconomics – US 10Y TIPS Yield",
+        "url": "https://tradingeconomics.com/united-states/10-year-tips-yield"
+      },
+      {
+        "label": "FRED – Market Yield on U.S. Treasury Securities at 10-Year (DFII10, T10Y, T10YIE)",
+        "url": "https://fred.stlouisfed.org"
+      },
+      {
+        "label": "CME FedWatch Tool",
+        "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
+      },
+      {
+        "label": "CNN Fear & Greed Index",
+        "url": "https://edition.cnn.com/markets/fear-and-greed"
+      },
+      {
+        "label": "TradingView DXY, US10Y, USOIL, USDJPY",
+        "url": "https://www.tradingview.com"
+      },
+      {
+        "label": "CFTC / CME QuikStrike – Commitment of Traders",
+        "url": "https://www.cmegroup.com/tools-information/quikstrike/commitment-of-traders.html"
+      }
+    ],
+    "source_type": "ai",
+    "updated_at": "2026-07-08T10:22:04+02:00"
   }
 }
