@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "v2",
-    "last_updated": "2026-07-09 16:08 CEST",
+    "last_updated": "2026-07-09 18:40 CEST",
     "auto": true,
     "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
     "data_freshness": "live",
@@ -32,28 +32,28 @@
       "updated_at": "2026-07-09T12:19:51+02:00"
     },
     "us10y": {
-      "value": 4.56,
-      "display": "4.56% – FALLING",
+      "value": 4.55,
+      "display": "4.55% – FALLING",
       "bias": "GREEN",
-      "bias_note": "US10Y 4.56%, falling – kedvezőbb long XAU háttér.",
+      "bias_note": "US10Y 4.55%, falling – kedvezőbb long XAU háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance ^TNX",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "dxy": {
-      "value": 100.9,
-      "display": "100.9 – RANGE",
+      "value": 100.89,
+      "display": "100.89 – RANGE",
       "bias": "YELLOW",
-      "bias_note": "DXY 100.9 a 99–103 sávban – semleges USD-háttér.",
+      "bias_note": "DXY 100.89 a 99–103 sávban – semleges USD-háttér.",
       "impact": 4,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "Yahoo Finance DX-Y.NYB",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "sentiment": {
       "value": 47,
@@ -65,7 +65,7 @@
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -77,7 +77,7 @@
       "source_type": "computed",
       "source_label": "Számított ártartomány alapján",
       "source_url": null,
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "intraday_regime": {
       "value": "TREND-BULL",
@@ -104,8 +104,8 @@
       "updated_at": "2026-07-09T12:19:51+02:00"
     },
     "xau_spot": {
-      "value": 4130.3,
-      "display": "$4,130.30 (+1.46%)",
+      "value": 4143.8,
+      "display": "$4,143.80 (+1.79%)",
       "bias": null,
       "bias_note": null,
       "impact": 4,
@@ -113,7 +113,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F",
       "source_url": "https://finance.yahoo.com/quote/GC=F",
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     }
   },
   "levels": {
@@ -123,7 +123,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi High)",
       "source_url": null,
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "pdl": {
       "value": 4053.0,
@@ -131,7 +131,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (előző napi Low)",
       "source_url": null,
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "daily_open": {
       "value": 4087.6,
@@ -139,7 +139,7 @@
       "source_type": "auto",
       "source_label": "Yahoo Finance GC=F (mai Open)",
       "source_url": null,
-      "updated_at": "2026-07-09T16:08:32+02:00"
+      "updated_at": "2026-07-09T18:40:23+02:00"
     },
     "asia_high": {
       "value": 4109.3,
@@ -211,7 +211,7 @@
     "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
     "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
     "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-09T16:08:32+02:00"
+    "updated_at": "2026-07-09T18:40:23+02:00"
   },
   "header": {
     "bias_direction": "SHORT",
@@ -288,6 +288,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-09T16:08:32+02:00"
+    "updated_at": "2026-07-09T18:40:23+02:00"
   }
 }
