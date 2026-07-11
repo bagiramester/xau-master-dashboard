@@ -17,7 +17,9 @@ const el = (tag, attrs = {}, ...children) => {
   }
   for (const c of children.flat()) {
     if (c == null) continue;
-    node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    // Minden nem-Node gyerek (string, szám, boolean) szöveg-node-ként kerül be —
+    // a data.json-ban a számmezők (SL, TP, score) numerikusak, nem stringek.
+    node.appendChild(c instanceof Node ? c : document.createTextNode(String(c)));
   }
   return node;
 };
