@@ -7,9 +7,11 @@ day-trader logikával SETUP A és SETUP B javaslatot ad (1 SHORT + 1 LONG).
 
 Minőségi kapu:
 - Az AI 1–100 skálán önértékeli a saját javaslatát (self-review kör).
-- Csak QUALITY_GATE (alap: 95) feletti eredmény kerül a dashboardra.
-- Ha AI_MAX_ITERATIONS alatt nem éri el, a setupok NEM frissülnek —
-  nincs kitalált érték, a korábbi/zárolt állapot marad érvényben.
+- A legjobb érvényes javaslat MINDIG publikálódik a dashboardra:
+  - 95+ önértékelés → SUGGESTED (CONFIRM & TRADE elérhető)
+  - 95 alatt → LOCKED, tájékoztató setup az önértékelés kiírásával
+- Csak a strukturálisan hibás javaslat (értelmezhetetlen/inkonzisztens
+  árszintek) marad ki — nincs kitalált érték a dashboardon.
 
 Kockázati garancia (a tér szabálya szerint):
 - A végső allowed/locked döntés TOVÁBBRA IS szabályalapú:
@@ -215,37 +217,41 @@ def parse_price(v):
 
 
 def sanity_check_setup(key, s, spot):
-    """Visszaadja a (hibalista, normalizált_setup) párost."""
-    errors = []
+    """Visszaadja a (hard_hibák, soft_figyelmeztetések, normalizált_setup) hármast.
+
+    hard: strukturális hiba — a javaslat NEM publikálható (értelmezhetetlen számok).
+    soft: szabály-szintű gyengeség (pl. RR < 2) — publikálható, de a rule-lock zárolja.
+    """
+    hard, soft = [], []
     direction = (s.get("direction") or "").upper()
     if direction not in ("LONG", "SHORT"):
-        errors.append(f"Setup {key}: érvénytelen irány ({direction})")
+        hard.append(f"Setup {key}: érvénytelen irány ({direction})")
 
     entry = parse_price(s.get("entry_zone"))
     sl = parse_price(s.get("sl"))
     tp1 = parse_price(s.get("tp1"))
     if entry is None or sl is None or tp1 is None:
-        errors.append(f"Setup {key}: hiányzó/értelmezhetetlen entry/SL/TP1")
-        return errors, s
+        hard.append(f"Setup {key}: hiányzó/értelmezhetetlen entry/SL/TP1")
+        return hard, soft, s
 
     if direction == "LONG" and not (sl < entry < tp1):
-        errors.append(f"Setup {key}: LONG szintek inkonzisztensek (SL<entry<TP1 kell)")
+        hard.append(f"Setup {key}: LONG szintek inkonzisztensek (SL<entry<TP1 kell)")
     if direction == "SHORT" and not (tp1 < entry < sl):
-        errors.append(f"Setup {key}: SHORT szintek inkonzisztensek (TP1<entry<SL kell)")
+        hard.append(f"Setup {key}: SHORT szintek inkonzisztensek (TP1<entry<SL kell)")
 
     risk = abs(entry - sl)
     if risk <= 0:
-        errors.append(f"Setup {key}: nulla SL távolság")
-        return errors, s
+        hard.append(f"Setup {key}: nulla SL távolság")
+        return hard, soft, s
     rr = round(abs(tp1 - entry) / risk, 2)
     if rr < 2.0:
-        errors.append(f"Setup {key}: számolt RR {rr} < 2.0")
+        soft.append(f"Setup {key}: számolt RR {rr} < 2.0 — szabály szerint zárolva")
     s["rr_min"] = rr
 
     if spot:
         dev = abs(entry - spot) / spot
         if dev > SPOT_TOLERANCE:
-            errors.append(
+            hard.append(
                 f"Setup {key}: belépő ({entry}) túl messze a spottól "
                 f"({spot}, eltérés {dev:.1%} > {SPOT_TOLERANCE:.0%})")
 
@@ -254,39 +260,45 @@ def sanity_check_setup(key, s, spot):
     for ck in COMPONENT_KEYS:
         cv = comps.get(ck)
         if not isinstance(cv, (int, float)) or not (0 <= cv <= 2):
-            errors.append(f"Setup {key}: score komponens hibás ({ck}={cv})")
+            soft.append(f"Setup {key}: score komponens hibás ({ck}={cv})")
             cv = 0
         score += int(cv)
     s["score"] = max(0, min(10, score))
 
     if not s.get("session"):
-        errors.append(f"Setup {key}: hiányzó session")
+        soft.append(f"Setup {key}: hiányzó session")
     if not s.get("invalidation"):
-        errors.append(f"Setup {key}: hiányzó invalidáció")
-    return errors, s
+        soft.append(f"Setup {key}: hiányzó invalidáció")
+    return hard, soft, s
 
 
 def sanity_check(proposal, spot):
-    errors = []
+    hard, soft = [], []
     setups = proposal.get("setups") or {}
     if set(setups.keys()) < {"A", "B"}:
-        return ["Hiányzó Setup A vagy B"], proposal
+        return ["Hiányzó Setup A vagy B"], [], proposal
     dirs = sorted((setups[k].get("direction") or "").upper() for k in ("A", "B"))
     if dirs != ["LONG", "SHORT"]:
-        errors.append("Pontosan 1 LONG és 1 SHORT setup kell")
+        hard.append("Pontosan 1 LONG és 1 SHORT setup kell")
     for key in ("A", "B"):
-        errs, setups[key] = sanity_check_setup(key, setups[key], spot)
-        errors.extend(errs)
+        h, sft, setups[key] = sanity_check_setup(key, setups[key], spot)
+        hard.extend(h)
+        soft.extend(sft)
     if not proposal.get("narrative"):
-        errors.append("Hiányzó narratíva")
-    return errors, proposal
+        soft.append("Hiányzó narratíva")
+    return hard, soft, proposal
 
 
 # ────────────────────────────────────────────────────────────────────
 # Eredmény beírás
 # ────────────────────────────────────────────────────────────────────
-def apply_accepted_proposal(state, proposal, self_score, iterations, sources):
-    """A 95+ minősítésű setupokat beírja — allowed TOVÁBBRA IS szabályalapú."""
+def apply_proposal(state, proposal, self_score, iterations, sources, weaknesses=None):
+    """A legjobb érvényes javaslatot beírja — allowed TOVÁBBRA IS szabályalapú.
+
+    95+ önértékelés: SUGGESTED (CONFIRM & TRADE elérhető, ha a szabály engedi).
+    95 alatt: LOCKED, tájékoztató setup — az önértékelés a zárolási okban.
+    """
+    gate_passed = self_score >= QUALITY_GATE
     effective = state.get("header", {}).get("effective_mode", "YELLOW")
     macro_lock = bool(state.get("header", {}).get("macro_lock_active"))
     open_xau = (state.get("risk", {}) or {}).get("open_xau_positions", 0) or 0
@@ -297,35 +309,56 @@ def apply_accepted_proposal(state, proposal, self_score, iterations, sources):
         body["confirmed"] = "pending"     # a chart-megerősítés a felhasználóé
         body["setup_ready"] = False
         allowed, reason = evaluate_setup(body, effective, macro_lock, open_xau)
-        body["allowed"] = allowed
-        body["locked_reason"] = reason
         body["updated_at"] = now_cest()
 
-        # SUGGESTED: minden hard feltétel OK, csak a megerősítés hiányzik
+        # would_allow: minden hard feltétel OK, csak a megerősítés hiányzik
         probe = dict(body)
         probe["confirmed"] = True
         probe["setup_ready"] = True
         would_allow, _ = evaluate_setup(probe, effective, macro_lock, open_xau)
-        if not allowed and would_allow:
-            ai_state = "SUGGESTED"
-            body["locked_reason"] = "Chart megerősítés szükséges (CONFIRM & TRADE)"
+
+        if gate_passed:
+            body["allowed"] = allowed
+            body["locked_reason"] = reason
+            if not allowed and would_allow:
+                ai_state = "SUGGESTED"
+                body["locked_reason"] = "Chart megerősítés szükséges (CONFIRM & TRADE)"
+            else:
+                ai_state = "SUGGESTED" if allowed else "LOCKED"
         else:
-            ai_state = "SUGGESTED" if allowed else "LOCKED"
+            # Kapu alatt: mindig zárolt, tájékoztató setup — engedély SOHA
+            ai_state = "LOCKED"
+            body["allowed"] = False
+            gate_txt = f"AI önértékelés {self_score}/100 < {QUALITY_GATE} — tájékoztató setup"
+            if not would_allow and reason:
+                body["locked_reason"] = f"{gate_txt} • {reason}"
+            else:
+                body["locked_reason"] = gate_txt
 
         wrapped[key] = {
             "ai_state": ai_state,
             "source_type": "ai",
             "ai_self_score": self_score,
+            "ai_gate_passed": gate_passed,
             "value": body,
         }
 
+    narrative = proposal.get("narrative", "")
+    if not gate_passed:
+        top = "; ".join((weaknesses or [])[:3])
+        narrative = (
+            f"⚠️ Minőségi kapu alatt ({self_score}/100 < {QUALITY_GATE}) — a setupok "
+            f"tájékoztató jellegűek, zárolva. " + narrative
+            + (f" | Fő gyengeségek: {top}" if top else ""))
+
     state["setups"] = wrapped
     state["bagira"] = {
-        "narrative": proposal.get("narrative", ""),
+        "narrative": narrative,
         "key_watch": proposal.get("key_watch", []),
         "reasoning_summary": proposal.get("reasoning_summary", {}),
         "confidence": self_score,
         "ai_self_score": self_score,
+        "ai_gate_passed": gate_passed,
         "ai_iterations": iterations,
         "sources": sources[:10],
         "model": MODEL, "source_type": "ai", "updated_at": now_cest(),
@@ -337,13 +370,13 @@ def apply_accepted_proposal(state, proposal, self_score, iterations, sources):
 
 
 def apply_gate_failure(state, best_score, weaknesses, iterations):
-    """A minőségi kapu nem teljesült — a setupok NEM frissülnek."""
+    """Nincs strukturálisan érvényes javaslat — a setupok NEM frissülnek."""
     top = "; ".join(weaknesses[:3]) if weaknesses else "n/a"
     state["bagira"] = {
         "narrative": (
-            f"⚠️ AI minőségi kapu nem teljesült ({iterations} iteráció, legjobb "
-            f"önértékelés: {best_score}/100, küszöb: {QUALITY_GATE}). A setupok "
-            f"nem frissültek — a korábbi/zárolt állapot érvényes. "
+            f"⚠️ Az AI nem tudott strukturálisan érvényes setupot adni "
+            f"({iterations} iteráció, legjobb önértékelés: {best_score}/100). "
+            f"A setupok nem frissültek — a korábbi/zárolt állapot érvényes. "
             f"Fő hiányosságok: {top}"),
         "key_watch": [], "reasoning_summary": "",
         "confidence": best_score, "ai_self_score": best_score,
@@ -367,6 +400,7 @@ def run_engine(state):
         RESEARCH_SYSTEM, build_research_prompt(state), temperature=0.2)
     all_sources.extend(urls)
 
+    best = None  # legjobb érvényes javaslat: (score, proposal, weaknesses)
     best_score, best_weaknesses = 0, []
     feedback = None
 
@@ -380,12 +414,14 @@ def run_engine(state):
             feedback = ["A válasz nem volt érvényes JSON — tartsd a sémát"]
             continue
 
-        errors, proposal = sanity_check(proposal, spot)
-        if errors:
-            print(f"  Sanity check hibák: {errors}")
-            feedback = errors
-            best_weaknesses = best_weaknesses or errors
+        hard_errors, soft_warnings, proposal = sanity_check(proposal, spot)
+        if hard_errors:
+            print(f"  Sanity check HARD hibák (nem publikálható): {hard_errors}")
+            feedback = hard_errors + soft_warnings
+            best_weaknesses = best_weaknesses or feedback
             continue
+        if soft_warnings:
+            print(f"  Sanity soft figyelmeztetések: {soft_warnings}")
 
         print(f"[{i}/{MAX_ITERATIONS}] Önellenőrzés (audit)…")
         raw_rev, _ = call_perplexity(
@@ -396,14 +432,15 @@ def run_engine(state):
         if not isinstance(self_score, (int, float)):
             self_score = 0
         self_score = int(self_score)
-        weaknesses = review.get("weaknesses") or []
+        weaknesses = (review.get("weaknesses") or []) + soft_warnings
         print(f"  Önértékelés: {self_score}/100, verdict: {review.get('verdict')}")
 
-        if self_score > best_score:
+        if best is None or self_score > best_score:
+            best = (self_score, proposal, weaknesses)
             best_score, best_weaknesses = self_score, weaknesses
 
         if self_score >= QUALITY_GATE:
-            apply_accepted_proposal(state, proposal, self_score, i, all_sources)
+            apply_proposal(state, proposal, self_score, i, all_sources)
             print(f"✅ Minőségi kapu teljesült ({self_score} ≥ {QUALITY_GATE}) — setupok beírva.")
             return True
 
@@ -417,8 +454,14 @@ def run_engine(state):
             research = research[:6000] + "\n\nKIEGÉSZÍTŐ KUTATÁS:\n" + extra
             all_sources.extend(urls2)
 
+    if best is not None:
+        score, proposal, weaknesses = best
+        apply_proposal(state, proposal, score, MAX_ITERATIONS, all_sources, weaknesses)
+        print(f"⚠️ Kapu alatt publikálva ({score}/{QUALITY_GATE}) — tájékoztató, zárolt setupok.")
+        return True
+
     apply_gate_failure(state, best_score, best_weaknesses, MAX_ITERATIONS)
-    print(f"⛔ Minőségi kapu NEM teljesült (legjobb: {best_score}/{QUALITY_GATE}).")
+    print(f"⛔ Nincs strukturálisan érvényes javaslat — setupok nem frissültek.")
     return False
 
 
