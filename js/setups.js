@@ -1,4 +1,8 @@
 // ═══ SETUPS MODULE — fix SHORT + LONG kártyák AI state kezeléssel ═══
+// Mindig 2 kártyát renderel (SHORT + LONG). Az `allowed` státusz a backend
+// scoring/RR/mode logikájából jön — a kliens SOHA nem kényszerít engedélyt.
+// Confirm state: memóriában tartva (NEM localStorage — sandbox-biztos).
+
 const FALLBACK_SETUP = {
   direction: 'NEUTRAL',
   type: '— (nincs setup adat)',
@@ -18,15 +22,10 @@ const FALLBACK_SETUP = {
   bias_compatibility: '–'
 };
 
-// LocalStorage-alapú confirm tracking (a data.json-t nem tudjuk kliens oldalról írni)
-const getConfirmed = (slotKey) => {
-  try { return localStorage.getItem('confirm_' + slotKey) === '1'; }
-  catch { return false; }
-};
-const setConfirmed = (slotKey, value) => {
-  try { localStorage.setItem('confirm_' + slotKey, value ? '1' : '0'); }
-  catch {}
-};
+// Memóriában tartott confirm state (NEM localStorage — sandbox-biztos)
+const confirmState = {};
+const getConfirmed = (slotKey) => confirmState[slotKey] === true;
+const setConfirmed = (slotKey, value) => { confirmState[slotKey] = !!value; };
 
 const orderSetupsFixed = (setups) => {
   const A = (setups && setups.A && setups.A.value) || null;
