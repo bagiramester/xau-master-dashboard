@@ -4,8 +4,12 @@ Forrasokbol tolti a mezoket. Ha egy forras nem elerheto, az elozo erteket tartja
 Kimenet: build_state.json (nem data.json - azt csak a push irja).
 """
 import sys
+import json
+import urllib.request
 from common import (load_json, save_json, field, keep_previous, now_cest,
                     today_cest, DATA_PATH, STATE_PATH)
+
+import yfinance as yf
 
 
 def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
@@ -19,8 +23,6 @@ def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
                      source_url=source_url, bias=bias)
     except Exception as e:
         return keep_previous(prev_field, f"{source_label} hiba: {e}")
-
-import yfinance as yf
 
 
 def _last_close(ticker):
@@ -41,7 +43,7 @@ def fetch_us10y():
     y = _last_close("^TNX")
     if y is None:
         return None
-    return f"{y / 10:.2f}%"
+    return f"{y:.2f}%"
 
 
 def fetch_dxy():
@@ -56,7 +58,14 @@ def fetch_fedwatch():
 
 
 def fetch_sentiment():
-    return None
+    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    score = payload.get("fear_and_greed", {}).get("score")
+    if score is None:
+        return None
+    return int(round(float(score)))
 
 
 def fetch_calendar():
