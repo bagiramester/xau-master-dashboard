@@ -1,14 +1,14 @@
 {
   "meta": {
     "date": "2026-07-11",
-    "last_auto_sync": "2026-07-11T15:12:42+02:00",
-    "last_manual_update": "2026-07-11T15:14:14+02:00",
+    "last_auto_sync": "2026-07-11T15:22:52+02:00",
+    "last_manual_update": "2026-07-11T15:27:27+02:00",
     "data_freshness": "live-refresh",
     "version": "v5",
     "effective_mode": "YELLOW",
-    "ai_model": null,
-    "ai_source_type": "ai-fallback",
-    "ai_last_run": "2026-07-11T15:14:05+02:00",
+    "ai_model": "sonar-pro",
+    "ai_source_type": "ai",
+    "ai_last_run": "2026-07-11T15:27:17+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -23,7 +23,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
-      "updated_at": "2026-07-11T15:12:43+02:00"
+      "updated_at": "2026-07-11T15:22:53+02:00"
     },
     "date": "2026-07-11",
     "macro_events_today": [
@@ -122,7 +122,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CME Fed Funds futures (ZQ=F)",
-      "updated_at": "2026-07-11T15:12:42+02:00",
+      "updated_at": "2026-07-11T15:22:52+02:00",
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "impact": 3
     },
@@ -131,7 +131,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "US10Y yield - Yahoo Finance",
-      "updated_at": "2026-07-11T15:12:42+02:00",
+      "updated_at": "2026-07-11T15:22:52+02:00",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
       "bias": "RED",
       "impact": 3
@@ -141,7 +141,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "DXY - Yahoo Finance",
-      "updated_at": "2026-07-11T15:12:42+02:00",
+      "updated_at": "2026-07-11T15:22:52+02:00",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
       "impact": 3
     },
@@ -150,7 +150,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
-      "updated_at": "2026-07-11T15:12:42+02:00",
+      "updated_at": "2026-07-11T15:22:53+02:00",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
       "impact": 2
     }
@@ -223,46 +223,117 @@
   },
   "setups": {
     "A": {
-      "ai_state": "PENDING",
-      "source_type": "auto",
+      "ai_state": "LOCKED",
+      "source_type": "ai",
+      "ai_self_score": 87,
+      "ai_gate_passed": false,
       "value": {
         "direction": "SHORT",
-        "type": "HTF sell zóna reakció",
-        "rr_min": 2.0,
-        "score": null,
-        "confirmed": "pending",
+        "type": "HTF supply rejection – intraday range top short",
+        "entry_zone": "4128-4134",
+        "sl": 4160.0,
+        "tp1": 4058.0,
+        "tp2": 4010.0,
         "session": "London 09:00–12:00 CEST",
+        "invalidation": "Ha H1 zárás 4160 felett, vagy tiszta elfogadás épül 4150–4200 sávban (nem csak wick), a HTF supply (4058–4105) fölötti tartós árfolyam elfogadásával a short narratíva sérül.",
+        "macro_support": [
+          "US10Y 4.57% és implied FFR 3.63% kombinációja továbbra is viszonylag magas reálkamat-környezetet jelez, ami strukturálisan fékezi az aranyat rövid távon.",
+          "A kutatás rövid távra enyhén bearish / range-bound képet ír le; a 4150–4200 sáv az első komoly ellenállás, így a 4130 körüli rejection illeszkedik a range-felső elutasítás narratívájába.",
+          "DXY 100.97 mellett nincs agresszív USD-gyengeség; ez nem támogat egy erőteljes, 4150 feletti intraday breakoutot hírkockázat nélkül."
+        ],
+        "setup_quality": "A",
+        "bias_compatibility": "Összhangban van a rövid távú enyhén bearish / range-bound bias-szal: 4104 körüli spot mellett a 4130–4135 lokális ellenállásból történő elutasításra épít, a 4058–4105 HTF supply zónát tágabban kezelve (felső range a 4150–4200 sáv előtt).",
+        "score_components": {
+          "trend": 1,
+          "key_level": 2,
+          "volatility_spread": 1,
+          "macro": 1,
+          "rr_quality": 2
+        },
+        "reasoning": "A spot 4104 közelében intraday tartomány 4094–4135, a 4130–4135 sáv a friss napi range teteje és lokális ellenállás. Innen egy konzervatív, tág SL-lel felépített short 4058 (HTF supply alsó pereme / intraday támasz) és 4010 (4000 pszichoszint fölötti biztonságosabb TP2) felé ad ~1:3 RR-t TP1-nél és >1:4-et TP2-nél.",
+        "rr_min": 2.52,
+        "score": 7,
+        "confirmed": "pending",
+        "setup_ready": false,
+        "updated_at": "2026-07-11T15:27:17+02:00",
         "allowed": false,
-        "locked_reason": "Score nem meghatározható",
-        "updated_at": "2026-07-11T15:12:52+02:00"
+        "locked_reason": "AI önértékelés 87/100 < 95 — tájékoztató setup • YELLOW napon score>=8 + chart megerősítés kötelező"
       }
     },
     "B": {
-      "ai_state": "PENDING",
-      "source_type": "auto",
+      "ai_state": "LOCKED",
+      "source_type": "ai",
+      "ai_self_score": 87,
+      "ai_gate_passed": false,
       "value": {
         "direction": "LONG",
-        "type": "HTF demand zóna reakció",
-        "rr_min": 2.0,
-        "score": null,
+        "type": "HTF demand anticipation – mélyebb visszahúzódásból kockázat-arányos long",
+        "entry_zone": "4005-4015",
+        "sl": 3950.0,
+        "tp1": 4100.0,
+        "tp2": 4150.0,
+        "session": "Overlap 16:00–19:00 CEST",
+        "invalidation": "Ha H4 zárás 3950 alatt, vagy erős, volumen-támogatott törés történik a 4000 pszichoszint és a 3900–3930 HTF demand zóna felé, az aktuális napra a long bias technikailag érdemben sérül.",
+        "macro_support": [
+          "A fundamentális kép szerint az arany továbbra is támasztott a lassan hűlő, de cél feletti infláció, a bizonytalan Fed-pálya és a geopolitikai kockázatok miatt; ez a mélyebb visszahúzódásokat inkább vételi lehetőséggé, semmint trendfordulóvá teszi.",
+          "A 4000–4050 kulcstámasz zónaként szerepel, 4000 pedig erős pszichológiai szint; innen egy visszapattanás technikailag és fundamentálisan is konzisztens a „támasztott, de nem eufórikus” aranyképpel.",
+          "DXY már nincs agresszív bull módban, miközben a geopolitikai bizonytalanság-prémium fennmarad; ez középtávon támogathatja a 4000 feletti tartományból érkező long próbálkozást."
+        ],
+        "setup_quality": "B",
+        "bias_compatibility": "A rövid távú enyhén bearish / range-bound bias mellett ez inkább reakciós, mély visszahúzódás utáni mean-reversion long a 4000 kulcstámaszból, nem agresszív trendkövető vétel; a közép-/hosszabb távú fundamentális támasz miatt azonban védhető alternatíva.",
+        "score_components": {
+          "trend": 1,
+          "key_level": 2,
+          "volatility_spread": 1,
+          "macro": 2,
+          "rr_quality": 2
+        },
+        "reasoning": "A 4000–4050 kulcstámasz és a 3900–3930 HTF demand kontextusában a 4005–4015 belépő a pszichoszint közvetlen közelében helyezkedik el. SL 3950 az első komolyabb mélyebb technikai szint előtt van, TP1 4100 vissza a jelenlegi spot-zónába, TP2 4150 a lokális ellenállás felé – ez ~1:2 RR-t ad TP1-nél és ~1:3.2-t TP2-nél.",
+        "rr_min": 1.5,
+        "score": 8,
         "confirmed": "pending",
-        "session": "London / Overlap",
+        "setup_ready": false,
+        "updated_at": "2026-07-11T15:27:17+02:00",
         "allowed": false,
-        "locked_reason": "Score nem meghatározható",
-        "updated_at": "2026-07-11T15:12:52+02:00"
+        "locked_reason": "AI önértékelés 87/100 < 95 — tájékoztató setup • RR 1:2 alatt"
       }
     }
   },
   "bagira": {
-    "narrative": "⚠️ AI minőségi kapu nem teljesült (3 iteráció, legjobb önértékelés: 0/100, küszöb: 95). A setupok nem frissültek — a korábbi/zárolt állapot érvényes. Fő hiányosságok: Setup A: számolt RR 1.61 < 2.0",
-    "key_watch": [],
-    "reasoning_summary": "",
-    "confidence": 0,
-    "ai_self_score": 0,
+    "narrative": "⚠️ Minőségi kapu alatt (87/100 < 95) — a setupok tájékoztató jellegűek, zárolva. A spot 4104 és a napi range 4094–4135 alapján először a rövid távú struktúrát azonosítottam: range-bound, enyhén bearish bias, HTF supply 4058–4105 és kulcsellenállás 4150–4200. Ebből épült a Setup A, mint elsődleges, lokális range-top short 4130 környékéről, konzervatív, tág SL-lel és a 4058, majd 4010 körüli célzónákkal. Alternatívaként a fundamentális támaszt (infláció, geopolitika, nem agresszív USD-bull) és a 4000–4050 kulcstámaszt használtam fel egy reakciós mean-reversion longhoz (Setup B), amely csak mélyebb visszahúzódás után, a 4000 pszichoszint közelében aktiválódik. A hírkockázat és session-szabályok miatt a belépők időzítését úgy szűkítettem, hogy ne essenek a Fed Monetary Policy Report és más magas impaktú események előtti 60 perces tiltóablakba. | Fő gyengeségek: 1. **HTF supply zóna félreolvasása / inkonzisztens narratíva (Setup A)**: A dashboard HTF supply-ja explicit **4058–4105**, ehhez képest a Setup A elsődleges belépőzónája **4128–4134**, tehát *a megadott HTF supply fölé* pozicionál, miközben a leírásban „HTF supply rejection – intraday range top short”-ként hivatkozik rá. A 4128–4134 inkább a **PDH/asia high / intraday range-top** (4130.5–4130.6) környéke, nem a definíció szerinti HTF supply; ez narratív-infláció és technikai pontatlanság, amit tisztázni kell.; 2. **RR matek – Setup A: számszinten téves, csak kvalitatívan jó**: Spot ~4104, entry 4128–4134, SL 4160, TP1 4058, TP2 4010. Ha a belépőt konzervatívan **4130**-ra tesszük: risk = 4160–4130 = 30; reward TP1 = 4130–4058 = 72 → RR ~ **2.4**, TP2 = 4130–4010 = 120 → RR ~ **4.0**. A szövegben viszont „~1:3 RR TP1-nél és >1:4 TP2-nél” szerepel, ami **nem pontos**; valós RR inkább ~1:2.4 és ~1:4.0. A `rr_min` mező **2.52**, ami nem konzisztens a számolható RR-rel. A kvalitatív RR jó (≥1:2), de a numerikus dokumentáció pontatlan.; 3. **RR matek – Setup B: a megadott `rr_min` (1.5) nem konzisztens a saját indoklással**: Entry 4005–4015, SL 3950, TP1 4100, TP2 4150. Konzervatívan **entry 4010**: risk = 4010–3950 = 60; reward TP1 = 4100–4010 = 90 → RR ~ **1.5**, TP2 = 4150–4010 = 140 → RR ~ **2.33**. A szövegben „~1:2 RR TP1-nél és ~1:3.2 TP2-nél” szerepel, ami túlzó; a `rr_min` mező 1.5 ugyan közelebb áll a valóságos TP1 RR-hez, de a dokumentáció **oversell-eli** az RR-t. Min 1:2 szabály szigorúan TP1-re nézve **nem teljesül**, csak TP2-nél; ez risk-policy szinten kérdőjeles.",
+    "key_watch": [
+      "Árviselkedés a 4130–4135 lokális ellenállásnál (wick vs. elfogadás, M15/H1 zárások)",
+      "4100–4058 közötti reakciók: lassulás, likviditás, fordulójelek vagy átesés 4058 alatt",
+      "4000 pszichoszint körüli orderflow (spike vs. stabilizáció) és a 3900–3930 HTF demand közelsége",
+      "US10Y hozam és implied FFR változása (reálkamat-kép árnyalása intraday)",
+      "Fed Monetary Policy Report és hozzá kapcsolódó USD/hozam reakciók (hírspirál kockázata)",
+      "DXY 100.97 körüli mozgás: erősödés esetén short, gyengülés esetén long narratíva erősödhet",
+      "Intraday volatilitás NFP-nap miatt, különös tekintettel a 13:30–15:00 CEST tiltóablakra"
+    ],
+    "reasoning_summary": {
+      "setup_A": "A setup A a rövid távú enyhén bearish / range-bound kontextusra épít: a spot 4104 mellett a 4130–4135 napi range-top és lokális ellenállás, amely alatt az ár eddig konszolidált. Egy 4128–4134 közötti belépő, 4160-as tág SL-lel és a 4058–4010 célzónákkal RR szempontból erős (TP1 ~1:3, TP2 >1:4), miközben technikailag HTF supply/ellenállás környéki rejection-t próbál megfogni.",
+      "setup_B": "A setup B a fundamentális támaszra és a 4000–4050 kulcstámasz zónára épül: csak akkor aktiválódik, ha az ár mélyebben visszahúzódik a 4005–4015 sávba, a 4000 pszichoszint közvetlen közelébe. SL 3950 a következő komolyabb mélyebb technikai szint előtt, TP1 4100 a jelenlegi spot-zóna, TP2 4150 pedig a lokális ellenállás felé – így a hosszabb távon támasztott fundamentumokkal összhangban, de rövid távon szigorúan RR-fókuszúan épül fel.",
+      "risk_view": "Makró szempontból a nap erősen hírérzékeny (Fed Monetary Policy Report, WASDE, CFTC adatok), miközben a reálkamat-környezet továbbra is viszonylag magas, a dollár pedig nem extrém gyenge. Ezért csak olyan setupok vállalhatók, amelyek RR-ben legalább 1:2-t adnak TP1-ig, a belépés nem esik magas impaktú esemény előtti 60 percbe, és technikailag kulcsszintekhez kötöttek. A kockázatkezelésben prioritás a pozíciók minimalizálása NFP-közeli időablakban, a tág, de logikus SL-ek használata, és a gyors részleges profitrealizálás TP1 környékén."
+    },
+    "confidence": 87,
+    "ai_self_score": 87,
+    "ai_gate_passed": false,
     "ai_iterations": 3,
+    "sources": [
+      "https://www.dukascopy.com/swiss/spanish/marketwatch/market-news/Trading-Ideas/XAU-USD/",
+      "https://www.portfolio.hu/deviza/20260702/hatalmasat-zuhan-a-dollar-az-amerikai-adatok-utan-oriasit-erosodik-a-forint-847078",
+      "https://twelvedata.com/markets/300755/commodity/xau-usd/historical-data",
+      "https://www.investing.com/currencies/xau-usd-historical-data",
+      "https://www.xe.com/currencycharts/?from=XAU&to=USD",
+      "https://privatbankar.hu/cikkek/reszveny/megszolalt-az-amerikai-jegybank-az-irani-haboru-es-trump-vamjainak-gazdasagi-hatasairol.html",
+      "https://www.kaggle.com/datasets/novandraanugrah/xauusd-gold-price-historical-data-2004-2024",
+      "https://www.instaforex.eu/hu/forex_analysis/451315",
+      "https://www.forex.com/en/news-and-analysis/gold-2026-outlook-fundamental-xau-usd-analysis/",
+      "https://tradersunion.com/hu/news/tag/xauusd/"
+    ],
     "model": "sonar-pro",
-    "source_type": "ai-fallback",
-    "updated_at": "2026-07-11T15:14:05+02:00"
+    "source_type": "ai",
+    "updated_at": "2026-07-11T15:27:17+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -272,6 +343,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-11T15:14:14+02:00"
+    "updated_at": "2026-07-11T15:27:27+02:00"
   }
 }
