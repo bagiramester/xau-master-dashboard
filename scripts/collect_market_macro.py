@@ -14,6 +14,24 @@ import yfinance as yf
 
 CEST = timezone(timedelta(hours=2))
 
+BROWSER_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) "
+                   "Chrome/125.0.0.0 Safari/537.36"),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache",
+}
+
+
+def _http_json(url, extra_headers=None, timeout=15):
+    headers = dict(BROWSER_HEADERS)
+    if extra_headers:
+        headers.update(extra_headers)
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
 
 def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
     """Megprobalja lekerni az adatot; hiba eseten elozo erteket tart meg."""
@@ -29,10 +47,13 @@ def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
 
 
 def _last_close(ticker):
-    data = yf.Ticker(ticker).history(period="5d")
+    data = yf.Ticker(ticker).history(period="7d")
     if data is None or data.empty:
         return None
-    return float(data["Close"].dropna().iloc[-1])
+    closes = data["Close"].dropna()
+    if closes.empty:
+        return None
+    return float(closes.iloc[-1])
 
 
 def fetch_xau_spot():
@@ -66,9 +87,10 @@ def fetch_fedwatch():
 
 def fetch_sentiment():
     url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        payload = json.loads(resp.read().decode("utf-8"))
+    payload = _http_json(url, extra_headers={
+        "Origin": "https://edition.cnn.com",
+        "Referer": "https://edition.cnn.com/",
+    })
     score = payload.get("fear_and_greed", {}).get("score")
     if score is None:
         return None
@@ -77,16 +99,14 @@ def fetch_sentiment():
 
 def fetch_calendar():
     """Aznapi magas hatasu USD esemenyek + no-trade ablakok.
-    Forras: nasdaq economic calendar (kulcs nelkul). Hiba eseten kivetel,
-    a main() az elozo erteket tartja meg."""
+    Forras: nasdaq economic calendar (kulcs nelkul).
+    Hiba eseten kivetel, a main() az elozo erteket tartja meg."""
     today = today_cest()
     url = ("https://api.nasdaq.com/api/calendar/economicevents?date=" + today)
-    req = urllib.request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "application/json",
+    payload = _http_json(url, extra_headers={
+        "Origin": "https://www.nasdaq.com",
+        "Referer": "https://www.nasdaq.com/market-activity/economic-calendar",
     })
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        payload = json.loads(resp.read().decode("utf-8"))
     rows = (payload.get("data") or {}).get("rows") or []
     events = []
     windows = []
@@ -111,6 +131,7 @@ def bias_us10y(v):
     except Exception:
         return "YELLOW"
     return "RED" if y > 4.2 else "YELLOW"
+
 
 def main():
     prev = load_json(DATA_PATH, default={})
@@ -147,6 +168,7 @@ def main():
         state["header"]["_calendar_warning"] = f"naptar nem elerheto: {e}"
     save_json(STATE_PATH, state)
     print("collect-data OK:", now_cest())
+
 
 if __name__ == "__main__":
     sys.exit(main())
