@@ -1,59 +1,82 @@
 {
   "meta": {
-    "schema_version": "v2",
-    "last_updated": "2026-07-10 21:35 CEST",
-    "auto": true,
-    "note": "Auto: XAU/US10Y/DXY/F&G/HTF (Yahoo+CNN). Manuális: FedWatch, kulcsszintek, risk, log.",
-    "data_freshness": "live",
+    "date": "2026-07-11",
+    "last_auto_sync": "2026-07-11T10:04:47+02:00",
+    "last_manual_update": "2026-07-11T10:05:23+02:00",
+    "data_freshness": "live-refresh",
+    "version": "v5",
+    "effective_mode": "YELLOW",
+    "ai_model": null,
+    "ai_source_type": "ai-fallback",
+    "ai_last_run": null,
     "source_stack": [
-      "yfinance:GC=F",
-      "yfinance:^TNX",
-      "yfinance:DX-Y.NYB",
-      "cnn:fear-greed",
-      "cme:fedwatch (manual)",
-      "investing:economic-calendar (manual)",
-      "manual:trade-log"
-    ],
-    "ai_last_run": "2026-07-10T12:11:51+02:00",
-    "ai_model": "sonar-pro",
-    "ai_source_type": "ai"
+      "economic-calendar",
+      "fedwatch",
+      "reuters",
+      "cnn-fear-greed",
+      "tradingview"
+    ]
+  },
+  "header": {
+    "xau_spot": {
+      "value": "4104.10",
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
+      "updated_at": "2026-07-11T10:04:48+02:00"
+    },
+    "date": "2026-07-11",
+    "macro_events_today": [],
+    "macro_no_trade_windows": [],
+    "_calendar_warning": "naptar nem elerheto: Economic calendar lekeres ide",
+    "daily_status": "YELLOW",
+    "effective_mode": "YELLOW",
+    "macro_lock_active": false
+  },
+  "risk": {
+    "mode": "YELLOW",
+    "daily_limit": 100.0,
+    "weekly_limit": 300.0,
+    "daily_loss": 0.0,
+    "daily_risk_usage_pct": 0,
+    "weekly_loss": 0.0,
+    "weekly_risk_usage_pct": 0,
+    "loss_streak": 0,
+    "max_trades_today": 1,
+    "open_positions": 0,
+    "open_xau_positions": 0,
+    "trade_allowed_now": true,
+    "xau_trade_allowed_now": true,
+    "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
+    "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
+    "rpt_hard_cap": 30.0,
+    "updated_at": "2026-07-10T21:35:59+02:00"
   },
   "macro": {
     "fedwatch": {
-      "value": "HOLD ~70% / CUT ~30%",
-      "display": "NEUTRAL FED – ENYHE CUT-BIAS",
-      "bias": "YELLOW",
-      "bias_note": "A piaci árazás dominánsan tartást vár, mérsékelt cut-opcióval; nem erős long-driver, de nem hawkish.",
-      "impact": 4,
+      "value": "n/a",
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-10T12:11:51+02:00"
+      "source_type": "auto",
+      "source_label": "CME FedWatch",
+      "updated_at": "2026-07-11T10:04:47+02:00",
+      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
     },
     "us10y": {
-      "value": 4.57,
-      "display": "4.57% – RISING",
-      "bias": "RED",
-      "bias_note": "US10Y 4.57% és emelkedik – magas opportunity cost aranynak, short XAU háttér.",
-      "impact": 4,
+      "value": "0.46%",
       "status": "fresh",
       "source_type": "auto",
-      "source_label": "Yahoo Finance ^TNX",
+      "source_label": "US10Y yield - Yahoo Finance",
+      "updated_at": "2026-07-11T10:04:48+02:00",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "updated_at": "2026-07-10T21:35:59+02:00"
+      "bias": "YELLOW"
     },
     "dxy": {
-      "value": 100.96,
-      "display": "100.96 – RANGE",
-      "bias": "YELLOW",
-      "bias_note": "DXY 100.96 a 99–103 sávban – semleges USD-háttér.",
-      "impact": 4,
+      "value": "100.97",
       "status": "fresh",
       "source_type": "auto",
-      "source_label": "Yahoo Finance DX-Y.NYB",
-      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
-      "updated_at": "2026-07-10T21:35:59+02:00"
+      "source_label": "DXY - Yahoo Finance",
+      "updated_at": "2026-07-11T10:04:48+02:00",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB"
     },
     "sentiment": {
       "value": 49,
@@ -61,58 +84,10 @@
       "bias": "YELLOW",
       "bias_note": "NEUTRAL (49) – semleges.",
       "impact": 2,
-      "status": "fresh",
+      "status": "stale",
       "source_type": "auto",
-      "source_label": "CNN Fear & Greed Index",
+      "source_label": "⚠️ Előző adat – ures valasz",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
-      "updated_at": "2026-07-10T21:35:59+02:00"
-    },
-    "htf_trend": {
-      "value": "RANGE",
-      "display": "RANGE",
-      "bias": "YELLOW",
-      "bias_note": "Ár 3800–4300 sávban – range/transition.",
-      "impact": 3,
-      "status": "fresh",
-      "source_type": "computed",
-      "source_label": "Számított ártartomány alapján",
-      "source_url": null,
-      "updated_at": "2026-07-10T21:35:59+02:00"
-    },
-    "intraday_regime": {
-      "value": "RANGE-BEAR",
-      "display": "INTRADAY RANGE-BEAR",
-      "bias": "YELLOW",
-      "bias_note": "Intraday inkább enyhén bear jellegű range-ben mozog, alacsony ATR-rel.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-10T12:11:51+02:00"
-    },
-    "volatility": {
-      "value": "LOW",
-      "display": "ALACSONY VOLATILITÁS",
-      "bias": "YELLOW",
-      "bias_note": "Az alacsony intraday vol limitálja a momentum-trade-ek értékét; szint-alapú vagy NO-TRADE a racionális.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-10T12:11:51+02:00"
-    },
-    "xau_spot": {
-      "value": 4110.4,
-      "display": "$4,110.40 (-0.49%)",
-      "bias": null,
-      "bias_note": null,
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "auto",
-      "source_label": "Yahoo Finance GC=F",
-      "source_url": "https://finance.yahoo.com/quote/GC=F",
       "updated_at": "2026-07-10T21:35:59+02:00"
     }
   },
@@ -182,145 +157,38 @@
       "updated_at": "2026-07-10T12:11:51+02:00"
     }
   },
-  "notrade_filters": {
-    "macro_lock_active": false,
-    "macro_events_today": [],
-    "macro_no_trade_windows": [],
-    "note": "NFP-nap manuális beállítás",
-    "us_market_closed": false,
-    "us_market_note": "US piac nyitva, normál kereskedési nap, ma nincs hivatalos US szünnap.",
-    "is_clean_day": true,
-    "clean_day_note": "A fő US makronaptárak szerint ma nincs high-impact US adat (nincs CPI, NFP, FOMC, PCE stb.).",
-    "updated_at": "2026-07-10T12:11:51+02:00",
-    "source_label": "AI mély kutatás (Perplexity)"
-  },
-  "risk": {
-    "mode": "YELLOW",
-    "daily_limit": 100.0,
-    "weekly_limit": 300.0,
-    "daily_loss": 0.0,
-    "daily_risk_usage_pct": 0,
-    "weekly_loss": 0.0,
-    "weekly_risk_usage_pct": 0,
-    "loss_streak": 0,
-    "max_trades_today": 1,
-    "open_positions": 0,
-    "open_xau_positions": 0,
-    "trade_allowed_now": true,
-    "xau_trade_allowed_now": true,
-    "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
-    "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
-    "rpt_hard_cap": 30.0,
-    "updated_at": "2026-07-10T21:35:59+02:00"
-  },
-  "header": {
-    "bias_direction": "LONG",
-    "bias_status": "SÁRGA",
-    "effective_mode": "RED",
-    "session": "NY",
-    "session_focus": "Setup A short (HTF sell-zóna reakció) NFP előtt",
-    "narrative": "A 10Y reálhozam továbbra is magas, de a nominális US10Y enyhe esése és a kissé gyengülő DXY, valamint a FedWatch neutrálishoz közeli, enyhe cut-bias mixe összességében mérsékelt, óvatos LONG-hátteret ad XAU-nak; HTF RANGE, intraday RANGE-BEAR és alacsony vol mellett a space továbbra is szint-alapú, nem pedig trend-follow, így a NO-TRADE opció ma is racionális, ha nincs tiszta reakció kritikus zónákra.",
-    "fed_regime_summary": "Az XAU ma enyhén LONG-biasban, de továbbra is HTF RANGE-ben és alacsony intraday vol mellett kereskedik; a stabilan magas, de napok óta nem romló US reálhozam és a semleges DXY/Fed-mix csak mérsékelt, szint-alapú long-hátteret ad, trend-follow space nincs."
-  },
   "setups": {
     "A": {
-      "value": {
-        "direction": "LONG",
-        "type": "range reversal / liquidity sweep reaction",
-        "bias_compatibility": "igen — Tier-1 mix óvatos LONG, HTF RANGE-ben szint-long",
-        "entry_zone": "4058-4070 (HTF supply alsó széle + PDL közel)",
-        "sl": "4038 alatt M15 close",
-        "tp1": "4115-4120 (aktuális spot / Asia-low fölötti visszateszt)",
-        "tp2": "4130-4135 (PDH + Daily Open visszateszt)",
-        "rr_min": 2.2,
-        "score": 7,
-        "session": "London 09:00-12:00 CEST, kiterjesztve Overlap eleje 14:00-16:00 CEST",
-        "invalidation": "H1 close 4038 alatt → HTF supply nem tart, range alsó szél felé nyit tér",
-        "macro_support": [
-          "Reálhozam magas és enyhén EMELKEDŐ (alapvetően XAU-RED), de mozgás nem agresszív, inkább fékező, nem trend-törő",
-          "DXY gyengül, nominális US10Y esik → enyhe kamat- és USD-lazulás, ami óvatos LONG-hátteret ad",
-          "FedWatch HOLD-domináns, enyhe CUT-bias → nem hawkish, nem nyomja tovább az XAU-t DOWN"
-        ],
-        "allowed": false,
-        "locked_reason": "SÁRGA risk-mód + SÁRGA bias: setup-score < 8, így ma tervezési szint, nem kötelező trade; NO-TRADE valid opció.",
-        "entry_zone_status": "pending — spot még a HTF supply teteje felett, nincs sweep a zóna aljáig",
-        "setup_quality": "közepes-erős szint-long range-ben, de makró vegyes, vol alacsony"
-      },
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI (sonar-pro) auto setup",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-10T12:11:51+02:00",
-      "impact": null,
-      "ai_state": "LOCKED"
+      "direction": "SHORT",
+      "type": "HTF sell zóna reakció",
+      "rr_min": 2.0,
+      "score": null,
+      "confirmed": "pending",
+      "session": "London 09:00–12:00 CEST",
+      "allowed": false,
+      "locked_reason": "Score nem meghatározható",
+      "updated_at": "2026-07-11T10:04:59+02:00"
     },
     "B": {
-      "value": {
-        "direction": "SHORT",
-        "type": "range continuation / rejection a felső sávból",
-        "bias_compatibility": "részben — reálhozam RED miatt támogatott, de DXY/US10Y/Fed nem agresszíven shortos",
-        "entry_zone": "4130-4138 (PDH + Daily Open + Asia-high környéki rejection)",
-        "sl": "4155 felett M15 close",
-        "tp1": "4105-4108 (HTF supply teteje, intraday közép)",
-        "tp2": "4070-4065 (HTF supply közepe + PDL felé lecsorgás)",
-        "rr_min": 2.0,
-        "score": 6,
-        "session": "Overlap 14:00-19:00 CEST, ha napközben felhúzzák a PDH/Daily Open zónáig",
-        "invalidation": "H1 close 4155 felett → range-felső sáv áttörés, HTF szerkezetet újra kell értékelni",
-        "macro_support": [
-          "Magas, enyhén EMELKEDŐ reálhozam önmagában XAU-short háttér",
-          "DXY gyengülése miatt a short nem erős trend-driver, inkább intraday struktúra-alapú",
-          "FedWatch neutrális → nincs friss hawkish trigger, ezért csak szint-alapú, óvatos short"
-        ],
-        "allowed": false,
-        "locked_reason": "SÁRGA risk-mód + score < 8 → struktúra szép, de Tier-1 makró vegyes, ezért ma inkább megfigyelős, tervezési forgatókönyv.",
-        "entry_zone_status": "pending — spot jelenleg a zóna alatt, előbb felhúzás kell",
-        "setup_quality": "közepes — szép szint-konfluencia, de makró nem tisztán short"
-      },
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI (sonar-pro) auto setup",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-10T12:11:51+02:00",
-      "impact": null,
-      "ai_state": "LOCKED"
+      "direction": "SHORT",
+      "type": "Intraday range breakdown",
+      "rr_min": 2.0,
+      "score": null,
+      "confirmed": "pending",
+      "session": "London / Overlap",
+      "allowed": false,
+      "locked_reason": "Score nem meghatározható",
+      "updated_at": "2026-07-11T10:04:59+02:00"
     }
   },
   "bagira": {
-    "narrative": "Gold ma oldalaz, reálhozam fogja, DXY lazít. HTF RANGE, intraday RANGE-BEAR, alacsony vol. Két szélső forgatókönyv van: 4058-4070-ből long, 4130-4138-ból short. Ma inkább figyelünk, nem erőltetjük a közepét.",
-    "key_watch": [
-      "4058-4070: HTF supply alsó széle + PDL környéki reakció (sweep vs. sima bounce)",
-      "4130-4138: PDH + Daily Open + Asia-high rejection vagy átütés H1 close szinten",
-      "Reálhozam és DXY intraday mozgás: erősödik-e bármelyik irány, ami megtöri a RANGE-et"
-    ],
-    "confidence": 45,
-    "reasoning_summary": "Makró vegyes: reálhozam RED, DXY/US10Y/Fed enyhén támogatja az XAU-t, HTF és intraday RANGE-ben, alacsony vol mellett csak szélső szintekre építhető edge. Ezért kap Long A 7, Short B 6 pontot, SÁRGA módban mindkettő inkább tervezés, nem kötelező trade.",
-    "score_breakdown": {
-      "setup_A": {
-        "trend": 1,
-        "level": 2,
-        "volatility": 1,
-        "tier1_macro": 2,
-        "rr": 1,
-        "total": 7
-      },
-      "setup_B": {
-        "trend": 1,
-        "level": 2,
-        "volatility": 1,
-        "tier1_macro": 1,
-        "rr": 1,
-        "total": 6
-      }
-    },
-    "conflicts_resolved": [
-      "A reálhozam magas és enyhén emelkedő, ami XAU-short bias, miközben a nominális US10Y esik és a DXY gyengül → a rendszer szerint a reálhozam a vezető driver, ezért a tiszta trend-shortot favorálná, de a mozgás nem elég agresszív, így csak a trend-követő space szűk, szint-alapú long/short marad.",
-      "Intraday RANGE-BEAR, HTF RANGE és alacsony vol ütközik a napi enyhe LONG-bias-szal → emiatt csak szélső szinteknél vállalható elméletileg értelmes RR, a közép-zóna (4105-4120) gyakorlatilag NO-TRADE terület.",
-      "Breakeven infláció és COT adat részben stale/pending, ezért extrém pozicionáltságra vagy finom reálhozam-szignálra épített trend-trade tiltva, csak HTF kulcsszintre épített intraday setup tervezhető."
-    ],
+    "narrative": "⚠️ Nincs PERPLEXITY_API_KEY — AI elemzés kihagyva.",
+    "key_watch": [],
+    "reasoning_summary": "",
+    "confidence": null,
     "model": "sonar-pro",
-    "source_type": "ai",
-    "updated_at": "2026-07-10T12:11:51+02:00"
+    "source_type": "ai-fallback",
+    "updated_at": "2026-07-11T10:05:09+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -330,6 +198,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-10T21:35:59+02:00"
+    "updated_at": "2026-07-11T10:05:23+02:00"
   }
 }
