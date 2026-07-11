@@ -33,7 +33,7 @@ def _http_json(url, extra_headers=None, timeout=15):
         return json.loads(resp.read().decode("utf-8"))
 
 
-def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
+def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None, impact=None):
     """Megprobalja lekerni az adatot; hiba eseten elozo erteket tart meg."""
     try:
         value = fetch_fn()
@@ -41,7 +41,7 @@ def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
             return keep_previous(prev_field, "ures valasz")
         bias = bias_fn(value) if bias_fn else None
         return field(value, source_type="auto", source_label=source_label,
-                     source_url=source_url, bias=bias)
+                     source_url=source_url, bias=bias, impact=impact)
     except Exception as e:
         return keep_previous(prev_field, f"{source_label} hiba: {e}")
 
@@ -145,10 +145,10 @@ def main():
             "source_stack": ["economic-calendar", "fedwatch", "reuters", "cnn-fear-greed", "tradingview"],
         },
         "macro": {
-            "fedwatch": safe(fetch_fedwatch, prev_macro.get("fedwatch"), "CME Fed Funds futures (ZQ=F)", "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"),
-            "us10y": safe(fetch_us10y, prev_macro.get("us10y"), "US10Y yield - Yahoo Finance", "https://finance.yahoo.com/quote/%5ETNX", bias_us10y),
-            "dxy": safe(fetch_dxy, prev_macro.get("dxy"), "DXY - Yahoo Finance", "https://finance.yahoo.com/quote/DX-Y.NYB"),
-            "sentiment": safe(fetch_sentiment, prev_macro.get("sentiment"), "CNN Fear & Greed Index", "https://edition.cnn.com/markets/fear-and-greed"),
+            "fedwatch": safe(fetch_fedwatch, prev_macro.get("fedwatch"), "CME Fed Funds futures (ZQ=F)", "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html", impact=3),
+            "us10y": safe(fetch_us10y, prev_macro.get("us10y"), "US10Y yield - Yahoo Finance", "https://finance.yahoo.com/quote/%5ETNX", bias_us10y, impact=3),
+            "dxy": safe(fetch_dxy, prev_macro.get("dxy"), "DXY - Yahoo Finance", "https://finance.yahoo.com/quote/DX-Y.NYB", impact=3),
+            "sentiment": safe(fetch_sentiment, prev_macro.get("sentiment"), "CNN Fear & Greed Index", "https://edition.cnn.com/markets/fear-and-greed", impact=2),
         },
         "header": {
             "xau_spot": safe(fetch_xau_spot, prev_header.get("xau_spot"), "XAU/USD spot - Yahoo Finance (GC=F)"),
