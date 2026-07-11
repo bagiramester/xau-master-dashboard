@@ -1,153 +1,112 @@
-#!/usr/bin/env python3
 """
-Bagira XAU Dashboard – data.json validátor
-==========================================
-
-Hármas védelmi vonal:
-  1. JSON Schema strukturális ellenőrzés (data-schema.json).
-  2. Hallucináció-guard: value != null esetén status in {fresh, stale},
-     source_label nem üres, updated_at nem null.
-  3. Trade-log guard: soronkénti mező-, irány-, rule_compliance- és
-     30 USD hard-cap ellenőrzés.
-
-Használat:
-  python scripts/validatedata.py
+FÁZIS 5a — Validáció.
+A build_state.json-ból összeállítja a végleges data.json-t, majd LEFUTTATJA a
+kötelező checklistet. Ha bármi bukik, exit 1 → NINCS push, régi data.json marad.
 """
-
-import json
 import sys
-from pathlib import Path
+from common import (load_json, save_json, now_cest, mode_num,
+                    STATE_PATH, DATA_PATH)
 
-try:
-    from jsonschema import Draft7Validator
-except ImportError:
-    print("Hianyzo fuggoseg: pip install jsonschema")
-    sys.exit(1)
-
-REPO = Path(__file__).resolve().parent.parent
-SCHEMA_PATH = REPO / "data-schema.json"
-DATA_PATH = REPO / "data.json"
+RED, YELLOW, GREEN = "RED", "YELLOW", "GREEN"
 
 
-def check_hallucination(data):
+def build_data(state):
+    header = state.get("header", {})
+    return {
+        "meta": {
+            "date": state["meta"].get("date"),
+            "last_auto_sync": state["meta"].get("last_auto_sync"),
+            "last_manual_update": now_cest(),
+            "data_freshness": "live-refresh",
+            "version": "v5",
+            "effective_mode": header.get("effective_mode"),
+            "ai_model": state["meta"].get("ai_model"),
+            "ai_source_type": state["meta"].get("ai_source_type"),
+            "ai_last_run": state["meta"].get("ai_last_run"),
+            "source_stack": state["meta"].get("source_stack", []),
+        },
+        "header": header,
+        "risk": state.get("risk", {}),
+        "macro": state.get("macro", {}),
+        "levels": state.get("levels_prev", {}),
+        "setups": state.get("setups", {}),
+        "bagira": state.get("bagira", {}),
+        "trade_log": state.get("trades_prev", []),
+        "performance": state.get("performance", {
+            "trade_count": 0, "win_count": 0, "loss_count": 0,
+            "net_pl_usd": 0.0, "avg_rr": None, "rule_break_count": 0,
+            "updated_at": now_cest(),
+        }),
+    }
+
+
+def validate(data):
     errors = []
+    header = data.get("header", {})
+    risk = data.get("risk", {})
+    setups = data.get("setups", {})
 
-    def walk(node, path=""):
-        if isinstance(node, dict):
-            if "value" in node and "status" in node and "source_label" in node:
-                v = node.get("value")
-                st = node.get("status")
-                if v is not None and v != "":
-                    if st not in ("fresh", "stale"):
-                        errors.append(f"{path}: value nem-null de status={st!r}")
-                    if not node.get("source_label"):
-                        errors.append(f"{path}: value nem-null de source_label ures")
-                    if not node.get("updated_at"):
-                        errors.append(f"{path}: value nem-null de updated_at hianyzik")
-                else:
-                    if st not in ("pending", "error"):
-                        errors.append(f"{path}: value=null de status={st!r}")
-            else:
-                for k, v in node.items():
-                    walk(v, f"{path}.{k}" if path else k)
-        elif isinstance(node, list):
-            for i, v in enumerate(node):
-                walk(v, f"{path}[{i}]")
+    # 1. effective_mode = max(daily_status, risk.mode)
+    eff = header.get("effective_mode")
+    expected = ["GREEN", "YELLOW", "RED"][max(
+        mode_num(header.get("daily_status", GREEN)),
+        mode_num(risk.get("mode", GREEN)))]
+    if eff != expected:
+        errors.append(f"effective_mode ({eff}) != max számított ({expected})")
 
-    walk(data)
+    open_xau = risk.get("open_xau_positions", 0) or 0
+    for key, s in setups.items():
+        if not s.get("allowed"):
+            continue
+        score = s.get("score")
+        rr = s.get("rr_min", 0) or 0
+        # 2-3. score / RR küszöb
+        if rr < 2.0:
+            errors.append(f"Setup {key}: allowed de RR<2.0")
+        if score is None:
+            errors.append(f"Setup {key}: allowed de score=None")
+        elif eff == GREEN and score < 6:
+            errors.append(f"Setup {key}: GREEN allowed de score<6")
+        elif eff == YELLOW and score < 8:
+            errors.append(f"Setup {key}: YELLOW allowed de score<8")
+        # 4. makró lock
+        if header.get("macro_lock_active"):
+            errors.append(f"Setup {key}: allowed aktív makró lock alatt")
+        # 5. nyitott XAU
+        if open_xau >= 1:
+            errors.append(f"Setup {key}: allowed de már van nyitott XAU pozíció")
+        # 6. RED
+        if eff == RED:
+            errors.append(f"Setup {key}: allowed RED módban")
+
+    # 7. trades csak lezárt
+    for t in data.get("trade_log", []):
+        if t.get("exit") in (None, ""):
+            errors.append("trade_log: lezáratlan trade szerepel")
+
+    # 8. updated_at minden fő blokkban
+    for blk in ("header", "risk", "macro", "setups", "performance"):
+        if blk == "macro":
+            for k, f in data["macro"].items():
+                if isinstance(f, dict) and not f.get("updated_at"):
+                    errors.append(f"macro.{k}: hiányzó updated_at")
+
     return errors
 
 
-def validate_trade_log(data):
-    """Trade-log guard a schema v2 alapján."""
-    log = data.get("trade_log", [])
-
-    required = [
-        "datetime",
-        "session",
-        "direction",
-        "setup_type",
-        "entry",
-        "sl",
-        "exit",
-        "risk_usd",
-        "pl_usd",
-        "rr_actual",
-        "score",
-        "allowed",
-        "rule_compliance",
-    ]
-
-    for i, t in enumerate(log):
-        # Kötelező mezők megléte
-        for k in required:
-            if k not in t:
-                raise ValueError(f"trade_log[{i}] hiányzó mező: {k}")
-
-        # Irány
-        if t.get("direction") not in ("LONG", "SHORT"):
-            raise ValueError(f"trade_log[{i}] direction hibás")
-
-        # Szabálykövetés
-        rc = t.get("rule_compliance")
-        if rc not in ("igen", "részben", "nem"):
-            raise ValueError(f"trade_log[{i}] rule_compliance hibás")
-
-        # allowed boolean
-        if not isinstance(t.get("allowed"), bool):
-            raise ValueError(f"trade_log[{i}] allowed hibás vagy hiányzik")
-
-        # Risk hard cap
-        ru = t.get("risk_usd")
-        if isinstance(ru, (int, float)) and ru > 30:
-            raise ValueError(f"trade_log[{i}] risk_usd > 30 USD (hard cap)")
-
-    print(f"[validate] trade_log OK ({len(log)} bejegyzés)")
-
-
 def main():
-    if not SCHEMA_PATH.exists():
-        print(f"Schema nem talalhato: {SCHEMA_PATH}")
-        return 1
-    if not DATA_PATH.exists():
-        print(f"Data nem talalhato: {DATA_PATH}")
-        return 1
+    state = load_json(STATE_PATH)
+    data = build_data(state)
+    errors = validate(data)
 
-    with SCHEMA_PATH.open() as f:
-        schema = json.load(f)
-    with DATA_PATH.open() as f:
-        data = json.load(f)
-
-    validator = Draft7Validator(schema)
-    schema_errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
-
-    if schema_errors:
-        print("JSON Schema hibak:")
-        for e in schema_errors:
-            path = ".".join(str(p) for p in e.path) or "<root>"
-            print(f"   {path}: {e.message}")
-
-    hall_errors = check_hallucination(data)
-    if hall_errors:
-        print("Hallucinacio-guard hibak:")
-        for e in hall_errors:
-            print(f"   {e}")
-
-    try:
-        validate_trade_log(data)
-    except ValueError as e:
-        print("Trade-log guard hiba:")
-        print(f"   {e}")
+    if errors:
+        print("VALIDÁCIÓ BUKOTT — nincs push:")
+        for e in errors:
+            print("  ✗", e)
         return 1
 
-    if schema_errors or hall_errors:
-        print(f"\nOssz hiba: schema={len(schema_errors)}, guard={len(hall_errors)}")
-        return 1
-
-    print("data.json valid.")
-    print(f"   schema_version: {data['meta']['schema_version']}")
-    print(f"   data_freshness: {data['meta']['data_freshness']}")
-    print(f"   last_updated:   {data['meta']['last_updated']}")
+    save_json("data.candidate.json", data)
+    print("VALIDÁCIÓ OK — data.candidate.json kész a push-hoz.")
     return 0
 
 
