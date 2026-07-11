@@ -1,14 +1,14 @@
 {
   "meta": {
     "date": "2026-07-11",
-    "last_auto_sync": "2026-07-11T10:41:11+02:00",
-    "last_manual_update": "2026-07-11T10:41:58+02:00",
+    "last_auto_sync": "2026-07-11T12:46:00+02:00",
+    "last_manual_update": "2026-07-11T12:46:44+02:00",
     "data_freshness": "live-refresh",
     "version": "v5",
     "effective_mode": "YELLOW",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai",
-    "ai_last_run": "2026-07-11T10:41:50+02:00",
+    "ai_last_run": "2026-07-11T12:46:32+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -23,13 +23,17 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
-      "updated_at": "2026-07-11T10:41:12+02:00"
+      "updated_at": "2026-07-11T12:46:01+02:00"
     },
     "date": "2026-07-11",
     "macro_events_today": [
       {
         "time": "05:00",
         "event": "IEA Monthly Report"
+      },
+      {
+        "time": "11:00",
+        "event": "Fed Monetary Policy Report"
       },
       {
         "time": "12:00",
@@ -118,7 +122,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CME Fed Funds futures (ZQ=F)",
-      "updated_at": "2026-07-11T10:41:11+02:00",
+      "updated_at": "2026-07-11T12:46:00+02:00",
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "impact": 3
     },
@@ -127,7 +131,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "US10Y yield - Yahoo Finance",
-      "updated_at": "2026-07-11T10:41:11+02:00",
+      "updated_at": "2026-07-11T12:46:01+02:00",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
       "bias": "RED",
       "impact": 3
@@ -137,7 +141,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "DXY - Yahoo Finance",
-      "updated_at": "2026-07-11T10:41:11+02:00",
+      "updated_at": "2026-07-11T12:46:01+02:00",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
       "impact": 3
     },
@@ -146,7 +150,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
-      "updated_at": "2026-07-11T10:41:12+02:00",
+      "updated_at": "2026-07-11T12:46:01+02:00",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
       "impact": 2
     }
@@ -227,7 +231,7 @@
       "session": "London 09:00–12:00 CEST",
       "allowed": false,
       "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T10:41:23+02:00"
+      "updated_at": "2026-07-11T12:46:15+02:00"
     },
     "B": {
       "direction": "SHORT",
@@ -238,23 +242,29 @@
       "session": "London / Overlap",
       "allowed": false,
       "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T10:41:23+02:00"
+      "updated_at": "2026-07-11T12:46:15+02:00"
     }
   },
   "bagira": {
-    "narrative": "A makrokép semleges: FedWatch enyhén alacsonyabb kamatot jelez, a 10 éves hozam viszont magas, a DXY közel 101-en erős dollárt mutat, a Fear&Greed 49 tiszta középzóna, tehát nincs extrém kockázati hangulat. Az XAU spot 4104 körül, a technikai összkép rövid távon inkább enyhe eladói bias, de túlzó irányjelzés nélkül. Effective mode és daily status YELLOW, Setup A és B tiltva – ez összességében azt üzeni: most a fő feladat a pozíciók védelme, új iránykockázat vállalása helyett a piaci szintek és volatilitás megfigyelése.",
+    "narrative": "YELLOW környezetben az XAU:CFD továbbra is óvatos, védekező megközelítést kér: a napi státusz YELLOW, a DXY erős (100.97), a US10Y magas (4.57%), miközben a Fear & Greed középen van (49), ezért az irány nem egyértelmű, de a kockázatoldal inkább feszes. A megadott adatok alapján nincs érvényes setup, ezért most a fő feladat a szintfigyelés és a kivárás, nem a kényszerbelépő.",
     "key_watch": [
-      "DXY 100.97 körüli zóna – erősödő dollár további nyomást gyakorolhat az aranyra, gyengülés enyhítheti a down-biast[2].",
-      "US10Y 4.57% – tartósan magas hozam aranyra negatív, hozamcsökkenés támogatná az XAU-t[2].",
-      "XAU spot 4104.10 és közeli pivot/fib szintek (kb. 4101–4102; S1/R1 zónák)[6] – ezek körül várható likviditás és rövid távú irányjelzés.",
-      "Technikai összkép: napi XAU/USD jelzés 'Sell', a mozgóátlagok többsége eladói[6] – trendkövetők számára fontos, de RSI ~48 semleges, MACD enyhén vételi, tehát nem egyértelmű trendhelyzet.",
-      "Volatilitás- és híresemények figyelése – magas tőkeáttételes CFD-knél a hirtelen mozgások komoly kockázatot jelentenek[1][4][8]."
+      "DXY: 100.97",
+      "US10Y: 4.57%",
+      "FedWatch implied FFR: 3.63%",
+      "Fear & Greed: 49",
+      "XAU spot: 4104.10",
+      "Daily status: YELLOW",
+      "Effective mode: YELLOW"
     ],
-    "reasoning_summary": "Effective és daily status YELLOW mellett a kockázatkezelési fókusz a tőke védelme, nem az agresszív pozíciónyitás. A CFD-k esetében a magas tőkeáttétel miatt már mérsékelt ármozgás is jelentős számla‑ingadozást okozhat, ezért ilyen üzemmódban a tananyagok általános irányelvei szerint a kitettség csökkentése, az egy trade-re eső kockázat 1–2% alatti szinten tartása, kötelező stop‑loss használata és a margin‑szintek folyamatos ellenőrzése javasolt[1][4][8]. Setup A és B tiltása kifejezetten azt jelzi, hogy az aktuális környezetben egyik ismert belépési sémára sincs elegendő megerősítés: sem fundamentális, sem technikai oldalról nincs olyan aszimmetria, ami indokolná az iránykockázat felvételét.\n\nA makroadatokból: a FedWatch által jelzett implied FFR 3.63% a piac kamatvárakozásait tükrözi, míg a 4.57%-os 10 éves hozam a hosszú oldalon feszes pénzpiaci környezetet mutat – történelmileg a magas hozamok inkább nyomást gyakorolnak a nem kamatozó eszközökre, így az aranyra[2]. Az erős DXY (100.97) klasszikusan negatív korrelációban mozog az XAU/USD-vel, tehát a dollár további erősödése növeli az arany‑árfolyam további gyengülésének kockázatát[2]. A Fear&Greed index 49-es értéke semleges kockázati étvágyat jelez, ami nem támogatja sem extrém menekülést a safe haven eszközökbe, sem agresszív kockázatvállalást.\n\nTechnikai oldalról a rendelkezésre álló összesített jelzés XAU/USD-re 'Sell', a mozgóátlagok többsége szintén eladói képet mutat[6]. Ugyanakkor az RSI ~48 semleges tartományban van, ami nem erősíti a túladott vagy túlvett narratívát, a MACD enyhe vételi jelzése pedig arra utal, hogy a lejtmenet nem egyértelműen domináns és rövid távú korrekciók könnyen kialakulhatnak[6]. A közelben található pivot‑szintek (kb. 4101–4102 környéke, S1/R1 zónák) rövid távú likviditási és döntési pontként szolgálnak; YELLOW módban ezek környékén a hangsúly a megfigyelésen, nem a belépésen van[6].\n\nMivel Setup A és B nem engedélyezett, konkrét belépési setupot nem alkalmazunk: a tiltás indoka, hogy a fundamentális és technikai jelek vegyesek, nincs tiszta trend‑ vagy fordulós jelzés, miközben a CFD‑tőkeáttétel önmagában magas kockázatot hordoz[1][4][8]. Ilyenkor Bagira‑szinten a \"defenzív\" protokoll lép életbe: pozícióméretek limitálása, új pozíciók kerülése, a meglévő XAU:CFD kitettségek stop‑lossainak felülvizsgálata, kiegészítve a kulcs makró‑ és technikai szintek célzott figyelésével. A jelenlegi adatbázis nem tartalmaz sem pontos volatilitás‑, sem trend‑erősség mérőszámokat, így score‑t nem határozunk meg, és nem teszünk kilépési vagy belépési javaslatot – ez összhangban van azzal a kockázatkezelési elvvel, hogy adat‑hiányban nem növeljük a kitettséget[1].",
-    "confidence": 78,
+    "reasoning_summary": {
+      "setup_A": "Setup A nem engedélyezett, ezért nincs valid trade-érvényesítés; kockázatkezelési szempontból ez azt jelenti, hogy a jelenlegi piaci környezetben nem teljesülnek a belépési feltételek.",
+      "setup_B": "Setup B sem engedélyezett, így nincs számolható score és nincs alátámasztott setup-minőség; a megadott adatokból csak annyi mondható, hogy a rendszer szerint a belépés most nem indokolt.",
+      "risk_view": "A magasabb US10Y és az erős DXY általában nem támogatja a könnyű long környezetet aranynál, ezért a jelenlegi állapot inkább kivárást és szigorú stop-diszciplinát indokol."
+    },
+    "confidence": 94,
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-07-11T10:41:50+02:00"
+    "updated_at": "2026-07-11T12:46:32+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -264,6 +274,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-11T10:41:58+02:00"
+    "updated_at": "2026-07-11T12:46:44+02:00"
   }
 }
