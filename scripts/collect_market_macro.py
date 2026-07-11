@@ -6,10 +6,13 @@ Kimenet: build_state.json (nem data.json - azt csak a push irja).
 import sys
 import json
 import urllib.request
+from datetime import datetime, timezone, timedelta
 from common import (load_json, save_json, field, keep_previous, now_cest,
                     today_cest, DATA_PATH, STATE_PATH)
 
 import yfinance as yf
+
+CEST = timezone(timedelta(hours=2))
 
 
 def safe(fetch_fn, prev_field, source_label, source_url=None, bias_fn=None):
@@ -54,7 +57,11 @@ def fetch_dxy():
 
 
 def fetch_fedwatch():
-    return "n/a"
+    price = _last_close("ZQ=F")
+    if price is None:
+        return None
+    implied = 100.0 - price
+    return f"implied FFR {implied:.2f}% (30d Fed Funds fut.)"
 
 
 def fetch_sentiment():
@@ -69,7 +76,33 @@ def fetch_sentiment():
 
 
 def fetch_calendar():
-    raise NotImplementedError("Economic calendar lekeres ide")
+    """Aznapi magas hatasu USD esemenyek + no-trade ablakok.
+    Forras: nasdaq economic calendar (kulcs nelkul). Hiba eseten kivetel,
+    a main() az elozo erteket tartja meg."""
+    today = today_cest()
+    url = ("https://api.nasdaq.com/api/calendar/economicevents?date=" + today)
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        payload = json.loads(resp.read().decode("utf-8"))
+    rows = (payload.get("data") or {}).get("rows") or []
+    events = []
+    windows = []
+    for r in rows:
+        country = (r.get("country") or "").strip()
+        if country not in ("United States", "US", "USA"):
+            continue
+        gmt = (r.get("gmt") or r.get("time") or "").strip()
+        name = (r.get("eventName") or r.get("event") or "").strip()
+        if not name:
+            continue
+        events.append({"time": gmt, "event": name})
+        upper = name.upper()
+        if any(k in upper for k in ("NONFARM", "NFP", "CPI", "FOMC", "RATE DECISION", "POWELL")):
+            windows.append({"event": name, "time": gmt, "buffer_min": 30})
+    return {"events": events, "windows": windows}
 
 
 def bias_us10y(v):
@@ -91,7 +124,7 @@ def main():
             "source_stack": ["economic-calendar", "fedwatch", "reuters", "cnn-fear-greed", "tradingview"],
         },
         "macro": {
-            "fedwatch": safe(fetch_fedwatch, prev_macro.get("fedwatch"), "CME FedWatch", "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"),
+            "fedwatch": safe(fetch_fedwatch, prev_macro.get("fedwatch"), "CME Fed Funds futures (ZQ=F)", "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"),
             "us10y": safe(fetch_us10y, prev_macro.get("us10y"), "US10Y yield - Yahoo Finance", "https://finance.yahoo.com/quote/%5ETNX", bias_us10y),
             "dxy": safe(fetch_dxy, prev_macro.get("dxy"), "DXY - Yahoo Finance", "https://finance.yahoo.com/quote/DX-Y.NYB"),
             "sentiment": safe(fetch_sentiment, prev_macro.get("sentiment"), "CNN Fear & Greed Index", "https://edition.cnn.com/markets/fear-and-greed"),
