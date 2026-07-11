@@ -1,14 +1,14 @@
 {
   "meta": {
     "date": "2026-07-11",
-    "last_auto_sync": "2026-07-11T12:46:00+02:00",
-    "last_manual_update": "2026-07-11T12:46:44+02:00",
+    "last_auto_sync": "2026-07-11T15:12:42+02:00",
+    "last_manual_update": "2026-07-11T15:14:14+02:00",
     "data_freshness": "live-refresh",
     "version": "v5",
     "effective_mode": "YELLOW",
-    "ai_model": "sonar-pro",
-    "ai_source_type": "ai",
-    "ai_last_run": "2026-07-11T12:46:32+02:00",
+    "ai_model": null,
+    "ai_source_type": "ai-fallback",
+    "ai_last_run": "2026-07-11T15:14:05+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -23,7 +23,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
-      "updated_at": "2026-07-11T12:46:01+02:00"
+      "updated_at": "2026-07-11T15:12:43+02:00"
     },
     "date": "2026-07-11",
     "macro_events_today": [
@@ -122,7 +122,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CME Fed Funds futures (ZQ=F)",
-      "updated_at": "2026-07-11T12:46:00+02:00",
+      "updated_at": "2026-07-11T15:12:42+02:00",
       "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
       "impact": 3
     },
@@ -131,7 +131,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "US10Y yield - Yahoo Finance",
-      "updated_at": "2026-07-11T12:46:01+02:00",
+      "updated_at": "2026-07-11T15:12:42+02:00",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
       "bias": "RED",
       "impact": 3
@@ -141,7 +141,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "DXY - Yahoo Finance",
-      "updated_at": "2026-07-11T12:46:01+02:00",
+      "updated_at": "2026-07-11T15:12:42+02:00",
       "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
       "impact": 3
     },
@@ -150,7 +150,7 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
-      "updated_at": "2026-07-11T12:46:01+02:00",
+      "updated_at": "2026-07-11T15:12:42+02:00",
       "source_url": "https://edition.cnn.com/markets/fear-and-greed",
       "impact": 2
     }
@@ -223,48 +223,46 @@
   },
   "setups": {
     "A": {
-      "direction": "SHORT",
-      "type": "HTF sell zóna reakció",
-      "rr_min": 2.0,
-      "score": null,
-      "confirmed": "pending",
-      "session": "London 09:00–12:00 CEST",
-      "allowed": false,
-      "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T12:46:15+02:00"
+      "ai_state": "PENDING",
+      "source_type": "auto",
+      "value": {
+        "direction": "SHORT",
+        "type": "HTF sell zóna reakció",
+        "rr_min": 2.0,
+        "score": null,
+        "confirmed": "pending",
+        "session": "London 09:00–12:00 CEST",
+        "allowed": false,
+        "locked_reason": "Score nem meghatározható",
+        "updated_at": "2026-07-11T15:12:52+02:00"
+      }
     },
     "B": {
-      "direction": "SHORT",
-      "type": "Intraday range breakdown",
-      "rr_min": 2.0,
-      "score": null,
-      "confirmed": "pending",
-      "session": "London / Overlap",
-      "allowed": false,
-      "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T12:46:15+02:00"
+      "ai_state": "PENDING",
+      "source_type": "auto",
+      "value": {
+        "direction": "LONG",
+        "type": "HTF demand zóna reakció",
+        "rr_min": 2.0,
+        "score": null,
+        "confirmed": "pending",
+        "session": "London / Overlap",
+        "allowed": false,
+        "locked_reason": "Score nem meghatározható",
+        "updated_at": "2026-07-11T15:12:52+02:00"
+      }
     }
   },
   "bagira": {
-    "narrative": "YELLOW környezetben az XAU:CFD továbbra is óvatos, védekező megközelítést kér: a napi státusz YELLOW, a DXY erős (100.97), a US10Y magas (4.57%), miközben a Fear & Greed középen van (49), ezért az irány nem egyértelmű, de a kockázatoldal inkább feszes. A megadott adatok alapján nincs érvényes setup, ezért most a fő feladat a szintfigyelés és a kivárás, nem a kényszerbelépő.",
-    "key_watch": [
-      "DXY: 100.97",
-      "US10Y: 4.57%",
-      "FedWatch implied FFR: 3.63%",
-      "Fear & Greed: 49",
-      "XAU spot: 4104.10",
-      "Daily status: YELLOW",
-      "Effective mode: YELLOW"
-    ],
-    "reasoning_summary": {
-      "setup_A": "Setup A nem engedélyezett, ezért nincs valid trade-érvényesítés; kockázatkezelési szempontból ez azt jelenti, hogy a jelenlegi piaci környezetben nem teljesülnek a belépési feltételek.",
-      "setup_B": "Setup B sem engedélyezett, így nincs számolható score és nincs alátámasztott setup-minőség; a megadott adatokból csak annyi mondható, hogy a rendszer szerint a belépés most nem indokolt.",
-      "risk_view": "A magasabb US10Y és az erős DXY általában nem támogatja a könnyű long környezetet aranynál, ezért a jelenlegi állapot inkább kivárást és szigorú stop-diszciplinát indokol."
-    },
-    "confidence": 94,
+    "narrative": "⚠️ AI minőségi kapu nem teljesült (3 iteráció, legjobb önértékelés: 0/100, küszöb: 95). A setupok nem frissültek — a korábbi/zárolt állapot érvényes. Fő hiányosságok: Setup A: számolt RR 1.61 < 2.0",
+    "key_watch": [],
+    "reasoning_summary": "",
+    "confidence": 0,
+    "ai_self_score": 0,
+    "ai_iterations": 3,
     "model": "sonar-pro",
-    "source_type": "ai",
-    "updated_at": "2026-07-11T12:46:32+02:00"
+    "source_type": "ai-fallback",
+    "updated_at": "2026-07-11T15:14:05+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -274,6 +272,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-11T12:46:44+02:00"
+    "updated_at": "2026-07-11T15:14:14+02:00"
   }
 }
