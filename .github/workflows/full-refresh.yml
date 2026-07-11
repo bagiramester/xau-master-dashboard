@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
-      - name: Piaci és makró adatgyűjtés
+      - name: Piaci es makro adatgyujtes
         run: python scripts/collect_market_macro.py
       - name: Kritikus adat gate
         run: python scripts/collect_gate_check.py
@@ -48,9 +48,9 @@ jobs:
         with: { python-version: "3.12" }
       - uses: actions/download-artifact@v4
         with: { name: build-state }
-      - name: Bagira AI elemzés
+      - name: Bagira AI elemzes
         env:
-          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.BAGIRA_XAU_MASTER }}
           PERPLEXITY_MODEL: sonar-pro
         run: python scripts/bagira_ai.py
       - uses: actions/upload-artifact@v4
@@ -65,18 +65,18 @@ jobs:
         with: { python-version: "3.12" }
       - uses: actions/download-artifact@v4
         with: { name: build-state }
-      - name: Validáció (kötelező checklist)
+      - name: Validacio (kotelezo checklist)
         run: python scripts/validate_data.py
-      - name: data.json írása
+      - name: data.json iras
         run: python scripts/push_data.py
       - name: Commit & push
         run: |
-          git config user.name  "bagira-refresh-bot"
+          git config user.name "bagira-refresh-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data.json
           if git diff --cached --quiet; then
-            echo "Nincs változás — nincs commit."
+            echo "Nincs valtozas - nincs commit."
           else
-            git commit -m "data: full-refresh $(date -u +%F' '%T) UTC – manual button run"
+            git commit -m "data: full-refresh $(date -u +%F' '%T) UTC - manual button run"
             git push
           fi
