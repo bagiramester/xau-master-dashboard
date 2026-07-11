@@ -1,0 +1,82 @@
+name: full-refresh
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: full-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - name: Piaci és makró adatgyűjtés
+        run: python scripts/collect_market_macro.py
+      - name: Kritikus adat gate
+        run: python scripts/collect_gate_check.py
+      - uses: actions/upload-artifact@v4
+        with: { name: build-state, path: build_state.json }
+
+  assemble-state:
+    needs: collect-data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/download-artifact@v4
+        with: { name: build-state }
+      - name: Effective mode + setup logika
+        run: python scripts/assemble_state.py
+      - uses: actions/upload-artifact@v4
+        with: { name: build-state, overwrite: true, path: build_state.json }
+
+  bagira-ai:
+    needs: assemble-state
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/download-artifact@v4
+        with: { name: build-state }
+      - name: Bagira AI elemzés
+        env:
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          PERPLEXITY_MODEL: sonar-pro
+        run: python scripts/bagira_ai.py
+      - uses: actions/upload-artifact@v4
+        with: { name: build-state, overwrite: true, path: build_state.json }
+
+  validate-and-push:
+    needs: bagira-ai
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/download-artifact@v4
+        with: { name: build-state }
+      - name: Validáció (kötelező checklist)
+        run: python scripts/validate_data.py
+      - name: data.json írása
+        run: python scripts/push_data.py
+      - name: Commit & push
+        run: |
+          git config user.name  "bagira-refresh-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "Nincs változás — nincs commit."
+          else
+            git commit -m "data: full-refresh $(date -u +%F' '%T) UTC – manual button run"
+            git push
+          fi
