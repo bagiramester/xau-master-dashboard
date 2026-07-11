@@ -1,14 +1,14 @@
 {
   "meta": {
     "date": "2026-07-11",
-    "last_auto_sync": "2026-07-11T10:33:33+02:00",
-    "last_manual_update": "2026-07-11T10:34:22+02:00",
+    "last_auto_sync": "2026-07-11T10:41:11+02:00",
+    "last_manual_update": "2026-07-11T10:41:58+02:00",
     "data_freshness": "live-refresh",
     "version": "v5",
     "effective_mode": "YELLOW",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai",
-    "ai_last_run": "2026-07-11T10:34:12+02:00",
+    "ai_last_run": "2026-07-11T10:41:50+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -23,17 +23,13 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
-      "updated_at": "2026-07-11T10:33:33+02:00"
+      "updated_at": "2026-07-11T10:41:12+02:00"
     },
     "date": "2026-07-11",
     "macro_events_today": [
       {
         "time": "05:00",
         "event": "IEA Monthly Report"
-      },
-      {
-        "time": "11:00",
-        "event": "Fed Monetary Policy Report"
       },
       {
         "time": "12:00",
@@ -122,33 +118,37 @@
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CME Fed Funds futures (ZQ=F)",
-      "updated_at": "2026-07-11T10:33:33+02:00",
-      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
+      "updated_at": "2026-07-11T10:41:11+02:00",
+      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+      "impact": 3
     },
     "us10y": {
       "value": "4.57%",
       "status": "fresh",
       "source_type": "auto",
       "source_label": "US10Y yield - Yahoo Finance",
-      "updated_at": "2026-07-11T10:33:33+02:00",
+      "updated_at": "2026-07-11T10:41:11+02:00",
       "source_url": "https://finance.yahoo.com/quote/%5ETNX",
-      "bias": "RED"
+      "bias": "RED",
+      "impact": 3
     },
     "dxy": {
       "value": "100.97",
       "status": "fresh",
       "source_type": "auto",
       "source_label": "DXY - Yahoo Finance",
-      "updated_at": "2026-07-11T10:33:33+02:00",
-      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB"
+      "updated_at": "2026-07-11T10:41:11+02:00",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "impact": 3
     },
     "sentiment": {
       "value": 49,
       "status": "fresh",
       "source_type": "auto",
       "source_label": "CNN Fear & Greed Index",
-      "updated_at": "2026-07-11T10:33:33+02:00",
-      "source_url": "https://edition.cnn.com/markets/fear-and-greed"
+      "updated_at": "2026-07-11T10:41:12+02:00",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "impact": 2
     }
   },
   "levels": {
@@ -227,7 +227,7 @@
       "session": "London 09:00–12:00 CEST",
       "allowed": false,
       "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T10:33:46+02:00"
+      "updated_at": "2026-07-11T10:41:23+02:00"
     },
     "B": {
       "direction": "SHORT",
@@ -238,24 +238,23 @@
       "session": "London / Overlap",
       "allowed": false,
       "locked_reason": "Score nem meghatározható",
-      "updated_at": "2026-07-11T10:33:46+02:00"
+      "updated_at": "2026-07-11T10:41:23+02:00"
     }
   },
   "bagira": {
-    "narrative": "A makrokép vegyes, enyhén kockázatkerülő hangulattal: a 10 éves US hozam 4.57% mellett feszes, a DXY 100.97 közelében erősödő dollárt jelez, miközben a Fear&Greed 49 semleges piaci érzelmi állapotot mutat. XAU spot 4104.10 körül oldalaz, a technikai jelzések összesített képe inkább enyhén short-bias, de nem extrém; a FedWatch implied FFR 3.63% rövid távon mérsékelt kamatvárakozást tükröz. Effective és Daily YELLOW státusz, valamint a tiltott A/B setupok arra utalnak, hogy ma a fő fókusz a kockázatkerülés: új iránytréd helyett pozícióméret, margin és hedge kontroll, illetve meglévő kitettségek védelme az elsődleges.",
+    "narrative": "A makrokép semleges: FedWatch enyhén alacsonyabb kamatot jelez, a 10 éves hozam viszont magas, a DXY közel 101-en erős dollárt mutat, a Fear&Greed 49 tiszta középzóna, tehát nincs extrém kockázati hangulat. Az XAU spot 4104 körül, a technikai összkép rövid távon inkább enyhe eladói bias, de túlzó irányjelzés nélkül. Effective mode és daily status YELLOW, Setup A és B tiltva – ez összességében azt üzeni: most a fő feladat a pozíciók védelme, új iránykockázat vállalása helyett a piaci szintek és volatilitás megfigyelése.",
     "key_watch": [
-      "US10Y 4.57% – magasabb hozam nyomást gyakorolhat az aranyra, új hozamcsúcsok esetén XAU további gyengeség kockázata.",
-      "DXY 100.97 – erősödő dollár; tartósan 101 fölött esetén fokozott lefelé irányú nyomás XAU-ra.",
-      "XAU spot 4104.10 – pivot zóna a közelben (Woodie/DeMark 4098–4102), tartománytörés 4088 alatt vagy 4110 fölött érdemi irányt adhat.[7]",
-      "Technikai összkép: napi összegzés Strong Sell, több MA Sell, RSI ~48 (semleges), MACD és rövidebb MA-k viszont Buy – vegyes, de kismértékben short-os torzítás.[7]",
-      "Fear&Greed 49 – semleges hangulat; hirtelen elmozdulás 40 alatt vagy 60 fölé fordulópontot jelezhet a kockázati étvágyban.",
-      "FedWatch implied FFR 3.63% – kamatvárakozások változása (különösen hawkish elmozdulás) tovább növelheti a hozamnyomást az aranyra."
+      "DXY 100.97 körüli zóna – erősödő dollár további nyomást gyakorolhat az aranyra, gyengülés enyhítheti a down-biast[2].",
+      "US10Y 4.57% – tartósan magas hozam aranyra negatív, hozamcsökkenés támogatná az XAU-t[2].",
+      "XAU spot 4104.10 és közeli pivot/fib szintek (kb. 4101–4102; S1/R1 zónák)[6] – ezek körül várható likviditás és rövid távú irányjelzés.",
+      "Technikai összkép: napi XAU/USD jelzés 'Sell', a mozgóátlagok többsége eladói[6] – trendkövetők számára fontos, de RSI ~48 semleges, MACD enyhén vételi, tehát nem egyértelmű trendhelyzet.",
+      "Volatilitás- és híresemények figyelése – magas tőkeáttételes CFD-knél a hirtelen mozgások komoly kockázatot jelentenek[1][4][8]."
     ],
-    "reasoning_summary": "Effective és Daily YELLOW státusz, valamint az, hogy Setup A és B nem engedélyezett, egyértelműen a defenzív kockázatkezelési üzemmódot erősíti: nincsen engedélyezett, előre definiált iránysetup, így az első szabály, hogy ne erőltess új pozíciót csak azért, mert az ár mozog.[1] A 4.57%-os US10Y és a 100.97-es DXY környezet historikusan inkább ellenállás az arany számára, azaz fundamentálisan nem támogatott az agresszív long felépítés; ugyanakkor a Fear&Greed 49 és az RSI ~48 semleges képet mutat, ami azt jelenti, hogy nincs szélsőséges túladottság vagy túlvett állapot, így a nagy irányváltásra építő kontratrade sem indokolt önmagában.[7]\n\nTechnikailag az Investing adatai alapján a napi összegzés Strong Sell, a mozgóátlagok többsége Sell, miközben a MACD és rövidebb MA-k inkább Buy, ami egy rövid távú felpattanással tarkított, de középtávon gyengülő struktúrára utal.[7] Az ár 4104.10 körül van, nagyon közel a Woodie és DeMark pivotokhoz (kb. 4098–4102), ami klasszikus range-környezet: ilyenkor a kockázatkezelés fókusza nem az irány, hanem az, hogy ne növeld feleslegesen a bruttó kitettséget a sáv közepén.[1][7]\n\nMivel A és B setup tiltva van, a racionális XAU:CFD risk stance ma:\n- **Új iránytréd kerülése** a jelenlegi adatok alapján (nincs engedélyezett setup, vegyes technikai kép, semleges hangulat).\n- **Pozícióméret konzerválása vagy csökkentése** meglévő nyitott XAU-pozícióknál, különösen ha a portfólióban az arany súlya magas. Oktatási gyakorlatban javasolt, hogy egy trédre legfeljebb a számla kis hányadát, pl. 1–2%-át kockáztassák; YELLOW módban ez a keret inkább az alsó sáv felé tolódik.[1]\n- **Stop-loss fegyelem**: a meglévő SL-eket nem szélesítjük indoklás nélküli „reménykedés” miatt; ha az ár áttöri a kulcszónákat (pl. 4088 vagy 4110 környéke), akkor a terv szerint cselekszünk.[1][7]\n- **Margin és leverage kontroll**: XAU CFD-n a tőkeáttétel gyorsan felnagyítja a mozgásokat; oktatási anyagok kiemelik, hogy különösen volatilis időszakban (hozam- és dollármozgások) érdemes alacsonyabb effektív tőkeáttételt használni, extra szabad marginnal bufferként.[1][5]\n\nÖsszességében a megadott adatokból az következik, hogy ma a fő cél a túlélés és a rugalmasság fenntartása: semleges érzelmi, de hozam- és dollár-oldalról enyhén aranyellenes környezetben, engedélyezett setupok hiányában a kockázatkerülő magatartás – új XAU:CFD iránytréd mellőzése, meglévő pozíciók védelme, alacsony egypozíciós kockázat – tekinthető indokoltnak.",
-    "confidence": 82,
+    "reasoning_summary": "Effective és daily status YELLOW mellett a kockázatkezelési fókusz a tőke védelme, nem az agresszív pozíciónyitás. A CFD-k esetében a magas tőkeáttétel miatt már mérsékelt ármozgás is jelentős számla‑ingadozást okozhat, ezért ilyen üzemmódban a tananyagok általános irányelvei szerint a kitettség csökkentése, az egy trade-re eső kockázat 1–2% alatti szinten tartása, kötelező stop‑loss használata és a margin‑szintek folyamatos ellenőrzése javasolt[1][4][8]. Setup A és B tiltása kifejezetten azt jelzi, hogy az aktuális környezetben egyik ismert belépési sémára sincs elegendő megerősítés: sem fundamentális, sem technikai oldalról nincs olyan aszimmetria, ami indokolná az iránykockázat felvételét.\n\nA makroadatokból: a FedWatch által jelzett implied FFR 3.63% a piac kamatvárakozásait tükrözi, míg a 4.57%-os 10 éves hozam a hosszú oldalon feszes pénzpiaci környezetet mutat – történelmileg a magas hozamok inkább nyomást gyakorolnak a nem kamatozó eszközökre, így az aranyra[2]. Az erős DXY (100.97) klasszikusan negatív korrelációban mozog az XAU/USD-vel, tehát a dollár további erősödése növeli az arany‑árfolyam további gyengülésének kockázatát[2]. A Fear&Greed index 49-es értéke semleges kockázati étvágyat jelez, ami nem támogatja sem extrém menekülést a safe haven eszközökbe, sem agresszív kockázatvállalást.\n\nTechnikai oldalról a rendelkezésre álló összesített jelzés XAU/USD-re 'Sell', a mozgóátlagok többsége szintén eladói képet mutat[6]. Ugyanakkor az RSI ~48 semleges tartományban van, ami nem erősíti a túladott vagy túlvett narratívát, a MACD enyhe vételi jelzése pedig arra utal, hogy a lejtmenet nem egyértelműen domináns és rövid távú korrekciók könnyen kialakulhatnak[6]. A közelben található pivot‑szintek (kb. 4101–4102 környéke, S1/R1 zónák) rövid távú likviditási és döntési pontként szolgálnak; YELLOW módban ezek környékén a hangsúly a megfigyelésen, nem a belépésen van[6].\n\nMivel Setup A és B nem engedélyezett, konkrét belépési setupot nem alkalmazunk: a tiltás indoka, hogy a fundamentális és technikai jelek vegyesek, nincs tiszta trend‑ vagy fordulós jelzés, miközben a CFD‑tőkeáttétel önmagában magas kockázatot hordoz[1][4][8]. Ilyenkor Bagira‑szinten a \"defenzív\" protokoll lép életbe: pozícióméretek limitálása, új pozíciók kerülése, a meglévő XAU:CFD kitettségek stop‑lossainak felülvizsgálata, kiegészítve a kulcs makró‑ és technikai szintek célzott figyelésével. A jelenlegi adatbázis nem tartalmaz sem pontos volatilitás‑, sem trend‑erősség mérőszámokat, így score‑t nem határozunk meg, és nem teszünk kilépési vagy belépési javaslatot – ez összhangban van azzal a kockázatkezelési elvvel, hogy adat‑hiányban nem növeljük a kitettséget[1].",
+    "confidence": 78,
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-07-11T10:34:12+02:00"
+    "updated_at": "2026-07-11T10:41:50+02:00"
   },
   "trade_log": [],
   "performance": {
@@ -265,6 +264,6 @@
     "net_pl_usd": 0.0,
     "avg_rr": null,
     "rule_break_count": 0,
-    "updated_at": "2026-07-11T10:34:22+02:00"
+    "updated_at": "2026-07-11T10:41:58+02:00"
   }
 }
