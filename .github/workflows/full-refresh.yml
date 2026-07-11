@@ -42,16 +42,19 @@ jobs:
   bagira-ai:
     needs: assemble-state
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - uses: actions/download-artifact@v4
         with: { name: build-state }
-      - name: Bagira AI elemzes
+      - name: Bagira AI Setup Engine (mely kutatas + 95+ minosegi kapu)
         env:
           PERPLEXITY_API_KEY: ${{ secrets.BAGIRA_XAU_MASTER }}
           PERPLEXITY_MODEL: sonar-pro
+          AI_MAX_ITERATIONS: "3"
+          AI_QUALITY_GATE: "95"
         run: python scripts/bagira_ai.py
       - uses: actions/upload-artifact@v4
         with: { name: build-state, overwrite: true, path: build_state.json }

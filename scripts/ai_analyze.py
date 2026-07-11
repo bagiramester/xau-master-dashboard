@@ -810,21 +810,26 @@ def analyze():
             "ai_state": "SUGGESTED" if body and body.get("allowed") else ("LOCKED" if body else "EMPTY"),
         }
 
-    data["setups"] = {
-        "A": wrap_setup(result.get("setup_A")),
-        "B": wrap_setup(result.get("setup_B")),
-    }
-    data["bagira"] = {
-        "narrative": result.get("bagira_narrative", ""),
-        "key_watch": result.get("key_watch", []),
-        "confidence": result.get("confidence", 0),
-        "reasoning_summary": result.get("reasoning_summary", ""),
-        "score_breakdown": result.get("score_breakdown", {}),
-        "conflicts_resolved": result.get("conflicts_resolved", []),
-        "model": model_name,
-        "source_type": source_type,
-        "updated_at": NOW_ISO,
-    }
+    # SKIP_SETUPS mód: a setup + bagira írást a bagira_ai.py Setup Engine végzi
+    # (95+ minőségi kapuval) — itt csak a mély kutatás (levels/bias) marad.
+    if os.getenv("SKIP_SETUPS", "").lower() in ("1", "true", "yes"):
+        print("[ai] SKIP_SETUPS aktív — setup/bagira írás a bagira_ai.py-ra bízva.")
+    else:
+        data["setups"] = {
+            "A": wrap_setup(result.get("setup_A")),
+            "B": wrap_setup(result.get("setup_B")),
+        }
+        data["bagira"] = {
+            "narrative": result.get("bagira_narrative", ""),
+            "key_watch": result.get("key_watch", []),
+            "confidence": result.get("confidence", 0),
+            "reasoning_summary": result.get("reasoning_summary", ""),
+            "score_breakdown": result.get("score_breakdown", {}),
+            "conflicts_resolved": result.get("conflicts_resolved", []),
+            "model": model_name,
+            "source_type": source_type,
+            "updated_at": NOW_ISO,
+        }
 
     data["meta"] = data.get("meta", {})
     data["meta"]["ai_last_run"] = NOW_ISO

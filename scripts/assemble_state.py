@@ -4,13 +4,25 @@ A build_state.json makró + risk + level adataiból kiszámolja:
 - daily_status (döntési fa)
 - effective_mode = max(daily_status, risk.mode)
 - setup A/B váz + engedélyezési logika (score/RR/lock)
-Bagira NARRATÍVA még NEM készül itt — az a bagira-ai lépés.
+Bagira NARRATÍVA és AI setup-javaslat még NEM készül itt — az a bagira-ai lépés.
+
+Setup struktúra (frontend-kompatibilis, csomagolt):
+setups.A = { ai_state, source_type, value: { direction, score, allowed, ... } }
 """
 import sys
 from common import (load_json, save_json, now_cest, mode_num, mode_label,
                     STATE_PATH)
 
 RED, YELLOW, GREEN = "RED", "YELLOW", "GREEN"
+
+DEFAULT_SETUPS = {
+    "A": {"direction": "SHORT", "type": "HTF sell zóna reakció",
+          "rr_min": 2.0, "score": None, "confirmed": "pending",
+          "session": "London 09:00–12:00 CEST"},
+    "B": {"direction": "LONG", "type": "HTF demand zóna reakció",
+          "rr_min": 2.0, "score": None, "confirmed": "pending",
+          "session": "London / Overlap"},
+}
 
 
 def val(f):
@@ -69,6 +81,24 @@ def evaluate_setup(setup, effective, macro_lock, open_xau):
     return False, "Ismeretlen mód"
 
 
+def normalize_setups(raw):
+    """Régi lapos és új csomagolt formát is egységes csomagolt formára hoz."""
+    out = {}
+    for key in ("A", "B"):
+        entry = (raw or {}).get(key)
+        if isinstance(entry, dict) and isinstance(entry.get("value"), dict):
+            out[key] = entry
+        elif isinstance(entry, dict) and entry:
+            out[key] = {"ai_state": entry.get("ai_state", "PENDING"),
+                        "source_type": entry.get("source_type", "auto"),
+                        "value": {k: v for k, v in entry.items()
+                                  if k not in ("ai_state", "source_type")}}
+        else:
+            out[key] = {"ai_state": "PENDING", "source_type": "auto",
+                        "value": dict(DEFAULT_SETUPS[key])}
+    return out
+
+
 def main():
     state = load_json(STATE_PATH)
     macro = state.get("macro", {})
@@ -82,20 +112,17 @@ def main():
     macro_lock = bool(header.get("macro_no_trade_windows"))
     open_xau = risk.get("open_xau_positions", 0) or 0
 
-    # Setup vázak (a konkrét árszinteket a manuális/AI réteg finomítja)
-    setups = state.get("setups", {
-        "A": {"direction": "SHORT", "type": "HTF sell zóna reakció",
-              "rr_min": 2.0, "score": None, "confirmed": "pending",
-              "session": "London 09:00–12:00 CEST"},
-        "B": {"direction": "SHORT", "type": "Intraday range breakdown",
-              "rr_min": 2.0, "score": None, "confirmed": "pending",
-              "session": "London / Overlap"},
-    })
+    # Setup vázak — a konkrét szinteket és score-t a bagira-ai réteg tölti fel,
+    # az engedélyezés itt és ott is KIZÁRÓLAG szabályalapú.
+    setups = normalize_setups(state.get("setups"))
     for key in ("A", "B"):
-        allowed, reason = evaluate_setup(setups[key], effective, macro_lock, open_xau)
-        setups[key]["allowed"] = allowed
-        setups[key]["locked_reason"] = reason
-        setups[key]["updated_at"] = now_cest()
+        body = setups[key]["value"]
+        allowed, reason = evaluate_setup(body, effective, macro_lock, open_xau)
+        body["allowed"] = allowed
+        body["locked_reason"] = reason
+        body["updated_at"] = now_cest()
+        if not allowed and setups[key].get("ai_state") not in ("SUGGESTED",):
+            setups[key]["ai_state"] = "PENDING"
 
     state["header"]["daily_status"] = daily_status
     state["header"]["effective_mode"] = effective

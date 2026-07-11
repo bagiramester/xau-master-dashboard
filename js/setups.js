@@ -51,8 +51,11 @@ const getAiBadge = (wrap, isConfirmed) => {
   const isAI = src && src.startsWith('ai');
 
   if (isConfirmed) return { text: '✓ CONFIRMED', cls: 'confirmed' };
-  if (st === 'LOCKED' || !wrap.value?.allowed) return { text: '⛔ LOCKED', cls: 'locked' };
+  // A SUGGESTED előrébb van, mint a LOCKED: az AI által javasolt setup akkor is
+  // SUGGESTED jelvényt kap, ha az allowed még false (csak a chart-megerősítés
+  // hiányzik — a CONFIRM & TRADE gomb így elérhető marad).
   if (isAI && st === 'SUGGESTED') return { text: '🤖 AI SUGGESTED', cls: 'suggested' };
+  if (st === 'LOCKED' || !wrap.value?.allowed) return { text: '⛔ LOCKED', cls: 'locked' };
   if (src === 'manual') return { text: '✏ MANUAL', cls: 'manual' };
   return { text: st || '–', cls: 'manual' };
 };

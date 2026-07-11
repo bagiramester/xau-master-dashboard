@@ -56,10 +56,12 @@ def validate(data):
 
     open_xau = risk.get("open_xau_positions", 0) or 0
     for key, s in setups.items():
-        if not s.get("allowed"):
+        # csomagolt ({ai_state, source_type, value:{...}}) és lapos forma támogatása
+        body = s.get("value") if isinstance(s, dict) and isinstance(s.get("value"), dict) else s
+        if not isinstance(body, dict) or not body.get("allowed"):
             continue
-        score = s.get("score")
-        rr = s.get("rr_min", 0) or 0
+        score = body.get("score")
+        rr = body.get("rr_min", 0) or 0
         # 2-3. score / RR küszöb
         if rr < 2.0:
             errors.append(f"Setup {key}: allowed de RR<2.0")
@@ -95,7 +97,24 @@ def validate(data):
 
 
 def main():
-    state = load_json(STATE_PATH)
+    state = load_json(STATE_PATH, default=None)
+
+    # Direkt mód: ha nincs build_state (pl. ai-refresh flow), a kész data.json-t
+    # validáljuk helyben — nincs candidate építés.
+    if not state or "meta" not in state:
+        data = load_json(DATA_PATH, default=None)
+        if not data:
+            print("VALIDÁCIÓ BUKOTT — se build_state.json, se data.json.")
+            return 1
+        errors = validate(data)
+        if errors:
+            print("VALIDÁCIÓ BUKOTT (direkt mód — data.json):")
+            for e in errors:
+                print("  ✗", e)
+            return 1
+        print("VALIDÁCIÓ OK — data.json rendben (direkt mód).")
+        return 0
+
     data = build_data(state)
     errors = validate(data)
 

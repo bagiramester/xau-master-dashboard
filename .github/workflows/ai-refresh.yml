@@ -45,6 +45,11 @@ jobs:
       - name: AI analysis + commit + push (retry on conflict)
         env:
           PPLX_API_KEY: ${{ secrets.BAGIRA_XAU_MASTER }}
+          PERPLEXITY_API_KEY: ${{ secrets.BAGIRA_XAU_MASTER }}
+          PERPLEXITY_MODEL: sonar-pro
+          SKIP_SETUPS: 'true'
+          AI_MAX_ITERATIONS: '3'
+          AI_QUALITY_GATE: '95'
           MOCK_AI: ${{ secrets.BAGIRA_XAU_MASTER == '' && 'true' || '' }}
         run: |
           set -euo pipefail
@@ -58,10 +63,14 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # AI elemzés futtatása a friss data.json-on
+            # 1) Mély kutatás (levels/bias/calendar) — setup írás NÉLKÜL (SKIP_SETUPS)
             python scripts/ai_analyze.py
 
-            # Séma validáció
+            # 2) Bagira AI Setup Engine — teljes dashboard-adat + mély kutatás,
+            #    önpontozó ciklus: csak 95+ önértékelésű SETUP A-B kerül be
+            STATE_PATH=data.json python scripts/bagira_ai.py
+
+            # 3) Séma validáció (direkt mód: data.json)
             python scripts/validate_data.py
 
             git add data.json
