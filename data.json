@@ -415,15 +415,38 @@
     "source_type": "ai",
     "updated_at": "2026-07-11T16:06:31+02:00"
   },
-  "trade_log": [],
+  "trade_log": [
+    {
+      "datetime": "2026-07-10T16:00:00+02:00",
+      "instrument": "XAU:CFD",
+      "session": "Other",
+      "direction": "SHORT",
+      "setup_type": "manuális — pénteki valós trade (utólagos rögzítés)",
+      "entry": 4105.0,
+      "sl": 4200.0,
+      "tp": 4000,
+      "exit": 4000.0,
+      "unit": 0.05,
+      "risk_usd": 4.56,
+      "pl_usd": 5.0,
+      "rr_actual": 1.11,
+      "score": 5,
+      "allowed": false,
+      "rule_compliance": "részben",
+      "note": "SHORT 4105→4000, SL 4200, zárás TP-n. Nyereség 5 USD (kis effektív pozícióméret). Terv-RR 1.11 < 1:2 — szabálysértés jelölve. Időpont hozzávetőleges.",
+      "bias": "NEUTRAL",
+      "daily_status": null,
+      "risk_mode": null
+    }
+  ],
   "performance": {
-    "trade_count": 0,
-    "win_count": 0,
+    "trade_count": 1,
+    "win_count": 1,
     "loss_count": 0,
-    "net_pl_usd": 0.0,
-    "avg_rr": null,
+    "net_pl_usd": 5.0,
+    "avg_rr": 1.11,
     "rule_break_count": 0,
-    "updated_at": "2026-07-11T15:27:27+02:00"
+    "updated_at": "2026-07-12T13:09:50.979931+00:00"
   },
   "notrade_filters": {
     "macro_events_today": [],
