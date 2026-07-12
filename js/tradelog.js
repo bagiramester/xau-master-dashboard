@@ -4,6 +4,61 @@
 
 const LOG_WORKFLOW_FILE = 'log-trade.yml';
 
+// ═══ GITHUB API SEGÉDFÜGGVÉNYEK — a naplózás dispatch + poll lánca ═══
+// (getPat / promptForPat / setPat és a GITHUB_* konstansok a bagira.js-ben)
+const getDataJsonSha = async () => {
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits?path=data.json&per_page=1`,
+      { headers: { 'Accept': 'application/vnd.github+json' } });
+    if (!r.ok) return '';
+    const j = await r.json();
+    return (j[0] && j[0].sha) || '';
+  } catch { return ''; }
+};
+
+const dispatchWorkflow = async (workflowFile, inputs) => {
+  let pat = getPat();
+  if (!pat) {
+    pat = promptForPat();
+    if (!pat) throw new Error('Nincs PAT megadva — a naplózáshoz GitHub token kell');
+  }
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/vnd.github+json',
+      'Authorization': `Bearer ${pat}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ref: 'main', inputs }),
+  });
+  if (res.status === 204) return true;
+  if (res.status === 401) { setPat(''); throw new Error('PAT érvénytelen — kattints újra és add meg újból'); }
+  if (res.status === 403) throw new Error('A PAT-nek nincs Actions írási joga (README guide)');
+  if (res.status === 404) throw new Error('Workflow nem található: ' + workflowFile);
+  const txt = await res.text();
+  throw new Error(`HTTP ${res.status}: ${txt.substring(0, 80)}`);
+};
+
+const pollDataJsonChange = ({ beforeSha, maxAttempts = 18, intervalMs = 10000, onDone, onTimeout }) => {
+  let attempt = 0;
+  const tick = async () => {
+    attempt++;
+    try {
+      const sha = await getDataJsonSha();
+      if (sha && sha !== beforeSha) {
+        const raw = await fetch(`https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${sha}/data.json`);
+        if (raw.ok) { onDone(await raw.json()); return; }
+      }
+    } catch { /* folytatjuk a poll-t */ }
+    if (attempt >= maxAttempts) { onTimeout(); return; }
+    setTimeout(tick, intervalMs);
+  };
+  setTimeout(tick, intervalMs);
+};
+
 const buildTradePayload = () => {
   const d = currentData || {};
   const h = d.header || {};
