@@ -22,8 +22,20 @@ Kockázati garancia (a tér szabálya szerint):
   a felhasználóé (CONFIRM & TRADE gomb).
 """
 import os, re, sys, json, urllib.request
+from pathlib import Path
 from common import load_json, save_json, now_cest, STATE_PATH
 from assemble_state import evaluate_setup
+
+PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
+
+
+def load_prompt(name, fallback):
+    """System prompt betöltése a prompts/ mappából — kód nélkül szerkeszthető."""
+    try:
+        txt = (PROMPTS_DIR / name).read_text(encoding="utf-8").strip()
+        return txt if txt else fallback
+    except Exception:
+        return fallback
 
 MODEL = os.environ.get("PERPLEXITY_MODEL", "sonar-pro")
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
@@ -82,6 +94,7 @@ def dashboard_snapshot(state):
     """A teljes releváns dashboard állapot kompakt JSON-ban."""
     snap = {
         "date": state.get("meta", {}).get("date"),
+        "now_cest": now_cest(),
         "header": {
             "xau_spot": (state.get("header", {}).get("xau_spot") or {}).get("value"),
             "daily_status": state.get("header", {}).get("daily_status"),
@@ -103,11 +116,11 @@ def dashboard_snapshot(state):
     return json.dumps(snap, ensure_ascii=False, indent=1)
 
 
-RESEARCH_SYSTEM = (
+RESEARCH_SYSTEM = load_prompt("bagira_research_prompt.md", (
     "Profi XAU/USD (arany) day-trader kutatóasszisztens vagy. Keress a weben "
     "friss, mai/legutóbbi forrásokat: Reuters, CNBC, MarketWatch, Investing.com, "
     "Kitco, FXStreet, TradingView elemzések. Tömör, tényszerű, forrás-URL-ekkel."
-)
+))
 
 
 def build_research_prompt(state, focus_questions=None):
@@ -129,13 +142,13 @@ def build_research_prompt(state, focus_questions=None):
     return base
 
 
-GENERATE_SYSTEM = (
+GENERATE_SYSTEM = load_prompt("bagira_generate_prompt.md", (
     "Profi XAU:CFD day-trader és kockázatkezelő vagy (Bagira). A legmagasabb "
     "szintű pénzügyi és technikai elemzési tudásodat használod. Kizárólag a "
     "megadott dashboard-adatokból és a kutatási összefoglalóból dolgozol — "
     "SOHA nem találsz ki árszintet. Minden számnak konzisztensnek kell lennie "
     "a spot árral és a megadott szintekkel. Csak JSON-nal válaszolj."
-)
+))
 
 
 def build_generate_prompt(state, research, feedback=None):
@@ -175,12 +188,12 @@ def build_generate_prompt(state, research, feedback=None):
     return prompt
 
 
-REVIEW_SYSTEM = (
+REVIEW_SYSTEM = load_prompt("bagira_review_prompt.md", (
     "Könyörtelen XAU kockázatkezelő auditor vagy. A feladatod a setup-javaslat "
     "hibáinak megtalálása. Szigorúan pontozol: 95+ csak akkor, ha minden szint "
     "realisztikus, az RR matek stimmel, a makró-narratíva konzisztens és nincs "
     "nyitott kockázati kérdés. Csak JSON-nal válaszolj."
-)
+))
 
 
 def build_review_prompt(state, research, proposal):
