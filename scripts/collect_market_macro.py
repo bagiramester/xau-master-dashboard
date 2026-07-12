@@ -157,6 +157,11 @@ def main():
         "levels_prev": prev.get("levels", {}),
         "risk_prev": prev.get("risk", {}),
         "trades_prev": prev.get("trade_log", prev.get("trades", [])),
+        # A performance és a korábbi setupok ÁTVITELE kötelező — enélkül a
+        # full-refresh lenullázná a trade-statisztikát és elvesznének az
+        # utolsó publikált AI setupok (kapu-bukás esetén nincs mire visszaesni).
+        "performance": prev.get("performance", {}),
+        "setups": prev.get("setups", {}),
     }
     try:
         cal = fetch_calendar()

@@ -113,7 +113,9 @@ const renderTopBar = (data) => {
   dot.dataset.state = fresh === 'live' ? 'live' : fresh === 'stale' ? 'stale' : 'error';
   $('#tb-freshness').textContent = fresh === 'live' ? 'LIVE' : fresh === 'stale' ? 'STALE' : 'PENDING';
 
-  $('#footer-updated').textContent = 'Frissítve: ' + (data.meta ? data.meta.last_updated : '—');
+  const meta = data.meta || {};
+  const footerTs = meta.last_auto_sync || meta.ai_last_run || meta.last_manual_update || meta.date || '—';
+  $('#footer-updated').textContent = 'Frissítve: ' + footerTs;
 };
 
 // ═══ REFRESH — minden adat frissítése KIVÉVE Bagira + timestamp mutatása ═══

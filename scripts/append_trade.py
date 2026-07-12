@@ -94,7 +94,9 @@ def main():
         "loss_count": len(losses),
         "net_pl_usd": round(sum(t.get("pl_usd") or 0 for t in log), 2),
         "avg_rr": round(sum(rrs) / len(rrs), 2) if rrs else None,
-        "rule_break_count": len([t for t in log if t.get("rule_compliance") == "nem"]),
+        "rule_break_count": len([t for t in log
+                                 if t.get("rule_compliance") in ("nem", "részben")
+                                 or t.get("risk_cap_exceeded")]),
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
 
