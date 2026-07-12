@@ -64,8 +64,13 @@ def main():
     if trade["score"] < 0 or trade["score"] > 10:
         fail("score must be 0..10")
 
+    # A 30 USD-s per-trade plafon túllépése szabálysértés, de a naplózást NEM
+    # blokkolja — a journal minden lezárt trade-et rögzít, jelölve a sértést.
     if trade["risk_usd"] > 30:
-        fail("risk_usd exceeds 30 USD hard cap")
+        print("[append_trade] WARNING: risk_usd > 30 USD — szabálysértő trade, jelölve.")
+        trade["risk_cap_exceeded"] = True
+        if trade.get("rule_compliance") == "igen":
+            trade["rule_compliance"] = "részben"
 
     trade.setdefault("instrument", "XAU:CFD")
     trade.setdefault("bias", "NEUTRAL")

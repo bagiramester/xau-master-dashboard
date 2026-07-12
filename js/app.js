@@ -44,14 +44,17 @@ const renderTradeLog = (data) => {
 };
 
 const wireTradeForm = () => {
-  const entry = $('#ti-entry'), sl = $('#ti-sl'), tp = $('#ti-tp');
+  const entry = $('#ti-entry'), sl = $('#ti-sl'), tp = $('#ti-tp'), exit = $('#ti-exit');
   const dir = $('#ti-direction'), submit = $('#ti-submit'), rrCalc = $('#ti-rr-calc');
+  // MINDEN lezárt trade naplózható — a szabálysértést JELÖLJÜK, nem tiltjuk.
+  // A napló akkor ér valamit, ha a szabályszegő trade is bekerül (rule_compliance).
   const recompute = () => {
     const e = parseFloat(entry.value), s = parseFloat(sl.value), t = parseFloat(tp.value);
-    if (!isFinite(e) || !isFinite(s) || !isFinite(t)) {
+    const x = parseFloat(exit.value);
+    if (!isFinite(e) || !isFinite(s) || !isFinite(t) || !isFinite(x)) {
       rrCalc.textContent = '—';
       submit.disabled = true;
-      submit.textContent = 'Naplózás (SL/TP kötelező)';
+      submit.textContent = 'Naplózás (Belépő / SL / TP / Záró ár kell)';
       return;
     }
     const risk = Math.abs(e - s);
@@ -59,11 +62,12 @@ const wireTradeForm = () => {
     const rr = risk > 0 ? (reward / risk) : 0;
     rrCalc.textContent = rr.toFixed(2) + 'R';
     const okDirection = (dir.value === 'LONG' && t > e && s < e) || (dir.value === 'SHORT' && t < e && s > e);
-    submit.disabled = !(rr >= 2.0 && okDirection);
-    submit.textContent = rr < 2.0 ? `RR ${rr.toFixed(2)} < 1:2 (tiltott)`
-      : !okDirection ? 'Irány/SL/TP inkonzisztens' : 'Trade naplózása';
+    submit.disabled = false;
+    submit.textContent = !okDirection ? '⚠ Naplózás (irány/SL/TP inkonzisztens)'
+      : rr < 2.0 ? `⚠ Naplózás (RR ${rr.toFixed(2)} < 1:2 — szabálysértő)`
+      : 'Trade naplózása';
   };
-  [entry, sl, tp, dir].forEach(x => x.addEventListener('input', recompute));
+  [entry, sl, tp, exit, dir].forEach(x => x.addEventListener('input', recompute));
   submit.addEventListener('click', submitTradeLog);
 };
 

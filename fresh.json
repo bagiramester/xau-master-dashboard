@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "date": "2026-07-11",
+    "last_auto_sync": "2026-07-11T15:12:42+02:00",
+    "last_manual_update": "2026-07-11T15:14:14+02:00",
+    "data_freshness": "live-refresh",
+    "version": "v5",
+    "effective_mode": "YELLOW",
+    "ai_model": null,
+    "ai_source_type": "ai-fallback",
+    "ai_last_run": "2026-07-11T15:14:05+02:00",
+    "source_stack": [
+      "economic-calendar",
+      "fedwatch",
+      "reuters",
+      "cnn-fear-greed",
+      "tradingview"
+    ]
+  },
+  "header": {
+    "xau_spot": {
+      "value": "4104.10",
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
+      "updated_at": "2026-07-11T15:12:43+02:00"
+    },
+    "date": "2026-07-11",
+    "macro_events_today": [
+      {
+        "time": "05:00",
+        "event": "IEA Monthly Report"
+      },
+      {
+        "time": "11:00",
+        "event": "Fed Monetary Policy Report"
+      },
+      {
+        "time": "12:00",
+        "event": "WASDE Report"
+      },
+      {
+        "time": "13:10",
+        "event": "U.S. Baker Hughes Oil Rig Count"
+      },
+      {
+        "time": "13:10",
+        "event": "U.S. Baker Hughes Total Rig Count"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Aluminium speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Copper speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Corn speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Crude Oil speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Gold speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Nasdaq 100 speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Natural Gas speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC S&P 500 speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Silver speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Soybeans speculative net positions"
+      },
+      {
+        "time": "15:30",
+        "event": "CFTC Wheat speculative net positions"
+      }
+    ],
+    "macro_no_trade_windows": [],
+    "daily_status": "YELLOW",
+    "effective_mode": "YELLOW",
+    "macro_lock_active": false
+  },
+  "risk": {
+    "mode": "YELLOW",
+    "daily_limit": 100.0,
+    "weekly_limit": 300.0,
+    "daily_loss": 0.0,
+    "daily_risk_usage_pct": 0,
+    "weekly_loss": 0.0,
+    "weekly_risk_usage_pct": 0,
+    "loss_streak": 0,
+    "max_trades_today": 1,
+    "open_positions": 0,
+    "open_xau_positions": 0,
+    "trade_allowed_now": true,
+    "xau_trade_allowed_now": true,
+    "trade_allowed_reason": "London session aktív, NFP tiltási ablak (13:30–15:00) még nem aktív. Setup A indítható, ha M15/H1 rejection tiszta és score ≥ 8.",
+    "rpt_recommendation": "5–15 USD (YELLOW + HIGH vol – NFP-nap konzervatív tartomány)",
+    "rpt_hard_cap": 30.0,
+    "updated_at": "2026-07-10T21:35:59+02:00"
+  },
+  "macro": {
+    "fedwatch": {
+      "value": "implied FFR 3.63% (30d Fed Funds fut.)",
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "CME Fed Funds futures (ZQ=F)",
+      "updated_at": "2026-07-11T15:12:42+02:00",
+      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+      "impact": 3
+    },
+    "us10y": {
+      "value": "4.57%",
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "US10Y yield - Yahoo Finance",
+      "updated_at": "2026-07-11T15:12:42+02:00",
+      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
+      "bias": "RED",
+      "impact": 3
+    },
+    "dxy": {
+      "value": "100.97",
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "DXY - Yahoo Finance",
+      "updated_at": "2026-07-11T15:12:42+02:00",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "impact": 3
+    },
+    "sentiment": {
+      "value": 49,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "CNN Fear & Greed Index",
+      "updated_at": "2026-07-11T15:12:42+02:00",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "impact": 2
+    }
+  },
+  "levels": {
+    "pdh": {
+      "value": 4130.6,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi High)",
+      "source_url": null,
+      "updated_at": "2026-07-10T21:35:59+02:00"
+    },
+    "pdl": {
+      "value": 4064.2,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (előző napi Low)",
+      "source_url": null,
+      "updated_at": "2026-07-10T21:35:59+02:00"
+    },
+    "daily_open": {
+      "value": 4135.4,
+      "status": "fresh",
+      "source_type": "auto",
+      "source_label": "Yahoo Finance GC=F (mai Open)",
+      "source_url": null,
+      "updated_at": "2026-07-10T21:35:59+02:00"
+    },
+    "asia_high": {
+      "value": 4130.5,
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-10T12:11:51+02:00"
+    },
+    "asia_low": {
+      "value": 4117.0,
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-10T12:11:51+02:00"
+    },
+    "htf_supply": {
+      "value": "4058–4105",
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-10T12:11:51+02:00"
+    },
+    "htf_demand": {
+      "value": "3900–3930",
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-10T12:11:51+02:00"
+    },
+    "psych_level": {
+      "value": 4000,
+      "status": "fresh",
+      "source_type": "ai",
+      "source_label": "AI mély kutatás (Perplexity)",
+      "source_url": "https://www.perplexity.ai/",
+      "updated_at": "2026-07-10T12:11:51+02:00"
+    }
+  },
+  "setups": {
+    "A": {
+      "ai_state": "PENDING",
+      "source_type": "auto",
+      "value": {
+        "direction": "SHORT",
+        "type": "HTF sell zóna reakció",
+        "rr_min": 2.0,
+        "score": null,
+        "confirmed": "pending",
+        "session": "London 09:00–12:00 CEST",
+        "allowed": false,
+        "locked_reason": "Score nem meghatározható",
+        "updated_at": "2026-07-11T15:12:52+02:00"
+      }
+    },
+    "B": {
+      "ai_state": "PENDING",
+      "source_type": "auto",
+      "value": {
+        "direction": "LONG",
+        "type": "HTF demand zóna reakció",
+        "rr_min": 2.0,
+        "score": null,
+        "confirmed": "pending",
+        "session": "London / Overlap",
+        "allowed": false,
+        "locked_reason": "Score nem meghatározható",
+        "updated_at": "2026-07-11T15:12:52+02:00"
+      }
+    }
+  },
+  "bagira": {
+    "narrative": "⚠️ AI minőségi kapu nem teljesült (3 iteráció, legjobb önértékelés: 0/100, küszöb: 95). A setupok nem frissültek — a korábbi/zárolt állapot érvényes. Fő hiányosságok: Setup A: számolt RR 1.61 < 2.0",
+    "key_watch": [],
+    "reasoning_summary": "",
+    "confidence": 0,
+    "ai_self_score": 0,
+    "ai_iterations": 3,
+    "model": "sonar-pro",
+    "source_type": "ai-fallback",
+    "updated_at": "2026-07-11T15:14:05+02:00"
+  },
+  "trade_log": [],
+  "performance": {
+    "trade_count": 0,
+    "win_count": 0,
+    "loss_count": 0,
+    "net_pl_usd": 0.0,
+    "avg_rr": null,
+    "rule_break_count": 0,
+    "updated_at": "2026-07-11T15:14:14+02:00"
+  }
+}

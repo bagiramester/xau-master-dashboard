@@ -68,9 +68,8 @@ const validateClosedTrade = (t) => {
     return 'rule_compliance hibás';
   }
 
-  if (t.risk_usd > 30) {
-    return 'Risk USD nagyobb mint 30 — tiltott';
-  }
+  // A 30 USD feletti kockázat szabálysértés, de NEM blokkolja a naplózást —
+  // a journal minden lezárt trade-et rögzít, a rule_compliance jelöli a sértést.
 
   if (t.rr_actual < 0) {
     return 'RR hibás';
@@ -97,7 +96,7 @@ const resetTradeForm = () => {
   const submit = $('#ti-submit');
   if (submit) {
     submit.disabled = true;
-    submit.textContent = 'Naplózás (SL/TP kötelező)';
+    submit.textContent = 'Naplózás (Belépő / SL / TP / Záró ár kell)';
   }
 };
 

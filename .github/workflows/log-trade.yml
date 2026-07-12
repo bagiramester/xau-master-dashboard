@@ -51,7 +51,8 @@ jobs:
 
       - name: Validate data.json
         run: |
-          python scripts/validatedata.py
+          # direkt mód: a kész data.json-t validálja (nincs build_state)
+          python scripts/validate_data.py
 
       - name: Configure git identity
         run: |
