@@ -437,16 +437,39 @@
       "bias": "NEUTRAL",
       "daily_status": null,
       "risk_mode": null
+    },
+    {
+      "datetime": "2026-07-12T13:13:31.387Z",
+      "instrument": "XAU:CFD",
+      "session": "Other",
+      "direction": "SHORT",
+      "setup_type": "A",
+      "bias": "SHORT",
+      "daily_status": "SÁRGA",
+      "risk_mode": "YELLOW",
+      "entry": 4101.0,
+      "sl": 4150.0,
+      "tp": 4050,
+      "exit": 4095.0,
+      "unit": 1.0,
+      "risk_usd": 49.0,
+      "pl_usd": 6.0,
+      "rr_actual": 0.12,
+      "score": 0,
+      "allowed": false,
+      "rule_compliance": "részben",
+      "note": "",
+      "risk_cap_exceeded": true
     }
   ],
   "performance": {
-    "trade_count": 1,
-    "win_count": 1,
+    "trade_count": 2,
+    "win_count": 2,
     "loss_count": 0,
-    "net_pl_usd": 5.0,
-    "avg_rr": 1.11,
+    "net_pl_usd": 11.0,
+    "avg_rr": 0.61,
     "rule_break_count": 0,
-    "updated_at": "2026-07-12T13:09:50.979931+00:00"
+    "updated_at": "2026-07-12T13:13:42.255905+00:00"
   },
   "notrade_filters": {
     "macro_events_today": [],
