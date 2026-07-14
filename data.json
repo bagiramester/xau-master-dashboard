@@ -8,7 +8,7 @@
     "effective_mode": "YELLOW",
     "ai_model": "mock-fallback (sonar-pro failed)",
     "ai_source_type": "ai-fallback",
-    "ai_last_run": "2026-07-14T07:54:43+02:00",
+    "ai_last_run": "2026-07-14T07:56:52+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -16,7 +16,7 @@
       "cnn-fear-greed",
       "tradingview"
     ],
-    "deep_research_last_run": "2026-07-14T07:54:43+02:00",
+    "deep_research_last_run": "2026-07-14T07:56:52+02:00",
     "deep_research_model": "mock-fallback (sonar-pro failed)",
     "deep_research_source_type": "ai-fallback",
     "deep_research_citations": 0,
@@ -71,7 +71,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "us10y": {
       "value": 4.49,
@@ -83,7 +83,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "dxy": {
       "value": 100.73,
@@ -95,7 +95,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "sentiment": {
       "value": 30,
@@ -107,7 +107,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "real_yield": {
       "value": "2.20% FALLING",
@@ -119,7 +119,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "cot": {
       "value": "extreme long",
@@ -131,7 +131,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -143,7 +143,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "intraday_regime": {
       "value": "RECOVERY BOUNCE",
@@ -155,7 +155,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "volatility": {
       "value": "ELEVATED",
@@ -167,7 +167,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     }
   },
   "levels": {
@@ -177,7 +177,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "pdl": {
       "value": 4030,
@@ -185,7 +185,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "daily_open": {
       "value": 4163,
@@ -193,7 +193,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "asia_high": {
       "value": 4183,
@@ -201,7 +201,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "asia_low": {
       "value": 4158,
@@ -209,7 +209,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "htf_supply": {
       "value": "4176–4180",
@@ -217,7 +217,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "htf_demand": {
       "value": "3950–3970",
@@ -225,7 +225,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     },
     "psych_level": {
       "value": 4000,
@@ -233,7 +233,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:54:43+02:00"
+      "updated_at": "2026-07-14T07:56:52+02:00"
     }
   },
   "setups": {
@@ -321,7 +321,7 @@
     "confidence": null,
     "model": "sonar-pro",
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-14T07:54:43+02:00"
+    "updated_at": "2026-07-14T07:56:52+02:00"
   },
   "trade_log": [
     {
@@ -387,12 +387,12 @@
     "us_market_note": "US piac nyitva.",
     "is_clean_day": true,
     "clean_day_note": "Ma nincs high-impact US adat.",
-    "updated_at": "2026-07-14T07:54:43+02:00",
+    "updated_at": "2026-07-14T07:56:52+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "daily_research": {
     "research_date": "2026-07-14",
-    "generated_at_cest": "2026-07-14 07:54",
+    "generated_at_cest": "2026-07-14 07:56",
     "daily_summary": "A mai XAU-kép vegyes: a rövid távú ármozgást a makró és a likviditás együtt határozza meg.",
     "calendar": {
       "us_market_closed": false,
@@ -406,7 +406,7 @@
     "facts": {
       "spot": {
         "value": null,
-        "asof_cest": "07:54",
+        "asof_cest": "07:56",
         "source": "snapshot",
         "url": ""
       },
@@ -608,6 +608,6 @@
       }
     ],
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-14T07:54:43+02:00"
+    "updated_at": "2026-07-14T07:56:52+02:00"
   }
 }
