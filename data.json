@@ -1,45 +1,67 @@
 {
   "meta": {
-    "date": "2026-07-12",
-    "last_auto_sync": "2026-07-12T15:35:12+02:00",
-    "last_manual_update": "2026-07-12T15:38:54+02:00",
+    "date": "2026-07-14",
+    "last_auto_sync": "2026-07-14T08:03:18+02:00",
+    "last_manual_update": "2026-07-14T08:03:55+02:00",
     "data_freshness": "live-refresh",
     "version": "v5",
     "effective_mode": "YELLOW",
-    "ai_model": "mock-fallback (sonar-pro failed)",
+    "ai_model": null,
     "ai_source_type": "ai-fallback",
-    "ai_last_run": "2026-07-14T07:56:52+02:00",
+    "ai_last_run": null,
     "source_stack": [
       "economic-calendar",
       "fedwatch",
       "reuters",
       "cnn-fear-greed",
       "tradingview"
-    ],
-    "deep_research_last_run": "2026-07-14T07:56:52+02:00",
-    "deep_research_model": "mock-fallback (sonar-pro failed)",
-    "deep_research_source_type": "ai-fallback",
-    "deep_research_citations": 0,
-    "ai_self_score": 0
+    ]
   },
   "header": {
     "xau_spot": {
-      "value": "4113.70",
+      "value": "4036.20",
       "status": "fresh",
       "source_type": "auto",
       "source_label": "XAU/USD spot - Yahoo Finance (GC=F)",
-      "updated_at": "2026-07-12T15:35:13+02:00"
+      "updated_at": "2026-07-14T08:03:18+02:00"
     },
-    "date": "2026-07-12",
-    "macro_events_today": [],
-    "macro_no_trade_windows": [],
+    "date": "2026-07-14",
+    "macro_events_today": [
+      {
+        "time": "05:25",
+        "event": "FOMC Member Bowman Speaks"
+      },
+      {
+        "time": "06:00",
+        "event": "OPEC Meeting"
+      },
+      {
+        "time": "11:30",
+        "event": "3-Month Bill Auction"
+      },
+      {
+        "time": "11:30",
+        "event": "6-Month Bill Auction"
+      },
+      {
+        "time": "12:30",
+        "event": "Fed Waller Speaks"
+      },
+      {
+        "time": "14:00",
+        "event": "Federal Budget Balance"
+      }
+    ],
+    "macro_no_trade_windows": [
+      {
+        "event": "FOMC Member Bowman Speaks",
+        "time": "05:25",
+        "buffer_min": 30
+      }
+    ],
     "daily_status": "YELLOW",
     "effective_mode": "YELLOW",
-    "macro_lock_active": false,
-    "bias_direction": "LONG",
-    "bias_status": "SÁRGA",
-    "narrative": "Eső reálhozam támogatja a long oldalt, de a túlzsúfolt positioning és a vegyes struktúra miatt csak szelektív long engedhető.",
-    "fed_regime_summary": "A mai XAU-kép vegyes: a rövid távú ármozgást a makró és a likviditás együtt határozza meg."
+    "macro_lock_active": true
   },
   "risk": {
     "mode": "YELLOW",
@@ -62,112 +84,41 @@
   },
   "macro": {
     "fedwatch": {
-      "value": "HOLD 70% / hike-bias később",
-      "display": "NEUTRAL → HIKE BIAS",
-      "bias": "YELLOW",
-      "bias_note": "Rövid távon semleges, középtávon nem tiszta long-tailwind.",
-      "impact": 4,
+      "value": "implied FFR 3.73% (30d Fed Funds fut.)",
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
+      "source_type": "auto",
+      "source_label": "CME Fed Funds futures (ZQ=F)",
+      "updated_at": "2026-07-14T08:03:18+02:00",
+      "source_url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+      "impact": 3
     },
     "us10y": {
-      "value": 4.49,
-      "display": "4.49% RISING",
-      "bias": "RED",
-      "bias_note": "Nominális hozam emelkedik, de a reálhozam a mérvadóbb.",
-      "impact": 4,
+      "value": "4.61%",
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
+      "source_type": "auto",
+      "source_label": "US10Y yield - Yahoo Finance",
+      "updated_at": "2026-07-14T08:03:18+02:00",
+      "source_url": "https://finance.yahoo.com/quote/%5ETNX",
+      "bias": "RED",
+      "impact": 3
     },
     "dxy": {
-      "value": 100.73,
-      "display": "100.73 – USD-BEAR",
-      "bias": "GREEN",
-      "bias_note": "Gyengülő USD rövid távon segíti az XAU-t.",
-      "impact": 4,
+      "value": "101.18",
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
+      "source_type": "auto",
+      "source_label": "DXY - Yahoo Finance",
+      "updated_at": "2026-07-14T08:03:18+02:00",
+      "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
+      "impact": 3
     },
     "sentiment": {
-      "value": 30,
-      "display": "30 – FEAR",
-      "bias": "GREEN",
-      "bias_note": "Fear safe-haven támogatást adhat.",
-      "impact": 4,
+      "value": 44,
       "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
-    },
-    "real_yield": {
-      "value": "2.20% FALLING",
-      "display": "REÁLHOZAM ESIK",
-      "bias": "GREEN",
-      "bias_note": "Eső reálhozam long XAU-t támogat.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
-    },
-    "cot": {
-      "value": "extreme long",
-      "display": "COT EXTRÉM LONG",
-      "bias": "YELLOW",
-      "bias_note": "A positioning túlzsúfolt, felfelé korlátozhat.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
-    },
-    "htf_trend": {
-      "value": "RANGE",
-      "display": "RANGE",
-      "bias": "YELLOW",
-      "bias_note": "Vegyes HTF szerkezet.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
-    },
-    "intraday_regime": {
-      "value": "RECOVERY BOUNCE",
-      "display": "RECOVERY BOUNCE",
-      "bias": "YELLOW",
-      "bias_note": "Rövid távú visszapattanás.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
-    },
-    "volatility": {
-      "value": "ELEVATED",
-      "display": "ELEVATED",
-      "bias": "YELLOW",
-      "bias_note": "Tágabb mozgás és spread.",
-      "impact": 4,
-      "status": "fresh",
-      "source_type": "ai",
-      "source_label": "AI mély kutatás (Perplexity)",
-      "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-07-14T07:56:52+02:00"
+      "source_type": "auto",
+      "source_label": "CNN Fear & Greed Index",
+      "updated_at": "2026-07-14T08:03:18+02:00",
+      "source_url": "https://edition.cnn.com/markets/fear-and-greed",
+      "impact": 2
     }
   },
   "levels": {
@@ -238,7 +189,7 @@
   },
   "setups": {
     "A": {
-      "ai_state": "LOCKED",
+      "ai_state": "PENDING",
       "source_type": "ai",
       "ai_self_score": 64,
       "ai_gate_passed": false,
@@ -270,13 +221,13 @@
         "score": 8,
         "confirmed": "pending",
         "setup_ready": false,
-        "updated_at": "2026-07-13T10:08:59+02:00",
+        "updated_at": "2026-07-14T08:03:34+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 64/100 < 95 — tájékoztató setup • RR 1:2 alatt"
+        "locked_reason": "Makró tiltási ablak aktív"
       }
     },
     "B": {
-      "ai_state": "LOCKED",
+      "ai_state": "PENDING",
       "source_type": "ai",
       "ai_self_score": 64,
       "ai_gate_passed": false,
@@ -308,9 +259,9 @@
         "score": 5,
         "confirmed": "pending",
         "setup_ready": false,
-        "updated_at": "2026-07-13T10:08:59+02:00",
+        "updated_at": "2026-07-14T08:03:34+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 64/100 < 95 — tájékoztató setup • RR 1:2 alatt"
+        "locked_reason": "Makró tiltási ablak aktív"
       }
     }
   },
@@ -321,7 +272,7 @@
     "confidence": null,
     "model": "sonar-pro",
     "source_type": "ai-fallback",
-    "updated_at": "2026-07-14T07:56:52+02:00"
+    "updated_at": "2026-07-14T08:03:44+02:00"
   },
   "trade_log": [
     {
@@ -378,236 +329,5 @@
     "avg_rr": 0.61,
     "rule_break_count": 0,
     "updated_at": "2026-07-12T13:13:42.255905+00:00"
-  },
-  "notrade_filters": {
-    "macro_events_today": [],
-    "macro_no_trade_windows": [],
-    "macro_lock_active": false,
-    "us_market_closed": false,
-    "us_market_note": "US piac nyitva.",
-    "is_clean_day": true,
-    "clean_day_note": "Ma nincs high-impact US adat.",
-    "updated_at": "2026-07-14T07:56:52+02:00",
-    "source_label": "AI mély kutatás (Perplexity)"
-  },
-  "daily_research": {
-    "research_date": "2026-07-14",
-    "generated_at_cest": "2026-07-14 07:56",
-    "daily_summary": "A mai XAU-kép vegyes: a rövid távú ármozgást a makró és a likviditás együtt határozza meg.",
-    "calendar": {
-      "us_market_closed": false,
-      "us_market_note": "US piac nyitva.",
-      "is_clean_day": true,
-      "clean_day_note": "Ma nincs high-impact US adat.",
-      "events_today": [],
-      "yesterday_drivers": [],
-      "no_trade_windows": []
-    },
-    "facts": {
-      "spot": {
-        "value": null,
-        "asof_cest": "07:56",
-        "source": "snapshot",
-        "url": ""
-      },
-      "dxy": {
-        "value": 100.73,
-        "prev": 100.86,
-        "direction": "FALLING",
-        "source": "mock",
-        "url": ""
-      },
-      "us10y_nominal": {
-        "value": 4.49,
-        "prev": 4.45,
-        "direction": "RISING",
-        "source": "mock",
-        "url": ""
-      },
-      "real_yield_10y": {
-        "value": 2.2,
-        "prev": 2.24,
-        "direction": "FALLING",
-        "source": "mock",
-        "url": ""
-      },
-      "fedwatch": {
-        "next_odds": "HOLD 70% / CUT 30%",
-        "following_odds": "hike-bias",
-        "source": "mock",
-        "url": ""
-      },
-      "fear_greed": {
-        "value": 30,
-        "label": "FEAR",
-        "source": "mock",
-        "url": ""
-      },
-      "cot": {
-        "noncommercial_net": "extreme long",
-        "asof": "2026-07-14",
-        "source": "mock",
-        "url": ""
-      }
-    },
-    "interpretation": {
-      "bias_direction": "LONG",
-      "bias_status": "SÁRGA",
-      "bias_narrative": "Eső reálhozam támogatja a long oldalt, de a túlzsúfolt positioning és a vegyes struktúra miatt csak szelektív long engedhető.",
-      "macro_regimes": {
-        "real_yield": {
-          "value": "2.20% FALLING",
-          "display": "REÁLHOZAM ESIK",
-          "bias": "GREEN",
-          "weight": "TIER-1",
-          "bias_note": "Eső reálhozam long XAU-t támogat."
-        },
-        "fedwatch": {
-          "value": "HOLD 70% / hike-bias később",
-          "display": "NEUTRAL → HIKE BIAS",
-          "bias": "YELLOW",
-          "weight": "TIER-1",
-          "bias_note": "Rövid távon semleges, középtávon nem tiszta long-tailwind."
-        },
-        "dxy": {
-          "value": 100.73,
-          "display": "100.73 – USD-BEAR",
-          "bias": "GREEN",
-          "weight": "TIER-1",
-          "bias_note": "Gyengülő USD rövid távon segíti az XAU-t."
-        },
-        "us10y": {
-          "value": 4.49,
-          "display": "4.49% RISING",
-          "bias": "RED",
-          "weight": "TIER-2",
-          "bias_note": "Nominális hozam emelkedik, de a reálhozam a mérvadóbb."
-        },
-        "sentiment": {
-          "value": 30,
-          "display": "30 – FEAR",
-          "bias": "GREEN",
-          "weight": "TIER-3",
-          "bias_note": "Fear safe-haven támogatást adhat."
-        },
-        "cot": {
-          "value": "extreme long",
-          "display": "COT EXTRÉM LONG",
-          "bias": "YELLOW",
-          "weight": "TIER-3",
-          "bias_note": "A positioning túlzsúfolt, felfelé korlátozhat."
-        },
-        "htf_trend": {
-          "value": "RANGE",
-          "display": "RANGE",
-          "bias": "YELLOW",
-          "weight": "STRUCTURE",
-          "bias_note": "Vegyes HTF szerkezet."
-        },
-        "intraday_regime": {
-          "value": "RECOVERY BOUNCE",
-          "display": "RECOVERY BOUNCE",
-          "bias": "YELLOW",
-          "weight": "STRUCTURE",
-          "bias_note": "Rövid távú visszapattanás."
-        },
-        "volatility": {
-          "value": "ELEVATED",
-          "display": "ELEVATED",
-          "bias": "YELLOW",
-          "weight": "STRUCTURE",
-          "bias_note": "Tágabb mozgás és spread."
-        }
-      },
-      "conflicts": [
-        "Nominális US10Y emelkedik, de reálhozam esik → a reálhozam vezetőbb XAU-driver."
-      ]
-    },
-    "macro_regimes": {
-      "real_yield": {
-        "value": "2.20% FALLING",
-        "display": "REÁLHOZAM ESIK",
-        "bias": "GREEN",
-        "weight": "TIER-1",
-        "bias_note": "Eső reálhozam long XAU-t támogat."
-      },
-      "fedwatch": {
-        "value": "HOLD 70% / hike-bias később",
-        "display": "NEUTRAL → HIKE BIAS",
-        "bias": "YELLOW",
-        "weight": "TIER-1",
-        "bias_note": "Rövid távon semleges, középtávon nem tiszta long-tailwind."
-      },
-      "dxy": {
-        "value": 100.73,
-        "display": "100.73 – USD-BEAR",
-        "bias": "GREEN",
-        "weight": "TIER-1",
-        "bias_note": "Gyengülő USD rövid távon segíti az XAU-t."
-      },
-      "us10y": {
-        "value": 4.49,
-        "display": "4.49% RISING",
-        "bias": "RED",
-        "weight": "TIER-2",
-        "bias_note": "Nominális hozam emelkedik, de a reálhozam a mérvadóbb."
-      },
-      "sentiment": {
-        "value": 30,
-        "display": "30 – FEAR",
-        "bias": "GREEN",
-        "weight": "TIER-3",
-        "bias_note": "Fear safe-haven támogatást adhat."
-      },
-      "cot": {
-        "value": "extreme long",
-        "display": "COT EXTRÉM LONG",
-        "bias": "YELLOW",
-        "weight": "TIER-3",
-        "bias_note": "A positioning túlzsúfolt, felfelé korlátozhat."
-      },
-      "htf_trend": {
-        "value": "RANGE",
-        "display": "RANGE",
-        "bias": "YELLOW",
-        "weight": "STRUCTURE",
-        "bias_note": "Vegyes HTF szerkezet."
-      },
-      "intraday_regime": {
-        "value": "RECOVERY BOUNCE",
-        "display": "RECOVERY BOUNCE",
-        "bias": "YELLOW",
-        "weight": "STRUCTURE",
-        "bias_note": "Rövid távú visszapattanás."
-      },
-      "volatility": {
-        "value": "ELEVATED",
-        "display": "ELEVATED",
-        "bias": "YELLOW",
-        "weight": "STRUCTURE",
-        "bias_note": "Tágabb mozgás és spread."
-      }
-    },
-    "conflicts": [
-      "Nominális US10Y emelkedik, de reálhozam esik → a reálhozam vezetőbb XAU-driver."
-    ],
-    "news_drivers": [
-      "Reálhozam-esés támogatja az XAU-t.",
-      "DXY enyhén gyengül.",
-      "COT positioning túlzsúfolt long."
-    ],
-    "data_quality": {
-      "tier1_all_fresh": true,
-      "stale_fields": [],
-      "confidence_note": "Mock adat — fejlesztői mód."
-    },
-    "sources": [
-      {
-        "label": "Mock source",
-        "url": "https://www.perplexity.ai/"
-      }
-    ],
-    "source_type": "ai-fallback",
-    "updated_at": "2026-07-14T07:56:52+02:00"
   }
 }
