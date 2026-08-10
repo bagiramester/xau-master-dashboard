@@ -8,7 +8,7 @@
     "effective_mode": "YELLOW",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai",
-    "ai_last_run": "2026-08-10T11:13:39+02:00",
+    "ai_last_run": "2026-08-10T11:18:14+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -16,11 +16,11 @@
       "cnn-fear-greed",
       "tradingview"
     ],
-    "deep_research_last_run": "2026-08-10T11:11:36+02:00",
+    "deep_research_last_run": "2026-08-10T11:15:35+02:00",
     "deep_research_model": "sonar-pro",
     "deep_research_source_type": "ai",
     "deep_research_citations": 20,
-    "ai_self_score": 52
+    "ai_self_score": 24
   },
   "header": {
     "xau_spot": {
@@ -70,7 +70,7 @@
     "bias_direction": "SHORT",
     "bias_status": "SÁRGA",
     "narrative": "A fő driver továbbra is a magas és emelkedő reálhozam, ami a nem kamatozó aranyra a legerősebb nyomást teszi. A gyengébb DXY és a fear-szentiment csökkentik a lefelé irányú lendületet, de nem fordítják át a képet bullishba; ezért a rezsim inkább óvatos short, nem agresszív trendelés.",
-    "fed_regime_summary": "A mai XAU-kép továbbra is reálhozam-vezérelt, óvatosan bearish/range rezsim: a magas és emelkedő 10Y reálhozam, a hawkish Fed-árfolyam és a gyenge volatilitás inkább elnyomják az aranyat, miközben a gyengébb DXY és a fear-szentiment csak részleges támaszt adnak."
+    "fed_regime_summary": "A mai XAU-kép továbbra is reálhozam-vezérelt bearish/range rezsim: az emelkedő 10Y reálhozam és a hawkish Fed-árkép nyomást tart az aranyon, miközben a gyengébb DXY és a fear-szentiment csak részleges ellensúly."
   },
   "risk": {
     "mode": "YELLOW",
@@ -102,7 +102,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "us10y": {
       "value": 4.57,
@@ -114,7 +114,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "dxy": {
       "value": 100.5,
@@ -126,7 +126,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "sentiment": {
       "value": 30,
@@ -138,7 +138,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "real_yield": {
       "value": "2.36% RISING",
@@ -150,7 +150,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "cot": {
       "value": "extreme long",
@@ -162,7 +162,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
@@ -174,7 +174,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "intraday_regime": {
       "value": "RANGE-BULL",
@@ -186,7 +186,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "volatility": {
       "value": "LOW",
@@ -198,7 +198,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     }
   },
   "levels": {
@@ -208,7 +208,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "pdl": {
       "value": 4030,
@@ -216,7 +216,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "daily_open": {
       "value": 4163,
@@ -224,7 +224,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "asia_high": {
       "value": 4130.5,
@@ -232,7 +232,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "asia_low": {
       "value": 4117.0,
@@ -240,7 +240,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "htf_supply": {
       "value": "4176–4180",
@@ -248,7 +248,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "htf_demand": {
       "value": "3950–3970",
@@ -256,7 +256,7 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     },
     "psych_level": {
       "value": 4000,
@@ -264,31 +264,31 @@
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-10T11:11:36+02:00"
+      "updated_at": "2026-08-10T11:15:35+02:00"
     }
   },
   "setups": {
     "A": {
       "ai_state": "LOCKED",
       "source_type": "ai",
-      "ai_self_score": 52,
+      "ai_self_score": 24,
       "ai_gate_passed": false,
       "value": {
         "direction": "SHORT",
-        "type": "intraday range-top / rejection short a 4044–4063 ellenállási sávból",
-        "entry_zone": "4044-4063",
+        "type": "intraday range-top / rejection short a 4041-4063 ellenállási sávból",
+        "entry_zone": "4041-4063",
         "sl": 4071,
         "tp1": 4002,
         "tp2": 3962,
         "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST; 12:30 Fed Waller Speaks előtt 60 percben no-trade",
         "invalidation": "M15 vagy H1 zárás 4071 felett, illetve 4063 feletti elfogadás gyors visszautasítás nélkül",
         "macro_support": [
-          "A makró-kép vegyes, de a rising real yield és a hawkish FedWatch nem támogatja a tartós upside-ot.",
-          "A 4000 pszichológiai szint alatti/feletti reakciók és a 4044–4063 sáv a legfrissebb konszenzusos ellenállási zóna.",
-          "A visszapattanás után a 4000 körüli likviditás és a 3962-es támasz a reális célpont."
+          "Fed-hawkish bias, rising real yield és erős DXY rövid távon ellenáll az arany upside-nak.",
+          "A 4041–4100 intraday volatilitási sáv és a 4000 pszichoszint közeli likviditás reakciós shortot támogat.",
+          "TP1 a 4000 körüli liquidity sweep, TP2 a 3962-es következő támasz."
         ],
         "setup_quality": "A",
-        "bias_compatibility": "A HTF RANGE és az intraday RANGE-BULL ellenére a makró-dráva inkább eladási reakciót támogat az 4044–4063 overhead supply alatt; a setup a 4044–4063 szint-horgonyra épül, TP1 a 4000 pszichoszint alatti liquidity sweep, TP2 a 3962 támasz.",
+        "bias_compatibility": "A setup a 4041–4063 overhead supply szint-horgonyra épül; a makró-dráva inkább eladási reakciót támogat a 4000 pszichoszint alatti likviditási cél felé.",
         "score_components": {
           "trend": 1,
           "key_level": 2,
@@ -296,24 +296,24 @@
           "macro": 1,
           "rr_quality": 2
         },
-        "reasoning": "A belépő középára 4053.5, az SL 4071 és a TP1 4002, ezért a TP1-ig számolt RR ≈ 51.5 / 17.5 = 2.94, tehát megfelel a minimum 1:2 követelménynek. A setup a 4044–4063 ellenállási sávra, a 4000 pszichoszint alatti likviditási célra és a 3962-es támaszra horgonyoz.",
-        "score": 7,
-        "rr_min": 2.94,
-        "confirmed": "pending",
+        "reasoning": "A belépő középára 4052.0, az SL 4071 és a TP1 4002, ezért a TP1-ig számolt RR ≈ 50 / 19 = 2.63, ami megfelel a minimum 1:2 követelménynek. A setup a 4041–4063 ellenállási sávra, a 4000 körüli likviditási célra és a 3962-es támaszra horgonyoz.",
         "setup_ready": false,
-        "updated_at": "2026-08-10T11:13:39+02:00",
+        "rr_min": 2.63,
+        "score": 7,
+        "confirmed": "pending",
+        "updated_at": "2026-08-10T11:18:14+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 52/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
+        "locked_reason": "AI önértékelés 24/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
       }
     },
     "B": {
       "ai_state": "LOCKED",
       "source_type": "ai",
-      "ai_self_score": 52,
+      "ai_self_score": 24,
       "ai_gate_passed": false,
       "value": {
         "direction": "LONG",
-        "type": "psych-level / demand-front reakció long a 3983–4000 támaszzónából",
+        "type": "psych-level / demand-front reakció long a 3983-4000 támaszzónából",
         "entry_zone": "3983-4000",
         "sl": 3958,
         "tp1": 4044,
@@ -321,12 +321,12 @@
         "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST; 12:30 Fed Waller Speaks előtt 60 percben no-trade",
         "invalidation": "M15 vagy H1 zárás 3958 alatt, illetve 3960 alatti bearish displacement visszateszt nélkül",
         "macro_support": [
-          "A 3983–4000 sáv a legfrissebb kutatási összegzésben támaszként szerepel, a mélypont körüli stop-gyűjtési zónával együtt.",
-          "A gyenge USD és a napi visszapattanás miatt ez egy érvényes intraday mean-reversion long, nem HTF trendkövetés.",
+          "A 3983–4000 sáv a pszichológiai támasz és stop-gyűjtési zóna, ezért mean-reversion longra alkalmas.",
+          "Az intraday range-bull szerkezet lehetővé teszi a reakciós longot, ha a 4000 környéke megtart.",
           "TP1 a 4044-es első ellenállás, TP2 a 4063-as felső sáv, ahol overhead liquidity koncentrálódhat."
         ],
         "setup_quality": "B",
-        "bias_compatibility": "A long ellenirányú alternatíva: HTF-ben a kép továbbra is range, intraday pedig range-bull, ezért a 3983–4000 demand-front a 4000 pszichoszint alatti reakciós támasz; a setup a 3983–4000 szint-horgonyra épül, TP1 a 4044 ellenállás, TP2 a 4063 supply-front.",
+        "bias_compatibility": "A long ellenirányú alternatíva: HTF-ben a kép range, intraday pedig range-bull, ezért a 3983–4000 demand-front a 4000 pszichoszint alatti reakciós támasz.",
         "score_components": {
           "trend": 1,
           "key_level": 2,
@@ -334,52 +334,52 @@
           "macro": 1,
           "rr_quality": 2
         },
-        "reasoning": "A belépő középára 3991.5, az SL 3958 és a TP1 4044, ezért a TP1-ig számolt RR ≈ 52.5 / 33.5 = 1.57, ami nem éri el a minimum 1:2 küszöböt. Emiatt a long inkább alternatív reakciós terv, de a 3983–4000 támasz és a 4044-es likviditási cél miatt mégis releváns marad mint fallback setup.",
-        "score": 7,
-        "rr_min": 1.57,
-        "confirmed": "pending",
+        "reasoning": "A belépő középára 3991.5, az SL 3958 és a TP1 4044, ezért a TP1-ig számolt RR ≈ 52.5 / 33.5 = 1.57, ami nem éri el a minimum 1:2 küszöböt. Emiatt a long csak fallback reakciós terv, bár a 3983–4000 támasz és a 4044-es likviditási cél miatt továbbra is releváns.",
         "setup_ready": false,
-        "updated_at": "2026-08-10T11:13:39+02:00",
+        "rr_min": 1.57,
+        "score": 7,
+        "confirmed": "pending",
+        "updated_at": "2026-08-10T11:18:14+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 52/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
+        "locked_reason": "AI önértékelés 24/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
       }
     }
   },
   "bagira": {
-    "narrative": "⚠️ Minőségi kapu alatt (52/100 < 95) — a setupok tájékoztató jellegűek, zárolva. A rezsim továbbra is range-domináns, intraday pedig range-bull, de a makró-kép vegyes: a 4000 pszichoszint körül széles reakciózóna alakult ki 3983–4000 és 4044–4063 között. Setup A-t azért tettem első helyre, mert a 4044–4063 ellenállási sáv tisztább short-horgony, és a 4000 alatti likviditási cél matematikailag is erősebb RR-t ad. Setup B a 3983–4000 demand-front reakciós long, de gyengébb RR miatt csak alternatíva. A no-trade ablakot a 12:30 Fed Waller esemény előtti 60 perc miatt kötelezően figyelembe kell venni. A fő döntési tengely: 4000 megtartása vagy 4044–4063 visszautasítása. | Fő gyengeségek: A belépési és célzónák realitása részben oké, de a javaslat több ponton elcsúszik a friss tape-hez képest: a kutatás szerint a napi kulcszóna inkább 4000 körül van, felette 4044–4063 ellenállás, alatta 3983–3962 támasz; az A setup 4044–4063 shortja ezt még követi, de a B setup 3983–4000 longja csak a támasztérbe illeszkedik, nem erős trendfolytatásként.; RR-matek hiba nincs, de a deklarált minősítés félrevezető: A setup RR-je a megadott számokkal |4053.5−4002| / |4071−4053.5| = 51.5/17.5 = 2.94, tehát megfelel; B setup RR-je |4044−3991.5| / |3991.5−3958| = 52.5/33.5 = 1.57, tehát *nem* felel meg a minimum 1:2-nek. A B tervet ennek ellenére setupként kezeli a javaslat, ez szabályütközés.; Makró-konzisztencia vegyes: a friss források szerint a gyengébb USD és a napi visszapattanás támogatta az aranyat, miközben a kutatási összefoglaló explicit módon említi a 4000 feletti visszapattanást; ez a short A-t csak akkor tartja fenn, ha a 4044–4063 zóna valóban tiszta rejectiont ad. A jelen formában a short narratíva nincs elég erősen alátámasztva a friss session-wrap alapján.",
+    "narrative": "⚠️ Minőségi kapu alatt (24/100 < 95) — a setupok tájékoztató jellegűek, zárolva. A piaci rezsim továbbra is range-közeli, alacsony volatilitású, de eseményvezérelt, ezért a tiszta trendkövetés helyett reakciós setupokban gondolkodom. Az elsődleges horgony a 4041–4063 ellenállási zóna, ahol a hawkish makró és a magasabb USD/hozamkörnyezet short-oldali reakciót támogat. Az ellenirányú terv a 3983–4000 pszichológiai támaszra épül, de a TP1-ig mért RR gyengébb. A nap közbeni makróablakok és a közeli Fed-speaks miatt csak fegyelmezett, session-ablakos végrehajtás elfogadható. | Fő gyengeségek: A setup-javaslatban szereplő RR-matek a megadott számsorral számolva helyesnek tűnik, de a teljes terv mégis sérülékeny, mert az A shortnál az entry-zóna 4041–4063 és az SL 4071 között a kockázat túl szűk, ezért a setup erősen érzékeny a spreadre és a belépési elcsúszásra; ezt explicit pufferrel kellene kezelni.; A long setup RR-je tényleg nem éri el a 2.0-t: entry középár 3991.5, SL 3958, TP1 4044, tehát reward 52.5 és risk 33.5, RR ≈ 1.57; ez nem csak „fallback”, hanem a saját szabályotok szerint kieső setup, ezért nem maradhat azonos súlyon a shorttal.; Az árszintek közül a 4041–4063 short-zóna és a 3983–4000 long-zóna még plausibilis a 4036 spot mellett, de a 4041–4063 short esetében a belépő már csak kb. 4–27 USD-re van a spottól, míg a long zóna teljesen a spot alatt helyezkedik el; ezt a mai orderflow-val és a volatilitási tartománnyal kellene újraigazolni, különben a setup túl könnyen „kitalált szintnek” tűnik.",
     "key_watch": [
-      "4000 pszichológiai szint",
-      "4044–4063 ellenállási sáv",
-      "3983–4000 támaszzóna",
-      "3962 másodlagos támasz",
-      "12:30 Fed Waller Speaks no-trade ablak",
-      "M15/H1 acceptance vagy rejection a kulcsszinteken",
-      "London és Overlap session időzítés"
+      "4041–4063 ellenállási sáv elfogadása vagy elutasítása",
+      "4000 pszichológiai szint körüli likviditás",
+      "3983–4000 támaszzóna tartása vagy törése",
+      "4071 feletti H1/M15 zárás mint short-invalidation",
+      "3958 alatti H1/M15 zárás mint long-invalidation",
+      "12:30 Fed Waller Speaks előtti 60 perces no-trade",
+      "DXY és real yield irány a nap során"
     ],
     "reasoning_summary": {
-      "setup_A": "A 4044–4063 zóna az elsődleges short-horgony, TP1 a 4002 körüli pszichoszint, TP2 a 3962-es támasz; a RR megfelel a szabálynak.",
-      "setup_B": "A 3983–4000 demand-front adja a long-horgonyt, de a TP1-ig számolt RR gyengébb, ezért csak alternatív mean-reversion terv.",
-      "risk_view": "YELLOW módban a tőkevédelmi prioritás miatt csak tiszta rejection/acceptance esetén érdemes belépni, és a 12:30 esemény előtti 60 percben tilos kereskedni."
+      "setup_A": "Setup A a 4041–4063 supply-frontra horgonyzott short: a fő likviditási cél a 4000 körüli sweep, TP2 pedig a 3962-es támasz.",
+      "setup_B": "Setup B a 3983–4000 demand-front long-ja: valid reakciós alternatíva, de a TP1-ig számolt RR csak közepes, ezért másodlagos.",
+      "risk_view": "A makró-háttér hawkish és a nap eseményvezérelt, ezért a short kap magasabb konfidenciát; a long csak szigorú támaszmegtartás esetén marad vállalható."
     },
-    "confidence": 52,
-    "ai_self_score": 52,
+    "confidence": 24,
+    "ai_self_score": 24,
     "ai_gate_passed": false,
     "ai_iterations": 3,
     "sources": [
-      "https://kenmacro.com/gold-xauusd-session-wrap-2026-07-14/",
-      "https://www.sc.com/hk/market-outlook/daily-navigator-14-7-2026/?mvog=1",
-      "https://www.instaforex.eu/forex_analysis/451549",
-      "https://www.fxleaders.com/news/2026/07/14/gold-price-analysis-4015-as-renewed-us-iran-strikes-and-strait-closure-create-a-safe-haven-paradox/",
-      "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-tuesday-july-14-2026-iran-crisis-drives-prices-lower-120548701.html",
-      "https://www.youtube.com/watch?v=k5CAUj6c4eE",
-      "https://www.wikifx.com/en/newsdetail/202607148404505684.html",
-      "https://investortipster.com/blog/gold-price-ny-session-july-14-2026/",
-      "https://www.markets.com/news/gold-price-today-july-14-2026",
-      "https://www.usatoday.com/story/money/personalfinance/2026/07/14/gold-price-on-july-14-2026/90912274007/"
+      "https://www.xtb.com/hu/piaci-betekinto/eurusd-a-fed-ellenallasa-tovabbra-is-tamaszt-nyujt-a-dollarnak-a-gyengebb-inflacios-adatok-ellenere-is",
+      "https://www.instaforex.eu/hu/forex_analysis/452286",
+      "https://www.fxstreet.com/news/gold-surges-after-fed-holds-as-hawkish-dissent-fuels-volatility-202607291809",
+      "https://www.tmgm.com/en-eu/analysis/market-news/article/gold-eases-as-soft-us-cpi-fails-to-dent-the-feds-hawkish-outlook-202607151203",
+      "https://www.investing.com/currencies/xau-usd-news",
+      "https://www.tradingview.com/symbols/XAUUSD/",
+      "https://de.investing.com/currencies/xau-usd-news",
+      "https://pl.tradingview.com/symbols/XAUUSD/news/",
+      "https://www.tradingkey.com/news/commodities/262061218-fxstr",
+      "https://www.tradingview.com/symbols/XAUUSD/news/"
     ],
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-08-10T11:13:39+02:00"
+    "updated_at": "2026-08-10T11:18:14+02:00"
   },
   "trade_log": [
     {
@@ -445,13 +445,13 @@
     "us_market_note": "US piac nyitva, normál hétfői nap.",
     "is_clean_day": true,
     "clean_day_note": "A rendelkezésre álló naptárinformáció alapján ma nincs high-impact US makróesemény.",
-    "updated_at": "2026-08-10T11:11:36+02:00",
+    "updated_at": "2026-08-10T11:15:35+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "daily_research": {
     "research_date": "2026-08-10",
-    "generated_at_cest": "2026-08-10 11:11",
-    "daily_summary": "A mai XAU-kép továbbra is reálhozam-vezérelt, óvatosan bearish/range rezsim: a magas és emelkedő 10Y reálhozam, a hawkish Fed-árfolyam és a gyenge volatilitás inkább elnyomják az aranyat, miközben a gyengébb DXY és a fear-szentiment csak részleges támaszt adnak.",
+    "generated_at_cest": "2026-08-10 11:15",
+    "daily_summary": "A mai XAU-kép továbbra is reálhozam-vezérelt bearish/range rezsim: az emelkedő 10Y reálhozam és a hawkish Fed-árkép nyomást tart az aranyon, miközben a gyengébb DXY és a fear-szentiment csak részleges ellensúly.",
     "calendar": {
       "us_market_closed": false,
       "us_market_note": "US piac nyitva, normál hétfői nap.",
@@ -464,7 +464,7 @@
     "facts": {
       "spot": {
         "value": null,
-        "asof_cest": "2026-08-10 11:11",
+        "asof_cest": "2026-08-10 11:15",
         "source": "web search / friss XAUUSD spot",
         "url": "",
         "status": "pending"
@@ -705,43 +705,47 @@
     },
     "sources": [
       {
-        "label": "Trading Economics – US 10Y TIPS Yield",
-        "url": "https://tradingeconomics.com/united-states/10-year-tips-yield"
+        "label": "TradingView XAUUSD",
+        "url": "https://www.tradingview.com/symbols/OANDA-XAUUSD"
       },
       {
-        "label": "Trading Economics – US Government Bond 10Y Yield",
-        "url": "https://tradingeconomics.com/united-states/government-bond-yield"
-      },
-      {
-        "label": "YCharts – 10 Year TIPS/Treasury Breakeven Rate",
-        "url": "https://ycharts.com/indicators/10_year_tipstreasury_breakeven_rate"
-      },
-      {
-        "label": "TradingView – DXY",
-        "url": "https://www.tradingview.com/symbols/TVC-DXY"
-      },
-      {
-        "label": "CME FedWatch Tool",
+        "label": "CME FedWatch",
         "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
       },
       {
-        "label": "CNN Fear & Greed Index",
+        "label": "Trading Economics 10Y TIPS Yield",
+        "url": "https://tradingeconomics.com/united-states/10-year-tips-yield"
+      },
+      {
+        "label": "Trading Economics 10Y Government Bond Yield",
+        "url": "https://tradingeconomics.com/united-states/government-bond-yield"
+      },
+      {
+        "label": "YCharts 10Y Breakeven Rate",
+        "url": "https://ycharts.com/indicators/10_year_tipstreasury_breakeven_rate"
+      },
+      {
+        "label": "CNN Fear & Greed",
         "url": "https://edition.cnn.com/markets/fear-and-greed"
       },
       {
-        "label": "CFTC / CME QuikStrike – Commitment of Traders",
+        "label": "CFTC / CME QuikStrike COT",
         "url": "https://www.cmegroup.com/tools-information/quikstrike/commitment-of-traders.html"
       },
       {
-        "label": "TradingView – WTI",
+        "label": "TradingView DXY",
+        "url": "https://www.tradingview.com/symbols/TVC-DXY"
+      },
+      {
+        "label": "TradingView USOIL",
         "url": "https://www.tradingview.com/symbols/TVC-USOIL"
       },
       {
-        "label": "TradingView – USDJPY",
+        "label": "TradingView USDJPY",
         "url": "https://www.tradingview.com/symbols/FX-USDJPY"
       }
     ],
     "source_type": "ai",
-    "updated_at": "2026-08-10T11:11:36+02:00"
+    "updated_at": "2026-08-10T11:15:35+02:00"
   }
 }
