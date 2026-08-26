@@ -2,8 +2,6 @@ name: full-refresh
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "*/30 5-21 * * 1-5"
 
 concurrency:
   group: full-refresh
