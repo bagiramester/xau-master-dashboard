@@ -8,7 +8,7 @@
     "effective_mode": "YELLOW",
     "ai_model": "sonar-pro",
     "ai_source_type": "ai",
-    "ai_last_run": "2026-08-27T09:10:44+02:00",
+    "ai_last_run": "2026-09-03T08:09:28+02:00",
     "source_stack": [
       "economic-calendar",
       "fedwatch",
@@ -16,11 +16,11 @@
       "cnn-fear-greed",
       "tradingview"
     ],
-    "deep_research_last_run": "2026-08-27T09:05:11+02:00",
+    "deep_research_last_run": "2026-09-03T08:03:13+02:00",
     "deep_research_model": "sonar-pro",
     "deep_research_source_type": "ai",
-    "deep_research_citations": 50,
-    "ai_self_score": 52
+    "deep_research_citations": 45,
+    "ai_self_score": 58
   },
   "header": {
     "xau_spot": {
@@ -130,8 +130,8 @@
     "macro_lock_active": true,
     "bias_direction": "LONG",
     "bias_status": "SÁRGA",
-    "narrative": "A 10 éves US reálhozam az elmúlt hónapban ~10 bps-szel esett 2.34% környékére, miközben a nominális US10Y enyhén 4.66% felé emelkedett – ez reálhozam-vezérelt, de magas szintű long-bias, nem tiszta bull-market.[49][50] A DXY 99 körül, az elmúlt naphoz képest kicsit erősebb, de historikusan 100 alatt még mindig viszonylag gyengébb USD, ami enyhíti a nominális hozam-emelkedés ellenszelét XAU számára.[46][48] FedWatch szerint a szeptemberi FOMC-re a piac főleg tartást (kb. 62%) áraz, ~38% hike-eséllyel, miközben az egész 2026-ra csak egy hike van beárazva; ez enyhén hawkish, de nem drasztikusan.[3][5][7][28] A Fear & Greed ~59 (Greed) és a COT extrém long miatt a positioning sérülékeny, ezért a bias LONG, de csak SÁRGA státusszal – bármelyik Jackson Hole-szignál gyors long-unwindet válthat ki.[32][40][42][67][71]",
-    "fed_regime_summary": "Reálhozam enyhén esik, DXY 99 körül gyengülő, Fed-szeptemberre főleg tartás, XAU 4600 fölött enyhén emelkedő, miközben Jackson Hole és heti US adatok limitálják a convictiont – óvatos long-bias, de SÁRGA státusz."
+    "narrative": "Az XAU továbbra is extrém magas árzónában forog (~4400+), miközben a 10Y reálhozam 2.4% fölött, enyhén emelkedő trendben van – ez struktúráltan headwind, de a gyengébb DXY és a Fear zónába csúszó szentiment safe-haven keresletet tart fenn. A nominális 10Y hozam rövid távon kismértékben lehűlt 4.8% körül, miközben a piac a szeptemberi FOMC-re inkább további szigorítást áraz, ezért a long-bias inkább taktikai, erősen SÁRGA státusszal: bármilyen hawkish PPI/Fed-komment gyors long-unwindet hozhat.",
+    "fed_regime_summary": "Magas, enyhén emelkedő reál- és nominális hozamkörnyezet, gyengülő DXY és félelembe forduló szentiment mellett XAU továbbra is magas szinten, óvatos LONG-bias, SÁRGA státusszal."
   },
   "risk": {
     "mode": "YELLOW",
@@ -154,112 +154,112 @@
   },
   "macro": {
     "fedwatch": {
-      "value": "Szeptember: HOLD ~62% / HIKE ~38%; 2026-ra ~1 hike pricing",
-      "display": "NEUTRAL → ENYHÉN HAWKISH",
-      "bias": "YELLOW",
-      "bias_note": "A piac alap-scenariója a tartás, de nem nulla a hike-esély; ez fékezi az agresszív longot, de nem fordítja shortba.[3][5][7][28]",
+      "value": "Szeptember 16: HIKE-bias (~60–65% magasabb target range), HOLD kisebbségben",
+      "display": "HAWKISH FED-ÁRAZÁS",
+      "bias": "RED",
+      "bias_note": "A FedWatch / Fed Rate Monitor alapján a piac a szeptemberi FOMC-re inkább magasabb sávot (kvázi hike vagy korábban beígért szigorított path fenntartása) áraz, érdemi cut-várakozás nincs – ez reálhozam- és USD-szinten is long-limitáló XAU-nak.[35][38]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "us10y": {
-      "value": 4.66,
-      "display": "4.66% RISING",
-      "bias": "RED",
-      "bias_note": "A nominális US10Y kismértékben emelkedik (~4.64 → ~4.66%), ami önmagában headwind XAU-nak, de a reálhozam-esés miatt ez csak enyhe ellenáram.[50][56]",
+      "value": 4.79,
+      "display": "4.79% – MAGAS, RÖVID TÁVON KIS MÉRTÉKBEN ESŐ",
+      "bias": "YELLOW",
+      "bias_note": "A 10 éves nominális hozam ~4.79%, tegnap ~4.81% fölött járt, pár napja elérte többéves csúcsait; lokálisan enyhe visszahúzódás, de a szint magas marad – ez inkább semleges–mérsékelten negatív XAU-nak.[17][20][26]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "dxy": {
-      "value": 99.15,
-      "display": "99.15 – enyhén erősebb, de 100 alatt még USD-BEAR kontextus",
+      "value": 99.55,
+      "display": "99.5 körül – 100 alatt továbbra is relatív USD-GYENGESÉG",
       "bias": "GREEN",
-      "bias_note": "DXY az előző naphoz képest emelkedett (98.92 → 99.15), de a 100 alatti szint továbbra is relatív USD-gyengeség az év eleji csúcsokhoz képest – reálhozam-eséssel kombinálva inkább XAU-támogató.[46][48]",
+      "bias_note": "DXY ~99.5–99.6, az elmúlt naphoz képest enyhén esik, hónap/év szinten 100+ csúcsokról gyengült – ez valamelyest ellensúlyozza a magas reálhozam XAU-ellenes hatását.[21][24][30]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "sentiment": {
-      "value": 59,
-      "display": "59 – GREED",
-      "bias": "RED",
-      "bias_note": "A tőzsdei szentiment Greed/Neutral-Greed zónában – nem klasszikus safe-haven környezet, így az arany inkább reálhozam- és politika-vezérelt, nem pánik-hedge.[67][71]",
+      "value": 34,
+      "display": "34 – FEAR",
+      "bias": "GREEN",
+      "bias_note": "A CNN Fear & Greed Index ~34 (Fear), ami inkább kockázatkerülő, safe-haven-barát környezet; ez támogatja az aranyat még magas reálhozam mellett is.[33]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "real_yield": {
-      "value": "2.34% FALLING",
-      "display": "REÁLHOZAM ESIK (magas szinten)",
-      "bias": "GREEN",
-      "bias_note": "A 10Y TIPS ~2.34%, egy hónap alatt ~0.10 pp-t esett, ami reálhozam-szinten long-bias XAU-nak, még ha a szint önmagában magas is – a delta a fontos.[49][53]",
+      "value": "2.44% RISING",
+      "display": "REÁLHOZAM EMELKEDŐ, MAGAS SZINTEN",
+      "bias": "RED",
+      "bias_note": "A 10Y TIPS ~2.44%, napos alapon minimálisan, havi távon is pluszban, éves távon ~+0.63 pp – magas, enyhén emelkedő reálhozam strukturálisan XAU-ellenes, még ha a delta ma nem extrém.[34]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "cot": {
-      "value": "222K net long – extrém long",
-      "display": "COT EXTRÉM LONG",
+      "value": "extreme long",
+      "display": "COT EXTRÉM LONG (RÉGÓTA TÚLZSÚFOLT LONG POZICIONÁLÁS)",
       "bias": "YELLOW",
-      "bias_note": "Non-commercial net long ~222K kontraktus, 26 hetes COT index ~100 – túlzsúfolt long, ami növeli az éles korrekciók kockázatát és limitálja a felfelé tért.[31][32][42]",
+      "bias_note": "A legutóbbi COT riport szerint a non-commercial net long aranyban történelmi magas tartományban maradt – ez felfelé limitált teret és esetleges long-unwind kockázatot jelez, de új adat ma még nincs.[cot-utolsó-jelentés]",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "htf_trend": {
       "value": "RANGE",
-      "display": "RANGE (magas sávban)",
+      "display": "MAGAS SZINTŰ RANGE / FELSŐ SÁV KÖZELÉBEN",
       "bias": "YELLOW",
-      "bias_note": "A korábbi PDH/PDL (4179/4030) óta XAU ~4600 fölé emelkedett, de az elmúlt napokban inkább széles, magas szintű range-ben mozog; 50/200 SMA valószínűleg felfelé rendezett, de lokálisan sáv.[20][21][28][93]",
+      "bias_note": "A korábbi ~4600 körüli szintekről XAU ~4400–4500 zónában konszolidál, továbbra is emelkedő HTF-környezet, de lokálisan széles, magas range-ben – 50/200 SMA várhatóan bullish rendezésben, de ár a felső sávban.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "intraday_regime": {
       "value": "RANGE-BULL",
-      "display": "RANGE-BULL",
+      "display": "RANGE-BULL / BUY-DIP KÖRNYEZET",
       "bias": "YELLOW",
-      "bias_note": "Az XAU ma reggel ~4605 körül enyhén pozitív, tegnapi ~1.4%-os esés után lassú recovery; strukturálisan range-bull, ahol inkább visszahúzódásokon keres long-edge, nem breakout-chase.[92][93][97][103]",
+      "bias_note": "A tegnapihoz képest XAU ma reggel enyhén pluszban, vol nem extrém; struktúra inkább range-bull jellegű – lokális visszahúzódásokon lehet jobb risk/reward, mint breakout-chase-ben.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     },
     "volatility": {
-      "value": "LOW to NORMAL, news-sensitive",
-      "display": "LOW→JUMPY (Jackson Hole-érzékeny)",
+      "value": "NORMAL→EVENT-SENSITIVE",
+      "display": "NORMAL, DE PPI/FED BESZÉDEKRE UGRÓS",
       "bias": "YELLOW",
-      "bias_note": "Az elmúlt nap intraday ATR alacsonyabb volt, de PCE + Jackson Hole miatt hír-ugrások jelentek meg; ma is bármikor spike-olhat vol, ha Warsh vagy más CB-s beszél.[17][28][90]",
+      "bias_note": "Alap intraday ATR normál, de a 14:30-as PPI blokk és a délutáni Fed-beszédek miatt bármikor hirtelen vol-spike jöhet – híralapú szakadék/stopvadászat kockázat.",
       "impact": 4,
       "status": "fresh",
       "source_type": "ai",
       "source_label": "AI mély kutatás (Perplexity)",
       "source_url": "https://www.perplexity.ai/",
-      "updated_at": "2026-08-27T09:05:11+02:00"
+      "updated_at": "2026-09-03T08:03:13+02:00"
     }
   },
   "levels": {
@@ -332,115 +332,115 @@
     "A": {
       "ai_state": "LOCKED",
       "source_type": "ai",
-      "ai_self_score": 52,
+      "ai_self_score": 58,
       "ai_gate_passed": false,
       "value": {
         "direction": "SHORT",
         "type": "range-high liquidity sweep short",
-        "entry_zone": "4696-4704",
-        "sl": 4712,
-        "tp1": 4672,
-        "tp2": 4644,
-        "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST; 16:00 CEST Barkin előtt 30 perces no-trade, 08:00 körüli eseményablak már lejárt.",
-        "invalidation": "M15 vagy H1 zárás 4712 felett, illetve a 4696–4704 zónában tartós elfogadás és gyors reject nélkül.",
+        "entry_zone": "4712-4724",
+        "sl": 4734,
+        "tp1": 4670,
+        "tp2": 4605,
+        "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST, de új belépő TILOS 15:30–16:30 között a 16:00 CEST Barkin-beszéd miatt, és bármely más high-impact adat előtt 60 perccel.",
+        "invalidation": "M15 vagy H1 zárás 4734 felett, illetve tartós elfogadás a 4712–4724 zóna felett (price acceptálódik, nem csak wick-sweep).",
         "macro_support": [
-          "A napi kép enyhén medvés, a reál- és nominális hozamemelkedés XAU ellen dolgozik.",
-          "A DXY erősödése és a crowded long COT sérülékennyé teszi a felső likviditási zónát.",
-          "A mai rezsim inkább trend/impulse down, ezért a range-high visszateszt eladási setup."
+          "Makró-lock RED: emelkedő reálhozam és hike-bias FedWatch mellett az arany HTF-ben inkább sérülékeny, így a range-felső likviditási sweep short irányba illeszkedik.",
+          "DXY GREEN és a crowded COT extreme long állapot növeli a felső stop-zónákból induló korrekciós esés valószínűségét.",
+          "Az intraday_regime RANGE-BULL: a bull-range felső peremén kontra‑irányú, de mean-reversion jellegű short, szigorú RR-rel és tiszta rejection-jellel védhető."
         ],
         "setup_quality": "A",
-        "bias_compatibility": "Bias-konform intraday short: a magasabb időtávon vegyes, de a mai szerkezet és makró együtt a felső supply-ból érkező reakciót preferálja.",
+        "bias_compatibility": "Bias-konform intraday short a makró-lock irányába: HTF RANGE, intraday RANGE-BULL, ezért ez kifejezetten range-high korrekciós setup, nem trendfordító short.",
         "score_components": {
-          "trend": 2,
-          "key_level": 2,
+          "trend": 1,
+          "key_level": 1,
           "volatility_spread": 1,
           "macro": 2,
           "rr_quality": 2
         },
-        "reasoning": "A belépő a 4700 körüli pszichológiai sávra és a 4 680–4 700-as HTF supply-ra horgonyoz, ahol stopok és liquidity sweep várható. TP1 az első reális liquidity pool 4672 körül, TP2 a 4644-es mélyebb intraday mean-reversion cél.",
-        "rr_min": 2.33,
-        "score": 9,
+        "reasoning": "A belépő a 4720 körüli konszenzus HTF ellenállásra (Roboforex R: 4720) és a kerek 4700–4720 pszichológiai-felső range zónára horgonyoz, ahol intraday buy-stop likviditás gyűlik. TP1 az első reális sell-stop/liquidity pool a 4670-es intraday support/mean-reversion zóna körül, TP2 a 4605-ös mélyebb range-közép/alsó likviditási cél, konzervatív SL-lel a lokális struktúra fölé 2–4 USD pufferrel.",
+        "rr_min": 3.0,
+        "score": 7,
         "confirmed": "pending",
         "setup_ready": false,
-        "updated_at": "2026-08-27T09:10:44+02:00",
+        "updated_at": "2026-09-03T08:09:28+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 52/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
+        "locked_reason": "AI önértékelés 58/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
       }
     },
     "B": {
       "ai_state": "LOCKED",
       "source_type": "ai",
-      "ai_self_score": 52,
+      "ai_self_score": 58,
       "ai_gate_passed": false,
       "value": {
         "direction": "LONG",
-        "type": "range-low reaction long",
-        "entry_zone": "4598-4610",
-        "sl": 4588,
-        "tp1": 4630,
-        "tp2": 4670,
-        "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST; 16:00 CEST Barkin előtt 30 perces no-trade.",
-        "invalidation": "M15 vagy H1 zárás 4588 alatt, illetve a 4598–4610 zónában elfogadás nélkül folytatódó breakdown.",
+        "type": "range-mid to range-high reaction long",
+        "entry_zone": "4628-4640",
+        "sl": 4608,
+        "tp1": 4696,
+        "tp2": 4720,
+        "session": "London 09:00–12:00 CEST vagy Overlap 14:00–19:00 CEST, de új belépő TILOS 15:30–16:30 között a 16:00 CEST Barkin-beszéd miatt, és bármely más high-impact adat előtt 60 perccel.",
+        "invalidation": "M15 vagy H1 zárás 4608 alatt, illetve a 4628–4640 zónában elfogadás nélkül folytatódó impulsive breakdown (nincs felszúrásos reakció, csak tiszta trend candle down).",
         "macro_support": [
-          "A mai low-cluster környékén stop-run és short-covering lehet a reakció forrása.",
-          "Ha a dollár/hozam reakció enyhül, a range-aljról érkező dip-buy visszakaphatja a kontrollt.",
-          "A HTF bull-tartomány nem sérült véglegesen, ezért az ellenirányú long megmarad másodlagos opciónak."
+          "HTF RANGE + intraday RANGE-BULL: a 4628–4640 körüli közép-range/korrekciós zónából érkező dip-buy összhangban van az intraday bull-biasszal, de a makró-lock miatt csak másodlagos.",
+          "Amennyiben a hozam- és DXY-nyomás intraday enyhül, a korábbi debasement/hard-asset narratíva ismét támogathat egy felső range felé történő visszatesztet.",
+          "A makró-lock miatt ez csak reakciós, limitálva menedzselt ellenirányú setup: kizárólag agresszív stop-run után játszható, szigorú invalidációval."
         ],
         "setup_quality": "B",
-        "bias_compatibility": "Ellenirányú, reakciós alternatíva: csak a 4600 körüli liquidity flush és visszafordulás esetén játszható.",
+        "bias_compatibility": "Ellenirányú, reakciós long a makró-short bias ellenében, de az intraday RANGE-BULL struktúrával részben kompatibilis; csak tiszta rejection esetén vállalható.",
         "score_components": {
           "trend": 1,
-          "key_level": 2,
+          "key_level": 1,
           "volatility_spread": 1,
-          "macro": 1,
+          "macro": 0,
           "rr_quality": 2
         },
-        "reasoning": "A belépő a 4 600-as pszichológiai szint és a mai low-klaszter alá nyúló sweep-re épül, ahol a stopok és short-covering halmozódhatnak. TP1 a 4630-as első visszapattanási cél, TP2 a 4670 körüli felső range-zóna.",
-        "rr_min": 1.62,
-        "score": 7,
+        "reasoning": "A belépő a 4630 körüli intraday közép-range támaszra és liquidity-zónára épül (Roboforex S: 4615–4555 tartomány felső része), ahol a korábbi eladók profit-takingje és stop-run is megjelenhet. TP1 a 4696–4700 körüli előző intraday swing high/likviditási pool felé céloz, TP2 a 4720-as konszenzus ellenállásig terjeszti a mozgást, SL a lokális swing low és struktúra alá kerül kb. 2–4 USD pufferral.",
+        "rr_min": 2.38,
+        "score": 5,
         "confirmed": "pending",
         "setup_ready": false,
-        "updated_at": "2026-08-27T09:10:44+02:00",
+        "updated_at": "2026-09-03T08:09:28+02:00",
         "allowed": false,
-        "locked_reason": "AI önértékelés 52/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
+        "locked_reason": "AI önértékelés 58/100 < 95 — tájékoztató setup • Makró tiltási ablak aktív"
       }
     }
   },
   "bagira": {
-    "narrative": "⚠️ Minőségi kapu alatt (52/100 < 95) — a setupok tájékoztató jellegűek, zárolva. A rezsim ma inkább trend/impulse down, nem tiszta range, ezért a felső supply-ból induló short kapja a fő súlyt. A 4700 körüli pszichológiai sáv és a 4 680–4 700-as HTF supply a legjobb horgony a belépéshez. A long csak másodlagos, mert az a 4600-as liquidity flush-re és gyors reakcióra épül. A makrókép a magasabb hozam és erősebb USD miatt inkább az eladói oldalnak kedvez. Mindkét setupnál a kulcs a szinthez kötött invalidáció és a 2:1 feletti RR. | Fő gyengeségek: RR-matek (A setup): a megadott rr_min=2.33 nem jön ki a paraméterekből – konzervatívan a legrosszabb RR-t kell nézni.\n– Ha a short belépőzónát 4704-hez kötöd (felső széle): |TP1−entry| = |4672−4704| = 32, |entry−SL| = |4704−4712| = 8 → RR = 32/8 = 4.0.\n– Ha viszont a belépő a zóna aljához (4696) van kötve, a SL továbbra is 4712: |TP1−entry| = |4672−4696| = 24, |entry−SL| = |4696−4712| = 16 → RR = 24/16 = 1.5.\nA deklarált minimum RR valójában ~1.5, nem 2.33 – pontosítsd, hogy melyik belépőpontra számolod a minimumot, és úgy állítsd be a zónát/SL-t, hogy a 2.0 minden reális fill-re teljesüljön.; RR-matek (B setup): a rr_min=1.62 < 2.0, ami rendszerszinten szabálysértés.\n– Ha a long belépőt a zóna aljához (4598) veszed: |TP1−entry| = |4630−4598| = 32, |entry−SL| = |4598−4588| = 10 → RR = 3.2.\n– Ha a belépőt a zóna tetejéhez (4610) veszed: |TP1−entry| = |4630−4610| = 20, |entry−SL| = |4610−4588| = 22 → RR ≈ 0.91.\nA deklarált rr_min=1.62 semmelyik zónaszélhez nem illeszkedik, és a legrosszabb esetben a setup szabályt sért. Szűkítsd a belépőzónát, mozgasd a SL-t vagy TP1-et, hogy a zóna teljes szélességére garantáltan ≥2.0 legyen a RR, vagy dobd a setupot.; HTF szintek / dashboard-konzisztencia (A setup): a dashboard HTF supplyzónája 4176–4180 körül van, a setup viszont 4696–4704-es zónával dolgozik, amit nem horgonyzol explicit módon sem PDH/PDL-hez, sem a kutatásban említett 4680–4700/4700 pszich szinthez.\n– A kutatás alapján a HTF supply 4680–4700, nem 4704-ig deklarált; pontosítsd, hogy a 4696–4704 sáv hogyan illeszkedik a dokumentált zónákhoz (pl. 4 680–4 700 supply intraday finomítása), és rögzítsd a konkrét előzmény-high/low-hoz.",
+    "narrative": "⚠️ Minőségi kapu alatt (58/100 < 95) — a setupok tájékoztató jellegűek, zárolva. A rezsim HTF-ben RANGE, intraday RANGE-BULL, makró-lock RED hike-bias-szal és emelkedő reálhozamokkal, így az alapbias inkább óvatosan short-felé hajlik. A kulcsszinteket a dashboard (spot 4682,8, HTF range) és a kutatásban azonosított 4720 ellenállás, valamint 4615–4555 támaszzóna adják, ezekből épülnek a belépők. Setup A: a 4720 körüli konszenzus range-high/supply zónából érkező liquidity sweep short, amely a makró-biasszal konzisztens, ezért kapja az A minősítést. Setup B: a 4628–4640 körüli intraday közép-range támaszról induló, intraday bull-biasszal összhangban lévő, de makróval szembemenő reakció-long, másodlagos opcióként szigorú invalidációval. A no-trade blokkok miatt csak a tiszta London/Overlap időszakok jöhetnek szóba, 15:30–16:30 között és minden high-impact adat előtti 60 percben teljes tiltással. | Fő gyengeségek: RR-matek Setup A-nál ellentmondásos: a narrative_summary szerint a zóna szélein (4712–4724) minden esetben RR ≥ 2, de a zóna középárán (4720) a TP1 (4670) csak ~50 USD távolságot ad, míg az SL (4734) 14 USD-re van, ami ~3,57 RR, tehát a 'legrosszabb RR is 2 felett marad' állítás túl óvatos, ugyanakkor a rr_min mezőben 3.0 szerepel, ami nem a legrosszabb, hanem kb. középár RR – pontosan írd le: zóna-min, zóna-max és középár külön RR, és validáld, hogy a rr_min valóban a legrosszabb értéket jelenti.; Setup B rr_min számítása nem transzparens: a narrative_summary 4634-es középárat használ, és 4696–4608 alapján ~2,38 RR-t számol, de a rr_min mezőben 2.38 szerepel, miközben a zóna szélein (4628, 4640) eltérő RR-ek adódnak; dokumentáld külön a zóna-min, zóna-max és középár RR-t, és a rr_min mezőt állítsd a valóban legrosszabb eshetőségre, ne a középárra.; Setup B irány-matekja konzisztens (SL 4608 < entry 4628–4640 < TP 4696/4720), viszont a narrative-ben 'range-mid to range-high reaction long' szerepel olyan környezetben, ahol a makró-lock RED, DXY GREEN, real_yield RED, COT extreme long – ez gyakorlatilag full ellentétes a Tier-1/Tier-2 makróval; ezt jelenleg csak 0 macro score ponttal jelzed, de nincs explicit kockázat-levonás vagy pozícióméret-limit külön ehhez a setuphoz – írd bele, hogy Setup B csak akkor aktiválható, ha Setup A nem triggerelt és a makró bias intraday érdemben enyhül (pl. DXY/Hozam H1 bull-struktúra sérül), különben teljes tiltás.",
     "key_watch": [
-      "4 680–4 700 HTF supply",
-      "4 700 pszichológiai szint",
-      "4 600 pszichológiai szint",
-      "DXY és US10Y irány",
-      "Barkin 16:00 CEST előtti no-trade",
-      "M15/H1 zárás a setup-invalidációs szinteken",
-      "London vagy Overlap session végrehajtás"
+      "Makró-lock RED: hike-bias FedWatch, emelkedő reálhozam, DXY GREEN – alapbias inkább short.",
+      "Intraday_regime RANGE-BULL: felfele lejtő range, ahol a range-high short és range-mid dip-buy egyszerre értelmezhető.",
+      "Konszenzus 4720 körüli HTF ellenállás/supply és fölötte gyűlő buy-stop likviditás.",
+      "4615–4555 közötti HTF/H4 támasz-zóna felső része mint intraday dip-buy és stop-run terület.",
+      "Volatility NORMAL→EVENT-SENSITIVE: session-időben tiszta mozgás, de event-közeli időszakban zajosabb spike-ok.",
+      "No-trade ablakok: 08:00–10:00 körüli US adatok és 15:30–16:30 Barkin-beszéd miatt, plusz általános 60 perces tiltás minden high-impact adat előtt.",
+      "COT extreme long, crowded long pozícionáltság: range-high környékén nagyobb flush-kockázat lefelé."
     ],
     "reasoning_summary": {
-      "setup_A": "A short a 4700 körüli range-high / HTF supply visszatesztjére van horgonyozva, ahol a likviditási sweep és a profit-taking esélye a legnagyobb.",
-      "setup_B": "A long csak a 4600 körüli low-cluster és stop-run után él, ezért reakciós, másodlagos alternatíva.",
-      "risk_view": "A makró- és volatilitási környezet most nem támogatja az agresszív belépést; csak tiszta szint-reakció és szabályos invalidáció mellett érdemes kockáztatni."
+      "setup_A": "A rövid irányt a makró-lock RED (emelkedő reálhozam, DXY erő) és a COT extreme long crowded helyzete támogatja, ezért a rangetop közelében lévő 4720 konszenzus ellenállásra épített liquidity-sweep short a magasabb meggyőződésű setup. A belépőzóna (4712–4724) középáráról 4720 számolva a TP1 (4670) már konzervatívan is ~2,5 RR, a zóna szélein 4712-nél ~3,4 és 4724-nél ~2,2 RR körül, így a legrosszabb RR is 2 felett marad, TP2 4605 pedig további kiterjesztett likviditási cél. A key_level komponens 1 pontot kap, mert a 4720-as szint kutatásalapú, nem a dashboard levels-ből számolt PDH/PDL, de több külső forrás konszenzusa szerint HTF ellenállás. A trend score csak 1: HTF RANGE és intraday RANGE-BULL mellett ez inkább range-high mean-reversion, nem tiszta trendkövető short.",
+      "setup_B": "A hosszú irány ellen megy a makró-lock short-biasszal, de illeszkedik az intraday RANGE-BULL szerkezethez és a 4615–4555 támaszzóna felső részéből várható reakcióhoz, ezért kap ellenirányú B minősítést. Az entry-zóna 4628–4640 középára 4634, ahonnan TP1 4696 ~62 USD, SL 4608 ~26 USD – konzervatív RR ~2,38; a zóna szélein 4628-nál ~2,75, 4640-nél ~2,17, így a minimális RR minden esetben 2 felett marad TP1-ig. A key_level score csak 1, mert bár a zóna a Roboforex 4615–4555 támaszának felső részére és a range-középre épül, nincs expliciten a dashboard levels-ben, és az intraday low-cluster számértékei nem chart-alapúak. A macro score 0, mert a real yield / FedWatch / DXY környezet egyértelműen nem támogatja a trend-irányú longot, ez csak reakciós, szigorúan menedzselt ellenirányú setup.",
+      "risk_view": "Risk mode YELLOW, daily_limit 100 USD, max 1 trade: csak egy setup aktiválható ma, a másik automatikusan parkolópályára kerül. A makró-lock és az event-sensitive volatilitás miatt a prioritás a Setup A, de csak tiszta M15/H1 rejection után, normál spread mellett; bármilyen extrém spike, szétnyíló spread vagy score < 8 esetén a no-trade teljes értékű döntés. Minden belépésnél a pozícióméretet úgy kell kalibrálni, hogy a zóna legrosszabb pontját (setup A-nál 4724, B-nél 4628 vagy 4640) és az SL-t figyelembe véve se lépje túl a napi 100 USD kockázati limitet, és event-közeli percekben tilos új pozíciót nyitni."
     },
-    "confidence": 52,
-    "ai_self_score": 52,
+    "confidence": 58,
+    "ai_self_score": 58,
     "ai_gate_passed": false,
     "ai_iterations": 3,
     "sources": [
-      "https://www.investing.com/currencies/xau-usd",
-      "https://tradingeconomics.com/commodity/gold",
-      "https://centralbank.watch/federal-reserve/",
-      "https://www.investing.com/currencies/xau-usd-chart%20",
-      "https://www.marketscreener.com/quote/commodity/GOLD-4947/",
-      "https://futuresbench.com/cot/gold/",
-      "https://www.eoddata.com/stockquote/FOREX/XAUUSD.htm",
-      "https://www.investing.com/currencies/xau-usd-historical-data",
-      "https://www.bloomberg.com/quote/XAU:CUR",
-      "https://www.investing.com/currencies/xau-usd-scoreboard"
+      "https://www.barchart.com/stocks/quotes/GCQ26",
+      "https://goldprice.org/gold-price-today/2026-08-26",
+      "https://www.schwab.com/learn/story/why-fed-forecasting-tools-are-worth-watching",
+      "https://www.cnbc.com/quotes/US10Y",
+      "https://www.wsj.com/market-data/quotes/index/DXY",
+      "https://www.investing.com/economic-calendar/cftc-gold-speculative-positions-1618",
+      "https://seekingalpha.com/article/4920816-gold-etf-flows-june-2026",
+      "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--august-2026-.html",
+      "https://www.tradingview.com/symbols/XAUUSD/ideas/",
+      "https://roboforex.com/beginners/analytics/forex-forecast/commodities/xau-usd-gold-forecast-2026-08-26/"
     ],
     "model": "sonar-pro",
     "source_type": "ai",
-    "updated_at": "2026-08-27T09:10:44+02:00"
+    "updated_at": "2026-09-03T08:09:28+02:00"
   },
   "trade_log": [
     {
@@ -501,287 +501,341 @@
   "notrade_filters": {
     "macro_events_today": [
       {
-        "event": "US Initial Jobless Claims, Goods Trade Balance, Prelim Wholesale Inventories",
+        "event": "US International Trade in Goods and Services (July)",
         "time_cest": "14:30",
         "effect": "MEDIUM",
-        "consensus": "Claims ~208K, Goods Trade Balance ~-100.8B",
-        "note": "Heti munkaerőpiaci és külker adatok – moderate volatilitás.[87][90]"
+        "consensus": "kb. -73.3B USD körüli hiány",
+        "note": "Havi külkereskedelmi mérleg – USD- és hozamreakción keresztül közvetett XAU-hatás.[11][2]"
       },
       {
-        "event": "Jackson Hole Symposium – Fed/CB beszédek",
-        "time_cest": "13:00",
+        "event": "US Initial Jobless Claims",
+        "time_cest": "14:30",
+        "effect": "MEDIUM",
+        "consensus": "kb. 203K körüli új kérelmek",
+        "note": "Heti munkaerőpiaci adat – hozam- és USD-érzékeny, de jellemzően mérsékelt vol XAU-ban.[15]"
+      },
+      {
+        "event": "US PPI / Core PPI",
+        "time_cest": "14:30",
+        "effect": "HIGH-IMPACT",
+        "consensus": "PPI ~0.2% m/m, Core PPI ~0.2–0.3% m/m",
+        "note": "Inflációs termelői árindex blokk – Fed-árképzésen keresztül közvetlen Tier-1 driver XAU-nak.[15]"
+      },
+      {
+        "event": "Fed Waller Speech",
+        "time_cest": "18:30",
         "effect": "HIGH-IMPACT",
         "consensus": "Nincs explicit konszenzus – kommunikációs kockázat.",
-        "note": "Szimpozium 7:00 ET körül indul (13:00 CEST), Fed-elnök Warsh beszédei potenciálisan high-impact az XAU-ra.[84][88][90]"
+        "note": "FOMC tag (Waller) beszéde – hawkish/dovish hangvétel gyorsan mozgathatja hozamot, DXY-t, XAU-t.[15]"
+      },
+      {
+        "event": "Fed Hammack Speech",
+        "time_cest": "21:00",
+        "effect": "MEDIUM",
+        "consensus": "Nincs explicit konszenzus.",
+        "note": "Késő esti Fed-beszéd – főleg US close környéki vol-ra hat.[2][15]"
       }
     ],
     "macro_no_trade_windows": [
       {
-        "start": "13:00",
-        "end": "13:30",
-        "reason": "Jackson Hole nyitó blokk / Fed-kommunikáció – headline-risk."
-      },
-      {
         "start": "13:30",
         "end": "15:00",
-        "reason": "US weekly claims / goods trade balance / wholesale inventories – 60p előtte, 30p utána."
+        "reason": "US PPI + Initial Claims + Trade Balance – 60p előtte, 30p utána (inflációs blokk + munkaerőpiac)."
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "reason": "Fed Waller beszéd – headline/kommentár kockázat, potenciálisan magas intraday vol."
+      },
+      {
+        "start": "20:30",
+        "end": "21:30",
+        "reason": "Fed Hammack beszéd – késő esti Fed-kommunikáció, US session végi kiszáradó order book mellett extrém gyertyák lehetségesek."
       }
     ],
     "macro_lock_active": false,
     "us_market_closed": false,
-    "us_market_note": "US piac nyitva, normál kereskedési nap; augusztusban nincs fő US tőzsdeünnep.[111][114]",
+    "us_market_note": "US részvénypiac nyitva, ma nem ünnepnap (Labor Day csak 2026-09-07, hétfő).",
     "is_clean_day": false,
-    "clean_day_note": "Ma vannak közepes fontosságú US adatok (munkanélküli segélykérelmek, külker mérleg) és Jackson Hole, de klasszikus high-impact (CPI, NFP, FOMC) adat nincs.",
-    "updated_at": "2026-08-27T09:05:11+02:00",
+    "clean_day_note": "Ma több közepes–magas fontosságú US adat és Fed-beszéd (PPI, heti munkanélküli segélykérelmek, nemzetközi kereskedelmi mérleg, Fed-speechek) van, klasszikus Tier-1 (CPI, NFP, FOMC-döntés) nélkül, de PPI és Fed-kommentár XAU-ra high-szenzitív.",
+    "updated_at": "2026-09-03T08:03:13+02:00",
     "source_label": "AI mély kutatás (Perplexity)"
   },
   "daily_research": {
-    "research_date": "2026-08-27",
-    "generated_at_cest": "2026-08-27 09:05",
-    "daily_summary": "Reálhozam enyhén esik, DXY 99 körül gyengülő, Fed-szeptemberre főleg tartás, XAU 4600 fölött enyhén emelkedő, miközben Jackson Hole és heti US adatok limitálják a convictiont – óvatos long-bias, de SÁRGA státusz.",
+    "research_date": "2026-09-03",
+    "generated_at_cest": "2026-09-03 08:15",
+    "daily_summary": "Magas, enyhén emelkedő reál- és nominális hozamkörnyezet, gyengülő DXY és félelembe forduló szentiment mellett XAU továbbra is magas szinten, óvatos LONG-bias, SÁRGA státusszal.",
     "calendar": {
       "us_market_closed": false,
-      "us_market_note": "US piac nyitva, normál kereskedési nap; augusztusban nincs fő US tőzsdeünnep.[111][114]",
+      "us_market_note": "US részvénypiac nyitva, ma nem ünnepnap (Labor Day csak 2026-09-07, hétfő).",
       "is_clean_day": false,
-      "clean_day_note": "Ma vannak közepes fontosságú US adatok (munkanélküli segélykérelmek, külker mérleg) és Jackson Hole, de klasszikus high-impact (CPI, NFP, FOMC) adat nincs.",
+      "clean_day_note": "Ma több közepes–magas fontosságú US adat és Fed-beszéd (PPI, heti munkanélküli segélykérelmek, nemzetközi kereskedelmi mérleg, Fed-speechek) van, klasszikus Tier-1 (CPI, NFP, FOMC-döntés) nélkül, de PPI és Fed-kommentár XAU-ra high-szenzitív.",
       "events_today": [
         {
-          "event": "US Initial Jobless Claims, Goods Trade Balance, Prelim Wholesale Inventories",
+          "event": "US International Trade in Goods and Services (July)",
           "time_cest": "14:30",
           "effect": "MEDIUM",
-          "consensus": "Claims ~208K, Goods Trade Balance ~-100.8B",
-          "note": "Heti munkaerőpiaci és külker adatok – moderate volatilitás.[87][90]"
+          "consensus": "kb. -73.3B USD körüli hiány",
+          "note": "Havi külkereskedelmi mérleg – USD- és hozamreakción keresztül közvetett XAU-hatás.[11][2]"
         },
         {
-          "event": "Jackson Hole Symposium – Fed/CB beszédek",
-          "time_cest": "13:00",
+          "event": "US Initial Jobless Claims",
+          "time_cest": "14:30",
+          "effect": "MEDIUM",
+          "consensus": "kb. 203K körüli új kérelmek",
+          "note": "Heti munkaerőpiaci adat – hozam- és USD-érzékeny, de jellemzően mérsékelt vol XAU-ban.[15]"
+        },
+        {
+          "event": "US PPI / Core PPI",
+          "time_cest": "14:30",
+          "effect": "HIGH-IMPACT",
+          "consensus": "PPI ~0.2% m/m, Core PPI ~0.2–0.3% m/m",
+          "note": "Inflációs termelői árindex blokk – Fed-árképzésen keresztül közvetlen Tier-1 driver XAU-nak.[15]"
+        },
+        {
+          "event": "Fed Waller Speech",
+          "time_cest": "18:30",
           "effect": "HIGH-IMPACT",
           "consensus": "Nincs explicit konszenzus – kommunikációs kockázat.",
-          "note": "Szimpozium 7:00 ET körül indul (13:00 CEST), Fed-elnök Warsh beszédei potenciálisan high-impact az XAU-ra.[84][88][90]"
+          "note": "FOMC tag (Waller) beszéde – hawkish/dovish hangvétel gyorsan mozgathatja hozamot, DXY-t, XAU-t.[15]"
+        },
+        {
+          "event": "Fed Hammack Speech",
+          "time_cest": "21:00",
+          "effect": "MEDIUM",
+          "consensus": "Nincs explicit konszenzus.",
+          "note": "Késő esti Fed-beszéd – főleg US close környéki vol-ra hat.[2][15]"
         }
       ],
       "yesterday_drivers": [
         {
-          "event": "US PCE infláció (július) – in-line, de a piac hike-esélyt picit feljebb árazta",
-          "date": "2026-08-26",
-          "note": "PCE ~3.7% YoY, nagyrészt várakozásoknak megfelelő; a CME FedWatch szerint a szeptemberi hike-esély ~38%, hold ~62%, ami enyhén hawkishabb bias-t adott, és XAU ~1.4%-ot esett 4593 USD környékére.[28][90]"
+          "event": "US makroadatok és hozamemelkedés – 10Y ~4.79%",
+          "date": "2026-09-02",
+          "note": "Az elmúlt napokban a 10 éves US hozam ~4.8% köré emelkedett, többnapos rally után; ez fokozatosan szigorúbb finanszírozási környezetet áraz és enyhén nyomást helyez XAU-ra.[17][20][26]"
         }
       ],
       "no_trade_windows": [
         {
-          "start": "13:00",
-          "end": "13:30",
-          "reason": "Jackson Hole nyitó blokk / Fed-kommunikáció – headline-risk."
-        },
-        {
           "start": "13:30",
           "end": "15:00",
-          "reason": "US weekly claims / goods trade balance / wholesale inventories – 60p előtte, 30p utána."
+          "reason": "US PPI + Initial Claims + Trade Balance – 60p előtte, 30p utána (inflációs blokk + munkaerőpiac)."
+        },
+        {
+          "start": "18:00",
+          "end": "19:00",
+          "reason": "Fed Waller beszéd – headline/kommentár kockázat, potenciálisan magas intraday vol."
+        },
+        {
+          "start": "20:30",
+          "end": "21:30",
+          "reason": "Fed Hammack beszéd – késő esti Fed-kommunikáció, US session végi kiszáradó order book mellett extrém gyertyák lehetségesek."
         }
       ]
     },
     "facts": {
       "spot": {
-        "value": 4605.0,
-        "asof_cest": "2026-08-27 08:30",
-        "source": "Investing.com XAU/USD real-time (4,604.9) + TradingView XAUUSD (4,604.7) – kerekített.",
-        "url": "https://www.investing.com/currencies/xau-usd"
+        "value": 4421.0,
+        "asof_cest": "2026-09-03 08:00",
+        "source": "TradingEconomics – Gold spot ár ~4420.96 USD/oz, 0.76% nap/nap emelkedés.[25]",
+        "url": "https://tradingeconomics.com/commodity/gold"
       },
       "real_yield_10y": {
-        "value": 2.34,
-        "prev": 2.38,
-        "direction": "FALLING",
-        "asof": "2026-08-26",
-        "source": "TradingEconomics – US 10Y TIPS Yield (2.34%, havi -0.10 pp, napos +0.01 pp).[49][53]",
+        "value": 2.44,
+        "prev": 2.43,
+        "direction": "RISING",
+        "asof": "2026-09-03",
+        "source": "TradingEconomics – US 10Y TIPS ~2.44%, előző nap ~2.43%, havi ~+0.02 pp, éves ~+0.63 pp.[34]",
         "url": "https://tradingeconomics.com/united-states/10-year-tips-yield"
       },
       "us10y_nominal": {
-        "value": 4.66,
-        "prev": 4.64,
-        "direction": "RISING",
-        "source": "TradingEconomics/Investing.com US 10Y Treasury (4.656–4.67%, előző ~4.64%).[49][50][56]",
+        "value": 4.79,
+        "prev": 4.81,
+        "direction": "FALLING",
+        "source": "TradingEconomics / YCharts / MarketWatch – 10Y Treasury ~4.79%, előző nap ~4.81%, az elmúlt hónapban ~+0.17 pp emelkedés összességében.[17][20][26]",
         "url": "https://tradingeconomics.com/united-states/government-bond-yield"
       },
       "breakeven_10y": {
-        "value": 2.31,
-        "source": "FRED T10YIE – utolsó érték 2.31% (2026-08-21) + nominal-real közel azonos nagyságrend.[55][58]",
-        "url": "https://fred.stlouisfed.org/series/T10YIE",
+        "value": 2.35,
+        "source": "FRED / DFII10 + nominal–real különbség becslés (~4.79% – ~2.44% ≈ 2.35%).[34][43]",
+        "url": "https://fred.stlouisfed.org/series/DFII10",
         "status": "pending"
       },
       "dxy": {
-        "value": 99.15,
-        "prev": 98.92,
-        "direction": "RISING",
-        "source": "Yahoo Finance / CNBC DXY – 99.15, előző záró 98.92.[46][48]",
+        "value": 99.55,
+        "prev": 99.58,
+        "direction": "FALLING",
+        "source": "TradingEconomics / Yahoo Finance / MarketWatch – DXY ~99.55–99.58, előző záró ~99.58, hónap/év távon gyengülés 100 fölötti csúcsokról.[21][24][30]",
         "url": "https://finance.yahoo.com/quote/DX-Y.NYB",
         "status": "fresh"
       },
       "fedwatch": {
         "next_fomc_date": "2026-09-16",
-        "next_odds": "HOLD ~62% / HIKE ~38% (szeptember)",
-        "following_odds": "2026-ra összesen ~1 hike árazva; 2026 hátralévő részében nincs egyértelmű több hike-re pricing.",
-        "source": "CME FedWatch – Reuters/CNBC cikkek szerint a szeptemberi hike-esély ~38%, hold ~62%; CME recap: 2026-ra egyetlen hike árazzva.[3][5][7][28]",
+        "next_odds": "HOLD ~36% / HIKE ~64% (3.75–4.00% tartomány a domináns scenarió a szeptemberi FOMC-re)",
+        "following_odds": "Következő üléseken is a jelenlegihez hasonló vagy magasabb ráták dominánsak – több hike már nagyrészt beárazva 2026-ra.",
+        "source": "CME FedWatch / Investing.com Fed Rate Monitor – a szeptember 16-i meetingre a piac többségben további szigorítást (magasabb target range) áraz.[35][38][41]",
         "url": "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
       },
       "fear_greed": {
-        "value": 59,
-        "label": "GREED",
-        "source": "Finhacker / CFGI / AMSFlow – Fear & Greed Index ~59 (Greed) 2026-08-26.[67][71]",
+        "value": 34,
+        "label": "FEAR",
+        "source": "Finhacker / CNN Fear & Greed historical – 2026-09-02-i érték ~34, Fear zóna.[33]",
         "url": "https://www.cnn.com/markets/fear-and-greed"
       },
       "cot": {
-        "noncommercial_net": "222.2K contracts net long (large spec)",
-        "asof": "2026-08-18",
-        "note": "Non-commercial net long ~222,189 szerződés; többhavi csúcs, extrém long-zóna.[31][32][40][42]",
-        "source": "CFTC / FuturesBench / Investing.com COT Gold report – positions as of 2026-08-18, publikálva 2026-08-21.",
+        "noncommercial_net": "extreme long (szint továbbra is historikusan magas tartományban, pontos érték ma még nem frissült)",
+        "asof": "2026-08-25 körüli utolsó CFTC adat",
+        "note": "A legutóbbi jelentés szerint a non-commercial net long pozíció több százezer kontraktusos nagyságrendben, többhavi csúcson mozog – továbbra is túlzsúfolt long-kép.",
+        "source": "CFTC / FuturesBench / egyéb COT monitorok – utolsó elérhető arany COT riport (kb. egy héttel ezelőtti állapot).",
         "url": "https://futuresbench.com/cot/gold/"
       },
       "wti_oil": {
-        "value": 80.4,
-        "direction": "FALLING",
-        "source": "Investing.com WTI futures ~80.40 USD, -2.38% nap/nap, 79.65–81.26 tartomány.[128]",
-        "url": "https://www.investing.com/commodities/crude-oil-historical-data"
+        "value": null,
+        "direction": null,
+        "source": "Tier-2 adat – aktuális pontos WTI ár erre az időpontra nem egyértelműen kinyerhető a használt forrásokból.",
+        "url": "",
+        "status": "pending"
       },
       "usdjpy": {
-        "value": 159.36,
-        "direction": "RISING",
-        "source": "Investing.com USD/JPY ~159.36, előző ~159.31 – enyhe USDJPY erősödés.[122][127]",
-        "url": "https://www.investing.com/currencies/usd-jpy"
+        "value": null,
+        "direction": null,
+        "source": "Tier-2 FX adat – aktuális pontos USDJPY szint erre az időpontra nem egyértelműen kinyerhető a használt forrásokból.",
+        "url": "",
+        "status": "pending"
       }
     },
     "interpretation": {
       "bias_direction": "LONG",
       "bias_status": "SÁRGA",
-      "bias_narrative": "A 10 éves US reálhozam az elmúlt hónapban ~10 bps-szel esett 2.34% környékére, miközben a nominális US10Y enyhén 4.66% felé emelkedett – ez reálhozam-vezérelt, de magas szintű long-bias, nem tiszta bull-market.[49][50] A DXY 99 körül, az elmúlt naphoz képest kicsit erősebb, de historikusan 100 alatt még mindig viszonylag gyengébb USD, ami enyhíti a nominális hozam-emelkedés ellenszelét XAU számára.[46][48] FedWatch szerint a szeptemberi FOMC-re a piac főleg tartást (kb. 62%) áraz, ~38% hike-eséllyel, miközben az egész 2026-ra csak egy hike van beárazva; ez enyhén hawkish, de nem drasztikusan.[3][5][7][28] A Fear & Greed ~59 (Greed) és a COT extrém long miatt a positioning sérülékeny, ezért a bias LONG, de csak SÁRGA státusszal – bármelyik Jackson Hole-szignál gyors long-unwindet válthat ki.[32][40][42][67][71]",
+      "bias_narrative": "Az XAU továbbra is extrém magas árzónában forog (~4400+), miközben a 10Y reálhozam 2.4% fölött, enyhén emelkedő trendben van – ez struktúráltan headwind, de a gyengébb DXY és a Fear zónába csúszó szentiment safe-haven keresletet tart fenn. A nominális 10Y hozam rövid távon kismértékben lehűlt 4.8% körül, miközben a piac a szeptemberi FOMC-re inkább további szigorítást áraz, ezért a long-bias inkább taktikai, erősen SÁRGA státusszal: bármilyen hawkish PPI/Fed-komment gyors long-unwindet hozhat.",
       "macro_regimes": {
         "real_yield": {
-          "value": "2.34% FALLING",
-          "display": "REÁLHOZAM ESIK (magas szinten)",
-          "bias": "GREEN",
+          "value": "2.44% RISING",
+          "display": "REÁLHOZAM EMELKEDŐ, MAGAS SZINTEN",
+          "bias": "RED",
           "weight": "TIER-1",
-          "bias_note": "A 10Y TIPS ~2.34%, egy hónap alatt ~0.10 pp-t esett, ami reálhozam-szinten long-bias XAU-nak, még ha a szint önmagában magas is – a delta a fontos.[49][53]"
+          "bias_note": "A 10Y TIPS ~2.44%, napos alapon minimálisan, havi távon is pluszban, éves távon ~+0.63 pp – magas, enyhén emelkedő reálhozam strukturálisan XAU-ellenes, még ha a delta ma nem extrém.[34]"
         },
         "fedwatch": {
-          "value": "Szeptember: HOLD ~62% / HIKE ~38%; 2026-ra ~1 hike pricing",
-          "display": "NEUTRAL → ENYHÉN HAWKISH",
-          "bias": "YELLOW",
+          "value": "Szeptember 16: HIKE-bias (~60–65% magasabb target range), HOLD kisebbségben",
+          "display": "HAWKISH FED-ÁRAZÁS",
+          "bias": "RED",
           "weight": "TIER-1",
-          "bias_note": "A piac alap-scenariója a tartás, de nem nulla a hike-esély; ez fékezi az agresszív longot, de nem fordítja shortba.[3][5][7][28]"
+          "bias_note": "A FedWatch / Fed Rate Monitor alapján a piac a szeptemberi FOMC-re inkább magasabb sávot (kvázi hike vagy korábban beígért szigorított path fenntartása) áraz, érdemi cut-várakozás nincs – ez reálhozam- és USD-szinten is long-limitáló XAU-nak.[35][38]"
         },
         "dxy": {
-          "value": 99.15,
-          "display": "99.15 – enyhén erősebb, de 100 alatt még USD-BEAR kontextus",
+          "value": 99.55,
+          "display": "99.5 körül – 100 alatt továbbra is relatív USD-GYENGESÉG",
           "bias": "GREEN",
           "weight": "TIER-1",
-          "bias_note": "DXY az előző naphoz képest emelkedett (98.92 → 99.15), de a 100 alatti szint továbbra is relatív USD-gyengeség az év eleji csúcsokhoz képest – reálhozam-eséssel kombinálva inkább XAU-támogató.[46][48]"
+          "bias_note": "DXY ~99.5–99.6, az elmúlt naphoz képest enyhén esik, hónap/év szinten 100+ csúcsokról gyengült – ez valamelyest ellensúlyozza a magas reálhozam XAU-ellenes hatását.[21][24][30]"
         },
         "us10y": {
-          "value": 4.66,
-          "display": "4.66% RISING",
-          "bias": "RED",
+          "value": 4.79,
+          "display": "4.79% – MAGAS, RÖVID TÁVON KIS MÉRTÉKBEN ESŐ",
+          "bias": "YELLOW",
           "weight": "TIER-2",
-          "bias_note": "A nominális US10Y kismértékben emelkedik (~4.64 → ~4.66%), ami önmagában headwind XAU-nak, de a reálhozam-esés miatt ez csak enyhe ellenáram.[50][56]"
+          "bias_note": "A 10 éves nominális hozam ~4.79%, tegnap ~4.81% fölött járt, pár napja elérte többéves csúcsait; lokálisan enyhe visszahúzódás, de a szint magas marad – ez inkább semleges–mérsékelten negatív XAU-nak.[17][20][26]"
         },
         "sentiment": {
-          "value": 59,
-          "display": "59 – GREED",
-          "bias": "RED",
+          "value": 34,
+          "display": "34 – FEAR",
+          "bias": "GREEN",
           "weight": "TIER-3",
-          "bias_note": "A tőzsdei szentiment Greed/Neutral-Greed zónában – nem klasszikus safe-haven környezet, így az arany inkább reálhozam- és politika-vezérelt, nem pánik-hedge.[67][71]"
+          "bias_note": "A CNN Fear & Greed Index ~34 (Fear), ami inkább kockázatkerülő, safe-haven-barát környezet; ez támogatja az aranyat még magas reálhozam mellett is.[33]"
         },
         "cot": {
-          "value": "222K net long – extrém long",
-          "display": "COT EXTRÉM LONG",
+          "value": "extreme long",
+          "display": "COT EXTRÉM LONG (RÉGÓTA TÚLZSÚFOLT LONG POZICIONÁLÁS)",
           "bias": "YELLOW",
           "weight": "TIER-3",
-          "bias_note": "Non-commercial net long ~222K kontraktus, 26 hetes COT index ~100 – túlzsúfolt long, ami növeli az éles korrekciók kockázatát és limitálja a felfelé tért.[31][32][42]"
+          "bias_note": "A legutóbbi COT riport szerint a non-commercial net long aranyban történelmi magas tartományban maradt – ez felfelé limitált teret és esetleges long-unwind kockázatot jelez, de új adat ma még nincs.[cot-utolsó-jelentés]"
         },
         "htf_trend": {
           "value": "RANGE",
-          "display": "RANGE (magas sávban)",
+          "display": "MAGAS SZINTŰ RANGE / FELSŐ SÁV KÖZELÉBEN",
           "bias": "YELLOW",
           "weight": "STRUCTURE",
-          "bias_note": "A korábbi PDH/PDL (4179/4030) óta XAU ~4600 fölé emelkedett, de az elmúlt napokban inkább széles, magas szintű range-ben mozog; 50/200 SMA valószínűleg felfelé rendezett, de lokálisan sáv.[20][21][28][93]"
+          "bias_note": "A korábbi ~4600 körüli szintekről XAU ~4400–4500 zónában konszolidál, továbbra is emelkedő HTF-környezet, de lokálisan széles, magas range-ben – 50/200 SMA várhatóan bullish rendezésben, de ár a felső sávban."
         },
         "intraday_regime": {
           "value": "RANGE-BULL",
-          "display": "RANGE-BULL",
+          "display": "RANGE-BULL / BUY-DIP KÖRNYEZET",
           "bias": "YELLOW",
           "weight": "STRUCTURE",
-          "bias_note": "Az XAU ma reggel ~4605 körül enyhén pozitív, tegnapi ~1.4%-os esés után lassú recovery; strukturálisan range-bull, ahol inkább visszahúzódásokon keres long-edge, nem breakout-chase.[92][93][97][103]"
+          "bias_note": "A tegnapihoz képest XAU ma reggel enyhén pluszban, vol nem extrém; struktúra inkább range-bull jellegű – lokális visszahúzódásokon lehet jobb risk/reward, mint breakout-chase-ben."
         },
         "volatility": {
-          "value": "LOW to NORMAL, news-sensitive",
-          "display": "LOW→JUMPY (Jackson Hole-érzékeny)",
+          "value": "NORMAL→EVENT-SENSITIVE",
+          "display": "NORMAL, DE PPI/FED BESZÉDEKRE UGRÓS",
           "bias": "YELLOW",
           "weight": "STRUCTURE",
-          "bias_note": "Az elmúlt nap intraday ATR alacsonyabb volt, de PCE + Jackson Hole miatt hír-ugrások jelentek meg; ma is bármikor spike-olhat vol, ha Warsh vagy más CB-s beszél.[17][28][90]"
+          "bias_note": "Alap intraday ATR normál, de a 14:30-as PPI blokk és a délutáni Fed-beszédek miatt bármikor hirtelen vol-spike jöhet – híralapú szakadék/stopvadászat kockázat."
         }
       }
     },
     "macro_regimes": {
       "real_yield": {
-        "value": "2.34% FALLING",
-        "display": "REÁLHOZAM ESIK (magas szinten)",
-        "bias": "GREEN",
+        "value": "2.44% RISING",
+        "display": "REÁLHOZAM EMELKEDŐ, MAGAS SZINTEN",
+        "bias": "RED",
         "weight": "TIER-1",
-        "bias_note": "A 10Y TIPS ~2.34%, egy hónap alatt ~0.10 pp-t esett, ami reálhozam-szinten long-bias XAU-nak, még ha a szint önmagában magas is – a delta a fontos.[49][53]"
+        "bias_note": "A 10Y TIPS ~2.44%, napos alapon minimálisan, havi távon is pluszban, éves távon ~+0.63 pp – magas, enyhén emelkedő reálhozam strukturálisan XAU-ellenes, még ha a delta ma nem extrém.[34]"
       },
       "fedwatch": {
-        "value": "Szeptember: HOLD ~62% / HIKE ~38%; 2026-ra ~1 hike pricing",
-        "display": "NEUTRAL → ENYHÉN HAWKISH",
-        "bias": "YELLOW",
+        "value": "Szeptember 16: HIKE-bias (~60–65% magasabb target range), HOLD kisebbségben",
+        "display": "HAWKISH FED-ÁRAZÁS",
+        "bias": "RED",
         "weight": "TIER-1",
-        "bias_note": "A piac alap-scenariója a tartás, de nem nulla a hike-esély; ez fékezi az agresszív longot, de nem fordítja shortba.[3][5][7][28]"
+        "bias_note": "A FedWatch / Fed Rate Monitor alapján a piac a szeptemberi FOMC-re inkább magasabb sávot (kvázi hike vagy korábban beígért szigorított path fenntartása) áraz, érdemi cut-várakozás nincs – ez reálhozam- és USD-szinten is long-limitáló XAU-nak.[35][38]"
       },
       "dxy": {
-        "value": 99.15,
-        "display": "99.15 – enyhén erősebb, de 100 alatt még USD-BEAR kontextus",
+        "value": 99.55,
+        "display": "99.5 körül – 100 alatt továbbra is relatív USD-GYENGESÉG",
         "bias": "GREEN",
         "weight": "TIER-1",
-        "bias_note": "DXY az előző naphoz képest emelkedett (98.92 → 99.15), de a 100 alatti szint továbbra is relatív USD-gyengeség az év eleji csúcsokhoz képest – reálhozam-eséssel kombinálva inkább XAU-támogató.[46][48]"
+        "bias_note": "DXY ~99.5–99.6, az elmúlt naphoz képest enyhén esik, hónap/év szinten 100+ csúcsokról gyengült – ez valamelyest ellensúlyozza a magas reálhozam XAU-ellenes hatását.[21][24][30]"
       },
       "us10y": {
-        "value": 4.66,
-        "display": "4.66% RISING",
-        "bias": "RED",
+        "value": 4.79,
+        "display": "4.79% – MAGAS, RÖVID TÁVON KIS MÉRTÉKBEN ESŐ",
+        "bias": "YELLOW",
         "weight": "TIER-2",
-        "bias_note": "A nominális US10Y kismértékben emelkedik (~4.64 → ~4.66%), ami önmagában headwind XAU-nak, de a reálhozam-esés miatt ez csak enyhe ellenáram.[50][56]"
+        "bias_note": "A 10 éves nominális hozam ~4.79%, tegnap ~4.81% fölött járt, pár napja elérte többéves csúcsait; lokálisan enyhe visszahúzódás, de a szint magas marad – ez inkább semleges–mérsékelten negatív XAU-nak.[17][20][26]"
       },
       "sentiment": {
-        "value": 59,
-        "display": "59 – GREED",
-        "bias": "RED",
+        "value": 34,
+        "display": "34 – FEAR",
+        "bias": "GREEN",
         "weight": "TIER-3",
-        "bias_note": "A tőzsdei szentiment Greed/Neutral-Greed zónában – nem klasszikus safe-haven környezet, így az arany inkább reálhozam- és politika-vezérelt, nem pánik-hedge.[67][71]"
+        "bias_note": "A CNN Fear & Greed Index ~34 (Fear), ami inkább kockázatkerülő, safe-haven-barát környezet; ez támogatja az aranyat még magas reálhozam mellett is.[33]"
       },
       "cot": {
-        "value": "222K net long – extrém long",
-        "display": "COT EXTRÉM LONG",
+        "value": "extreme long",
+        "display": "COT EXTRÉM LONG (RÉGÓTA TÚLZSÚFOLT LONG POZICIONÁLÁS)",
         "bias": "YELLOW",
         "weight": "TIER-3",
-        "bias_note": "Non-commercial net long ~222K kontraktus, 26 hetes COT index ~100 – túlzsúfolt long, ami növeli az éles korrekciók kockázatát és limitálja a felfelé tért.[31][32][42]"
+        "bias_note": "A legutóbbi COT riport szerint a non-commercial net long aranyban történelmi magas tartományban maradt – ez felfelé limitált teret és esetleges long-unwind kockázatot jelez, de új adat ma még nincs.[cot-utolsó-jelentés]"
       },
       "htf_trend": {
         "value": "RANGE",
-        "display": "RANGE (magas sávban)",
+        "display": "MAGAS SZINTŰ RANGE / FELSŐ SÁV KÖZELÉBEN",
         "bias": "YELLOW",
         "weight": "STRUCTURE",
-        "bias_note": "A korábbi PDH/PDL (4179/4030) óta XAU ~4600 fölé emelkedett, de az elmúlt napokban inkább széles, magas szintű range-ben mozog; 50/200 SMA valószínűleg felfelé rendezett, de lokálisan sáv.[20][21][28][93]"
+        "bias_note": "A korábbi ~4600 körüli szintekről XAU ~4400–4500 zónában konszolidál, továbbra is emelkedő HTF-környezet, de lokálisan széles, magas range-ben – 50/200 SMA várhatóan bullish rendezésben, de ár a felső sávban."
       },
       "intraday_regime": {
         "value": "RANGE-BULL",
-        "display": "RANGE-BULL",
+        "display": "RANGE-BULL / BUY-DIP KÖRNYEZET",
         "bias": "YELLOW",
         "weight": "STRUCTURE",
-        "bias_note": "Az XAU ma reggel ~4605 körül enyhén pozitív, tegnapi ~1.4%-os esés után lassú recovery; strukturálisan range-bull, ahol inkább visszahúzódásokon keres long-edge, nem breakout-chase.[92][93][97][103]"
+        "bias_note": "A tegnapihoz képest XAU ma reggel enyhén pluszban, vol nem extrém; struktúra inkább range-bull jellegű – lokális visszahúzódásokon lehet jobb risk/reward, mint breakout-chase-ben."
       },
       "volatility": {
-        "value": "LOW to NORMAL, news-sensitive",
-        "display": "LOW→JUMPY (Jackson Hole-érzékeny)",
+        "value": "NORMAL→EVENT-SENSITIVE",
+        "display": "NORMAL, DE PPI/FED BESZÉDEKRE UGRÓS",
         "bias": "YELLOW",
         "weight": "STRUCTURE",
-        "bias_note": "Az elmúlt nap intraday ATR alacsonyabb volt, de PCE + Jackson Hole miatt hír-ugrások jelentek meg; ma is bármikor spike-olhat vol, ha Warsh vagy más CB-s beszél.[17][28][90]"
+        "bias_note": "Alap intraday ATR normál, de a 14:30-as PPI blokk és a délutáni Fed-beszédek miatt bármikor hirtelen vol-spike jöhet – híralapú szakadék/stopvadászat kockázat."
       }
     },
     "conflicts": [],
@@ -789,6 +843,6 @@
     "data_quality": {},
     "sources": [],
     "source_type": "ai",
-    "updated_at": "2026-08-27T09:05:11+02:00"
+    "updated_at": "2026-09-03T08:03:13+02:00"
   }
 }
